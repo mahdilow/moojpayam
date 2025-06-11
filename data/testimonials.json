@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "مهدی رضایی",
+    "position": "مدیر بازاریابی",
+    "company": "فروشگاه زنجیره‌ای رفاه",
+    "image": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=300",
+    "rating": 5,
+    "content": "ما برای اطلاع‌رسانی حراج‌های ویژه از پنل پیامک موج پیام استفاده می‌کنیم. ارسال سریع و تحویل بالا باعث رضایت کامل ما شده است. پشتیبانی فنی عالی آنها همیشه پاسخگو و راهنما بوده است.",
+    "results": {
+      "metric": "افزایش سروش",
+      "value": "۲۸۵٪",
+      "improvement": "در ۳ ماه اول"
+    },
+    "featured": true,
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "سارا محمدی",
+    "position": "مدیر فروش",
+    "company": "شرکت تولیدی آرمان",
+    "image": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=300",
+    "rating": 5,
+    "content": "ارسال پیامک‌های تبلیغاتی ما با پیامک موج پیام بسیار راحت و سریع انجام می‌شود. امکان زمانبندی ارسال و گزارش‌گیری دقیق از وضعیت پیام‌ها کار ما را بسیار آسان کرده است.",
+    "results": {
+      "metric": "نرخ تبدیل",
+      "value": "۱۲.۴٪",
+      "improvement": "بهبود ۳۰۰٪"
+    },
+    "featured": false,
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "امیر حسینی",
+    "position": "صاحب کسب و کار",
+    "company": "فروشگاه اینترنتی دیجی‌استور",
+    "image": "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=300",
+    "rating": 3,
+    "content": "پس از مقایسه چندین سرویس پیامک، پیامک موج پیام بهترین انتخاب برای ما بود. قیمت مناسب، سرعت ارسال بالا و پنل کاربری ساده همگی از مزایای این سرویس عالی هستند.",
+    "results": {
+      "metric": "مشتریان جدید",
+      "value": "۱,۲۰۰",
+      "improvement": "در ماه"
+    },
+    "featured": false,
+    "active": true
+  },
+  {
+    "id": 4,
+    "name": "فاطمه احمدی",
+    "position": "مدیر رستوران",
+    "company": "رستوران سنتی کوثر",
+    "image": "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=300",
+    "rating": 5,
+    "content": "با استفاده از پیامک منطقه‌ای موج پیام، توانستیم مشتریان محلی بیشتری جذب کنیم. سیستم هدفمندسازی جغرافیایی واقعاً شگفت‌انگیز است و نتایج فوق‌العاده‌ای داشته.",
+    "results": {
+      "metric": "رزرو روزانه",
+      "value": "۸۵٪",
+      "improvement": "افزایش"
+    },
+    "featured": false,
+    "active": true
+  }
+]

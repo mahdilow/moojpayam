@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "پایه",
+    "price": "۳۹۹",
+    "description": "مناسب برای کسب و کارهای کوچک و تازه شروع شده",
+    "features": [
+      {
+        "title": "۵۰۰ پیامک ماهانه",
+        "included": true
+      },
+      {
+        "title": "پنل کاربری ساده",
+        "included": true
+      },
+      {
+        "title": "ارسال زمانبندی شده",
+        "included": true
+      },
+      {
+        "title": "گزارش وضعیت تحویل",
+        "included": true
+      },
+      {
+        "title": "پشتیبانی ایمیلی",
+        "included": true
+      },
+      {
+        "title": "ارسال پیامک با نام تجاری",
+        "included": false
+      },
+      {
+        "title": "وب سرویس اختصاصی",
+        "included": false
+      },
+      {
+        "title": "مدیریت پیشرفته مخاطبین",
+        "included": false
+      }
+    ],
+    "cta": "شروع کنید",
+    "popular": false,
+    "color": "border-blue-400",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "حرفه‌ای",
+    "price": "۴۵۰,۰۰۰",
+    "description": "مناسب برای کسب و کارهای متوسط و در حال رشد",
+    "features": [
+      {
+        "title": "۲,۰۰۰ پیامک ماهانه",
+        "included": true
+      },
+      {
+        "title": "پنل کاربری پیشرفته",
+        "included": true
+      },
+      {
+        "title": "ارسال زمانبندی شده",
+        "included": true
+      },
+      {
+        "title": "گزارش وضعیت تحویل",
+        "included": true
+      },
+      {
+        "title": "پشتیبانی تلفنی و ایمیلی",
+        "included": true
+      },
+      {
+        "title": "ارسال پیامک با نام تجاری",
+        "included": true
+      },
+      {
+        "title": "وب سرویس اختصاصی",
+        "included": false
+      },
+      {
+        "title": "مدیریت پیشرفته مخاطبین",
+        "included": true
+      }
+    ],
+    "cta": "انتخاب پلن حرفه‌ای",
+    "popular": true,
+    "color": "border-primary-500",
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "سازمانی",
+    "price": "۹۵۰,۰۰۰",
+    "description": "مناسب برای کسب و کارهای بزرگ و سازمان‌ها",
+    "features": [
+      {
+        "title": "۱۰,۰۰۰ پیامک ماهانه",
+        "included": true
+      },
+      {
+        "title": "پنل کاربری اختصاصی",
+        "included": true
+      },
+      {
+        "title": "ارسال زمانبندی شده",
+        "included": true
+      },
+      {
+        "title": "گزارش وضعیت تحویل",
+        "included": true
+      },
+      {
+        "title": "پشتیبانی VIP",
+        "included": true
+      },
+      {
+        "title": "ارسال پیامک با نام تجاری",
+        "included": true
+      },
+      {
+        "title": "وب سرویس اختصاصی",
+        "included": true
+      },
+      {
+        "title": "مدیریت پیشرفته مخاطبین",
+        "included": true
+      }
+    ],
+    "cta": "تماس با ما",
+    "popular": false,
+    "color": "border-secondary-500",
+    "active": true
+  }
+]
