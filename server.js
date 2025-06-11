@@ -135,12 +135,12 @@ const logAdminAction = async (logEntry) => {
   try {
     const logs = await readJsonFile('admin-logs.json');
     logs.unshift(logEntry); // Add to beginning
-    
+
     // Keep only last 10000 logs
     if (logs.length > 10000) {
       logs.splice(10000);
     }
-    
+
     await writeJsonFile('admin-logs.json', logs);
     console.log(`Admin action logged: ${logEntry.action} by ${logEntry.adminUser}`);
   } catch (error) {
@@ -197,50 +197,50 @@ app.get('/api/admin/logs', requireAdmin, async (req, res) => {
   try {
     const { category, severity, dateRange, search, limit = 100, offset = 0 } = req.query;
     let logs = await readJsonFile('admin-logs.json');
-    
+
     // Apply filters
     if (category && category !== 'all') {
       logs = logs.filter(log => log.category === category);
     }
-    
+
     if (severity && severity !== 'all') {
       logs = logs.filter(log => log.severity === severity);
     }
-    
+
     if (dateRange && dateRange !== 'all') {
       const now = new Date();
       const days = parseInt(dateRange.replace('d', ''));
       const cutoff = new Date(now.getTime() - (days * 24 * 60 * 60 * 1000));
       logs = logs.filter(log => new Date(log.timestamp) >= cutoff);
     }
-    
+
     if (search) {
       const searchLower = search.toLowerCase();
-      logs = logs.filter(log => 
+      logs = logs.filter(log =>
         log.action.toLowerCase().includes(searchLower) ||
         log.adminUser.toLowerCase().includes(searchLower) ||
         JSON.stringify(log.details).toLowerCase().includes(searchLower)
       );
     }
-    
+
     // Apply pagination
     const total = logs.length;
     const paginatedLogs = logs.slice(parseInt(offset), parseInt(offset) + parseInt(limit));
-    
+
     // Log the view action
     const adminUser = getAdminUserFromSession(req);
     await logAdminAction(createLogEntry(
       adminUser,
       'View admin logs',
       'system',
-      { 
+      {
         filters: { category, severity, dateRange, search },
         resultCount: paginatedLogs.length,
-        success: true 
+        success: true
       },
       'low'
     ));
-    
+
     res.json({
       logs: paginatedLogs,
       total,
@@ -257,19 +257,19 @@ app.get('/api/admin/logs/export', requireAdmin, async (req, res) => {
   try {
     const logs = await readJsonFile('admin-logs.json');
     const adminUser = getAdminUserFromSession(req);
-    
+
     // Log the export action
     await logAdminAction(createLogEntry(
       adminUser,
       'Export admin logs',
       'system',
-      { 
+      {
         exportedCount: logs.length,
-        success: true 
+        success: true
       },
       'medium'
     ));
-    
+
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Content-Disposition', `attachment; filename=admin-logs-${new Date().toISOString().split('T')[0]}.json`);
     res.json(logs);
@@ -282,7 +282,7 @@ app.get('/api/admin/logs/export', requireAdmin, async (req, res) => {
 // Image upload endpoint
 app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'), async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     if (!req.file) {
       await logAdminAction(createLogEntry(
@@ -297,21 +297,21 @@ app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'
 
     // Return the URL path for the uploaded image
     const imageUrl = `/uploads/${req.file.filename}`;
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'Upload image',
       'upload',
-      { 
+      {
         filename: req.file.filename,
         originalName: req.file.originalname,
         size: req.file.size,
         mimetype: req.file.mimetype,
-        success: true 
+        success: true
       },
       'low'
     ));
-    
+
     res.json({
       message: 'تصویر با موفقیت آپلود شد',
       imageUrl: `http://localhost:3000${imageUrl}`,
@@ -333,11 +333,11 @@ app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'
 // Delete uploaded image endpoint
 app.delete('/api/admin/upload/:filename', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'uploads', filename);
-    
+
     // Check if file exists
     try {
       await fs.access(filePath);
@@ -351,10 +351,10 @@ app.delete('/api/admin/upload/:filename', requireAdmin, async (req, res) => {
       ));
       return res.status(404).json({ message: 'فایل یافت نشد' });
     }
-    
+
     // Delete the file
     await fs.unlink(filePath);
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'Delete image',
@@ -362,7 +362,7 @@ app.delete('/api/admin/upload/:filename', requireAdmin, async (req, res) => {
       { filename, success: true },
       'medium'
     ));
-    
+
     res.json({ message: 'تصویر با موفقیت حذف شد' });
   } catch (error) {
     console.error('Delete error:', error);
@@ -380,11 +380,11 @@ app.delete('/api/admin/upload/:filename', requireAdmin, async (req, res) => {
 // Get list of uploaded images
 app.get('/api/admin/images', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const uploadsDir = path.join(__dirname, 'uploads');
     const files = await fs.readdir(uploadsDir);
-    
+
     const images = files
       .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
       .map(file => ({
@@ -392,7 +392,7 @@ app.get('/api/admin/images', requireAdmin, async (req, res) => {
         url: `http://localhost:3000/uploads/${file}`,
         uploadDate: new Date().toISOString() // In a real app, you'd store this
       }));
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'View uploaded images',
@@ -400,7 +400,7 @@ app.get('/api/admin/images', requireAdmin, async (req, res) => {
       { imageCount: images.length, success: true },
       'low'
     ));
-    
+
     res.json(images);
   } catch (error) {
     console.error('Error reading images:', error);
@@ -424,7 +424,7 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
   }
 
   try {
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
@@ -453,6 +453,17 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
+    // Save notification
+    const notifications = await readJsonFile('notifications.json');
+    notifications.unshift({
+      id: `notif_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      type: 'contact',
+      message: `پیام جدید از ${name} (${phone}) با موضوع: ${subject}`,
+      read: false,
+      createdAt: new Date().toISOString(),
+      data: { name, phone, subject, message }
+    });
+    await writeJsonFile('notifications.json', notifications);
     return res.status(200).json({ message: 'پیام شما با موفقیت ارسال شد' });
   } catch (error) {
     console.error('Email sending error:', error);
@@ -468,13 +479,13 @@ app.post('/api/mooj-admin', adminLoginLimiter, async (req, res) => {
   const { username, password } = req.body;
   const clientIP = req.ip || req.connection.remoteAddress;
   const userAgent = req.get('User-Agent');
-  
+
   if (!username || !password) {
     await logAdminAction(createLogEntry(
       username || 'unknown',
       'Login attempt failed - missing credentials',
       'auth',
-      { 
+      {
         ipAddress: clientIP,
         userAgent,
         success: false,
@@ -500,7 +511,7 @@ app.post('/api/mooj-admin', adminLoginLimiter, async (req, res) => {
       username,
       'Successful login',
       'auth',
-      { 
+      {
         ipAddress: clientIP,
         userAgent,
         sessionId: sessionToken,
@@ -511,7 +522,7 @@ app.post('/api/mooj-admin', adminLoginLimiter, async (req, res) => {
     ));
 
     console.log(`Admin login successful at ${new Date().toISOString()}`);
-    return res.status(200).json({ 
+    return res.status(200).json({
       message: 'ورود شما با موفقیت انجام شد. خوش آمدید!',
       redirectTo: '/admin/dashboard'
     });
@@ -520,7 +531,7 @@ app.post('/api/mooj-admin', adminLoginLimiter, async (req, res) => {
       username,
       'Failed login attempt',
       'auth',
-      { 
+      {
         ipAddress: clientIP,
         userAgent,
         success: false,
@@ -536,26 +547,26 @@ app.post('/api/mooj-admin', adminLoginLimiter, async (req, res) => {
 
 app.get('/api/admin/verify', (req, res) => {
   const sessionToken = req.cookies.admin_session;
-  
+
   if (!sessionToken || !activeSessions.has(sessionToken)) {
     return res.status(401).json({ message: 'غیر مجاز' });
   }
-  
+
   return res.status(200).json({ message: 'تایید شد' });
 });
 
 app.post('/api/admin/logout', async (req, res) => {
   const sessionToken = req.cookies.admin_session;
   const adminUser = getAdminUserFromSession(req);
-  
+
   if (sessionToken) {
     activeSessions.delete(sessionToken);
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'Logout',
       'auth',
-      { 
+      {
         sessionId: sessionToken,
         success: true
       },
@@ -563,7 +574,7 @@ app.post('/api/admin/logout', async (req, res) => {
       sessionToken
     ));
   }
-  
+
   res.clearCookie('admin_session');
   return res.status(200).json({ message: 'خروج موفقیت‌آمیز' });
 });
@@ -571,11 +582,11 @@ app.post('/api/admin/logout', async (req, res) => {
 // Admin middleware
 function requireAdmin(req, res, next) {
   const sessionToken = req.cookies.admin_session;
-  
+
   if (!sessionToken || !activeSessions.has(sessionToken)) {
     return res.status(401).json({ message: 'دسترسی غیر مجاز' });
   }
-  
+
   next();
 }
 
@@ -583,14 +594,14 @@ function requireAdmin(req, res, next) {
 app.post('/api/blog/:id/view', viewTrackingLimiter, async (req, res) => {
   try {
     const blogId = parseInt(req.params.id);
-    
+
     if (!blogId || isNaN(blogId)) {
       return res.status(400).json({ message: 'شناسه مقاله نامعتبر است' });
     }
 
     const blogs = await readJsonFile('blogs.json');
     const blogIndex = blogs.findIndex(blog => blog.id === blogId);
-    
+
     if (blogIndex === -1) {
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
@@ -598,13 +609,13 @@ app.post('/api/blog/:id/view', viewTrackingLimiter, async (req, res) => {
     // Increment view count
     blogs[blogIndex].views = (blogs[blogIndex].views || 0) + 1;
     blogs[blogIndex].lastViewed = new Date().toISOString();
-    
+
     const success = await writeJsonFile('blogs.json', blogs);
-    
+
     if (success) {
-      res.json({ 
+      res.json({
         message: 'بازدید ثبت شد',
-        views: blogs[blogIndex].views 
+        views: blogs[blogIndex].views
       });
     } else {
       res.status(500).json({ message: 'خطا در ثبت بازدید' });
@@ -633,7 +644,7 @@ app.get('/api/content/blogs/:id', async (req, res) => {
     const blogId = parseInt(req.params.id);
     const blogs = await readJsonFile('blogs.json');
     const blog = blogs.find(blog => blog.id === blogId && blog.published);
-    
+
     if (!blog) {
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
@@ -641,9 +652,9 @@ app.get('/api/content/blogs/:id', async (req, res) => {
     // Get related posts
     let relatedPosts = [];
     if (blog.relatedPosts && blog.relatedPosts.length > 0) {
-      relatedPosts = blogs.filter(b => 
-        blog.relatedPosts.includes(b.id) && 
-        b.published && 
+      relatedPosts = blogs.filter(b =>
+        blog.relatedPosts.includes(b.id) &&
+        b.published &&
         b.id !== blog.id
       );
     }
@@ -651,23 +662,23 @@ app.get('/api/content/blogs/:id', async (req, res) => {
     // If no related posts specified or found, auto-select based on category
     if (relatedPosts.length === 0) {
       relatedPosts = blogs
-        .filter(b => 
-          b.published && 
-          b.id !== blog.id && 
+        .filter(b =>
+          b.published &&
+          b.id !== blog.id &&
           b.category === blog.category
         )
         .slice(0, 2);
-      
+
       // If still not enough, get from all published posts
       if (relatedPosts.length < 2) {
         const additionalPosts = blogs
-          .filter(b => 
-            b.published && 
-            b.id !== blog.id && 
+          .filter(b =>
+            b.published &&
+            b.id !== blog.id &&
             !relatedPosts.some(rp => rp.id === b.id)
           )
           .slice(0, 2 - relatedPosts.length);
-        
+
         relatedPosts = [...relatedPosts, ...additionalPosts];
       }
     }
@@ -702,7 +713,7 @@ app.get('/api/content/testimonials', async (req, res) => {
 // Admin dashboard stats
 app.get('/api/admin/stats', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const [blogs, pricing, testimonials] = await Promise.all([
       readJsonFile('blogs.json'),
@@ -718,8 +729,8 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
       // Additional stats
       draftPosts: blogs.filter(blog => !blog.published).length,
       totalPosts: blogs.length,
-      mostViewedPost: blogs.reduce((max, blog) => 
-        (blog.views || 0) > (max.views || 0) ? blog : max, 
+      mostViewedPost: blogs.reduce((max, blog) =>
+        (blog.views || 0) > (max.views || 0) ? blog : max,
         { views: 0, title: 'هیچ مقاله‌ای' }
       ),
       recentViews: blogs
@@ -752,10 +763,10 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
 // Blog management endpoints
 app.get('/api/admin/blogs', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const blogs = await readJsonFile('blogs.json');
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'View all blogs',
@@ -763,7 +774,7 @@ app.get('/api/admin/blogs', requireAdmin, async (req, res) => {
       { blogCount: blogs.length, success: true },
       'low'
     ));
-    
+
     res.json(blogs);
   } catch (error) {
     await logAdminAction(createLogEntry(
@@ -779,17 +790,17 @@ app.get('/api/admin/blogs', requireAdmin, async (req, res) => {
 
 app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const blogs = await readJsonFile('blogs.json');
-    
+
     // Auto-select related posts if none provided
     let relatedPosts = req.body.relatedPosts || [];
     if (relatedPosts.length === 0) {
       const sameCategoryPosts = blogs
         .filter(b => b.published && b.category === req.body.category)
         .slice(0, 2);
-      
+
       if (sameCategoryPosts.length >= 2) {
         relatedPosts = sameCategoryPosts.map(p => p.id);
       } else {
@@ -799,7 +810,7 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
           .map(p => p.id);
       }
     }
-    
+
     const newBlog = {
       ...req.body,
       id: Date.now(),
@@ -812,24 +823,24 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       slug: req.body.title.replace(/\s+/g, '-').toLowerCase(),
       metaDescription: req.body.excerpt || req.body.title
     };
-    
+
     blogs.push(newBlog);
     const success = await writeJsonFile('blogs.json', blogs);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Create blog post',
         'content',
-        { 
+        {
           resourceType: 'blog',
           resourceId: newBlog.id,
           newData: { title: newBlog.title, category: newBlog.category },
-          success: true 
+          success: true
         },
         'medium'
       ));
-      
+
       res.json({ message: 'مقاله با موفقیت ایجاد شد', blog: newBlog });
     } else {
       res.status(500).json({ message: 'خطا در ذخیره مقاله' });
@@ -848,25 +859,25 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
 
 app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const blogs = await readJsonFile('blogs.json');
     const blogId = parseInt(req.params.id);
     const blogIndex = blogs.findIndex(blog => blog.id === blogId);
-    
+
     if (blogIndex === -1) {
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
-    
+
     const oldBlog = { ...blogs[blogIndex] };
-    
+
     // Auto-select related posts if none provided
     let relatedPosts = req.body.relatedPosts || [];
     if (relatedPosts.length === 0) {
       const sameCategoryPosts = blogs
         .filter(b => b.published && b.category === req.body.category && b.id !== blogId)
         .slice(0, 2);
-      
+
       if (sameCategoryPosts.length >= 2) {
         relatedPosts = sameCategoryPosts.map(p => p.id);
       } else {
@@ -876,7 +887,7 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
           .map(p => p.id);
       }
     }
-    
+
     // Preserve views and creation date
     const updatedBlog = {
       ...blogs[blogIndex],
@@ -890,25 +901,25 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
       slug: req.body.title ? req.body.title.replace(/\s+/g, '-').toLowerCase() : blogs[blogIndex].slug,
       metaDescription: req.body.excerpt || req.body.title || blogs[blogIndex].metaDescription
     };
-    
+
     blogs[blogIndex] = updatedBlog;
     const success = await writeJsonFile('blogs.json', blogs);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Update blog post',
         'content',
-        { 
+        {
           resourceType: 'blog',
           resourceId: blogId,
           oldData: { title: oldBlog.title, category: oldBlog.category },
           newData: { title: updatedBlog.title, category: updatedBlog.category },
-          success: true 
+          success: true
         },
         'medium'
       ));
-      
+
       res.json({ message: 'مقاله با موفقیت ویرایش شد', blog: updatedBlog });
     } else {
       res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
@@ -927,33 +938,33 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
 
 app.delete('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const blogs = await readJsonFile('blogs.json');
     const blogId = parseInt(req.params.id);
     const blogToDelete = blogs.find(blog => blog.id === blogId);
     const filteredBlogs = blogs.filter(blog => blog.id !== blogId);
-    
+
     if (filteredBlogs.length === blogs.length) {
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
-    
+
     const success = await writeJsonFile('blogs.json', filteredBlogs);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Delete blog post',
         'content',
-        { 
+        {
           resourceType: 'blog',
           resourceId: blogId,
           oldData: { title: blogToDelete?.title, category: blogToDelete?.category },
-          success: true 
+          success: true
         },
         'high'
       ));
-      
+
       res.json({ message: 'مقاله با موفقیت حذف شد' });
     } else {
       res.status(500).json({ message: 'خطا در حذف مقاله' });
@@ -973,10 +984,10 @@ app.delete('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
 // Pricing management endpoints
 app.get('/api/admin/pricing', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const pricing = await readJsonFile('pricing.json');
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'View pricing plans',
@@ -984,7 +995,7 @@ app.get('/api/admin/pricing', requireAdmin, async (req, res) => {
       { planCount: pricing.length, success: true },
       'low'
     ));
-    
+
     res.json(pricing);
   } catch (error) {
     await logAdminAction(createLogEntry(
@@ -1000,28 +1011,28 @@ app.get('/api/admin/pricing', requireAdmin, async (req, res) => {
 
 app.post('/api/admin/pricing', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const pricing = await readJsonFile('pricing.json');
     const newPlan = { ...req.body, id: Date.now() };
-    
+
     pricing.push(newPlan);
     const success = await writeJsonFile('pricing.json', pricing);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Create pricing plan',
         'content',
-        { 
+        {
           resourceType: 'pricing',
           resourceId: newPlan.id,
           newData: { name: newPlan.name, price: newPlan.price },
-          success: true 
+          success: true
         },
         'medium'
       ));
-      
+
       res.json({ message: 'پلن با موفقیت ایجاد شد', plan: newPlan });
     } else {
       res.status(500).json({ message: 'خطا در ذخیره پلن' });
@@ -1040,35 +1051,35 @@ app.post('/api/admin/pricing', requireAdmin, async (req, res) => {
 
 app.put('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const pricing = await readJsonFile('pricing.json');
     const planId = parseInt(req.params.id);
     const planIndex = pricing.findIndex(plan => plan.id === planId);
-    
+
     if (planIndex === -1) {
       return res.status(404).json({ message: 'پلن یافت نشد' });
     }
-    
+
     const oldPlan = { ...pricing[planIndex] };
     pricing[planIndex] = { ...pricing[planIndex], ...req.body, id: planId };
     const success = await writeJsonFile('pricing.json', pricing);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Update pricing plan',
         'content',
-        { 
+        {
           resourceType: 'pricing',
           resourceId: planId,
           oldData: { name: oldPlan.name, price: oldPlan.price },
           newData: { name: pricing[planIndex].name, price: pricing[planIndex].price },
-          success: true 
+          success: true
         },
         'medium'
       ));
-      
+
       res.json({ message: 'پلن با موفقیت ویرایش شد', plan: pricing[planIndex] });
     } else {
       res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
@@ -1087,33 +1098,33 @@ app.put('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
 
 app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const pricing = await readJsonFile('pricing.json');
     const planId = parseInt(req.params.id);
     const planToDelete = pricing.find(plan => plan.id === planId);
     const filteredPricing = pricing.filter(plan => plan.id !== planId);
-    
+
     if (filteredPricing.length === pricing.length) {
       return res.status(404).json({ message: 'پلن یافت نشد' });
     }
-    
+
     const success = await writeJsonFile('pricing.json', filteredPricing);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Delete pricing plan',
         'content',
-        { 
+        {
           resourceType: 'pricing',
           resourceId: planId,
           oldData: { name: planToDelete?.name, price: planToDelete?.price },
-          success: true 
+          success: true
         },
         'high'
       ));
-      
+
       res.json({ message: 'پلن با موفقیت حذف شد' });
     } else {
       res.status(500).json({ message: 'خطا در حذف پلن' });
@@ -1133,10 +1144,10 @@ app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
 // Testimonials management endpoints
 app.get('/api/admin/testimonials', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const testimonials = await readJsonFile('testimonials.json');
-    
+
     await logAdminAction(createLogEntry(
       adminUser,
       'View testimonials',
@@ -1144,7 +1155,7 @@ app.get('/api/admin/testimonials', requireAdmin, async (req, res) => {
       { testimonialCount: testimonials.length, success: true },
       'low'
     ));
-    
+
     res.json(testimonials);
   } catch (error) {
     await logAdminAction(createLogEntry(
@@ -1160,28 +1171,28 @@ app.get('/api/admin/testimonials', requireAdmin, async (req, res) => {
 
 app.post('/api/admin/testimonials', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const testimonials = await readJsonFile('testimonials.json');
     const newTestimonial = { ...req.body, id: Date.now() };
-    
+
     testimonials.push(newTestimonial);
     const success = await writeJsonFile('testimonials.json', testimonials);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Create testimonial',
         'content',
-        { 
+        {
           resourceType: 'testimonial',
           resourceId: newTestimonial.id,
           newData: { name: newTestimonial.name, company: newTestimonial.company },
-          success: true 
+          success: true
         },
         'medium'
       ));
-      
+
       res.json({ message: 'نظر با موفقیت ایجاد شد', testimonial: newTestimonial });
     } else {
       res.status(500).json({ message: 'خطا در ذخیره نظر' });
@@ -1200,35 +1211,35 @@ app.post('/api/admin/testimonials', requireAdmin, async (req, res) => {
 
 app.put('/api/admin/testimonials/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const testimonials = await readJsonFile('testimonials.json');
     const testimonialId = parseInt(req.params.id);
     const testimonialIndex = testimonials.findIndex(testimonial => testimonial.id === testimonialId);
-    
+
     if (testimonialIndex === -1) {
       return res.status(404).json({ message: 'نظر یافت نشد' });
     }
-    
+
     const oldTestimonial = { ...testimonials[testimonialIndex] };
     testimonials[testimonialIndex] = { ...testimonials[testimonialIndex], ...req.body, id: testimonialId };
     const success = await writeJsonFile('testimonials.json', testimonials);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Update testimonial',
         'content',
-        { 
+        {
           resourceType: 'testimonial',
           resourceId: testimonialId,
           oldData: { name: oldTestimonial.name, company: oldTestimonial.company },
           newData: { name: testimonials[testimonialIndex].name, company: testimonials[testimonialIndex].company },
-          success: true 
+          success: true
         },
         'medium'
       ));
-      
+
       res.json({ message: 'نظر با موفقیت ویرایش شد', testimonial: testimonials[testimonialIndex] });
     } else {
       res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
@@ -1247,33 +1258,33 @@ app.put('/api/admin/testimonials/:id', requireAdmin, async (req, res) => {
 
 app.delete('/api/admin/testimonials/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
-  
+
   try {
     const testimonials = await readJsonFile('testimonials.json');
     const testimonialId = parseInt(req.params.id);
     const testimonialToDelete = testimonials.find(testimonial => testimonial.id === testimonialId);
     const filteredTestimonials = testimonials.filter(testimonial => testimonial.id !== testimonialId);
-    
+
     if (filteredTestimonials.length === testimonials.length) {
       return res.status(404).json({ message: 'نظر یافت نشد' });
     }
-    
+
     const success = await writeJsonFile('testimonials.json', filteredTestimonials);
-    
+
     if (success) {
       await logAdminAction(createLogEntry(
         adminUser,
         'Delete testimonial',
         'content',
-        { 
+        {
           resourceType: 'testimonial',
           resourceId: testimonialId,
           oldData: { name: testimonialToDelete?.name, company: testimonialToDelete?.company },
-          success: true 
+          success: true
         },
         'high'
       ));
-      
+
       res.json({ message: 'نظر با موفقیت حذف شد' });
     } else {
       res.status(500).json({ message: 'خطا در حذف نظر' });
@@ -1287,6 +1298,28 @@ app.delete('/api/admin/testimonials/:id', requireAdmin, async (req, res) => {
       'high'
     ));
     res.status(500).json({ message: 'خطا در حذف نظر' });
+  }
+});
+
+// Admin notifications endpoints
+app.get('/api/admin/notifications', requireAdmin, async (req, res) => {
+  try {
+    const notifications = await readJsonFile('notifications.json');
+    res.json(notifications.filter(n => !n.read));
+  } catch (error) {
+    res.status(500).json({ message: 'خطا در دریافت اعلان‌ها' });
+  }
+});
+
+app.post('/api/admin/notifications/read/:id', requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    let notifications = await readJsonFile('notifications.json');
+    notifications = notifications.map(n => n.id === id ? { ...n, read: true } : n);
+    await writeJsonFile('notifications.json', notifications);
+    res.json({ message: 'اعلان خوانده شد' });
+  } catch (error) {
+    res.status(500).json({ message: 'خطا در حذف اعلان' });
   }
 });
 
@@ -1310,11 +1343,11 @@ app.use((error, req, res, next) => {
       return res.status(400).json({ message: 'حجم فایل بیش از حد مجاز است (حداکثر ۵ مگابایت)' });
     }
   }
-  
+
   if (error.message === 'فقط فایل‌های تصویری مجاز هستند') {
     return res.status(400).json({ message: error.message });
   }
-  
+
   console.error('Server error:', error);
   res.status(500).json({ message: 'خطای سرور' });
 });

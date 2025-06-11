@@ -92,11 +92,22 @@ interface DashboardStats {
   }>;
 }
 
+// Notification type
+interface Notification {
+  id: string;
+  type: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+  data?: any;
+}
+
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   // Blog state
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -123,6 +134,7 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     if (activeTab === "dashboard") {
       loadStats();
+      loadNotifications();
     } else if (activeTab === "blogs") {
       loadBlogs();
     } else if (activeTab === "pricing") {
@@ -206,6 +218,36 @@ const AdminDashboard: React.FC = () => {
       }
     } catch (error) {
       toast.error("خطا در بارگذاری نظرات");
+    }
+  };
+
+  const loadNotifications = async () => {
+    try {
+      const response = await fetch("/api/admin/notifications", {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setNotifications(data);
+      }
+    } catch (error) {
+      toast.error("خطا در دریافت اعلان‌ها");
+    }
+  };
+
+  const markNotificationRead = async (id: string) => {
+    try {
+      const response = await fetch(`/api/admin/notifications/read/${id}`, {
+        method: "POST",
+        credentials: "include",
+      });
+      if (response.ok) {
+        setNotifications((prev) => prev.filter((n) => n.id !== id));
+      } else {
+        toast.error("خطا در حذف اعلان");
+      }
+    } catch (error) {
+      toast.error("خطا در حذف اعلان");
     }
   };
 
@@ -476,6 +518,38 @@ const AdminDashboard: React.FC = () => {
           {activeTab === "dashboard" && (
             <div>
               <h2 className="text-2xl font-bold text-gray-800 mb-8">داشبورد</h2>
+              {notifications.length > 0 && (
+                <div className="mb-6">
+                  <div className="bg-white border-l-4 border-blue-500 rounded-xl shadow p-4 flex flex-col gap-3">
+                    <div className="flex items-center mb-2">
+                      <MessageSquare className="text-blue-500 ml-2" size={22} />
+                      <span className="font-bold text-blue-700 text-lg">
+                        اعلان‌های جدید فرم تماس
+                      </span>
+                    </div>
+                    {notifications.map((notif) => (
+                      <div
+                        key={notif.id}
+                        className="flex items-center justify-between bg-blue-50 hover:bg-blue-100 transition rounded-lg p-3 mb-1 shadow-sm border border-blue-100"
+                      >
+                        <div className="flex items-center text-gray-800">
+                          <span className="inline-block w-2 h-2 bg-blue-500 rounded-full ml-2"></span>
+                          <span>{notif.message}</span>
+                          <span className="text-xs text-gray-400 ml-4">
+                            {new Date(notif.createdAt).toLocaleString("fa-IR")}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => markNotificationRead(notif.id)}
+                          className="ml-4 px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-400 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-500 transition text-sm font-semibold"
+                        >
+                          خواندم
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {stats && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -53,7 +53,7 @@
     "author": "علی محمدی",
     "date": "۱۴۰۳/۰۸/۰۵",
     "readTime": "۶ دقیقه",
-    "views": 1102,
+    "views": 1103,
     "category": "بهینه‌سازی",
     "tags": [
       "شخصی‌سازی",
@@ -62,7 +62,7 @@
     ],
     "featured": false,
     "published": true,
-    "lastViewed": "2025-06-11T19:21:37.171Z"
+    "lastViewed": "2025-06-11T21:57:28.924Z"
   },
   {
     "id": 1749466415994,
@@ -79,5 +79,31 @@
       "y"
     ],
     "published": true
+  },
+  {
+    "title": "test",
+    "excerpt": "test text",
+    "content": "text long text",
+    "image": "http://localhost:3000/uploads/image-1749676334481-666978673.png",
+    "author": "testwriter",
+    "readTime": "4",
+    "category": "آموزش",
+    "tags": [
+      "test barchasb",
+      "testb"
+    ],
+    "featured": false,
+    "published": true,
+    "relatedPosts": [
+      3
+    ],
+    "id": 1749676380317,
+    "views": 1,
+    "date": "۱۴۰۴/۳/۲۲",
+    "createdAt": "2025-06-11T21:13:00.403Z",
+    "updatedAt": "2025-06-11T21:13:49.208Z",
+    "slug": "test",
+    "metaDescription": "test text",
+    "lastViewed": "2025-06-11T21:14:36.384Z"
   }
 ]
