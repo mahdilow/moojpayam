@@ -3,7 +3,7 @@
     "id": "notif_1749679264134_5f4dakjib",
     "type": "contact",
     "message": "پیام جدید از pyrotech (09108680274) با موضوع: a",
-    "read": false,
+    "read": true,
     "createdAt": "2025-06-11T22:01:04.134Z",
     "data": {
       "name": "pyrotech",

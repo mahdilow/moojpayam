@@ -1,5 +1,162 @@
 [
   {
+    "id": "log_1749684326050_r9f7uq3yh",
+    "timestamp": "2025-06-11T23:25:26.050Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "severity": "low",
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684318073_oh3emr8h9",
+    "timestamp": "2025-06-11T23:25:18.073Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "severity": "medium",
+        "dateRange": "7d"
+      },
+      "resultCount": 24,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684285111_1db8eoz4u",
+    "timestamp": "2025-06-11T23:24:45.111Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684267314_5u57aslky",
+    "timestamp": "2025-06-11T23:24:27.314Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684266409_igg44w0jo",
+    "timestamp": "2025-06-11T23:24:26.409Z",
+    "adminUser": "admin",
+    "action": "View testimonials",
+    "category": "content",
+    "details": {
+      "testimonialCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684261096_1gwwdvdvp",
+    "timestamp": "2025-06-11T23:24:21.096Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684260774_xxnns53yt",
+    "timestamp": "2025-06-11T23:24:20.774Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684258851_scfa58ulj",
+    "timestamp": "2025-06-11T23:24:18.851Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "hqwcqmt6n8pgvw3pxqs65t",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "hqwcqmt6n8pgvw3pxqs65t"
+  },
+  {
+    "id": "log_1749684232180_v6tr8gdc7",
+    "timestamp": "2025-06-11T23:23:52.180Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684231871_p8ob3hudb",
+    "timestamp": "2025-06-11T23:23:51.871Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749684229975_py9i5kmpw",
+    "timestamp": "2025-06-11T23:23:49.975Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "f8psrvqyfm9vo9l7o8f4",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "f8psrvqyfm9vo9l7o8f4"
+  },
+  {
     "id": "log_1749681326284_m45h35dhk",
     "timestamp": "2025-06-11T22:35:26.284Z",
     "adminUser": "admin",

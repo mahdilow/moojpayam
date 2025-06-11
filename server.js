@@ -1357,17 +1357,6 @@ app.use('/', (req, res) => {
   res.redirect(new URL(req.url, 'http://localhost:5173').href);
 });
 
-// 404 for unknown API routes
-app.use('/api', (req, res) => {
-  res.status(404).json({ message: 'API endpoint not found' });
-});
-
-// Catch-all for SPA (frontend)
-app.use('*', (req, res) => {
-  res.status(200);
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

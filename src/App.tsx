@@ -7,7 +7,6 @@ import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
-import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -52,7 +51,6 @@ function App() {
             />
             <Route path="/mooj-admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </Router>
