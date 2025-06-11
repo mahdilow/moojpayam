@@ -1,5 +1,276 @@
 [
   {
+    "id": "log_1749681326284_m45h35dhk",
+    "timestamp": "2025-06-11T22:35:26.284Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749681325949_tkcaxmzqb",
+    "timestamp": "2025-06-11T22:35:25.950Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749681050720_erdi3092e",
+    "timestamp": "2025-06-11T22:30:50.720Z",
+    "adminUser": "admin",
+    "action": "View testimonials",
+    "category": "content",
+    "details": {
+      "testimonialCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749681044966_ebl9xrch6",
+    "timestamp": "2025-06-11T22:30:44.966Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749681044647_rns5urrs8",
+    "timestamp": "2025-06-11T22:30:44.647Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749680951438_herkhdf0z",
+    "timestamp": "2025-06-11T22:29:11.438Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749680951126_raesuvsog",
+    "timestamp": "2025-06-11T22:29:11.126Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749680949216_4wmchsa0s",
+    "timestamp": "2025-06-11T22:29:09.216Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "f8odgvixyxftkif9xs3wh",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "f8odgvixyxftkif9xs3wh"
+  },
+  {
+    "id": "log_1749680935806_i2rroo6bi",
+    "timestamp": "2025-06-11T22:28:55.806Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "0u0ad7gzfa7cojsz4o76dhk",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "0u0ad7gzfa7cojsz4o76dhk"
+  },
+  {
+    "id": "log_1749679602894_82v9zuypv",
+    "timestamp": "2025-06-11T22:06:42.895Z",
+    "adminUser": "admin",
+    "action": "View testimonials",
+    "category": "content",
+    "details": {
+      "testimonialCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679580763_hjf11a4cc",
+    "timestamp": "2025-06-11T22:06:20.763Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679579253_cny44e9is",
+    "timestamp": "2025-06-11T22:06:19.253Z",
+    "adminUser": "admin",
+    "action": "View testimonials",
+    "category": "content",
+    "details": {
+      "testimonialCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679575073_h0naacuaq",
+    "timestamp": "2025-06-11T22:06:15.073Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679571750_e0ub82zdk",
+    "timestamp": "2025-06-11T22:06:11.750Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679563722_s8i8h9fb9",
+    "timestamp": "2025-06-11T22:06:03.722Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679563706_rdtn0h7el",
+    "timestamp": "2025-06-11T22:06:03.706Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679557560_38l79ef5x",
+    "timestamp": "2025-06-11T22:05:57.560Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679556879_v235nxtoo",
+    "timestamp": "2025-06-11T22:05:56.879Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679556457_z1qjnr0t3",
+    "timestamp": "2025-06-11T22:05:56.457Z",
+    "adminUser": "admin",
+    "action": "View testimonials",
+    "category": "content",
+    "details": {
+      "testimonialCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679555454_q8z1kpffn",
+    "timestamp": "2025-06-11T22:05:55.454Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749679554901_yjngnmfc0",
+    "timestamp": "2025-06-11T22:05:54.901Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1749679313336_5nrmyrvdl",
     "timestamp": "2025-06-11T22:01:53.336Z",
     "adminUser": "admin",

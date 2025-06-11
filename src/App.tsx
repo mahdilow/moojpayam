@@ -1,26 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Toaster } from 'react-hot-toast';
-import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from "react-hot-toast";
+import { HelmetProvider } from "react-helmet-async";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
     <HelmetProvider>
       <Router>
         <div dir="rtl" className="font-vazir">
-          <Toaster 
+          <Toaster
             position="top-center"
             toastOptions={{
               duration: 4000,
               style: {
-                background: '#363636',
-                color: '#fff',
-                fontFamily: 'Lalezar, Vazir, sans-serif',
+                background: "#363636",
+                color: "#fff",
+                fontFamily: "Lalezar, Vazir, sans-serif",
               },
             }}
           />
@@ -51,6 +52,7 @@ function App() {
             />
             <Route path="/mooj-admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </Router>
