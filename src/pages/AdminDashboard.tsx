@@ -57,23 +57,6 @@ interface PricingPlan {
   active: boolean;
 }
 
-interface Testimonial {
-  id: number;
-  name: string;
-  position: string;
-  company: string;
-  image: string;
-  rating: number;
-  content: string;
-  results: {
-    metric: string;
-    value: string;
-    improvement: string;
-  };
-  featured?: boolean;
-  active: boolean;
-}
-
 interface DashboardStats {
   totalPosts: number;
   totalViews: number;
@@ -119,12 +102,6 @@ const AdminDashboard: React.FC = () => {
   const [editingPlan, setEditingPlan] = useState<PricingPlan | null>(null);
   const [showPlanForm, setShowPlanForm] = useState(false);
 
-  // Testimonials state
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [editingTestimonial, setEditingTestimonial] =
-    useState<Testimonial | null>(null);
-  const [showTestimonialForm, setShowTestimonialForm] = useState(false);
-
   const [showLogsViewer, setShowLogsViewer] = useState(false);
 
   useEffect(() => {
@@ -139,8 +116,6 @@ const AdminDashboard: React.FC = () => {
       loadBlogs();
     } else if (activeTab === "pricing") {
       loadPricing();
-    } else if (activeTab === "testimonials") {
-      loadTestimonials();
     }
   }, [activeTab]);
 
@@ -203,21 +178,6 @@ const AdminDashboard: React.FC = () => {
       }
     } catch (error) {
       toast.error("خطا در بارگذاری تعرفه‌ها");
-    }
-  };
-
-  const loadTestimonials = async () => {
-    try {
-      const response = await fetch("/api/admin/testimonials", {
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setTestimonials(data);
-      }
-    } catch (error) {
-      toast.error("خطا در بارگذاری نظرات");
     }
   };
 
@@ -366,57 +326,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  // Testimonial functions
-  const saveTestimonial = async (testimonialData: Partial<Testimonial>) => {
-    try {
-      const url = editingTestimonial
-        ? `/api/admin/testimonials/${editingTestimonial.id}`
-        : "/api/admin/testimonials";
-
-      const method = editingTestimonial ? "PUT" : "POST";
-
-      const response = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(testimonialData),
-      });
-
-      if (response.ok) {
-        toast.success(editingTestimonial ? "نظر ویرایش شد" : "نظر ایجاد شد");
-        setShowTestimonialForm(false);
-        setEditingTestimonial(null);
-        loadTestimonials();
-      } else {
-        toast.error("خطا در ذخیره نظر");
-      }
-    } catch (error) {
-      toast.error("خطا در ارتباط با سرور");
-    }
-  };
-
-  const deleteTestimonial = async (id: number) => {
-    if (!confirm("آیا از حذف این نظر اطمینان دارید؟")) return;
-
-    try {
-      const response = await fetch(`/api/admin/testimonials/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        toast.success("نظر حذف شد");
-        loadTestimonials();
-      } else {
-        toast.error("خطا در حذف نظر");
-      }
-    } catch (error) {
-      toast.error("خطا در ارتباط با سرور");
-    }
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -482,18 +391,7 @@ const AdminDashboard: React.FC = () => {
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 onClick={() => setActiveTab("testimonials")}
-              >
-                <MessageSquare className="ml-2" size={18} /> نظرات
-              </button>
-              <button
-                className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
-                  ${
-                    showLogsViewer
-                      ? "bg-blue-100 text-blue-700 font-bold shadow"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
-                onClick={() => setShowLogsViewer(true)}
-              >
+              >         
                 <Activity className="ml-2" size={18} /> گزارش‌ها
               </button>
             </div>
@@ -595,24 +493,7 @@ const AdminDashboard: React.FC = () => {
                         <DollarSign className="text-purple-600" size={24} />
                       </div>
                     </div>
-                  </div>
-
-                  <div className="bg-white rounded-xl shadow-sm p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-600 text-sm">نظرات فعال</p>
-                        <p className="text-2xl font-bold text-gray-800">
-                          {stats.activeTestimonials}
-                        </p>
-                      </div>
-                      <div className="bg-orange-100 p-3 rounded-lg">
-                        <MessageSquare className="text-orange-600" size={24} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
+                  </div>             
               {stats && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="bg-white rounded-xl shadow-sm p-6">
@@ -891,117 +772,12 @@ const AdminDashboard: React.FC = () => {
             </div>
           )}
 
-          {/* Testimonials Tab */}
-          {activeTab === "testimonials" && (
-            <div>
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800">
-                  مدیریت نظرات
-                </h2>
-                <button
-                  onClick={() => {
-                    setEditingTestimonial(null);
-                    setShowTestimonialForm(true);
-                  }}
-                  className="btn btn-primary flex items-center"
-                >
-                  <Plus className="ml-2" size={20} />
-                  نظر جدید
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {testimonials.map((testimonial) => (
-                  <div
-                    key={testimonial.id}
-                    className="bg-white rounded-xl shadow-sm p-6"
-                  >
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex items-center">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-12 h-12 rounded-full object-cover ml-3"
-                        />
-                        <div>
-                          <h3 className="font-bold text-gray-800">
-                            {testimonial.name}
-                          </h3>
-                          <p className="text-gray-600 text-sm">
-                            {testimonial.position}
-                          </p>
-                          <p className="text-primary-600 text-sm">
-                            {testimonial.company}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex space-x-2 space-x-reverse">
-                        <button
-                          onClick={() => {
-                            setEditingTestimonial(testimonial);
-                            setShowTestimonialForm(true);
-                          }}
-                          className="text-blue-600 hover:text-blue-900"
-                        >
-                          <Edit size={16} />
-                        </button>
-                        <button
-                          onClick={() => deleteTestimonial(testimonial.id)}
-                          className="text-red-600 hover:text-red-900"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={`ml-1 ${
-                            i < testimonial.rating
-                              ? "text-yellow-400 fill-yellow-400"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
-
-                    <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-                      {testimonial.content}
-                    </p>
-
-                    <div className="bg-gradient-to-r from-primary-50 to-blue-50 rounded-lg p-3">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-primary-600">
-                          {testimonial.results.value}
-                        </div>
-                        <div className="text-xs text-gray-600">
-                          {testimonial.results.metric}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 flex items-center justify-between">
-                      <span
-                        className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          testimonial.active
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
-                        {testimonial.active ? "فعال" : "غیرفعال"}
-                      </span>
-                      {testimonial.featured && (
-                        <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
-                          ویژه
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
+          
+                      
+                    
+                  
+              
+              
             </div>
           )}
         </div>
@@ -1602,242 +1378,6 @@ const PricingFormModal: React.FC<{
             <button type="submit" className="btn btn-primary flex items-center">
               <Save className="ml-2" size={20} />
               {plan ? "ویرایش" : "ایجاد"} پلن
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Testimonial Form Modal Component
-const TestimonialFormModal: React.FC<{
-  testimonial: Testimonial | null;
-  onSave: (data: Partial<Testimonial>) => void;
-  onClose: () => void;
-}> = ({ testimonial, onSave, onClose }) => {
-  const [formData, setFormData] = useState({
-    name: testimonial?.name || "",
-    position: testimonial?.position || "",
-    company: testimonial?.company || "",
-    image: testimonial?.image || "",
-    rating: testimonial?.rating || 5,
-    content: testimonial?.content || "",
-    results: testimonial?.results || {
-      metric: "",
-      value: "",
-      improvement: "",
-    },
-    featured: testimonial?.featured || false,
-    active: testimonial?.active !== undefined ? testimonial.active : true,
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave(formData);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-bold text-gray-800">
-            {testimonial ? "ویرایش نظر" : "نظر جدید"}
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <X size={24} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                نام *
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, name: e.target.value }))
-                }
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                سمت *
-              </label>
-              <input
-                type="text"
-                value={formData.position}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, position: e.target.value }))
-                }
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              شرکت *
-            </label>
-            <input
-              type="text"
-              value={formData.company}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, company: e.target.value }))
-              }
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-              required
-            />
-          </div>
-
-          <ImageUpload
-            value={formData.image}
-            onChange={(url) => setFormData((prev) => ({ ...prev, image: url }))}
-            label="تصویر"
-            required
-          />
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              امتیاز
-            </label>
-            <select
-              value={formData.rating}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  rating: parseInt(e.target.value),
-                }))
-              }
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-            >
-              {[1, 2, 3, 4, 5].map((rating) => (
-                <option key={rating} value={rating}>
-                  {rating} ستاره
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              متن نظر *
-            </label>
-            <textarea
-              value={formData.content}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, content: e.target.value }))
-              }
-              rows={4}
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none resize-none"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              نتایج حاصل
-            </label>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <input
-                type="text"
-                value={formData.results.metric}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    results: { ...prev.results, metric: e.target.value },
-                  }))
-                }
-                placeholder="نوع معیار"
-                className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-              />
-              <input
-                type="text"
-                value={formData.results.value}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    results: { ...prev.results, value: e.target.value },
-                  }))
-                }
-                placeholder="مقدار"
-                className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-              />
-              <input
-                type="text"
-                value={formData.results.improvement}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    results: { ...prev.results, improvement: e.target.value },
-                  }))
-                }
-                placeholder="بهبود"
-                className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-6 space-x-reverse">
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.featured}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    featured: e.target.checked,
-                  }))
-                }
-                className="ml-2"
-              />
-              <span className="text-sm text-gray-700">نظر ویژه</span>
-            </label>
-
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.active}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, active: e.target.checked }))
-                }
-                className="ml-2"
-              />
-              <span className="text-sm text-gray-700">فعال</span>
-            </label>
-          </div>
-
-          <div className="flex justify-end space-x-4 space-x-reverse">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              انصراف
-            </button>
-            <button type="submit" className="btn btn-primary flex items-center">
-              <Save className="ml-2" size={20} />
-              {testimonial ? "ویرایش" : "ایجاد"} نظر
             </button>
           </div>
         </form>
