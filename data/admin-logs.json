@@ -1,5 +1,18 @@
 [
   {
+    "id": "log_1750017768734_vx1ihtcfm",
+    "timestamp": "2025-06-15T20:02:48.734Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1750017735184_wgl8gwcms",
     "timestamp": "2025-06-15T20:02:15.184Z",
     "adminUser": "admin",
