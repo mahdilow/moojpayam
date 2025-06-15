@@ -1,5 +1,18 @@
 [
   {
+    "id": "log_1750015717252_8ot8qvsuf",
+    "timestamp": "2025-06-15T19:28:37.252Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1750015714998_g6ubzzmqj",
     "timestamp": "2025-06-15T19:28:34.998Z",
     "adminUser": "admin",
