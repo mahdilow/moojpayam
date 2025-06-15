@@ -3,7 +3,7 @@
     "id": "notif_1749996800949_hvmq3g9u5",
     "type": "contact",
     "message": "پیام جدید از test (09108680274) با موضوع: hjjh",
-    "read": false,
+    "read": true,
     "createdAt": "2025-06-15T14:13:20.949Z",
     "data": {
       "name": "test",

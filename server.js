@@ -701,31 +701,20 @@ app.get('/api/content/pricing', async (req, res) => {
   }
 });
 
-app.get('/api/content/testimonials', async (req, res) => {
-  try {
-    const testimonials = await readJsonFile('testimonials.json');
-    res.json(testimonials);
-  } catch (error) {
-    res.status(500).json({ message: 'خطا در بارگذاری نظرات' });
-  }
-});
-
 // Admin dashboard stats
 app.get('/api/admin/stats', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
 
   try {
-    const [blogs, pricing, testimonials] = await Promise.all([
+    const [blogs, pricing] = await Promise.all([
       readJsonFile('blogs.json'),
-      readJsonFile('pricing.json'),
-      readJsonFile('testimonials.json')
+      readJsonFile('pricing.json')
     ]);
 
     const stats = {
       totalPosts: blogs.filter(blog => blog.published).length,
       totalViews: blogs.reduce((sum, blog) => sum + (blog.views || 0), 0),
       activePlans: pricing.filter(plan => plan.active).length,
-      activeTestimonials: testimonials.filter(testimonial => testimonial.active).length,
       // Additional stats
       draftPosts: blogs.filter(blog => !blog.published).length,
       totalPosts: blogs.length,
@@ -1138,166 +1127,6 @@ app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
       'high'
     ));
     res.status(500).json({ message: 'خطا در حذف پلن' });
-  }
-});
-
-// Testimonials management endpoints
-app.get('/api/admin/testimonials', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
-  try {
-    const testimonials = await readJsonFile('testimonials.json');
-
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View testimonials',
-      'content',
-      { testimonialCount: testimonials.length, success: true },
-      'low'
-    ));
-
-    res.json(testimonials);
-  } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View testimonials failed',
-      'content',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
-    res.status(500).json({ message: 'خطا در بارگذاری نظرات' });
-  }
-});
-
-app.post('/api/admin/testimonials', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
-  try {
-    const testimonials = await readJsonFile('testimonials.json');
-    const newTestimonial = { ...req.body, id: Date.now() };
-
-    testimonials.push(newTestimonial);
-    const success = await writeJsonFile('testimonials.json', testimonials);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Create testimonial',
-        'content',
-        {
-          resourceType: 'testimonial',
-          resourceId: newTestimonial.id,
-          newData: { name: newTestimonial.name, company: newTestimonial.company },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'نظر با موفقیت ایجاد شد', testimonial: newTestimonial });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره نظر' });
-    }
-  } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Create testimonial failed',
-      'content',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
-    res.status(500).json({ message: 'خطا در ایجاد نظر' });
-  }
-});
-
-app.put('/api/admin/testimonials/:id', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
-  try {
-    const testimonials = await readJsonFile('testimonials.json');
-    const testimonialId = parseInt(req.params.id);
-    const testimonialIndex = testimonials.findIndex(testimonial => testimonial.id === testimonialId);
-
-    if (testimonialIndex === -1) {
-      return res.status(404).json({ message: 'نظر یافت نشد' });
-    }
-
-    const oldTestimonial = { ...testimonials[testimonialIndex] };
-    testimonials[testimonialIndex] = { ...testimonials[testimonialIndex], ...req.body, id: testimonialId };
-    const success = await writeJsonFile('testimonials.json', testimonials);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Update testimonial',
-        'content',
-        {
-          resourceType: 'testimonial',
-          resourceId: testimonialId,
-          oldData: { name: oldTestimonial.name, company: oldTestimonial.company },
-          newData: { name: testimonials[testimonialIndex].name, company: testimonials[testimonialIndex].company },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'نظر با موفقیت ویرایش شد', testimonial: testimonials[testimonialIndex] });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
-    }
-  } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Update testimonial failed',
-      'content',
-      { resourceType: 'testimonial', resourceId: req.params.id, success: false, errorMessage: error.message },
-      'medium'
-    ));
-    res.status(500).json({ message: 'خطا در ویرایش نظر' });
-  }
-});
-
-app.delete('/api/admin/testimonials/:id', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
-  try {
-    const testimonials = await readJsonFile('testimonials.json');
-    const testimonialId = parseInt(req.params.id);
-    const testimonialToDelete = testimonials.find(testimonial => testimonial.id === testimonialId);
-    const filteredTestimonials = testimonials.filter(testimonial => testimonial.id !== testimonialId);
-
-    if (filteredTestimonials.length === testimonials.length) {
-      return res.status(404).json({ message: 'نظر یافت نشد' });
-    }
-
-    const success = await writeJsonFile('testimonials.json', filteredTestimonials);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Delete testimonial',
-        'content',
-        {
-          resourceType: 'testimonial',
-          resourceId: testimonialId,
-          oldData: { name: testimonialToDelete?.name, company: testimonialToDelete?.company },
-          success: true
-        },
-        'high'
-      ));
-
-      res.json({ message: 'نظر با موفقیت حذف شد' });
-    } else {
-      res.status(500).json({ message: 'خطا در حذف نظر' });
-    }
-  } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Delete testimonial failed',
-      'content',
-      { resourceType: 'testimonial', resourceId: req.params.id, success: false, errorMessage: error.message },
-      'high'
-    ));
-    res.status(500).json({ message: 'خطا در حذف نظر' });
   }
 });
 
