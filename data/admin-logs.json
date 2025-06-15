@@ -1,5 +1,31 @@
 [
   {
+    "id": "log_1750013100780_b8ilci421",
+    "timestamp": "2025-06-15T18:45:00.780Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750013100228_e52l72t5b",
+    "timestamp": "2025-06-15T18:45:00.228Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1750013098827_6w53uz4ce",
     "timestamp": "2025-06-15T18:44:58.827Z",
     "adminUser": "admin",
