@@ -390,8 +390,7 @@ const AdminDashboard: React.FC = () => {
                       ? "bg-blue-100 text-blue-700 font-bold shadow"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
-                onClick={() => setActiveTab("testimonials")}
-              >         
+                     
                 <Activity className="ml-2" size={18} /> گزارش‌ها
               </button>
             </div>
