@@ -1,5 +1,18 @@
 [
   {
+    "id": "log_1750017735184_wgl8gwcms",
+    "timestamp": "2025-06-15T20:02:15.184Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1750017732564_xhg47mtz4",
     "timestamp": "2025-06-15T20:02:12.564Z",
     "adminUser": "admin",
