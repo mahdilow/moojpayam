@@ -95,7 +95,7 @@
     "features": [
       {
         "title": "۱۰,۰۰۰ پیامک ماهانه",
-        "included": false
+        "included": true
       },
       {
         "title": "پنل کاربری اختصاصی",

@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1750017805727_pcap8ddjv",
+    "timestamp": "2025-06-15T20:03:25.727Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750017805662_iidca18ew",
+    "timestamp": "2025-06-15T20:03:25.662Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 3,
+      "oldData": {
+        "name": "سازمانی",
+        "price": "تماس بگیرید"
+      },
+      "newData": {
+        "name": "سازمانی",
+        "price": "تماس بگیرید"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1750017788419_rn6w0jfw1",
     "timestamp": "2025-06-15T20:03:08.419Z",
     "adminUser": "admin",
