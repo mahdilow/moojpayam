@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1750017770686_vcw1vwvt9",
+    "timestamp": "2025-06-15T20:02:50.686Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750017770635_beftgd84m",
+    "timestamp": "2025-06-15T20:02:50.635Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1,
+      "oldData": {
+        "title": "راهنمای کامل پیامک بازاریابی: از صفر تا صد",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "راهنمای کامل پیامک بازاریابی: از صفر تا صد",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1750017768734_vx1ihtcfm",
     "timestamp": "2025-06-15T20:02:48.734Z",
     "adminUser": "admin",
