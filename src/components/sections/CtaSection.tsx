@@ -50,10 +50,10 @@ const CtaSection: React.FC = () => {
             className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 sm:space-x-reverse"
           >
             <a
-              href="#register"
+              href="http://dash.moojpayam.ir/userregister.aspx"
               className="btn bg-white text-primary-600 hover:bg-gray-100 transition-colors text-lg px-8 py-3"
             >
-              ثبت نام رایگان
+              ثبت نام
             </a>
             <a
               href="#pricing"

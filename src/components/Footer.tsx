@@ -24,8 +24,8 @@ const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed">
-              ارائه دهنده خدمات پیامک تبلیغاتی با بالاترین کیفیت و پایین‌ترین
-              قیمت در ایران. با اطمینان پیام خود را به مخاطبان برسانید.
+              ارائه دهنده خدمات پیامک تبلیغاتی با بالاترین کیفیت و به صرفه ترین
+              تعرفه . با اطمینان پیام خود را به مخاطبان برسانید.
             </p>
             <div className="flex space-x-4 space-x-reverse">
               <a
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   خدمات
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#pricing"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   تعرفه‌ها
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/blog"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   بلاگ
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#contact"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   تماس با ما
@@ -171,17 +171,19 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Phone size={18} className="ml-2 mt-1 text-blue-400" />
-                <span className="text-gray-400">۰۲۱-۱۲۳۴۵۶۷۸</span>
+                <a href="tel:+989100711835">
+                  <span className="text-gray-400">۰۹۱۰۰۷۱۱۸۳۵</span>
+                </a>
               </li>
               <li className="flex items-start">
                 <Mail size={18} className="ml-2 mt-1 text-blue-400" />
-                <span className="text-gray-400">info@payamresan.ir</span>
+                <a href="mailto:moojpayam@proton.me">
+                  <span className="text-gray-400">moojpayam@proton.me</span>
+                </a>
               </li>
               <li className="flex items-start">
                 <MapPin size={18} className="ml-2 mt-1 text-blue-400" />
-                <span className="text-gray-400">
-                  تهران، خیابان ولیعصر، برج آسمان، طبقه ۱۰
-                </span>
+                <span className="text-gray-400">کرج طالقانی جنوبی</span>
               </li>
             </ul>
           </div>

@@ -1,5 +1,160 @@
 [
   {
+    "id": "log_1749996837975_v09z9lvct",
+    "timestamp": "2025-06-15T14:13:57.975Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749996837657_jntweo7or",
+    "timestamp": "2025-06-15T14:13:57.657Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749996836031_jhchyesk7",
+    "timestamp": "2025-06-15T14:13:56.031Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "nok7sheouyer36qoe55te",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "nok7sheouyer36qoe55te"
+  },
+  {
+    "id": "log_1749766887816_hbhyi4xo8",
+    "timestamp": "2025-06-12T22:21:27.816Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766887489_paiinjdsq",
+    "timestamp": "2025-06-12T22:21:27.489Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 3,
+      "oldData": {
+        "name": "سازمانی",
+        "price": "۹۵۰,۰۰۰"
+      },
+      "newData": {
+        "name": "سازمانی",
+        "price": "تماس بگیرید"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766872045_d8mjiyzj4",
+    "timestamp": "2025-06-12T22:21:12.045Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766870641_a8a02ucxl",
+    "timestamp": "2025-06-12T22:21:10.641Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766869454_78zjpnktr",
+    "timestamp": "2025-06-12T22:21:09.454Z",
+    "adminUser": "admin",
+    "action": "View testimonials",
+    "category": "content",
+    "details": {
+      "testimonialCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766868840_p8t7fb50a",
+    "timestamp": "2025-06-12T22:21:08.840Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766868513_ll2lmtmdb",
+    "timestamp": "2025-06-12T22:21:08.513Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1749766866594_umjeh3un9",
+    "timestamp": "2025-06-12T22:21:06.594Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "3qh02txmtqpko8vq6cu4pl",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "3qh02txmtqpko8vq6cu4pl"
+  },
+  {
     "id": "log_1749684326050_r9f7uq3yh",
     "timestamp": "2025-06-11T23:25:26.050Z",
     "adminUser": "admin",

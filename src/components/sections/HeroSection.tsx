@@ -94,8 +94,8 @@ const HeroSection: React.FC = () => {
               </h1>
               <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                 با انتخاب منطقه مورد نظر روی نقشه، پیام تبلیغاتی خود را به
-                مشتریان بالقوه در آن محدوده ارسال کنید. هدفمندسازی تبلیغات و
-                افزایش نرخ تبدیل با موج پیام.
+                مشتریان بالقوه در آن محدوده ارسال کنید هدفمندسازی تبلیغات و
+                افزایش نرخ تبدیل با موج پیام
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
                 <a

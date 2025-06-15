@@ -8,7 +8,10 @@ const PricingSection: React.FC = () => {
 
   if (loading) {
     return (
-      <section id="pricing" className="py-20 bg-gradient-to-br from-white to-blue-50">
+      <section
+        id="pricing"
+        className="py-20 bg-gradient-to-br from-white to-blue-50"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
@@ -21,7 +24,10 @@ const PricingSection: React.FC = () => {
 
   if (error) {
     return (
-      <section id="pricing" className="py-20 bg-gradient-to-br from-white to-blue-50">
+      <section
+        id="pricing"
+        className="py-20 bg-gradient-to-br from-white to-blue-50"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center">
             <p className="text-red-600">{error}</p>
@@ -115,7 +121,9 @@ const PricingSection: React.FC = () => {
                     <span className="text-4xl font-bold text-gray-900">
                       {plan.price}
                     </span>
-                    <span className="text-gray-600 mr-2">تومان / ماهانه</span>
+                    <span className="text-gray-600 mr-2">
+                      هزار تومان / سالانه
+                    </span>
                   </div>
                 </div>
 

@@ -90,7 +90,7 @@ const StatisticsSection: React.FC = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
           >
-            آمار و ارقام <span className="text-primary-500">موج پیام</span>
+            آمار <span className="text-primary-500">موج پیام</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -109,8 +109,18 @@ const StatisticsSection: React.FC = () => {
           {/* Glass effect overlay */}
           <div className="absolute inset-0 backdrop-blur-sm bg-white/10"></div>
           <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <StatItem value={12000} label="مشتری فعال" delay={0} />
-            <StatItem value={850} label="میلیون پیامک ارسالی" delay={0.1} />
+            <StatItem
+              value={98}
+              label="مشتری ها از ما راضی هستند"
+              suffix="%"
+              delay={0}
+            />
+            <StatItem
+              value={450}
+              label="هزار پیامک ارسالی"
+              suffix="+"
+              delay={0.1}
+            />
             <StatItem
               value={99.9}
               label="درصد تحویل موفق"

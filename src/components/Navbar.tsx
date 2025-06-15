@@ -72,10 +72,16 @@ const Navbar: React.FC = () => {
             >
               تماس با ما
             </a>
-            <a href="#login" className="btn btn-outline mr-4">
+            <a
+              href="http://dash.moojpayam.ir/"
+              className="btn btn-outline mr-4"
+            >
               ورود
             </a>
-            <a href="#register" className="btn btn-primary">
+            <a
+              href="http://dash.moojpayam.ir/userregister.aspx"
+              className="btn btn-primary"
+            >
               ثبت نام
             </a>
           </div>
@@ -143,11 +149,14 @@ const Navbar: React.FC = () => {
                 تماس با ما
               </a>
               <div className="flex space-x-4 space-x-reverse pt-2">
-                <a href="#login" className="btn btn-outline flex-1 text-center">
+                <a
+                  href="http://dash.moojpayam.ir"
+                  className="btn btn-outline flex-1 text-center"
+                >
                   ورود
                 </a>
                 <a
-                  href="#register"
+                  href="http://dash.moojpayam.ir/userregister.aspx"
                   className="btn btn-primary flex-1 text-center"
                 >
                   ثبت نام
