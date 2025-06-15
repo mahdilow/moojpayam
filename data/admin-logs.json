@@ -1,5 +1,43 @@
 [
   {
+    "id": "log_1750015714998_g6ubzzmqj",
+    "timestamp": "2025-06-15T19:28:34.998Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750015714316_k6hhngb9b",
+    "timestamp": "2025-06-15T19:28:34.316Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750015713822_kquzhtizx",
+    "timestamp": "2025-06-15T19:28:33.822Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1750015713166_3c4cn2bvz",
     "timestamp": "2025-06-15T19:28:33.166Z",
     "adminUser": "admin",
