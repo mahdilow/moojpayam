@@ -493,6 +493,8 @@ const AdminDashboard: React.FC = () => {
                       </div>
                     </div>
                   </div>             
+                </div>             
+                  
               {stats && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="bg-white rounded-xl shadow-sm p-6">
