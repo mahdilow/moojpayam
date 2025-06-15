@@ -383,6 +383,15 @@ const AdminDashboard: React.FC = () => {
               >
                 <DollarSign className="ml-2" size={18} /> تعرفه‌ها
               </button>                    
+               <button
+                className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
+                  ${
+                    showLogsViewer
+                      ? "bg-blue-100 text-blue-700 font-bold shadow"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                onClick={() => setShowLogsViewer(true)}
+              >
                 <Activity className="ml-2" size={18} /> گزارش‌ها
               </button>
             </div>
