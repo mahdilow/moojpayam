@@ -1,5 +1,19 @@
 [
   {
+    "id": "log_1750013782148_o74z4tszx",
+    "timestamp": "2025-06-15T18:56:22.148Z",
+    "adminUser": "a",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "127.0.0.1",
+      "sessionId": "srfsrofnkrnv87mv6u2ba",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "srfsrofnkrnv87mv6u2ba"
+  },
+  {
     "id": "log_1750013126555_pqha8dhr3",
     "timestamp": "2025-06-15T18:45:26.555Z",
     "adminUser": "admin",
