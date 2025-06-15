@@ -811,20 +811,6 @@ const AdminDashboard: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Testimonial Form Modal */}
-      <AnimatePresence>
-        {showTestimonialForm && (
-          <TestimonialFormModal
-            testimonial={editingTestimonial}
-            onSave={saveTestimonial}
-            onClose={() => {
-              setShowTestimonialForm(false);
-              setEditingTestimonial(null);
-            }}
-          />
-        )}
-      </AnimatePresence>
-
       {/* Logs Viewer Modal */}
       <AdminLogsViewer
         isOpen={showLogsViewer}
