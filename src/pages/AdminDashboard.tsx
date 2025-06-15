@@ -61,7 +61,6 @@ interface DashboardStats {
   totalPosts: number;
   totalViews: number;
   activePlans: number;
-  activeTestimonials: number;
   draftPosts: number;
   mostViewedPost: {
     title: string;
