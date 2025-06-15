@@ -492,8 +492,9 @@ const AdminDashboard: React.FC = () => {
                         <DollarSign className="text-purple-600" size={24} />
                       </div>
                     </div>
-                  </div>             
-                </div>             
+                  </div>  
+                </div>
+              )}
                   
               {stats && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
