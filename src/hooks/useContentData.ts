@@ -31,27 +31,9 @@ interface PricingPlan {
   active: boolean;
 }
 
-interface Testimonial {
-  id: number;
-  name: string;
-  position: string;
-  company: string;
-  image: string;
-  rating: number;
-  content: string;
-  results: {
-    metric: string;
-    value: string;
-    improvement: string;
-  };
-  featured?: boolean;
-  active: boolean;
-}
-
 export const useContentData = () => {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [pricing, setPricing] = useState<PricingPlan[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,26 +42,23 @@ export const useContentData = () => {
       setLoading(true);
       setError(null);
 
-      // Load all content from API endpoints
-      const [blogsRes, pricingRes, testimonialsRes] = await Promise.all([
+      // Load content from API endpoints
+      const [blogsRes, pricingRes] = await Promise.all([
         fetch('/api/content/blogs'),
-        fetch('/api/content/pricing'),
-        fetch('/api/content/testimonials')
+        fetch('/api/content/pricing')
       ]);
 
-      if (!blogsRes.ok || !pricingRes.ok || !testimonialsRes.ok) {
+      if (!blogsRes.ok || !pricingRes.ok) {
         throw new Error('خطا در بارگذاری محتوا');
       }
 
-      const [blogsData, pricingData, testimonialsData] = await Promise.all([
+      const [blogsData, pricingData] = await Promise.all([
         blogsRes.json(),
-        pricingRes.json(),
-        testimonialsRes.json()
+        pricingRes.json()
       ]);
 
       setBlogs(blogsData);
       setPricing(pricingData);
-      setTestimonials(testimonialsData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'خطا در بارگذاری محتوا');
       console.error('Error loading content:', err);
@@ -107,9 +86,6 @@ export const useContentData = () => {
   // Get active pricing plans
   const activePricingPlans = pricing.filter(plan => plan.active);
 
-  // Get active testimonials
-  const activeTestimonials = testimonials.filter(testimonial => testimonial.active);
-
   return {
     blogs: publishedBlogs,
     allBlogs: blogs,
@@ -117,12 +93,10 @@ export const useContentData = () => {
     latestBlogs,
     pricing: activePricingPlans,
     allPricing: pricing,
-    testimonials: activeTestimonials,
-    allTestimonials: testimonials,
     loading,
     error,
     refetch: loadContent
   };
 };
 
-export type { BlogPost, PricingPlan, Testimonial };
+export type { BlogPost, PricingPlan };
