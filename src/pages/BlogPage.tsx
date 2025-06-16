@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, User, ArrowLeft, Search, Clock, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useContentData } from '../hooks/useContentData';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Calendar, User, ArrowLeft, Search, Clock, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useContentData } from "../hooks/useContentData";
 
 const BlogPage: React.FC = () => {
   const { blogs, featuredBlog, loading, error } = useContentData();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('همه');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("همه");
 
-  const categories = ['همه', 'آموزش', 'نکات', 'بهینه‌سازی', 'قوانین', 'تحلیل', 'خلاقیت'];
+  const categories = [
+    "همه",
+    "آموزش",
+    "نکات",
+    "بهینه‌سازی",
+    "قوانین",
+    "تحلیل",
+    "خلاقیت",
+  ];
 
-  const filteredPosts = blogs.filter(post => {
-    const matchesSearch = post.title.includes(searchTerm) || post.excerpt.includes(searchTerm);
-    const matchesCategory = selectedCategory === 'همه' || post.category === selectedCategory;
+  const filteredPosts = blogs.filter((post) => {
+    const matchesSearch =
+      post.title.includes(searchTerm) || post.excerpt.includes(searchTerm);
+    const matchesCategory =
+      selectedCategory === "همه" || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const regularPosts = filteredPosts.filter(post => !post.featured);
+  const regularPosts = filteredPosts.filter((post) => !post.featured);
 
   if (loading) {
     return (
@@ -64,10 +74,12 @@ const BlogPage: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
           >
-            آخرین <span className="text-primary-500 relative">
+            آخرین{" "}
+            <span className="text-primary-500 relative">
               مقالات
               <span className="absolute bottom-0 left-0 w-full h-1 bg-primary-500/30 rounded-full"></span>
-            </span> و راهنماها
+            </span>{" "}
+            و راهنماها
           </motion.h1>
 
           <motion.p
@@ -83,7 +95,10 @@ const BlogPage: React.FC = () => {
         {/* Search and Filter */}
         <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
           <div className="relative flex-1">
-            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <Search
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              size={20}
+            />
             <input
               type="text"
               placeholder="جستجو در مقالات..."
@@ -99,8 +114,8 @@ const BlogPage: React.FC = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-xl whitespace-nowrap transition-all ${
                   selectedCategory === category
-                    ? 'bg-primary-500 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    ? "bg-primary-500 text-white"
+                    : "bg-white text-gray-600 hover:bg-gray-50"
                 }`}
               >
                 {category}
@@ -139,15 +154,15 @@ const BlogPage: React.FC = () => {
                       {featuredBlog.views.toLocaleString()}
                     </div>
                   </div>
-                  
+
                   <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
                     {featuredBlog.title}
                   </h2>
-                  
+
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     {featuredBlog.excerpt}
                   </p>
-                  
+
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center text-gray-500 text-sm">
                       <User size={16} className="ml-2" />
@@ -162,7 +177,7 @@ const BlogPage: React.FC = () => {
                       {featuredBlog.readTime}
                     </div>
                   </div>
-                  
+
                   <Link
                     to={`/blog/${featuredBlog.id}`}
                     className="btn btn-primary inline-flex items-center w-fit"
@@ -200,18 +215,16 @@ const BlogPage: React.FC = () => {
                   {post.views.toLocaleString()}
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight hover:text-primary-600 transition-colors">
-                  <Link to={`/blog/${post.id}`}>
-                    {post.title}
-                  </Link>
+                  <Link to={`/blog/${post.id}`}>{post.title}</Link>
                 </h3>
-                
+
                 <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.slice(0, 2).map((tag) => (
                     <span
@@ -222,7 +235,7 @@ const BlogPage: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                   <div className="flex items-center">
                     <User size={14} className="ml-1" />
@@ -233,7 +246,7 @@ const BlogPage: React.FC = () => {
                     {post.readTime}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500 text-sm">{post.date}</span>
                   <Link
@@ -255,8 +268,12 @@ const BlogPage: React.FC = () => {
             <div className="text-gray-400 mb-4">
               <Search size={64} className="mx-auto" />
             </div>
-            <h3 className="text-xl font-bold text-gray-600 mb-2">نتیجه‌ای یافت نشد</h3>
-            <p className="text-gray-500">لطفاً کلمات کلیدی دیگری را امتحان کنید</p>
+            <h3 className="text-xl font-bold text-gray-600 mb-2">
+              نتیجه‌ای یافت نشد
+            </h3>
+            <p className="text-gray-500">
+              لطفاً کلمات کلیدی دیگری را امتحان کنید
+            </p>
           </div>
         )}
       </div>

@@ -1,5 +1,83 @@
 [
   {
+    "id": "log_1750085295248_tjdv9mrss",
+    "timestamp": "2025-06-16T14:48:15.248Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750085294329_zhp113ny3",
+    "timestamp": "2025-06-16T14:48:14.329Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750085292711_9a0hln77u",
+    "timestamp": "2025-06-16T14:48:12.711Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750085289128_bj7341wjn",
+    "timestamp": "2025-06-16T14:48:09.128Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750085288807_r9upto7ik",
+    "timestamp": "2025-06-16T14:48:08.807Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750085287205_lpg7t6ysj",
+    "timestamp": "2025-06-16T14:48:07.205Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "f6sok3372r494ddo21bdee",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "f6sok3372r494ddo21bdee"
+  },
+  {
     "id": "log_1750077984702_dktn0npwp",
     "timestamp": "2025-06-16T12:46:24.702Z",
     "adminUser": "admin",

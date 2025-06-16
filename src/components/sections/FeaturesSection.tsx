@@ -5,10 +5,13 @@ import {
   Users,
   BarChart3,
   Calendar,
-  Shield,
   Zap,
   Clock,
-  Hash,
+  AudioLinesIcon,
+  LocateIcon,
+  Target,
+  SatelliteDish,
+  PlugIcon,
 } from "lucide-react";
 
 interface FeatureCardProps {
@@ -90,10 +93,10 @@ const FeaturesSection: React.FC = () => {
         "برنامه‌ریزی ارسال پیام‌ها در زمان‌های مشخص و به صورت دوره‌ای و مناسبتی",
     },
     {
-      icon: <Shield className="h-8 w-8" />,
-      title: "امنیت بالا",
+      icon: <LocateIcon className="h-8 w-8" />,
+      title: "ارسال منطقه ای",
       description:
-        "استفاده از پروتکل‌های امنیتی پیشرفته برای حفاظت از اطلاعات مشتریان و مخاطبان",
+        "ارسال پیامک به استان ،شهر، و محله مورد نظر خودتون از روی نقشه یا کد پستی",
     },
     {
       icon: <Zap className="h-8 w-8" />,
@@ -102,16 +105,39 @@ const FeaturesSection: React.FC = () => {
         "ارسال فوری پیام‌ها با استفاده از زیرساخت‌های قدرتمند و خطوط پرسرعت",
     },
     {
+      icon: <AudioLinesIcon className="h-8 w-8" />,
+      title: "پیامک صوتی",
+      description:
+        " قابلیت ارسال پیامک صوتی به صورت تکی و انبوه با امکان تبدیل متن به صوت یا اپلود ویس را به شما می دهد",
+    },
+    {
+      icon: <Target className="h-8 w-8" />,
+      title: "فیلتر پیشرفته",
+      description:
+        " ارسال براساس فیلتر سن، جنسیت و ... برای دسترسی دقیق به مخاطب هدف",
+    },
+    {
+      icon: <SatelliteDish className="h-8 w-8" />,
+      title: "ارسال پیامک زنده",
+      description:
+        " به افرادی که در موقعیت مکانی مورد‌نظر شما حضور دارند یا در‌حال تردد هستند پیامک ارسال کنید",
+    },
+    {
+      icon: <PlugIcon className="h-8 w-8" />,
+      title: "خدمات وب سرویس",
+      description:
+        "اتصال آسان پنل به وب‌سایت یا نرم‌افزار شما و قابلیت ارسال از طریق پترن ",
+    },
+    {
+      icon: <PlugIcon className="h-8 w-8" />,
+      title: "ارسال هدفمند",
+      description: " دسترسی به روز به شماره های مشاغل و اصناف مختلف",
+    },
+    {
       icon: <Clock className="h-8 w-8" />,
       title: "پشتیبانی ۲۴/۷",
       description:
         "پشتیبانی شبانه‌روزی و در تمام روزهای هفته برای رفع مشکلات احتمالی",
-    },
-    {
-      icon: <Hash className="h-8 w-8" />,
-      title: "نام تجاری اختصاصی",
-      description:
-        "امکان ارسال پیام با نام تجاری اختصاصی شما برای افزایش اعتبار برند",
     },
   ];
 
