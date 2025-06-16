@@ -1,14 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo.png";
-import {
-  Instagram,
-  Twitter,
-  Linkedin,
-  Facebook,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -32,25 +25,13 @@ const Footer: React.FC = () => {
                 href="#"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
               >
-                <Instagram size={20} />
+                <FaInstagram size={20} />
               </a>
               <a
                 href="#"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
               >
-                <Twitter size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-blue-400 transition-colors"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-blue-400 transition-colors"
-              >
-                <Facebook size={20} />
+                <FaTelegramPlane size={20} />
               </a>
             </div>
           </div>

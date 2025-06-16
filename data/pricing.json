@@ -88,47 +88,31 @@
     "active": true
   },
   {
-    "id": 3,
-    "name": "سازمانی",
-    "price": "تماس بگیرید",
-    "description": "مناسب برای کسب و کارهای بزرگ و سازمان‌ها",
+    "name": "پلن ",
+    "price": "ندارد",
+    "description": "خهتبخیهبتخت",
     "features": [
       {
-        "title": "۱۰,۰۰۰ پیامک ماهانه",
+        "title": "۱",
         "included": true
       },
       {
-        "title": "پنل کاربری اختصاصی",
+        "title": "۲",
         "included": true
       },
       {
-        "title": "ارسال زمانبندی شده",
-        "included": true
+        "title": "۳",
+        "included": false
       },
       {
-        "title": "گزارش وضعیت تحویل",
-        "included": true
-      },
-      {
-        "title": "پشتیبانی VIP",
-        "included": true
-      },
-      {
-        "title": "ارسال پیامک با نام تجاری",
-        "included": true
-      },
-      {
-        "title": "وب سرویس اختصاصی",
-        "included": true
-      },
-      {
-        "title": "مدیریت پیشرفته مخاطبین",
+        "title": "۴",
         "included": true
       }
     ],
-    "cta": "تماس با ما",
+    "cta": "انتخاب پلن",
     "popular": false,
-    "color": "border-secondary-500",
-    "active": true
+    "color": "border-blue-400",
+    "active": true,
+    "id": 1750020501513
   }
 ]

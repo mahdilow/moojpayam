@@ -25,7 +25,7 @@ const StatItem: React.FC<StatItemProps> = ({
           setInView(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.4 }
     );
 
     if (counterRef.current) {
@@ -43,14 +43,13 @@ const StatItem: React.FC<StatItemProps> = ({
     if (!inView) return;
 
     let start = 0;
-    const end = value;
-    const duration = 2000;
-    const increment = end / (duration / 16);
+    const duration = 1500;
+    const increment = value / (duration / 16);
 
     const timer = setInterval(() => {
       start += increment;
-      if (start > end) {
-        setCount(end);
+      if (start >= value) {
+        setCount(value);
         clearInterval(timer);
       } else {
         setCount(Math.floor(start));
@@ -62,15 +61,15 @@ const StatItem: React.FC<StatItemProps> = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
+      ref={counterRef}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, delay }}
       viewport={{ once: true }}
       className="text-center"
-      ref={counterRef}
     >
       <div className="text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-md">
-        {count.toLocaleString()}
+        {count.toLocaleString("fa-IR")}
         {suffix}
       </div>
       <div className="text-lg text-white/90">{label}</div>
@@ -86,7 +85,7 @@ const StatisticsSection: React.FC = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
           >
@@ -95,7 +94,7 @@ const StatisticsSection: React.FC = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
@@ -103,31 +102,30 @@ const StatisticsSection: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl p-8 lg:p-12 shadow-lg bg-gradient-to-br from-blue-500 to-purple-500 animate-gradient-x">
-          {/* Animated background overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-400/30 via-secondary-400/30 to-primary-500/30 animate-gradient-shift"></div>
-          {/* Glass effect overlay */}
-          <div className="absolute inset-0 backdrop-blur-sm bg-white/10"></div>
+        <div className="relative overflow-hidden rounded-2xl p-8 lg:p-12 shadow-lg bg-gradient-to-br from-blue-500 to-purple-500">
+          {/* Glass effect overlay only (removes double animations) */}
+          <div className="absolute inset-0 backdrop-blur-sm bg-white/10 rounded-2xl"></div>
+
           <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-8">
             <StatItem
               value={98}
               label="مشتری ها از ما راضی هستند"
               suffix="%"
-              delay={0}
+              delay={0.1}
             />
             <StatItem
               value={450}
               label="هزار پیامک ارسالی"
               suffix="+"
-              delay={0.1}
+              delay={0.2}
             />
             <StatItem
               value={99.9}
               label="درصد تحویل موفق"
               suffix="%"
-              delay={0.2}
+              delay={0.3}
             />
-            <StatItem value={6} label="سال سابقه فعالیت" delay={0.3} />
+            <StatItem value={6} label="سال سابقه فعالیت" delay={0.4} />
           </div>
         </div>
       </div>

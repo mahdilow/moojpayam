@@ -73,12 +73,14 @@ const Navbar: React.FC = () => {
               تماس با ما
             </a>
             <a
+              target="_blank"
               href="http://dash.moojpayam.ir/"
               className="btn btn-outline mr-4"
             >
               ورود
             </a>
             <a
+              target="_blank"
               href="http://dash.moojpayam.ir/userregister.aspx"
               className="btn btn-primary"
             >
@@ -150,12 +152,14 @@ const Navbar: React.FC = () => {
               </a>
               <div className="flex space-x-4 space-x-reverse pt-2">
                 <a
+                  target="_blank"
                   href="http://dash.moojpayam.ir"
                   className="btn btn-outline flex-1 text-center"
                 >
                   ورود
                 </a>
                 <a
+                  target="_blank"
                   href="http://dash.moojpayam.ir/userregister.aspx"
                   className="btn btn-primary flex-1 text-center"
                 >

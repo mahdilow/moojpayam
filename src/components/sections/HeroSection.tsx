@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MessageSquare, ArrowDownCircle, MapPin } from "lucide-react";
+import { ArrowDownCircle, MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MapContainer,

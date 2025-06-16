@@ -150,15 +150,18 @@ const PricingSection: React.FC = () => {
                   ))}
                 </ul>
 
-                <button
-                  className={`w-full py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-[1.02] ${
+                <a
+                  href="http://dash.moojpayam.ir/userregister.aspx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block w-full py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] ${
                     plan.popular
                       ? "bg-primary-500 hover:bg-primary-600 text-white shadow-lg hover:shadow-xl"
                       : "bg-gray-100 hover:bg-gray-200 text-gray-800"
                   }`}
                 >
                   {plan.cta}
-                </button>
+                </a>
               </div>
             </motion.div>
           ))}

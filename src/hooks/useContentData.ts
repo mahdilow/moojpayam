@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface BlogPost {
   id: number;
@@ -44,24 +44,24 @@ export const useContentData = () => {
 
       // Load content from API endpoints
       const [blogsRes, pricingRes] = await Promise.all([
-        fetch('/api/content/blogs'),
-        fetch('/api/content/pricing')
+        fetch("/api/content/blogs"),
+        fetch("/api/content/pricing"),
       ]);
 
       if (!blogsRes.ok || !pricingRes.ok) {
-        throw new Error('خطا در بارگذاری محتوا');
+        throw new Error("خطا در بارگذاری محتوا");
       }
 
       const [blogsData, pricingData] = await Promise.all([
         blogsRes.json(),
-        pricingRes.json()
+        pricingRes.json(),
       ]);
 
       setBlogs(blogsData);
       setPricing(pricingData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'خطا در بارگذاری محتوا');
-      console.error('Error loading content:', err);
+      setError(err instanceof Error ? err.message : "خطا در بارگذاری محتوا");
+      console.error("Error loading content:", err);
     } finally {
       setLoading(false);
     }
@@ -72,19 +72,28 @@ export const useContentData = () => {
   }, []);
 
   // Get published blogs only
-  const publishedBlogs = blogs.filter(blog => blog.published);
-  
+  const publishedBlogs = blogs.filter((blog) => blog.published);
+
   // Get featured blog
-  const featuredBlog = publishedBlogs.find(blog => blog.featured);
-  
+  const featuredBlog = publishedBlogs.find((blog) => blog.featured);
+
   // Get latest blogs (excluding featured)
   const latestBlogs = publishedBlogs
-    .filter(blog => !blog.featured)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .filter((blog: any) => !blog.featured)
+    .map((blog: any) => {
+      const createdAt = new Date(blog.createdAt);
+      const daysOld = Math.floor(
+        (Date.now() - createdAt.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      const recencyBoost = Math.max(0, 30 - daysOld); // Boost fresh posts up to 30 days old
+      const score = blog.views + recencyBoost; // Hybrid score
+      return { ...blog, score };
+    })
+    .sort((a: any, b: any) => b.score - a.score)
     .slice(0, 3);
 
   // Get active pricing plans
-  const activePricingPlans = pricing.filter(plan => plan.active);
+  const activePricingPlans = pricing.filter((plan) => plan.active);
 
   return {
     blogs: publishedBlogs,
@@ -95,7 +104,7 @@ export const useContentData = () => {
     allPricing: pricing,
     loading,
     error,
-    refetch: loadContent
+    refetch: loadContent,
   };
 };
 
