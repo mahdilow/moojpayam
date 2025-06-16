@@ -6,11 +6,11 @@
     "description": "مناسب برای کسب و کارهای کوچک و تازه شروع شده",
     "features": [
       {
-        "title": "۵۰۰ پیامک ماهانه",
+        "title": "شارژ اولیه 400 پیامک",
         "included": true
       },
       {
-        "title": "پنل کاربری ساده",
+        "title": "رابط کاربری ساده",
         "included": true
       },
       {
@@ -26,15 +26,27 @@
         "included": true
       },
       {
-        "title": "ارسال پیامک با نام تجاری",
+        "title": "تعرفه پایه ۲۵۴ تومان",
+        "included": true
+      },
+      {
+        "title": "وب سرویس ، الگو، اتصال به سایت شما",
+        "included": true
+      },
+      {
+        "title": "بدون محدودیت ارسال",
+        "included": true
+      },
+      {
+        "title": "امکانات محدود",
         "included": false
       },
       {
-        "title": "وب سرویس اختصاصی",
+        "title": "پیامک زنده(LBS)",
         "included": false
       },
       {
-        "title": "مدیریت پیشرفته مخاطبین",
+        "title": "دفترچه تلفن",
         "included": false
       }
     ],
@@ -50,35 +62,35 @@
     "description": "مناسب برای کسب و کارهای متوسط و در حال رشد",
     "features": [
       {
-        "title": "۲,۰۰۰ پیامک ماهانه",
+        "title": "شارژ اولیه 1200 پیامک",
         "included": true
       },
       {
-        "title": "پنل کاربری پیشرفته",
+        "title": "۵۰ پیامک هدیه",
         "included": true
       },
       {
-        "title": "ارسال زمانبندی شده",
+        "title": "پشتیبانی ایمیلی و تیکتی",
         "included": true
-      },
-      {
-        "title": "گزارش وضعیت تحویل",
-        "included": true
-      },
-      {
-        "title": "پشتیبانی تلفنی و ایمیلی",
-        "included": true
-      },
-      {
-        "title": "ارسال پیامک با نام تجاری",
-        "included": true
-      },
-      {
-        "title": "وب سرویس اختصاصی",
-        "included": false
       },
       {
         "title": "مدیریت پیشرفته مخاطبین",
+        "included": true
+      },
+      {
+        "title": "یک شماره اختصاصی رایگان",
+        "included": true
+      },
+      {
+        "title": "تعرفه پایه ۲۲۵ تومان",
+        "included": true
+      },
+      {
+        "title": "ارسال پیامک زنده LBS",
+        "included": true
+      },
+      {
+        "title": "+ دسترسی به همه امکانات پنل",
         "included": true
       }
     ],
@@ -88,31 +100,35 @@
     "active": true
   },
   {
-    "name": "پلن ",
-    "price": "ندارد",
-    "description": "خهتبخیهبتخت",
+    "name": "ویژه",
+    "price": "توافقی",
+    "description": "مناسب برای همه کسب و کارها(پایین تعرفه ها نسبت به نیاز و ارسال پیام شما در ماه)",
     "features": [
       {
-        "title": "۱",
+        "title": "+ همه امکانات بسته حرفه ای ",
         "included": true
       },
       {
-        "title": "۲",
+        "title": "تعرفه ۱۹۰ تومان و پایین تر متناسب با استفاده شما",
         "included": true
       },
       {
-        "title": "۳",
-        "included": false
+        "title": "راهنمایی و پشتیبانی  تلفنی اختصاصی",
+        "included": true
       },
       {
-        "title": "۴",
+        "title": "پیامک هدیه ماهانه",
+        "included": true
+      },
+      {
+        "title": "تخفیف ویژه تمدید",
         "included": true
       }
     ],
-    "cta": "انتخاب پلن",
+    "cta": "تماس با کارشناس فروش",
     "popular": false,
     "color": "border-blue-400",
     "active": true,
-    "id": 1750020501513
+    "id": 3
   }
 ]

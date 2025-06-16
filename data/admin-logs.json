@@ -1,5 +1,1153 @@
 [
   {
+    "id": "log_1750113046525_pwfsbfj9h",
+    "timestamp": "2025-06-16T22:30:46.525Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750113046263_96jwndoso",
+    "timestamp": "2025-06-16T22:30:46.263Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750113012138_9fsazwova",
+    "timestamp": "2025-06-16T22:30:12.138Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750113011876_chlawd4y1",
+    "timestamp": "2025-06-16T22:30:11.876Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750111932412_j2m967q7z",
+    "timestamp": "2025-06-16T22:12:12.412Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750111932158_a6gntgwv0",
+    "timestamp": "2025-06-16T22:12:12.158Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 3,
+      "oldData": {
+        "name": "ویژه",
+        "price": "توافقی"
+      },
+      "newData": {
+        "name": "ویژه",
+        "price": "توافقی"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750111920859_bjlotpg82",
+    "timestamp": "2025-06-16T22:12:00.859Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750111920630_n7zn1qq0f",
+    "timestamp": "2025-06-16T22:12:00.630Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750111918479_c2v7tdeo3",
+    "timestamp": "2025-06-16T22:11:58.479Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750111918461_q8m3o765v",
+    "timestamp": "2025-06-16T22:11:58.461Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110936388_5ccqllysc",
+    "timestamp": "2025-06-16T21:55:36.388Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110936123_3v39lnhoj",
+    "timestamp": "2025-06-16T21:55:36.123Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "newData": {
+        "name": "ویژه",
+        "price": "توافقی"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110267107_3kphifvy7",
+    "timestamp": "2025-06-16T21:44:27.107Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110266846_g7nwthtaf",
+    "timestamp": "2025-06-16T21:44:26.846Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110128118_jmyheng6r",
+    "timestamp": "2025-06-16T21:42:08.118Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110127786_ph837bosk",
+    "timestamp": "2025-06-16T21:42:07.786Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "newData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110101002_40jlyn4lk",
+    "timestamp": "2025-06-16T21:41:41.002Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750110100738_xrh2hnlr4",
+    "timestamp": "2025-06-16T21:41:40.738Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109888335_k0qg38nfc",
+    "timestamp": "2025-06-16T21:38:08.335Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109888079_ieqgwcxxv",
+    "timestamp": "2025-06-16T21:38:08.079Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109828944_uau5xriuw",
+    "timestamp": "2025-06-16T21:37:08.944Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109828698_lj9wdn4oc",
+    "timestamp": "2025-06-16T21:37:08.698Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109758477_f222j01tu",
+    "timestamp": "2025-06-16T21:35:58.477Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109758159_9b7c0lwag",
+    "timestamp": "2025-06-16T21:35:58.159Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109708470_rwp7t7k9u",
+    "timestamp": "2025-06-16T21:35:08.470Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109708204_pqvy0z86j",
+    "timestamp": "2025-06-16T21:35:08.204Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109627494_huui2kdbn",
+    "timestamp": "2025-06-16T21:33:47.494Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109603446_2dzbd1d3j",
+    "timestamp": "2025-06-16T21:33:23.446Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "severity": "medium",
+        "dateRange": "7d"
+      },
+      "resultCount": 64,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109582102_ewsxkgyce",
+    "timestamp": "2025-06-16T21:33:02.102Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109578101_2nl0dkv2a",
+    "timestamp": "2025-06-16T21:32:58.101Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109577788_xy0zavznc",
+    "timestamp": "2025-06-16T21:32:57.788Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750109575901_omu9lwhp2",
+    "timestamp": "2025-06-16T21:32:55.901Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "ng5mq1jh8knh2ar8gpuujn",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "ng5mq1jh8knh2ar8gpuujn"
+  },
+  {
+    "id": "log_1750107672942_9d5c49llj",
+    "timestamp": "2025-06-16T21:01:12.942Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750107672689_9urjgjx4d",
+    "timestamp": "2025-06-16T21:01:12.689Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "newData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750107492177_hdxkp5w8r",
+    "timestamp": "2025-06-16T20:58:12.177Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750107491847_b5v1ka0k5",
+    "timestamp": "2025-06-16T20:58:11.847Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "newData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750107486289_ya0oag8px",
+    "timestamp": "2025-06-16T20:58:06.289Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750107486022_0fazbqd2f",
+    "timestamp": "2025-06-16T20:58:06.022Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "پلن ",
+        "price": "-"
+      },
+      "newData": {
+        "name": "توافقی",
+        "price": "-"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106888599_ii0zuruj9",
+    "timestamp": "2025-06-16T20:48:08.599Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106888349_9sxjkkooj",
+    "timestamp": "2025-06-16T20:48:08.349Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "پلن ",
+        "price": "ندارد"
+      },
+      "newData": {
+        "name": "پلن ",
+        "price": "-"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106425493_9akwq666h",
+    "timestamp": "2025-06-16T20:40:25.493Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106425165_dkdt8wwqy",
+    "timestamp": "2025-06-16T20:40:25.165Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106408873_fq7pkvlsh",
+    "timestamp": "2025-06-16T20:40:08.873Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106408620_vbbtz0m5q",
+    "timestamp": "2025-06-16T20:40:08.620Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106300755_331p785t5",
+    "timestamp": "2025-06-16T20:38:20.755Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106300488_bvcurxwh1",
+    "timestamp": "2025-06-16T20:38:20.488Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106219443_5l5uqafm4",
+    "timestamp": "2025-06-16T20:36:59.443Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106219176_18ihmuyqp",
+    "timestamp": "2025-06-16T20:36:59.176Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106063535_9cle0ivaj",
+    "timestamp": "2025-06-16T20:34:23.535Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106063213_m7tsy9ky4",
+    "timestamp": "2025-06-16T20:34:23.213Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106056612_uk95a6stq",
+    "timestamp": "2025-06-16T20:34:16.612Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750106056359_dc2yyjs0h",
+    "timestamp": "2025-06-16T20:34:16.359Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105927132_jipuhkww2",
+    "timestamp": "2025-06-16T20:32:07.132Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105926879_udskba406",
+    "timestamp": "2025-06-16T20:32:06.879Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105551865_u2mxfvot1",
+    "timestamp": "2025-06-16T20:25:51.865Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105551537_drhg07w89",
+    "timestamp": "2025-06-16T20:25:51.537Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105531112_6ewgws3lr",
+    "timestamp": "2025-06-16T20:25:31.112Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105530792_z71zo16ml",
+    "timestamp": "2025-06-16T20:25:30.792Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "۳۹۹"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105505610_6lp561rrw",
+    "timestamp": "2025-06-16T20:25:05.610Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105505345_7ps7u6x4p",
+    "timestamp": "2025-06-16T20:25:05.345Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105092910_k0dyu4at3",
+    "timestamp": "2025-06-16T20:18:12.910Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750105092658_90ixm64q8",
+    "timestamp": "2025-06-16T20:18:12.658Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104933677_xi5p3p1je",
+    "timestamp": "2025-06-16T20:15:33.677Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104933426_kl6izsf49",
+    "timestamp": "2025-06-16T20:15:33.426Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1750020501513,
+      "oldData": {
+        "name": "پلن ",
+        "price": "ندارد"
+      },
+      "newData": {
+        "name": "پلن ",
+        "price": "ندارد"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104921558_d9gfqj0nu",
+    "timestamp": "2025-06-16T20:15:21.558Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104907524_8lu8m1fjq",
+    "timestamp": "2025-06-16T20:15:07.524Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104890035_9hgqveqy2",
+    "timestamp": "2025-06-16T20:14:50.035Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104889720_y8j6tb8wd",
+    "timestamp": "2025-06-16T20:14:49.720Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750104887792_10n9szoav",
+    "timestamp": "2025-06-16T20:14:47.792Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "6hb215i03ac3nit12e2hi7",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "6hb215i03ac3nit12e2hi7"
+  },
+  {
     "id": "log_1750085295248_tjdv9mrss",
     "timestamp": "2025-06-16T14:48:15.248Z",
     "adminUser": "admin",

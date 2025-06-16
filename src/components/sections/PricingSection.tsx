@@ -97,23 +97,42 @@ const PricingSection: React.FC = () => {
                 stiffness: 300,
               }}
               viewport={{ once: true }}
-              className={`bg-white rounded-2xl shadow-lg overflow-hidden ${
-                plan.popular
-                  ? "border-t-4 border-primary-500 transform md:-translate-y-4"
-                  : ""
+              className={`bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col ${
+                plan.popular ? "border-t transform md:-translate-y-4" : ""
               }`}
             >
               {plan.popular && (
-                <div className="bg-primary-500 text-white text-center py-2 px-4 text-sm font-bold">
+                <div className=" bg-blue-700 text-white text-center py-2 px-4 text-sm font-bold">
                   محبوب‌ترین
                 </div>
               )}
 
-              <div className="p-8">
+              <div
+                className={`p-8 flex flex-col flex-grow rounded-2xl backdrop-blur-md bg-white/30 shadow-inner border border-white/20 ${
+                  plan.id === 2
+                    ? "bg-gradient-to-b from-purple-100/30 to-blue-100/20"
+                    : plan.id === 1
+                    ? "bg-gradient-to-b from-gray-100/30 to-white/10"
+                    : plan.id === 3
+                    ? "bg-gradient-to-b from-green-100/30 to-emerald-100/20"
+                    : ""
+                }`}
+              >
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-2 text-gray-800">
+                  <h3
+                    className={`text-3xl font-extrabold mb-2 ${
+                      plan.id === 2
+                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text"
+                        : plan.id === 1
+                        ? "bg-gradient-to-r from-gray-700 to-gray-400 text-transparent bg-clip-text"
+                        : plan.id === 3
+                        ? "bg-gradient-to-r from-green-500 to-teal-400 text-transparent bg-clip-text"
+                        : "text-gray-800"
+                    }`}
+                  >
                     {plan.name}
                   </h3>
+
                   <p className="text-gray-600 mb-6 min-h-[48px]">
                     {plan.description}
                   </p>
@@ -121,11 +140,14 @@ const PricingSection: React.FC = () => {
                     <span className="text-4xl font-bold text-gray-900">
                       {plan.price}
                     </span>
-                    <span className="text-gray-600 mr-2">
-                      هزار تومان / سالانه
-                    </span>
+                    {plan.id !== 3 && (
+                      <span className="text-gray-600 mr-2">
+                        هزار تومان / سالانه
+                      </span>
+                    )}
                   </div>
                 </div>
+                <hr className="border-t-2 border-primary-100 opacity-40 my-6" />
 
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
@@ -150,18 +172,20 @@ const PricingSection: React.FC = () => {
                   ))}
                 </ul>
 
-                <a
-                  href="http://dash.moojpayam.ir/userregister.aspx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`block w-full py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] ${
-                    plan.popular
-                      ? "bg-primary-500 hover:bg-primary-600 text-white shadow-lg hover:shadow-xl"
-                      : "bg-gray-100 hover:bg-gray-200 text-gray-800"
-                  }`}
-                >
-                  {plan.cta}
-                </a>
+                <div className="mt-auto">
+                  <a
+                    href="http://dash.moojpayam.ir/userregister.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block w-full py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] ${
+                      plan.popular
+                        ? "bg-blue-700 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl"
+                        : "bg-gray-100 hover:bg-gray-200 text-gray-800"
+                    }`}
+                  >
+                    {plan.cta}
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
