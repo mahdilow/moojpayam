@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../assets/logo.png";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -30,7 +29,11 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="موج پیام" className="h-20 w-auto logo-pulse" />
+            <img
+              src={"/assets/logo.png"}
+              alt="موج پیام"
+              className="h-20 w-auto logo-pulse"
+            />
             <span className="mr-2 text-2xl brand-name">موج پیام</span>
           </Link>
 

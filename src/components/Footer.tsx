@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../assets/logo.png";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
 
@@ -11,7 +10,11 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-4">
-              <img src={logo} alt="موج پیام" className="h-20 w-auto" />
+              <img
+                src={"/assets/logo.png"}
+                alt="موج پیام"
+                className="h-20 w-auto"
+              />
               <span className="mr-2 text-xl font-bold text-blue-400">
                 موج پیام
               </span>
