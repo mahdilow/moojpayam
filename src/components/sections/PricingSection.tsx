@@ -102,20 +102,20 @@ const PricingSection: React.FC = () => {
               }`}
             >
               {plan.popular && (
-                <div className=" bg-blue-700 text-white text-center py-2 px-4 text-sm font-bold">
-                  محبوب‌ترین
+                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-6 rounded-t-xl text-base font-extrabold tracking-wide shadow-md">
+                  ⭐ محبوب‌ترین
                 </div>
               )}
 
               <div
-                className={`p-8 flex flex-col flex-grow rounded-2xl backdrop-blur-md bg-white/30 shadow-inner border border-white/20 ${
+                className={`p-8 flex flex-col flex-grow backdrop-blur-md shadow-inner border border-white/20 ${
                   plan.id === 2
-                    ? "bg-gradient-to-b from-purple-100/30 to-blue-100/20"
+                    ? "rounded-b-2xl rounded-t-none bg-gradient-to-b from-purple-300/40 to-blue-200/20"
                     : plan.id === 1
-                    ? "bg-gradient-to-b from-gray-100/30 to-white/10"
+                    ? "rounded-2xl bg-gradient-to-b from-slate-200/50 to-white/20"
                     : plan.id === 3
-                    ? "bg-gradient-to-b from-green-100/30 to-emerald-100/20"
-                    : ""
+                    ? "rounded-2xl bg-gradient-to-b from-emerald-200/40 to-green-100/20"
+                    : "rounded-2xl bg-white/20"
                 }`}
               >
                 <div className="text-center mb-8">
@@ -174,9 +174,15 @@ const PricingSection: React.FC = () => {
 
                 <div className="mt-auto">
                   <a
-                    href="http://dash.moojpayam.ir/userregister.aspx"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={
+                      plan.id === 3
+                        ? "#contact" // Replace with actual link
+                        : "http://dash.moojpayam.ir/userregister.aspx"
+                    }
+                    {...(plan.id !== 3 && {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    })}
                     className={`block w-full py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] ${
                       plan.popular
                         ? "bg-blue-700 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl"

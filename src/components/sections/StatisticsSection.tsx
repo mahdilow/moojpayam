@@ -125,7 +125,7 @@ const StatisticsSection: React.FC = () => {
               suffix="%"
               delay={0.3}
             />
-            <StatItem value={6} label="سال سابقه فعالیت" delay={0.4} />
+            <StatItem value={3} label="سال سابقه فعالیت" delay={0.4} />
           </div>
         </div>
       </div>

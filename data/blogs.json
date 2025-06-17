@@ -46,26 +46,6 @@
     "lastViewed": "2025-06-11T19:30:47.876Z"
   },
   {
-    "id": 3,
-    "title": "افزایش نرخ تبدیل با شخصی‌سازی پیام‌ها",
-    "excerpt": "یاد بگیرید چگونه با شخصی‌سازی پیام‌هایتان، نرخ تبدیل را تا ۳۰۰٪ افزایش دهید.",
-    "content": "<p>شخصی‌سازی پیام‌ها کلید موفقیت در بازاریابی مدرن است.</p>",
-    "image": "http://localhost:3000/uploads/image-1749505927588-238246168.png",
-    "author": "علی محمدی",
-    "date": "۱۴۰۳/۰۸/۰۵",
-    "readTime": "۶ دقیقه",
-    "views": 1103,
-    "category": "بهینه‌سازی",
-    "tags": [
-      "شخصی‌سازی",
-      "تبدیل",
-      "فروش"
-    ],
-    "featured": false,
-    "published": true,
-    "lastViewed": "2025-06-11T21:57:28.924Z"
-  },
-  {
     "id": 1749466415994,
     "title": "67t",
     "excerpt": "yug",
@@ -106,5 +86,29 @@
     "slug": "test",
     "metaDescription": "test text",
     "lastViewed": "2025-06-11T21:14:36.384Z"
+  },
+  {
+    "title": "عت",
+    "excerpt": "تالت",
+    "content": "التل",
+    "image": "http://localhost:3000/uploads/image-1750148771167-339978242.png",
+    "author": "تال",
+    "readTime": "۷",
+    "category": "قوانین",
+    "tags": [
+      "ع"
+    ],
+    "featured": false,
+    "published": true,
+    "relatedPosts": [
+      1749676380317
+    ],
+    "id": 1750148782161,
+    "views": 0,
+    "date": "۱۴۰۴/۳/۲۷",
+    "createdAt": "2025-06-17T08:26:22.189Z",
+    "updatedAt": "2025-06-17T08:26:22.189Z",
+    "slug": "عت",
+    "metaDescription": "تالت"
   }
 ]
