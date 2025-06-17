@@ -8,14 +8,14 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server-dev": "node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
     "formik": "^2.4.6",
     "framer-motion": "^11.0.3",

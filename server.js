@@ -1192,14 +1192,17 @@ if (process.env.NODE_ENV === 'development') {
   app.use('/', (req, res) => {
     res.redirect(new URL(req.url, 'http://localhost:5173').href);
   });
-} else {
-  // In production: handle unknown routes
-  app.use('*', (req, res) => {
-    res.status(404).send('Not Found');
-  });
 }
+// Serve frontend (production)
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
-
+// 404 handler (should be last)
+app.use((req, res) => {
+  res.status(404).send('Not Found');
+});
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
