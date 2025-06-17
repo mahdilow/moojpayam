@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   پنل پیامک انبوه
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   ارسال هوشمند
@@ -113,7 +113,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   پیامک تبلیغاتی
@@ -121,7 +121,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   پیامک مناسبتی
@@ -129,7 +129,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   پیامک خدماتی
@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   وب سرویس پیامک

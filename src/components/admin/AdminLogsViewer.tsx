@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield,
@@ -34,13 +34,7 @@ const AdminLogsViewer: React.FC<AdminLogsViewerProps> = ({
   });
   const [selectedLog, setSelectedLog] = useState<AdminLogEntry | null>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      loadLogs();
-    }
-  }, [isOpen, filter]);
-
-  const loadLogs = async () => {
+  const loadLogs = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -70,7 +64,13 @@ const AdminLogsViewer: React.FC<AdminLogsViewerProps> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]); // <- only the state/filter it uses
+
+  useEffect(() => {
+    if (isOpen) {
+      loadLogs();
+    }
+  }, [isOpen, loadLogs]);
 
   const exportLogs = async () => {
     try {

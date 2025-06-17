@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Calendar, User, Clock, Eye, ArrowRight, Share2, BookOpen } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  User,
+  Clock,
+  Eye,
+  ArrowRight,
+  Share2,
+  BookOpen,
+} from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 interface BlogPost {
   id: number;
@@ -36,12 +44,12 @@ const BlogPostPage: React.FC = () => {
         setError(null);
 
         const response = await fetch(`/api/content/blogs/${id}`);
-        
+
         if (!response.ok) {
           if (response.status === 404) {
-            setError('مقاله یافت نشد');
+            setError("مقاله یافت نشد");
           } else {
-            setError('خطا در بارگذاری مقاله');
+            setError("خطا در بارگذاری مقاله");
           }
           return;
         }
@@ -54,8 +62,8 @@ const BlogPostPage: React.FC = () => {
           trackView();
         }
       } catch (err) {
-        setError('خطا در ارتباط با سرور');
-        console.error('Error loading blog post:', err);
+        setError("خطا در ارتباط با سرور");
+        console.error("Error loading blog post:", err);
       } finally {
         setLoading(false);
       }
@@ -69,21 +77,21 @@ const BlogPostPage: React.FC = () => {
   const trackView = async () => {
     try {
       const response = await fetch(`/api/blog/${id}/view`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
       if (response.ok) {
         const data = await response.json();
         setViewTracked(true);
-        
+
         // Update view count in state
-        setBlogPost(prev => prev ? { ...prev, views: data.views } : null);
+        setBlogPost((prev) => (prev ? { ...prev, views: data.views } : null));
       }
     } catch (error) {
-      console.error('Error tracking view:', error);
+      console.error("Error tracking view:", error);
       // Don't show error to user for view tracking
     }
   };
@@ -97,6 +105,7 @@ const BlogPostPage: React.FC = () => {
           url: window.location.href,
         });
       } catch (error) {
+        console.error("Share Post error", error);
         // Fallback to copying URL
         copyToClipboard();
       }
@@ -108,7 +117,7 @@ const BlogPostPage: React.FC = () => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
       // You could show a toast notification here
-      alert('لینک کپی شد!');
+      alert("لینک کپی شد!");
     });
   };
 
@@ -130,7 +139,9 @@ const BlogPostPage: React.FC = () => {
       <div className="py-20 bg-white min-h-screen">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">{error || 'مقاله یافت نشد'}</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              {error || "مقاله یافت نشد"}
+            </h1>
             <Link to="/blog" className="btn btn-primary">
               بازگشت به بلاگ
             </Link>
@@ -144,65 +155,74 @@ const BlogPostPage: React.FC = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": blogPost.title,
-    "description": blogPost.metaDescription || blogPost.excerpt,
-    "image": blogPost.image,
-    "author": {
+    headline: blogPost.title,
+    description: blogPost.metaDescription || blogPost.excerpt,
+    image: blogPost.image,
+    author: {
       "@type": "Person",
-      "name": blogPost.author
+      name: blogPost.author,
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "موج پیام",
-      "logo": {
+      name: "موج پیام",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://moojpayam.ir/assets/logo.png"
-      }
+        url: "https://moojpayam.ir/assets/logo.png",
+      },
     },
-    "datePublished": blogPost.date,
-    "dateModified": blogPost.date,
-    "mainEntityOfPage": {
+    datePublished: blogPost.date,
+    dateModified: blogPost.date,
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": window.location.href
+      "@id": window.location.href,
     },
-    "keywords": blogPost.tags.join(', '),
-    "articleSection": blogPost.category,
-    "wordCount": blogPost.content.replace(/<[^>]*>/g, '').split(' ').length
+    keywords: blogPost.tags.join(", "),
+    articleSection: blogPost.category,
+    wordCount: blogPost.content.replace(/<[^>]*>/g, "").split(" ").length,
   };
 
   return (
     <>
       <Helmet>
         <title>{blogPost.title} | بلاگ موج پیام</title>
-        <meta name="description" content={blogPost.metaDescription || blogPost.excerpt} />
-        <meta name="keywords" content={blogPost.tags.join(', ')} />
+        <meta
+          name="description"
+          content={blogPost.metaDescription || blogPost.excerpt}
+        />
+        <meta name="keywords" content={blogPost.tags.join(", ")} />
         <meta name="author" content={blogPost.author} />
-        
+
         {/* Open Graph tags */}
         <meta property="og:title" content={blogPost.title} />
-        <meta property="og:description" content={blogPost.metaDescription || blogPost.excerpt} />
+        <meta
+          property="og:description"
+          content={blogPost.metaDescription || blogPost.excerpt}
+        />
         <meta property="og:image" content={blogPost.image} />
         <meta property="og:url" content={window.location.href} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="موج پیام" />
-        
+
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={blogPost.title} />
-        <meta name="twitter:description" content={blogPost.metaDescription || blogPost.excerpt} />
+        <meta
+          name="twitter:description"
+          content={blogPost.metaDescription || blogPost.excerpt}
+        />
         <meta name="twitter:image" content={blogPost.image} />
-        
+
         {/* Article specific tags */}
         <meta property="article:author" content={blogPost.author} />
         <meta property="article:published_time" content={blogPost.date} />
         <meta property="article:section" content={blogPost.category} />
-        {blogPost.tags.map(tag => (
+        {blogPost.tags.map((tag) => (
           <meta key={tag} property="article:tag" content={tag} />
         ))}
-        
+
         {/* Canonical URL */}
         <link rel="canonical" href={window.location.href} />
-        
+
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
@@ -219,9 +239,13 @@ const BlogPostPage: React.FC = () => {
             className="mb-8"
           >
             <div className="flex items-center text-sm text-gray-500">
-              <Link to="/" className="hover:text-primary-500">خانه</Link>
+              <Link to="/" className="hover:text-primary-500">
+                خانه
+              </Link>
               <span className="mx-2">/</span>
-              <Link to="/blog" className="hover:text-primary-500">بلاگ</Link>
+              <Link to="/blog" className="hover:text-primary-500">
+                بلاگ
+              </Link>
               <span className="mx-2">/</span>
               <span className="text-gray-900">{blogPost.category}</span>
             </div>
@@ -262,7 +286,7 @@ const BlogPostPage: React.FC = () => {
                   <Clock size={16} className="ml-2" />
                   {blogPost.readTime}
                 </div>
-                <button 
+                <button
                   onClick={sharePost}
                   className="flex items-center hover:text-primary-500 transition-colors"
                 >
@@ -305,12 +329,12 @@ const BlogPostPage: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="prose prose-lg max-w-none mb-12"
               style={{
-                fontSize: '18px',
-                lineHeight: '1.8',
-                color: '#374151'
+                fontSize: "18px",
+                lineHeight: "1.8",
+                color: "#374151",
               }}
             >
-              <div 
+              <div
                 dangerouslySetInnerHTML={{ __html: blogPost.content }}
                 className="blog-content"
               />
@@ -350,7 +374,7 @@ const BlogPostPage: React.FC = () => {
                   <BookOpen className="ml-2" />
                   مقالات مرتبط
                 </h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {blogPost.relatedPosts.map((post) => (
                     <Link

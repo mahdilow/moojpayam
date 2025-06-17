@@ -1,7 +1,14 @@
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, X, Image as ImageIcon, Loader, Trash2, Eye } from 'lucide-react';
-import toast from 'react-hot-toast';
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Upload,
+  X,
+  Image as ImageIcon,
+  Loader,
+  Trash2,
+  Eye,
+} from "lucide-react";
+import toast from "react-hot-toast";
 
 interface ImageUploadProps {
   value: string;
@@ -16,11 +23,11 @@ interface UploadedImage {
   uploadDate: string;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ 
-  value, 
-  onChange, 
-  label = "تصویر", 
-  required = false 
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  value,
+  onChange,
+  label = "تصویر",
+  required = false,
 }) => {
   const [uploading, setUploading] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
@@ -32,18 +39,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const loadGallery = async () => {
     setLoadingGallery(true);
     try {
-      const response = await fetch('/api/admin/images', {
-        credentials: 'include'
+      const response = await fetch("/api/admin/images", {
+        credentials: "include",
       });
-      
+
       if (response.ok) {
         const images = await response.json();
         setUploadedImages(images);
       } else {
-        toast.error('خطا در بارگذاری گالری تصاویر');
+        toast.error("خطا در بارگذاری گالری تصاویر");
       }
     } catch (error) {
-      toast.error('خطا در ارتباط با سرور');
+      console.error("Gallery fetch error:", error);
+      toast.error("خطا در ارتباط با سرور");
     } finally {
       setLoadingGallery(false);
     }
@@ -54,14 +62,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     if (!file) return;
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      toast.error('لطفاً فقط فایل‌های تصویری انتخاب کنید');
+    if (!file.type.startsWith("image/")) {
+      toast.error("لطفاً فقط فایل‌های تصویری انتخاب کنید");
       return;
     }
 
     // Validate file size (5MB)
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('حجم فایل نباید بیش از ۵ مگابایت باشد');
+      toast.error("حجم فایل نباید بیش از ۵ مگابایت باشد");
       return;
     }
 
@@ -69,29 +77,30 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     try {
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append("image", file);
 
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        credentials: 'include',
+      const response = await fetch("/api/admin/upload", {
+        method: "POST",
+        credentials: "include",
         body: formData,
       });
 
       if (response.ok) {
         const result = await response.json();
         onChange(result.imageUrl);
-        toast.success('تصویر با موفقیت آپلود شد');
-        
+        toast.success("تصویر با موفقیت آپلود شد");
+
         // Refresh gallery if it's open
         if (showGallery) {
           loadGallery();
         }
       } else {
         const error = await response.json();
-        toast.error(error.message || 'خطا در آپلود تصویر');
+        toast.error(error.message || "خطا در آپلود تصویر");
       }
     } catch (error) {
-      toast.error('خطا در آپلود تصویر');
+      console.error("Upload error:", error);
+      toast.error("خطا در آپلود تصویر");
     } finally {
       setUploading(false);
     }
@@ -112,28 +121,29 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   // Delete image from server
   const deleteImage = async (filename: string) => {
-    if (!confirm('آیا از حذف این تصویر اطمینان دارید؟')) return;
+    if (!confirm("آیا از حذف این تصویر اطمینان دارید؟")) return;
 
     try {
       const response = await fetch(`/api/admin/upload/${filename}`, {
-        method: 'DELETE',
-        credentials: 'include',
+        method: "DELETE",
+        credentials: "include",
       });
 
       if (response.ok) {
-        toast.success('تصویر حذف شد');
+        toast.success("تصویر حذف شد");
         loadGallery(); // Refresh gallery
-        
+
         // If the deleted image was selected, clear the selection
         if (value.includes(filename)) {
-          onChange('');
+          onChange("");
         }
       } else {
         const error = await response.json();
-        toast.error(error.message || 'خطا در حذف تصویر');
+        toast.error(error.message || "خطا در حذف تصویر");
       }
     } catch (error) {
-      toast.error('خطا در حذف تصویر');
+      console.error("Delete image error:", error);
+      toast.error("خطا در حذف تصویر");
     }
   };
 
@@ -153,7 +163,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           />
           <button
             type="button"
-            onClick={() => onChange('')}
+            onClick={() => onChange("")}
             className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
           >
             <X size={16} />
@@ -175,7 +185,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           ) : (
             <Upload className="ml-2" size={16} />
           )}
-          {uploading ? 'در حال آپلود...' : 'آپلود تصویر'}
+          {uploading ? "در حال آپلود..." : "آپلود تصویر"}
         </button>
 
         {/* Gallery Button */}
@@ -195,7 +205,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         <button
           type="button"
           onClick={() => {
-            const url = prompt('URL تصویر را وارد کنید:');
+            const url = prompt("URL تصویر را وارد کنید:");
             if (url) onChange(url);
           }}
           className="flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
@@ -246,7 +256,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[80vh] overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-gray-800">گالری تصاویر</h3>
+                <h3 className="text-xl font-bold text-gray-800">
+                  گالری تصاویر
+                </h3>
                 <button
                   onClick={() => setShowGallery(false)}
                   className="text-gray-500 hover:text-gray-700"
@@ -277,14 +289,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                         alt={image.filename}
                         className="w-full h-full object-cover"
                       />
-                      
+
                       {/* Overlay with actions */}
                       <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-2 space-x-reverse">
                         <button
                           onClick={() => {
                             onChange(image.url);
                             setShowGallery(false);
-                            toast.success('تصویر انتخاب شد');
+                            toast.success("تصویر انتخاب شد");
                           }}
                           className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors"
                           title="انتخاب تصویر"

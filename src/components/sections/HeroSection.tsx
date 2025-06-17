@@ -9,10 +9,15 @@ import {
   useMapEvents,
   useMap,
 } from "react-leaflet";
-import { useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
+import { LeafletMouseEvent } from "leaflet";
+import toast from "react-hot-toast";
 
-const MapEvents = ({ onMapClick }: { onMapClick: (e: any) => void }) => {
+const MapEvents = ({
+  onMapClick,
+}: {
+  onMapClick: (e: LeafletMouseEvent) => void;
+}) => {
   useMapEvents({
     click: onMapClick,
   });
@@ -58,9 +63,8 @@ const HeroSection: React.FC = () => {
     [25.0, 44.0], // Southwest corner
     [40.0, 63.3], // Northeast corner
   ];
-  const navigate = useNavigate();
 
-  const handleMapClick = (e: any) => {
+  const handleMapClick = (e: LeafletMouseEvent) => {
     setSelectedArea({
       lat: e.latlng.lat,
       lng: e.latlng.lng,
@@ -71,7 +75,23 @@ const HeroSection: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    navigate("/register");
+    const pricingSection = document.getElementById("pricing");
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleSubmitClick = () => {
+    if (!selectedArea) {
+      toast.error("لطفاً ابتدا یک منطقه را انتخاب کنید.");
+      return;
+    }
+    if (!message) {
+      toast.error("لطفاً پیام خود را وارد کنید.");
+      return;
+    }
+
+    handleSubmit();
   };
 
   return (
@@ -207,9 +227,8 @@ const HeroSection: React.FC = () => {
                 </div>
 
                 <button
-                  onClick={handleSubmit}
+                  onClick={handleSubmitClick}
                   className="w-full bg-blue-600 text-white rounded-lg py-3 font-bold hover:bg-blue-700 transition-colors"
-                  disabled={!selectedArea || !message}
                 >
                   ارسال پیام به منطقه انتخاب شده
                 </button>

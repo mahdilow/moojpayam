@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { motion } from "framer-motion";
 import { CheckCircle, Shield, Lock, User } from "lucide-react";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const AdminLogin: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -15,25 +15,26 @@ const AdminLogin: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       const res = await fetch("/api/mooj-admin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify({ username, password }),
       });
-      
+
       const data = await res.json();
-      
+
       if (res.ok) {
         setSuccess(data.message);
-        toast.success('ورود موفقیت‌آمیز!');
+        toast.success("ورود موفقیت‌آمیز!");
         setTimeout(() => navigate("/admin/dashboard"), 1500);
       } else {
         toast.error(data.message || "خطا در ورود");
       }
     } catch (err) {
+      console.error("Server connection error:", err);
       toast.error("خطا در ارتباط با سرور");
     } finally {
       setLoading(false);
@@ -66,7 +67,11 @@ const AdminLogin: React.FC = () => {
                     <motion.div
                       key={i}
                       animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 0.6, delay: i * 0.1, repeat: Infinity }}
+                      transition={{
+                        duration: 0.6,
+                        delay: i * 0.1,
+                        repeat: Infinity,
+                      }}
                       className="w-2 h-2 bg-green-500 rounded-full"
                     />
                   ))}
@@ -87,9 +92,7 @@ const AdminLogin: React.FC = () => {
               <h2 className="text-2xl font-bold text-white mb-2">
                 پنل مدیریت موج پیام
               </h2>
-              <p className="text-blue-100">
-                ورود به سیستم مدیریت محتوا
-              </p>
+              <p className="text-blue-100">ورود به سیستم مدیریت محتوا</p>
             </div>
 
             {/* Form */}

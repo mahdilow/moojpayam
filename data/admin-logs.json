@@ -1,5 +1,717 @@
 [
   {
+    "id": "log_1750168508086_u040f85ej",
+    "timestamp": "2025-06-17T13:55:08.086Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168507767_qz8cf4n95",
+    "timestamp": "2025-06-17T13:55:07.767Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168484368_m34fg68le",
+    "timestamp": "2025-06-17T13:54:44.368Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168484107_l31txd5wm",
+    "timestamp": "2025-06-17T13:54:44.108Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168148574_y5rkzahs1",
+    "timestamp": "2025-06-17T13:49:08.574Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168148307_elh1spl2b",
+    "timestamp": "2025-06-17T13:49:08.307Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168127346_fhu9v0m47",
+    "timestamp": "2025-06-17T13:48:47.346Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168126991_gf8yqyqku",
+    "timestamp": "2025-06-17T13:48:46.991Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1749676380317,
+      "oldData": {
+        "title": "test",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168124881_59l69ou18",
+    "timestamp": "2025-06-17T13:48:44.881Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168124536_tzhvv0kte",
+    "timestamp": "2025-06-17T13:48:44.536Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1749466415994,
+      "oldData": {
+        "title": "67t",
+        "category": "قوانین"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168122640_9z527r6ur",
+    "timestamp": "2025-06-17T13:48:42.640Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168122288_7hhxgiyhc",
+    "timestamp": "2025-06-17T13:48:42.288Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 2,
+      "oldData": {
+        "title": "بهترین زمان‌های ارسال پیامک تبلیغاتی",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168118679_ari2d3vn5",
+    "timestamp": "2025-06-17T13:48:38.679Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168118341_uhe14zedm",
+    "timestamp": "2025-06-17T13:48:38.341Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1,
+      "oldData": {
+        "title": "راهنمای کامل پیامک بازاریابی: از صفر تا صد",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168116212_4nh2etxq1",
+    "timestamp": "2025-06-17T13:48:36.212Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168115858_q955kb8a3",
+    "timestamp": "2025-06-17T13:48:35.858Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750148782161,
+      "oldData": {
+        "title": "عت",
+        "category": "قوانین"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168111756_l7tx6sb82",
+    "timestamp": "2025-06-17T13:48:31.756Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750168111505_7v8w8hquj",
+    "timestamp": "2025-06-17T13:48:31.505Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167509695_zu2eqkhin",
+    "timestamp": "2025-06-17T13:38:29.695Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167509363_sz1gmgeo7",
+    "timestamp": "2025-06-17T13:38:29.363Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167491914_8mn1rzi86",
+    "timestamp": "2025-06-17T13:38:11.914Z",
+    "adminUser": "admin",
+    "action": "Upload image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1750167491889-108398558.png",
+      "originalName": "map-sms-marketing.png",
+      "size": 2576794,
+      "mimetype": "image/png",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167478911_mr83cvlaq",
+    "timestamp": "2025-06-17T13:37:58.911Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167478591_q07shzsvu",
+    "timestamp": "2025-06-17T13:37:58.591Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167478578_a00t24h8h",
+    "timestamp": "2025-06-17T13:37:58.578Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167478268_yz5ftck7u",
+    "timestamp": "2025-06-17T13:37:58.268Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1750167374283-211605254.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167474988_q8a3tcrjt",
+    "timestamp": "2025-06-17T13:37:54.988Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167374306_5erqk89po",
+    "timestamp": "2025-06-17T13:36:14.306Z",
+    "adminUser": "admin",
+    "action": "Upload image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1750167374283-211605254.png",
+      "originalName": "ChatGPT Image Jun 17, 2025, 05_05_42 PM.png",
+      "size": 2576794,
+      "mimetype": "image/png",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167005283_d38tkhqki",
+    "timestamp": "2025-06-17T13:30:05.283Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750167005021_xf9xoc4g4",
+    "timestamp": "2025-06-17T13:30:05.021Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750166474568_4heqg7ta9",
+    "timestamp": "2025-06-17T13:21:14.568Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750166474310_vyxz0b11o",
+    "timestamp": "2025-06-17T13:21:14.310Z",
+    "adminUser": "admin",
+    "action": "Create blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750166361503_fdwz105bg",
+    "timestamp": "2025-06-17T13:19:21.503Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750166359612_qbwovfpqd",
+    "timestamp": "2025-06-17T13:19:19.612Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750166359583_2liy0fccv",
+    "timestamp": "2025-06-17T13:19:19.583Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165365836_utzp0sv8l",
+    "timestamp": "2025-06-17T13:02:45.836Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165364168_alj8kgad1",
+    "timestamp": "2025-06-17T13:02:44.168Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165363848_0nyb9bqdy",
+    "timestamp": "2025-06-17T13:02:43.848Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750148782161,
+      "oldData": {
+        "title": "عت",
+        "category": "قوانین"
+      },
+      "newData": {
+        "title": "عت",
+        "category": "قوانین"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165354954_3eu1avf5k",
+    "timestamp": "2025-06-17T13:02:34.954Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165353998_qb34j3j0q",
+    "timestamp": "2025-06-17T13:02:33.998Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165353329_q9hr8da25",
+    "timestamp": "2025-06-17T13:02:33.329Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165350900_q6n9zt8mw",
+    "timestamp": "2025-06-17T13:02:30.900Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165335199_w78091a05",
+    "timestamp": "2025-06-17T13:02:15.199Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 100,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165333835_vduhsho09",
+    "timestamp": "2025-06-17T13:02:13.835Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165333158_tjmc37kk7",
+    "timestamp": "2025-06-17T13:02:13.158Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165332842_9a4w46dk1",
+    "timestamp": "2025-06-17T13:02:12.842Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750165330962_9g6mxx1z5",
+    "timestamp": "2025-06-17T13:02:10.962Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "olrreoy47hpi5icgf41hyi",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "olrreoy47hpi5icgf41hyi"
+  },
+  {
     "id": "log_1750151410739_69yxz15j6",
     "timestamp": "2025-06-17T09:10:10.739Z",
     "adminUser": "admin",

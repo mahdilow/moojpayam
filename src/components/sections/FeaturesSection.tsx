@@ -12,6 +12,7 @@ import {
   Target,
   SatelliteDish,
   PlugIcon,
+  ListChecks,
 } from "lucide-react";
 
 interface FeatureCardProps {
@@ -129,7 +130,7 @@ const FeaturesSection: React.FC = () => {
         "اتصال آسان پنل به وب‌سایت یا نرم‌افزار شما و قابلیت ارسال از طریق پترن ",
     },
     {
-      icon: <PlugIcon className="h-8 w-8" />,
+      icon: <ListChecks className="h-8 w-8" />,
       title: "ارسال هدفمند",
       description: " دسترسی به روز به شماره های مشاغل و اصناف مختلف",
     },

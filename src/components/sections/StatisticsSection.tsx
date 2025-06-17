@@ -28,13 +28,15 @@ const StatItem: React.FC<StatItemProps> = ({
       { threshold: 0.4 }
     );
 
-    if (counterRef.current) {
-      observer.observe(counterRef.current);
+    const current = counterRef.current; // ✅ cache the ref
+
+    if (current) {
+      observer.observe(current);
     }
 
     return () => {
-      if (counterRef.current) {
-        observer.unobserve(counterRef.current);
+      if (current) {
+        observer.unobserve(current); // ✅ use cached ref here
       }
     };
   }, []);

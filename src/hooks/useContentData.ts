@@ -72,24 +72,23 @@ export const useContentData = () => {
   }, []);
 
   // Get published blogs only
-  const publishedBlogs = blogs.filter((blog) => blog.published);
+  const publishedBlogs: BlogPost[] = blogs.filter((blog) => blog.published);
 
   // Get featured blog
   const featuredBlog = publishedBlogs.find((blog) => blog.featured);
 
-  // Get latest blogs (excluding featured)
+  //get latest blogs
   const latestBlogs = publishedBlogs
-    .filter((blog: any) => !blog.featured)
-    .map((blog: any) => {
-      const createdAt = new Date(blog.createdAt);
+    .map((blog) => {
+      const createdAt = new Date(blog.date); // Use blog.date as per your interface
       const daysOld = Math.floor(
         (Date.now() - createdAt.getTime()) / (1000 * 60 * 60 * 24)
       );
-      const recencyBoost = Math.max(0, 30 - daysOld); // Boost fresh posts up to 30 days old
-      const score = blog.views + recencyBoost; // Hybrid score
-      return { ...blog, score };
+      const recencyBoost = Math.max(0, 30 - daysOld);
+      const score = blog.views + recencyBoost;
+      return { ...blog, score }; // Add score property
     })
-    .sort((a: any, b: any) => b.score - a.score)
+    .sort((a, b) => b.score - a.score)
     .slice(0, 3);
 
   // Get active pricing plans

@@ -13,7 +13,6 @@ import {
   LogOut,
   Save,
   X,
-  Star,
   TrendingUp,
   Activity,
   CheckCircle,
@@ -131,6 +130,7 @@ const AdminDashboard: React.FC = () => {
 
       setLoading(false);
     } catch (error) {
+      console.error("Navigation to /mooj-admin error:", error);
       navigate("/mooj-admin");
     }
   };
@@ -146,6 +146,7 @@ const AdminDashboard: React.FC = () => {
         setStats(data);
       }
     } catch (error) {
+      console.error("Error loading the Stats:", error);
       toast.error("خطا در بارگذاری آمار");
     }
   };
@@ -161,6 +162,7 @@ const AdminDashboard: React.FC = () => {
         setBlogs(data);
       }
     } catch (error) {
+      console.error("Loading blogs error:", error);
       toast.error("خطا در بارگذاری مقالات");
     }
   };
@@ -176,6 +178,7 @@ const AdminDashboard: React.FC = () => {
         setPricing(data);
       }
     } catch (error) {
+      console.error("Loading pricing plans error:", error);
       toast.error("خطا در بارگذاری تعرفه‌ها");
     }
   };
@@ -190,6 +193,7 @@ const AdminDashboard: React.FC = () => {
         setNotifications(data);
       }
     } catch (error) {
+      console.error("Fetching notifications error:", error);
       toast.error("خطا در دریافت اعلان‌ها");
     }
   };
@@ -206,6 +210,7 @@ const AdminDashboard: React.FC = () => {
         toast.error("خطا در حذف اعلان");
       }
     } catch (error) {
+      console.error("Delete notification error:", error);
       toast.error("خطا در حذف اعلان");
     }
   };
@@ -218,6 +223,7 @@ const AdminDashboard: React.FC = () => {
       });
       navigate("/mooj-admin");
     } catch (error) {
+      console.error("Logout error:", error);
       toast.error("خطا در خروج");
     }
   };
@@ -250,6 +256,7 @@ const AdminDashboard: React.FC = () => {
         toast.error(error.message || "خطا در ذخیره مقاله");
       }
     } catch (error) {
+      console.error("Server connection error:", error);
       toast.error("خطا در ارتباط با سرور");
     }
   };
@@ -270,6 +277,7 @@ const AdminDashboard: React.FC = () => {
         toast.error("خطا در حذف مقاله");
       }
     } catch (error) {
+      console.error("Server connection error:", error);
       toast.error("خطا در ارتباط با سرور");
     }
   };
@@ -301,6 +309,7 @@ const AdminDashboard: React.FC = () => {
         toast.error("خطا در ذخیره پلن");
       }
     } catch (error) {
+      console.error("Server connection error:", error);
       toast.error("خطا در ارتباط با سرور");
     }
   };
@@ -321,6 +330,7 @@ const AdminDashboard: React.FC = () => {
         toast.error("خطا در حذف پلن");
       }
     } catch (error) {
+      console.error("Server connection error:", error);
       toast.error("خطا در ارتباط با سرور");
     }
   };
@@ -381,8 +391,8 @@ const AdminDashboard: React.FC = () => {
                 onClick={() => setActiveTab("pricing")}
               >
                 <DollarSign className="ml-2" size={18} /> تعرفه‌ها
-              </button>                    
-               <button
+              </button>
+              <button
                 className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
                   ${
                     showLogsViewer
@@ -492,10 +502,10 @@ const AdminDashboard: React.FC = () => {
                         <DollarSign className="text-purple-600" size={24} />
                       </div>
                     </div>
-                  </div>  
+                  </div>
                 </div>
               )}
-                  
+
               {stats && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="bg-white rounded-xl shadow-sm p-6">
