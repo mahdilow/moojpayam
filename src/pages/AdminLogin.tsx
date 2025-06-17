@@ -98,7 +98,7 @@ const AdminLogin: React.FC = () => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="p-8 space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <User size={16} className="ml-2 text-gray-500" />
                   نام کاربری
                 </label>
@@ -115,7 +115,7 @@ const AdminLogin: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <label className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                   <Lock size={16} className="ml-2 text-gray-500" />
                   رمز عبور
                 </label>

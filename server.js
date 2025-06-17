@@ -20,11 +20,16 @@ dotenv.config();
 
 const app = express();
 
+
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
 // Middleware
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
@@ -1182,9 +1187,18 @@ app.use((error, req, res, next) => {
 });
 
 // Proxy to Vite dev server
-app.use('/', (req, res) => {
-  res.redirect(new URL(req.url, 'http://localhost:5173').href);
-});
+if (process.env.NODE_ENV === 'development') {
+  // Only in dev: proxy to Vite dev server
+  app.use('/', (req, res) => {
+    res.redirect(new URL(req.url, 'http://localhost:5173').href);
+  });
+} else {
+  // In production: handle unknown routes
+  app.use('*', (req, res) => {
+    res.status(404).send('Not Found');
+  });
+}
+
 
 // Start server
 const PORT = process.env.PORT || 3000;
