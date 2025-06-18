@@ -8,6 +8,7 @@ const BlogPage: React.FC = () => {
   const { blogs, featuredBlog, loading, error } = useContentData();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("همه");
+  const [visibleCount, setVisibleCount] = useState(3);
 
   const categories = [
     "همه",
@@ -28,6 +29,8 @@ const BlogPage: React.FC = () => {
   });
 
   const regularPosts = filteredPosts.filter((post) => !post.featured);
+
+  const visiblePosts = regularPosts.slice(0, visibleCount);
 
   if (loading) {
     return (
@@ -193,7 +196,7 @@ const BlogPage: React.FC = () => {
 
         {/* Regular Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regularPosts.map((post, index) => (
+          {visiblePosts.map((post, index) => (
             <motion.article
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
@@ -261,6 +264,18 @@ const BlogPage: React.FC = () => {
             </motion.article>
           ))}
         </div>
+
+        {/* Load More Button */}
+        {visibleCount < regularPosts.length && (
+          <div className="flex justify-center mt-8">
+            <button
+              className="btn btn-primary px-8 py-3 rounded-xl text-lg font-bold shadow-md hover:bg-primary-600 transition-colors"
+              onClick={() => setVisibleCount((c) => c + 3)}
+            >
+              مشاهده بیشتر
+            </button>
+          </div>
+        )}
 
         {/* No Results */}
         {filteredPosts.length === 0 && (
