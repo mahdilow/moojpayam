@@ -1,5 +1,298 @@
 [
   {
+    "id": "log_1750205422628_xxtzjeuqz",
+    "timestamp": "2025-06-18T00:10:22.628Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205422565_0a8pu9v5z",
+    "timestamp": "2025-06-18T00:10:22.565Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205422307_766eo9mn1",
+    "timestamp": "2025-06-18T00:10:22.307Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205422299_evje5zvke",
+    "timestamp": "2025-06-18T00:10:22.299Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1749505927588-238246168.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205419701_64ngacd4k",
+    "timestamp": "2025-06-18T00:10:19.701Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205416512_j47sessqq",
+    "timestamp": "2025-06-18T00:10:16.512Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205416432_ey6rq5zrc",
+    "timestamp": "2025-06-18T00:10:16.432Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205416190_svjxjeehv",
+    "timestamp": "2025-06-18T00:10:16.190Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205416183_kn66fvjeh",
+    "timestamp": "2025-06-18T00:10:16.183Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1749505956190-175513852.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205411421_nkhujmgrq",
+    "timestamp": "2025-06-18T00:10:11.421Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205409766_kvomdibyy",
+    "timestamp": "2025-06-18T00:10:09.766Z",
+    "adminUser": "admin",
+    "action": "Upload image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1750205409740-422929443.png",
+      "originalName": "map-sms-marketing.png",
+      "size": 2576794,
+      "mimetype": "image/png",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205401442_xim1bskye",
+    "timestamp": "2025-06-18T00:10:01.442Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205401132_tjdfyzpqk",
+    "timestamp": "2025-06-18T00:10:01.132Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205398866_sw6s309se",
+    "timestamp": "2025-06-18T00:09:58.866Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205398545_2txplmcd6",
+    "timestamp": "2025-06-18T00:09:58.545Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205396966_txy33go05",
+    "timestamp": "2025-06-18T00:09:56.966Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "t42o1qxfhu8ix3q10qv9s",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "t42o1qxfhu8ix3q10qv9s"
+  },
+  {
+    "id": "log_1750205022795_i2vyl3m27",
+    "timestamp": "2025-06-18T00:03:42.795Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205022529_fwjkox6c8",
+    "timestamp": "2025-06-18T00:03:42.529Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205021804_4viidbrrg",
+    "timestamp": "2025-06-18T00:03:41.804Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205021167_msoz8l6mv",
+    "timestamp": "2025-06-18T00:03:41.167Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750205020915_ktusqf9xo",
+    "timestamp": "2025-06-18T00:03:40.915Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1750202321954_8v1lp2wgm",
     "timestamp": "2025-06-17T23:18:41.954Z",
     "adminUser": "admin",

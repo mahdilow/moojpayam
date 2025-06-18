@@ -394,8 +394,8 @@ app.get('/api/admin/images', requireAdmin, async (req, res) => {
       .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
       .map(file => ({
         filename: file,
-        url: `http://localhost:3000/uploads/${file}`,
-        uploadDate: new Date().toISOString() // In a real app, you'd store this
+        url: `${req.protocol}://${req.get('host')}/uploads/${file}`,
+        uploadDate: new Date().toISOString()
       }));
 
     await logAdminAction(createLogEntry(
