@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../assets/logo.png";
 import { motion } from "framer-motion";
 
 interface LoadingScreenProps {
@@ -26,9 +25,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
         }}
         className="relative mb-6"
       >
-        <img src={logo} alt="موج پیام" className="h-32 w-auto" />
+        <img src={"/assets/logo.png"} alt="موج پیام" className="h-32 w-auto" />
       </motion.div>
-      
+
       <motion.div
         className="brand-name text-4xl mb-8"
         animate={{
@@ -42,7 +41,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
       >
         موج پیام
       </motion.div>
-      
+
       <div className="flex space-x-2">
         {[0, 1, 2].map((index) => (
           <motion.div
@@ -61,15 +60,13 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
           />
         ))}
       </div>
-      
-      <motion.p 
+
+      <motion.p
         className="mt-6 text-gray-600 font-vazir"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-      >
-        در حال بارگذاری سامانه هوشمند پیامک...
-      </motion.p>
+      ></motion.p>
     </motion.div>
   );
 };
