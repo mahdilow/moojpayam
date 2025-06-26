@@ -30,25 +30,22 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{
-        scale: 1.05,
-        boxShadow:
-          "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      }}
+      whileHover={{ y: -6 }}
       transition={{
-        duration: 0.3,
-        delay,
-        type: "spring",
-        stiffness: 300,
+        opacity: { duration: 0.4, delay, ease: "easeOut" },
+        y: { duration: 0.3, ease: "easeOut" },
       }}
       viewport={{ once: true }}
-      className="bg-white rounded-2xl p-6 hover:bg-gradient-to-br from-blue-50 to-indigo-50 transform transition-all duration-300 group"
+      className="bg-white rounded-2xl p-6 group transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-gradient-to-br from-blue-50 to-indigo-50"
     >
       <motion.div
-        whileHover={{ rotate: 360 }}
-        transition={{ duration: 0.5 }}
+        whileHover={{ rotate: 360, scale: 1.1 }}
+        transition={{
+          rotate: { duration: 0.8, ease: "easeInOut" },
+          scale: { duration: 0.3, ease: "easeOut" },
+        }}
         className="rounded-full bg-blue-100 p-4 inline-flex mb-6 group-hover:bg-blue-200 transition-colors"
       >
         <div className="text-primary-500 w-8 h-8">{icon}</div>

@@ -1,5 +1,105 @@
 [
   {
+    "id": "log_1750883982485_93nqtelq1",
+    "timestamp": "2025-06-25T20:39:42.485Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750883982235_rdhc9nktg",
+    "timestamp": "2025-06-25T20:39:42.235Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 3,
+      "oldData": {
+        "name": "ویژه",
+        "price": "تماس بگیرید"
+      },
+      "newData": {
+        "name": "ویژه",
+        "price": "قیمت گذاری سفارشی"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750883752857_tvngjoz7f",
+    "timestamp": "2025-06-25T20:35:52.857Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750883751880_ueh75tbb7",
+    "timestamp": "2025-06-25T20:35:51.880Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750883749036_4x2qkad0f",
+    "timestamp": "2025-06-25T20:35:49.036Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750883748721_br3bxaada",
+    "timestamp": "2025-06-25T20:35:48.721Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750883747093_tcl9ug55t",
+    "timestamp": "2025-06-25T20:35:47.093Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "sqmlpmii6hwhj9uvg62fp",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "sqmlpmii6hwhj9uvg62fp"
+  },
+  {
     "id": "log_1750791809763_ccezmomi0",
     "timestamp": "2025-06-24T19:03:29.763Z",
     "adminUser": "admin",

@@ -13,6 +13,7 @@ import BlogPostPage from "./pages/BlogPostPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import LoadingScreen from "./components/LoadingScreen";
+import NotFoundPage from "./pages/NotFoundPage";
 import { useState, useEffect } from "react";
 
 function AppContent() {
@@ -73,6 +74,8 @@ function AppContent() {
         />
         <Route path="/mooj-admin" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        {/* 404 Page - This should be the last route */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
