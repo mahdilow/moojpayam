@@ -29,6 +29,7 @@ interface PricingPlan {
   popular?: boolean;
   color: string;
   active: boolean;
+  discount?: number; // New discount field
 }
 
 export const useContentData = () => {

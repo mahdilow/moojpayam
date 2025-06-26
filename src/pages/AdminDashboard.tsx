@@ -54,6 +54,7 @@ interface PricingPlan {
   popular?: boolean;
   color: string;
   active: boolean;
+  discount?: number; // New discount field
 }
 
 interface DashboardStats {
@@ -333,6 +334,18 @@ const AdminDashboard: React.FC = () => {
       console.error("Server connection error:", error);
       toast.error("خطا در ارتباط با سرور");
     }
+  };
+
+  // Helper function to calculate discounted price
+  const getDiscountedPrice = (price: string, discount?: number) => {
+    if (!discount || discount <= 0) return null;
+    
+    // Extract numeric value from price string
+    const numericPrice = parseInt(price.replace(/[^\d]/g, ''));
+    if (isNaN(numericPrice)) return null;
+    
+    const discountedPrice = numericPrice * (1 - discount / 100);
+    return discountedPrice.toLocaleString('fa-IR');
   };
 
   if (loading) {
@@ -711,9 +724,25 @@ const AdminDashboard: React.FC = () => {
                         <h3 className="text-lg font-bold text-gray-800">
                           {plan.name}
                         </h3>
-                        <p className="text-2xl font-bold text-primary-600">
-                          {plan.price} تومان
-                        </p>
+                        <div className="flex items-center gap-2">
+                          {plan.discount && plan.discount > 0 ? (
+                            <>
+                              <span className="text-lg text-gray-400 line-through">
+                                {plan.price} تومان
+                              </span>
+                              <span className="text-2xl font-bold text-green-600">
+                                {getDiscountedPrice(plan.price, plan.discount)} تومان
+                              </span>
+                              <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">
+                                {plan.discount}% تخفیف
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-2xl font-bold text-primary-600">
+                              {plan.price} تومان
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <div className="flex space-x-2 space-x-reverse">
                         <button
@@ -1152,6 +1181,7 @@ const PricingFormModal: React.FC<{
     popular: plan?.popular || false,
     color: plan?.color || "border-blue-400",
     active: plan?.active !== undefined ? plan.active : true,
+    discount: plan?.discount || 0, // New discount field
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -1243,6 +1273,30 @@ const PricingFormModal: React.FC<{
                 required
               />
             </div>
+          </div>
+
+          {/* Discount Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              درصد تخفیف (اختیاری)
+            </label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={formData.discount}
+              onChange={(e) =>
+                setFormData((prev) => ({ 
+                  ...prev, 
+                  discount: parseInt(e.target.value) || 0 
+                }))
+              }
+              placeholder="مثال: 20"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              برای حذف تخفیف، مقدار را 0 قرار دهید
+            </p>
           </div>
 
           <div>
