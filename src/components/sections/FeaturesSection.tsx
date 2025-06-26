@@ -35,7 +35,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       whileHover={{ y: -6 }}
       transition={{
         opacity: { duration: 0.4, delay, ease: "easeOut" },
-        y: { duration: 0.3, ease: "easeOut" },
+        y: { duration: 0.1, ease: "easeOut" },
       }}
       viewport={{ once: true }}
       className="bg-white rounded-2xl p-6 group transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-gradient-to-br from-blue-50 to-indigo-50"
@@ -43,7 +43,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       <motion.div
         whileHover={{ rotate: 360, scale: 1.1 }}
         transition={{
-          rotate: { duration: 0.8, ease: "easeInOut" },
+          rotate: { duration: 0.6, ease: "easeInOut" },
           scale: { duration: 0.3, ease: "easeOut" },
         }}
         className="rounded-full bg-blue-100 p-4 inline-flex mb-6 group-hover:bg-blue-200 transition-colors"

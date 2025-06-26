@@ -573,16 +573,35 @@ const AdminDashboard: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-800">
                   مدیریت مقالات
                 </h2>
-                <button
-                  onClick={() => {
-                    setEditingBlog(null);
-                    setShowBlogForm(true);
-                  }}
-                  className="btn btn-primary flex items-center"
-                >
-                  <Plus className="ml-2" size={20} />
-                  مقاله جدید
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      setEditingBlog(null);
+                      setShowBlogForm(true);
+                    }}
+                    className="btn btn-primary flex items-center"
+                  >
+                    <Plus className="ml-2" size={20} />
+                    مقاله جدید
+                  </button>
+                  <button
+                    onClick={() => {
+                      const dataStr =
+                        "data:text/json;charset=utf-8," +
+                        encodeURIComponent(JSON.stringify(blogs, null, 2));
+                      const downloadAnchorNode = document.createElement("a");
+                      downloadAnchorNode.setAttribute("href", dataStr);
+                      downloadAnchorNode.setAttribute("download", "blogs.json");
+                      document.body.appendChild(downloadAnchorNode);
+                      downloadAnchorNode.click();
+                      downloadAnchorNode.remove();
+                    }}
+                    className="btn btn-outline flex items-center"
+                  >
+                    <FileText className="ml-2" size={20} />
+                    خروجی JSON
+                  </button>
+                </div>
               </div>
 
               <div className="bg-white rounded-xl shadow-sm overflow-hidden">
