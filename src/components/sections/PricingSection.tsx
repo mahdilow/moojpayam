@@ -6,6 +6,18 @@ import { useContentData } from "../../hooks/useContentData";
 const PricingSection: React.FC = () => {
   const { pricing: plans, loading, error } = useContentData();
 
+  // Helper function to calculate discounted price
+  const getDiscountedPrice = (price: string, discount?: number) => {
+    if (!discount || discount <= 0) return null;
+    
+    // Extract numeric value from price string
+    const numericPrice = parseInt(price.replace(/[^\d]/g, ''));
+    if (isNaN(numericPrice)) return null;
+    
+    const discountedPrice = numericPrice * (1 - discount / 100);
+    return discountedPrice.toLocaleString('fa-IR');
+  };
+
   if (loading) {
     return (
       <section
@@ -136,14 +148,39 @@ const PricingSection: React.FC = () => {
                   <p className="text-gray-600 mb-6 min-h-[48px]">
                     {plan.description}
                   </p>
+                  
                   <div className="flex items-center justify-center mb-6">
-                    <span className="text-4xl font-bold text-gray-900">
-                      {plan.price}
-                    </span>
-                    {plan.id !== 3 && (
-                      <span className="text-gray-600 mr-2">
-                        هزار تومان / سالانه
-                      </span>
+                    {plan.discount && plan.discount > 0 ? (
+                      <div className="text-center">
+                        {/* Discount Badge */}
+                        <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-2 inline-block">
+                          {plan.discount}% تخفیف
+                        </div>
+                        
+                        {/* Original Price (crossed out) */}
+                        <div className="text-lg text-gray-400 line-through mb-1">
+                          {plan.price} هزار تومان
+                        </div>
+                        
+                        {/* Discounted Price */}
+                        <div className="text-4xl font-bold text-green-600">
+                          {getDiscountedPrice(plan.price, plan.discount)}
+                        </div>
+                        <span className="text-gray-600 text-sm">
+                          هزار تومان / سالانه
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-4xl font-bold text-gray-900">
+                          {plan.price}
+                        </span>
+                        {plan.id !== 3 && (
+                          <span className="text-gray-600 mr-2">
+                            هزار تومان / سالانه
+                          </span>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
