@@ -3,7 +3,7 @@
     "id": "notif_1750176262842_8sn51g3bo",
     "type": "contact",
     "message": "پیام جدید از test (09108680274) با موضوع: khj",
-    "read": false,
+    "read": true,
     "createdAt": "2025-06-17T16:04:22.842Z",
     "data": {
       "name": "test",

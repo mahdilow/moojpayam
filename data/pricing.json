@@ -54,7 +54,7 @@
     "popular": false,
     "color": "border-blue-400",
     "active": true,
-    "discount": 4
+    "discount": 0
   },
   {
     "id": 2,
@@ -103,7 +103,7 @@
     "popular": true,
     "color": "border-primary-500",
     "active": true,
-    "discount": 24
+    "discount": 5
   },
   {
     "name": "ویژه",

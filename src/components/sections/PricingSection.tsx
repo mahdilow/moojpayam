@@ -7,14 +7,16 @@ const PricingSection: React.FC = () => {
   const { pricing: plans, loading, error } = useContentData();
 
   // Helper function to calculate discounted price
-  const getDiscountedPrice = (price: string, discount?: number) => {
+  const getDiscountedPrice = (
+    price: string,
+    discount?: number
+  ): string | null => {
     if (!discount || discount <= 0) return null;
 
-    // Extract numeric value from price string
     const numericPrice = parseInt(price.replace(/[^\d]/g, ""));
     if (isNaN(numericPrice)) return null;
 
-    const discountedPrice = numericPrice * (1 - discount / 100);
+    const discountedPrice = Math.round(numericPrice * (1 - discount / 100));
     return discountedPrice.toLocaleString("fa-IR");
   };
 
@@ -213,7 +215,7 @@ const PricingSection: React.FC = () => {
                   <a
                     href={
                       plan.id === 3
-                        ? "#contact" // Replace with actual link
+                        ? "#contact"
                         : "http://dash.moojpayam.ir/userregister.aspx"
                     }
                     {...(plan.id !== 3 && {

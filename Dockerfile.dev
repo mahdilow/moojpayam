@@ -1,0 +1,26 @@
+# Dockerfile.dev
+
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install global dev tools
+RUN npm install -g nodemon
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Install concurrently for running both dev servers
+RUN npm install -D concurrently
+
+# Copy all source files
+COPY . .
+
+# Expose Vite (5173) and Express (3000)
+EXPOSE 5173
+EXPOSE 3000
+
+# Run frontend + backend in parallel with hot reload
+CMD ["npm", "run", "dev:all"]
