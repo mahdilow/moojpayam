@@ -1,5 +1,20 @@
 [
   {
+    "id": "log_1750929119021_q1vu44084",
+    "timestamp": "2025-06-26T09:11:59.021Z",
+    "adminUser": "1",
+    "action": "Failed login attempt",
+    "category": "auth",
+    "details": {
+      "ipAddress": "127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "success": false,
+      "errorMessage": "Invalid credentials"
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
     "id": "log_1750883982485_93nqtelq1",
     "timestamp": "2025-06-25T20:39:42.485Z",
     "adminUser": "admin",
