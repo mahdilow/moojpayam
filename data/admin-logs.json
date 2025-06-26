@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1750929219685_ku2ogiiso",
+    "timestamp": "2025-06-26T09:13:39.685Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1750929219674_xxh4gsijx",
+    "timestamp": "2025-06-26T09:13:39.674Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "799"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1750929172248_125n8af3r",
     "timestamp": "2025-06-26T09:12:52.248Z",
     "adminUser": "admin",

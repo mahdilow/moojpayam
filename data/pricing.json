@@ -101,7 +101,8 @@
     "cta": "انتخاب پلن حرفه‌ای",
     "popular": true,
     "color": "border-primary-500",
-    "active": true
+    "active": true,
+    "discount": 2
   },
   {
     "name": "ویژه",
