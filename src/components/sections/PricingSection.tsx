@@ -9,13 +9,13 @@ const PricingSection: React.FC = () => {
   // Helper function to calculate discounted price
   const getDiscountedPrice = (price: string, discount?: number) => {
     if (!discount || discount <= 0) return null;
-    
+
     // Extract numeric value from price string
-    const numericPrice = parseInt(price.replace(/[^\d]/g, ''));
+    const numericPrice = parseInt(price.replace(/[^\d]/g, ""));
     if (isNaN(numericPrice)) return null;
-    
+
     const discountedPrice = numericPrice * (1 - discount / 100);
-    return discountedPrice.toLocaleString('fa-IR');
+    return discountedPrice.toLocaleString("fa-IR");
   };
 
   if (loading) {
@@ -115,7 +115,7 @@ const PricingSection: React.FC = () => {
             >
               {plan.popular && (
                 <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-6 rounded-t-xl text-base font-extrabold tracking-wide shadow-md">
-                  ⭐ محبوب‌ترین
+                  محبوب‌ترین
                 </div>
               )}
 
@@ -148,7 +148,7 @@ const PricingSection: React.FC = () => {
                   <p className="text-gray-600 mb-6 min-h-[48px]">
                     {plan.description}
                   </p>
-                  
+
                   <div className="flex items-center justify-center mb-6">
                     {plan.discount && plan.discount > 0 ? (
                       <div className="text-center">
@@ -156,12 +156,12 @@ const PricingSection: React.FC = () => {
                         <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-2 inline-block">
                           {plan.discount}% تخفیف
                         </div>
-                        
+
                         {/* Original Price (crossed out) */}
                         <div className="text-lg text-gray-400 line-through mb-1">
                           {plan.price} هزار تومان
                         </div>
-                        
+
                         {/* Discounted Price */}
                         <div className="text-4xl font-bold text-green-600">
                           {getDiscountedPrice(plan.price, plan.discount)}

@@ -339,13 +339,13 @@ const AdminDashboard: React.FC = () => {
   // Helper function to calculate discounted price
   const getDiscountedPrice = (price: string, discount?: number) => {
     if (!discount || discount <= 0) return null;
-    
+
     // Extract numeric value from price string
-    const numericPrice = parseInt(price.replace(/[^\d]/g, ''));
+    const numericPrice = parseInt(price.replace(/[^\d]/g, ""));
     if (isNaN(numericPrice)) return null;
-    
+
     const discountedPrice = numericPrice * (1 - discount / 100);
-    return discountedPrice.toLocaleString('fa-IR');
+    return discountedPrice.toLocaleString("fa-IR");
   };
 
   if (loading) {
@@ -731,7 +731,8 @@ const AdminDashboard: React.FC = () => {
                                 {plan.price} تومان
                               </span>
                               <span className="text-2xl font-bold text-green-600">
-                                {getDiscountedPrice(plan.price, plan.discount)} تومان
+                                {getDiscountedPrice(plan.price, plan.discount)}{" "}
+                                تومان
                               </span>
                               <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">
                                 {plan.discount}% تخفیف
@@ -1265,10 +1266,12 @@ const PricingFormModal: React.FC<{
               <input
                 type="text"
                 value={formData.price}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, price: e.target.value }))
-                }
-                placeholder="مثال: ۲۰۰,۰۰۰"
+                onChange={(e) => {
+                  // Only allow English digits and commas
+                  const englishOnly = e.target.value.replace(/[^0-9,]/g, "");
+                  setFormData((prev) => ({ ...prev, price: englishOnly }));
+                }}
+                placeholder="مثال: 200,000"
                 className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
                 required
               />
@@ -1286,9 +1289,9 @@ const PricingFormModal: React.FC<{
               max="100"
               value={formData.discount}
               onChange={(e) =>
-                setFormData((prev) => ({ 
-                  ...prev, 
-                  discount: parseInt(e.target.value) || 0 
+                setFormData((prev) => ({
+                  ...prev,
+                  discount: parseInt(e.target.value) || 0,
                 }))
               }
               placeholder="مثال: 20"

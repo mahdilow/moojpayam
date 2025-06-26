@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "پایه",
-    "price": "۳۹۹",
+    "price": "399",
     "description": "مناسب برای کسب و کارهای کوچک و تازه شروع شده",
     "features": [
       {
@@ -53,7 +53,8 @@
     "cta": "شروع کنید",
     "popular": false,
     "color": "border-blue-400",
-    "active": true
+    "active": true,
+    "discount": 4
   },
   {
     "id": 2,
@@ -102,7 +103,7 @@
     "popular": true,
     "color": "border-primary-500",
     "active": true,
-    "discount": 2
+    "discount": 24
   },
   {
     "name": "ویژه",
