@@ -1,255 +1,382 @@
-import React, { useState } from "react";
-import { ArrowDownCircle, MapPin } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  MapContainer,
-  TileLayer,
-  Circle,
-  Popup,
-  useMapEvents,
-  useMap,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { LeafletMouseEvent } from "leaflet";
-import toast from "react-hot-toast";
-
-const MapEvents = ({
-  onMapClick,
-}: {
-  onMapClick: (e: LeafletMouseEvent) => void;
-}) => {
-  useMapEvents({
-    click: onMapClick,
-  });
-  return null;
-};
-
-const MapBoundsComponent = ({
-  bounds,
-}: {
-  bounds: [[number, number], [number, number]];
-}) => {
-  const map = useMap();
-
-  React.useEffect(() => {
-    // Set max bounds to restrict panning
-    map.setMaxBounds(bounds);
-
-    // Handle when user tries to drag outside bounds
-    map.on("drag", () => {
-      map.panInsideBounds(bounds, { animate: false });
-    });
-
-    return () => {
-      map.off("drag");
-    };
-  }, [map, bounds]);
-
-  return null;
-};
+import React from "react";
+import { ArrowDownCircle, Waves, MessageCircle, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HeroSection: React.FC = () => {
-  const [selectedArea, setSelectedArea] = useState<{
-    lat: number;
-    lng: number;
-    radius: number;
-  } | null>(null);
-  const [message, setMessage] = useState("");
-  const [showNotification, setShowNotification] = useState(false);
-  // Tehran position as initial center
-  const tehranPosition: [number, number] = [35.6892, 51.389];
-  // Iran bounds (southwest and northeast corners)
-  const iranBounds: [[number, number], [number, number]] = [
-    [25.0, 44.0], // Southwest corner
-    [40.0, 63.3], // Northeast corner
-  ];
-
-  const handleMapClick = (e: LeafletMouseEvent) => {
-    setSelectedArea({
-      lat: e.latlng.lat,
-      lng: e.latlng.lng,
-      radius: 1000, // 1km radius
-    });
-    setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 3000);
-  };
-
-  const handleSubmit = () => {
-    const pricingSection = document.getElementById("pricing");
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleSubmitClick = () => {
-    if (!selectedArea) {
-      toast.error("لطفاً ابتدا یک منطقه را انتخاب کنید.");
-      return;
-    }
-    if (!message) {
-      toast.error("لطفاً پیام خود را وارد کنید.");
-      return;
-    }
-
-    handleSubmit();
-  };
-
   return (
     <section
       id="home"
-      className="pt-24 pb-20 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 to-purple-50"
+      className="pt-24 pb-20 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 via-white to-teal-50 overflow-hidden relative"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap items-center">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating waves */}
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="absolute top-20 left-10 opacity-10"
+        >
+          <Waves size={120} className="text-blue-500" />
+        </motion.div>
+        
+        <motion.div
+          animate={{
+            x: [0, -80, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: "reverse",
+            delay: 5,
+          }}
+          className="absolute bottom-20 right-20 opacity-10"
+        >
+          <Waves size={80} className="text-teal-500" />
+        </motion.div>
+
+        {/* Floating message bubbles */}
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 10, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="absolute top-40 right-32 opacity-20"
+        >
+          <MessageCircle size={40} className="text-blue-400" />
+        </motion.div>
+
+        <motion.div
+          animate={{
+            y: [0, 15, 0],
+            rotate: [0, -8, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            repeatType: "reverse",
+            delay: 2,
+          }}
+          className="absolute bottom-40 left-32 opacity-20"
+        >
+          <MessageCircle size={30} className="text-teal-400" />
+        </motion.div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-wrap items-center min-h-[70vh]">
+          {/* Left Content */}
           <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
             >
+              {/* Brand Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center bg-gradient-to-r from-blue-100 to-teal-100 text-blue-600 px-6 py-3 rounded-full mb-8 shadow-lg"
+              >
+                <Waves className="ml-2" size={20} />
+                <span className="font-bold">موج پیام - پیشرو در پیامک هوشمند</span>
+              </motion.div>
+
+              {/* Main Headline */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-6">
-                ارسال هدفمند{" "}
-                <span className="text-primary-500">پیامک تبلیغاتی</span> بر اساس
-                منطقه
+                <span className="block">پیام‌های شما</span>
+                <span className="block text-transparent bg-gradient-to-r from-blue-500 to-teal-500 bg-clip-text">
+                  مثل موج دریا
+                </span>
+                <span className="block">به همه می‌رسد</span>
               </h1>
-              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-                با انتخاب منطقه مورد نظر روی نقشه، پیام تبلیغاتی خود را به
-                مشتریان بالقوه در آن محدوده ارسال کنید هدفمندسازی تبلیغات و
-                افزایش نرخ تبدیل با موج پیام
-              </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl"
+              >
+                با قدرت هوش مصنوعی و تکنولوژی پیشرفته، پیامک‌های خود را به صورت 
+                هدفمند و منطقه‌ای ارسال کنید. موج پیام، انقلابی در دنیای بازاریابی دیجیتال.
+              </motion.p>
+
+              {/* Key Features */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-wrap gap-6 mb-10"
+              >
+                <div className="flex items-center bg-white/80 backdrop-blur rounded-2xl px-4 py-3 shadow-md">
+                  <div className="w-3 h-3 bg-green-500 rounded-full ml-3"></div>
+                  <span className="text-gray-700 font-medium">ارسال منطقه‌ای</span>
+                </div>
+                <div className="flex items-center bg-white/80 backdrop-blur rounded-2xl px-4 py-3 shadow-md">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full ml-3"></div>
+                  <span className="text-gray-700 font-medium">هوش مصنوعی</span>
+                </div>
+                <div className="flex items-center bg-white/80 backdrop-blur rounded-2xl px-4 py-3 shadow-md">
+                  <div className="w-3 h-3 bg-purple-500 rounded-full ml-3"></div>
+                  <span className="text-gray-700 font-medium">تحلیل پیشرفته</span>
+                </div>
+              </motion.div>
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse"
+              >
                 <a
-                  href="#pricing"
-                  className="btn btn-primary text-center px-8 py-3 text-lg"
+                  target="_blank"
+                  href="http://dash.moojpayam.ir/userregister.aspx"
+                  className="btn btn-primary text-center px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 >
-                  شروع کنید
+                  <Zap className="ml-2" size={20} />
+                  شروع رایگان
                 </a>
                 <a
                   href="#features"
-                  className="btn btn-outline text-center px-8 py-3 text-lg"
+                  className="btn btn-outline text-center px-8 py-4 text-lg hover:bg-blue-50 transition-all duration-300"
                 >
-                  امکانات بیشتر
+                  کشف امکانات
                 </a>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
 
+          {/* Right Side - Animated Ocean Scene */}
           <div className="w-full lg:w-1/2">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 1, delay: 0.3 }}
               className="relative"
             >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-6 relative z-10">
-                <div className="bg-blue-600 text-white rounded-lg p-4 mb-6 flex items-center">
-                  <MapPin className="ml-3" />
-                  <div>
-                    <h3 className="font-bold">ارسال پیامک منطقه‌ای</h3>
-                    <p className="text-sm text-blue-100">
-                      منطقه مورد نظر را انتخاب کنید
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mb-6 h-64 rounded-lg overflow-hidden border border-gray-200 relative">
-                  <MapContainer
-                    center={tehranPosition}
-                    zoom={10}
-                    maxBounds={iranBounds}
-                    minZoom={5}
-                    maxZoom={18}
-                    className="h-full w-full"
+              {/* Main Ocean Container */}
+              <div className="relative bg-gradient-to-b from-sky-200 via-blue-300 to-blue-500 rounded-3xl p-8 shadow-2xl overflow-hidden min-h-[500px]">
+                
+                {/* Animated Waves */}
+                <div className="absolute bottom-0 left-0 right-0">
+                  <motion.div
+                    animate={{
+                      x: [0, 50, 0],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                    className="absolute bottom-0 left-0 right-0 h-32"
                   >
-                    <TileLayer
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <MapEvents onMapClick={handleMapClick} />
-                    <MapBoundsComponent bounds={iranBounds} />
-                    {selectedArea && (
-                      <Circle
-                        center={[selectedArea.lat, selectedArea.lng]}
-                        radius={selectedArea.radius}
-                        pathOptions={{ color: "blue", fillColor: "blue" }}
-                      >
-                        <Popup>منطقه انتخاب شده برای ارسال پیامک</Popup>
-                      </Circle>
-                    )}
-                  </MapContainer>
-
-                  <AnimatePresence>
-                    {showNotification && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg"
-                      >
-                        منطقه مورد نظر به لیست اضافه شد
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    <svg
+                      viewBox="0 0 1200 120"
+                      className="w-full h-full"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"
+                        fill="rgba(255,255,255,0.3)"
+                      />
+                    </svg>
+                  </motion.div>
+                  
+                  <motion.div
+                    animate={{
+                      x: [0, -30, 0],
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      delay: 1,
+                    }}
+                    className="absolute bottom-0 left-0 right-0 h-24"
+                  >
+                    <svg
+                      viewBox="0 0 1200 120"
+                      className="w-full h-full"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0,40 C400,100 800,20 1200,40 L1200,120 L0,120 Z"
+                        fill="rgba(255,255,255,0.2)"
+                      />
+                    </svg>
+                  </motion.div>
                 </div>
 
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    متن پیام
-                  </label>
-                  <textarea
-                    className="w-full border border-gray-300 rounded-lg p-3 resize-none"
-                    rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="متن پیام خود را وارد کنید..."
-                  ></textarea>
-                </div>
-
-                <div className="flex justify-between mb-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      زمان ارسال
-                    </label>
-                    <select className="border border-gray-300 rounded-lg p-2">
-                      <option>هم اکنون</option>
-                      <option>زمانبندی</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      نوع پیام
-                    </label>
-                    <select className="border border-gray-300 rounded-lg p-2">
-                      <option>تبلیغاتی</option>
-                      <option>خدماتی</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleSubmitClick}
-                  className="w-full bg-blue-600 text-white rounded-lg py-3 font-bold hover:bg-blue-700 transition-colors"
+                {/* Animated Dolphin */}
+                <motion.div
+                  animate={{
+                    y: [0, -20, 0],
+                    x: [0, 30, 0],
+                    rotate: [0, 5, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                  className="absolute top-1/3 left-1/4 z-10"
                 >
-                  ارسال پیام به منطقه انتخاب شده
-                </button>
+                  <div className="relative">
+                    {/* Dolphin Body */}
+                    <div className="w-24 h-12 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full transform rotate-12 shadow-lg"></div>
+                    {/* Dolphin Tail */}
+                    <div className="absolute -right-6 top-2 w-8 h-8 bg-gradient-to-r from-gray-500 to-gray-700 rounded-full transform rotate-45"></div>
+                    {/* Dolphin Fin */}
+                    <div className="absolute top-0 left-4 w-6 h-4 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full transform -rotate-12"></div>
+                  </div>
+                </motion.div>
+
+                {/* Message Bubbles from Dolphin */}
+                <motion.div
+                  animate={{
+                    y: [0, -40, -80],
+                    opacity: [1, 0.8, 0],
+                    scale: [0.8, 1, 1.2],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: 0,
+                  }}
+                  className="absolute top-1/4 left-1/2"
+                >
+                  <div className="w-8 h-8 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
+                    <MessageCircle size={16} className="text-blue-500" />
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  animate={{
+                    y: [0, -40, -80],
+                    opacity: [1, 0.8, 0],
+                    scale: [0.8, 1, 1.2],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: 1,
+                  }}
+                  className="absolute top-1/3 right-1/3"
+                >
+                  <div className="w-6 h-6 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
+                    <MessageCircle size={12} className="text-teal-500" />
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  animate={{
+                    y: [0, -40, -80],
+                    opacity: [1, 0.8, 0],
+                    scale: [0.8, 1, 1.2],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: 2,
+                  }}
+                  className="absolute top-1/2 left-1/3"
+                >
+                  <div className="w-10 h-10 bg-white/80 rounded-full flex items-center justify-center shadow-lg">
+                    <MessageCircle size={20} className="text-purple-500" />
+                  </div>
+                </motion.div>
+
+                {/* Floating Text Elements */}
+                <motion.div
+                  animate={{
+                    y: [0, -10, 0],
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                  className="absolute top-16 right-8 bg-white/90 backdrop-blur rounded-2xl px-4 py-2 shadow-lg"
+                >
+                  <span className="text-sm font-bold text-blue-600">پیامک منطقه‌ای</span>
+                </motion.div>
+
+                <motion.div
+                  animate={{
+                    y: [0, -15, 0],
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    delay: 0.5,
+                  }}
+                  className="absolute bottom-32 left-8 bg-white/90 backdrop-blur rounded-2xl px-4 py-2 shadow-lg"
+                >
+                  <span className="text-sm font-bold text-teal-600">هوش مصنوعی</span>
+                </motion.div>
+
+                <motion.div
+                  animate={{
+                    y: [0, -12, 0],
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    delay: 1,
+                  }}
+                  className="absolute top-1/2 right-16 bg-white/90 backdrop-blur rounded-2xl px-4 py-2 shadow-lg"
+                >
+                  <span className="text-sm font-bold text-purple-600">تحلیل داده</span>
+                </motion.div>
               </div>
 
-              {/* Decorative elements */}
-              <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-400 rounded-full opacity-20 blur-3xl"></div>
-              <div className="absolute bottom-0 left-10 w-40 h-40 bg-secondary-400 rounded-full opacity-20 blur-3xl"></div>
+              {/* Decorative elements around the ocean */}
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-blue-400 to-teal-400 rounded-full opacity-20 blur-xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full opacity-20 blur-xl"></div>
             </motion.div>
           </div>
         </div>
 
-        <div className="mt-16 text-center">
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mt-16 text-center"
+        >
           <a
             href="#features"
-            className="inline-flex items-center text-primary-500 hover:text-primary-600"
+            className="inline-flex items-center text-blue-500 hover:text-blue-600 transition-colors group"
           >
-            <span className="ml-2">مشاهده امکانات</span>
-            <ArrowDownCircle className="animate-bounce" size={20} />
+            <span className="ml-2 font-medium">کشف امکانات شگفت‌انگیز</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <ArrowDownCircle size={24} />
+            </motion.div>
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
