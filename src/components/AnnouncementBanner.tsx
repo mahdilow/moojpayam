@@ -95,8 +95,7 @@ const AnnouncementBanner: React.FC = () => {
         animate={{ height: 'auto', opacity: 1 }}
         exit={{ height: 0, opacity: 0 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 ${getColors(announcement.type)} shadow-lg`}
-        style={{ marginBottom: 0 }}
+        className={`w-full ${getColors(announcement.type)} shadow-lg relative z-40`}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-3">
