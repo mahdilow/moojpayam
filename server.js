@@ -706,6 +706,241 @@ app.get('/api/content/pricing', async (req, res) => {
   }
 });
 
+// Announcement endpoints
+app.get('/api/content/announcement', async (req, res) => {
+  try {
+    const announcements = await readJsonFile('announcements.json');
+    // Find the first active announcement that hasn't expired
+    const activeAnnouncement = announcements.find(announcement => {
+      if (!announcement.isActive) return false;
+      if (announcement.expiresAt && new Date() > new Date(announcement.expiresAt)) return false;
+      return true;
+    });
+    
+    res.json(activeAnnouncement || null);
+  } catch (error) {
+    res.status(500).json({ message: 'خطا در بارگذاری اعلان' });
+  }
+});
+
+app.get('/api/admin/announcements', requireAdmin, async (req, res) => {
+  const adminUser = getAdminUserFromSession(req);
+
+  try {
+    const announcements = await readJsonFile('announcements.json');
+
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'View announcements',
+      'content',
+      { announcementCount: announcements.length, success: true },
+      'low'
+    ));
+
+    res.json(announcements);
+  } catch (error) {
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'View announcements failed',
+      'content',
+      { success: false, errorMessage: error.message },
+      'medium'
+    ));
+    res.status(500).json({ message: 'خطا در بارگذاری اعلان‌ها' });
+  }
+});
+
+app.post('/api/admin/announcements', requireAdmin, async (req, res) => {
+  const adminUser = getAdminUserFromSession(req);
+
+  try {
+    const announcements = await readJsonFile('announcements.json');
+    const newAnnouncement = {
+      ...req.body,
+      id: `announcement_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      createdAt: new Date().toISOString()
+    };
+
+    announcements.unshift(newAnnouncement);
+    const success = await writeJsonFile('announcements.json', announcements);
+
+    if (success) {
+      await logAdminAction(createLogEntry(
+        adminUser,
+        'Create announcement',
+        'content',
+        {
+          resourceType: 'announcement',
+          resourceId: newAnnouncement.id,
+          newData: { message: newAnnouncement.message, type: newAnnouncement.type },
+          success: true
+        },
+        'medium'
+      ));
+
+      res.json({ message: 'اعلان با موفقیت ایجاد شد', announcement: newAnnouncement });
+    } else {
+      res.status(500).json({ message: 'خطا در ذخیره اعلان' });
+    }
+  } catch (error) {
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Create announcement failed',
+      'content',
+      { success: false, errorMessage: error.message },
+      'medium'
+    ));
+    res.status(500).json({ message: 'خطا در ایجاد اعلان' });
+  }
+});
+
+app.put('/api/admin/announcements/:id', requireAdmin, async (req, res) => {
+  const adminUser = getAdminUserFromSession(req);
+
+  try {
+    const announcements = await readJsonFile('announcements.json');
+    const announcementId = req.params.id;
+    const announcementIndex = announcements.findIndex(announcement => announcement.id === announcementId);
+
+    if (announcementIndex === -1) {
+      return res.status(404).json({ message: 'اعلان یافت نشد' });
+    }
+
+    const oldAnnouncement = { ...announcements[announcementIndex] };
+    announcements[announcementIndex] = { 
+      ...announcements[announcementIndex], 
+      ...req.body, 
+      id: announcementId,
+      updatedAt: new Date().toISOString()
+    };
+    
+    const success = await writeJsonFile('announcements.json', announcements);
+
+    if (success) {
+      await logAdminAction(createLogEntry(
+        adminUser,
+        'Update announcement',
+        'content',
+        {
+          resourceType: 'announcement',
+          resourceId: announcementId,
+          oldData: { message: oldAnnouncement.message, type: oldAnnouncement.type },
+          newData: { message: announcements[announcementIndex].message, type: announcements[announcementIndex].type },
+          success: true
+        },
+        'medium'
+      ));
+
+      res.json({ message: 'اعلان با موفقیت ویرایش شد', announcement: announcements[announcementIndex] });
+    } else {
+      res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
+    }
+  } catch (error) {
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Update announcement failed',
+      'content',
+      { resourceType: 'announcement', resourceId: req.params.id, success: false, errorMessage: error.message },
+      'medium'
+    ));
+    res.status(500).json({ message: 'خطا در ویرایش اعلان' });
+  }
+});
+
+app.delete('/api/admin/announcements/:id', requireAdmin, async (req, res) => {
+  const adminUser = getAdminUserFromSession(req);
+
+  try {
+    const announcements = await readJsonFile('announcements.json');
+    const announcementId = req.params.id;
+    const announcementToDelete = announcements.find(announcement => announcement.id === announcementId);
+    const filteredAnnouncements = announcements.filter(announcement => announcement.id !== announcementId);
+
+    if (filteredAnnouncements.length === announcements.length) {
+      return res.status(404).json({ message: 'اعلان یافت نشد' });
+    }
+
+    const success = await writeJsonFile('announcements.json', filteredAnnouncements);
+
+    if (success) {
+      await logAdminAction(createLogEntry(
+        adminUser,
+        'Delete announcement',
+        'content',
+        {
+          resourceType: 'announcement',
+          resourceId: announcementId,
+          oldData: { message: announcementToDelete?.message, type: announcementToDelete?.type },
+          success: true
+        },
+        'high'
+      ));
+
+      res.json({ message: 'اعلان با موفقیت حذف شد' });
+    } else {
+      res.status(500).json({ message: 'خطا در حذف اعلان' });
+    }
+  } catch (error) {
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Delete announcement failed',
+      'content',
+      { resourceType: 'announcement', resourceId: req.params.id, success: false, errorMessage: error.message },
+      'high'
+    ));
+    res.status(500).json({ message: 'خطا در حذف اعلان' });
+  }
+});
+
+app.patch('/api/admin/announcements/:id/toggle', requireAdmin, async (req, res) => {
+  const adminUser = getAdminUserFromSession(req);
+
+  try {
+    const announcements = await readJsonFile('announcements.json');
+    const announcementId = req.params.id;
+    const announcementIndex = announcements.findIndex(announcement => announcement.id === announcementId);
+
+    if (announcementIndex === -1) {
+      return res.status(404).json({ message: 'اعلان یافت نشد' });
+    }
+
+    const oldStatus = announcements[announcementIndex].isActive;
+    announcements[announcementIndex].isActive = req.body.isActive;
+    announcements[announcementIndex].updatedAt = new Date().toISOString();
+    
+    const success = await writeJsonFile('announcements.json', announcements);
+
+    if (success) {
+      await logAdminAction(createLogEntry(
+        adminUser,
+        'Toggle announcement status',
+        'content',
+        {
+          resourceType: 'announcement',
+          resourceId: announcementId,
+          oldData: { isActive: oldStatus },
+          newData: { isActive: announcements[announcementIndex].isActive },
+          success: true
+        },
+        'medium'
+      ));
+
+      res.json({ message: 'وضعیت اعلان تغییر کرد', announcement: announcements[announcementIndex] });
+    } else {
+      res.status(500).json({ message: 'خطا در تغییر وضعیت اعلان' });
+    }
+  } catch (error) {
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Toggle announcement status failed',
+      'content',
+      { resourceType: 'announcement', resourceId: req.params.id, success: false, errorMessage: error.message },
+      'medium'
+    ));
+    res.status(500).json({ message: 'خطا در تغییر وضعیت اعلان' });
+  }
+});
+
 // Admin dashboard stats
 app.get('/api/admin/stats', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
@@ -1213,5 +1448,6 @@ app.listen(PORT, () => {
   console.log(`📸 Upload API: http://localhost:${PORT}/api/admin/upload`);
   console.log(`👁️ View Tracking: http://localhost:${PORT}/api/blog/:id/view`);
   console.log(`📊 Admin Logs: http://localhost:${PORT}/api/admin/logs`);
+  console.log(`📢 Announcements: http://localhost:${PORT}/api/admin/announcements`);
   console.log(`🎯 Frontend: http://localhost:5173`);
 });

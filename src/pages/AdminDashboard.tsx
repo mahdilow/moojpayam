@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   BarChart3,
   FileText,
   DollarSign,
-  MessageSquare,
-  Plus,
+  Users,
+  Eye,
   Edit,
   Trash2,
-  Eye,
+  Plus,
   LogOut,
-  Save,
-  X,
-  TrendingUp,
   Activity,
-  CheckCircle,
-  Clock,
+  Upload,
+  Megaphone,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import ImageUpload from "../components/ImageUpload";
 import AdminLogsViewer from "../components/admin/AdminLogsViewer";
+import AnnouncementManager from "../components/admin/AnnouncementManager";
 
 interface BlogPost {
   id: number;
@@ -29,16 +27,13 @@ interface BlogPost {
   content: string;
   image: string;
   author: string;
-  date: string;
   readTime: string;
-  views: number;
   category: string;
   tags: string[];
-  featured?: boolean;
+  featured: boolean;
   published: boolean;
-  relatedPosts?: number[];
-  createdAt?: string;
-  updatedAt?: string;
+  views: number;
+  date: string;
 }
 
 interface PricingPlan {
@@ -51,10 +46,10 @@ interface PricingPlan {
     included: boolean;
   }>;
   cta: string;
-  popular?: boolean;
+  popular: boolean;
   color: string;
   active: boolean;
-  discount?: number; // New discount field
+  discount?: number;
 }
 
 interface DashboardStats {
@@ -74,34 +69,46 @@ interface DashboardStats {
   }>;
 }
 
-// Notification type
-interface Notification {
-  id: string;
-  type: string;
-  message: string;
-  read: boolean;
-  createdAt: string;
-  data?: any;
-}
-
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-
-  // Blog state
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null);
-  const [showBlogForm, setShowBlogForm] = useState(false);
-
-  // Pricing state
   const [pricing, setPricing] = useState<PricingPlan[]>([]);
-  const [editingPlan, setEditingPlan] = useState<PricingPlan | null>(null);
-  const [showPlanForm, setShowPlanForm] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   const [showLogsViewer, setShowLogsViewer] = useState(false);
+  const [showAnnouncementManager, setShowAnnouncementManager] = useState(false);
+
+  // Blog form state
+  const [showBlogForm, setShowBlogForm] = useState(false);
+  const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null);
+  const [blogForm, setBlogForm] = useState({
+    title: "",
+    excerpt: "",
+    content: "",
+    image: "",
+    author: "تیم موج پیام",
+    readTime: "5",
+    category: "آموزش",
+    tags: [] as string[],
+    featured: false,
+    published: true,
+  });
+
+  // Pricing form state
+  const [showPricingForm, setShowPricingForm] = useState(false);
+  const [editingPricing, setEditingPricing] = useState<PricingPlan | null>(null);
+  const [pricingForm, setPricingForm] = useState({
+    name: "",
+    price: "",
+    description: "",
+    features: [] as Array<{ title: string; included: boolean }>,
+    cta: "انتخاب پلن",
+    popular: false,
+    color: "border-blue-400",
+    active: true,
+    discount: 0,
+  });
 
   useEffect(() => {
     checkAuth();
@@ -110,7 +117,6 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     if (activeTab === "dashboard") {
       loadStats();
-      loadNotifications();
     } else if (activeTab === "blogs") {
       loadBlogs();
     } else if (activeTab === "pricing") {
@@ -123,15 +129,12 @@ const AdminDashboard: React.FC = () => {
       const response = await fetch("/api/admin/verify", {
         credentials: "include",
       });
-
       if (!response.ok) {
         navigate("/mooj-admin");
         return;
       }
-
       setLoading(false);
     } catch (error) {
-      console.error("Navigation to /mooj-admin error:", error);
       navigate("/mooj-admin");
     }
   };
@@ -141,14 +144,12 @@ const AdminDashboard: React.FC = () => {
       const response = await fetch("/api/admin/stats", {
         credentials: "include",
       });
-
       if (response.ok) {
         const data = await response.json();
         setStats(data);
       }
     } catch (error) {
-      console.error("Error loading the Stats:", error);
-      toast.error("خطا در بارگذاری آمار");
+      console.error("Error loading stats:", error);
     }
   };
 
@@ -157,14 +158,12 @@ const AdminDashboard: React.FC = () => {
       const response = await fetch("/api/admin/blogs", {
         credentials: "include",
       });
-
       if (response.ok) {
         const data = await response.json();
         setBlogs(data);
       }
     } catch (error) {
-      console.error("Loading blogs error:", error);
-      toast.error("خطا در بارگذاری مقالات");
+      console.error("Error loading blogs:", error);
     }
   };
 
@@ -173,46 +172,12 @@ const AdminDashboard: React.FC = () => {
       const response = await fetch("/api/admin/pricing", {
         credentials: "include",
       });
-
       if (response.ok) {
         const data = await response.json();
         setPricing(data);
       }
     } catch (error) {
-      console.error("Loading pricing plans error:", error);
-      toast.error("خطا در بارگذاری تعرفه‌ها");
-    }
-  };
-
-  const loadNotifications = async () => {
-    try {
-      const response = await fetch("/api/admin/notifications", {
-        credentials: "include",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setNotifications(data);
-      }
-    } catch (error) {
-      console.error("Fetching notifications error:", error);
-      toast.error("خطا در دریافت اعلان‌ها");
-    }
-  };
-
-  const markNotificationRead = async (id: string) => {
-    try {
-      const response = await fetch(`/api/admin/notifications/read/${id}`, {
-        method: "POST",
-        credentials: "include",
-      });
-      if (response.ok) {
-        setNotifications((prev) => prev.filter((n) => n.id !== id));
-      } else {
-        toast.error("خطا در حذف اعلان");
-      }
-    } catch (error) {
-      console.error("Delete notification error:", error);
-      toast.error("خطا در حذف اعلان");
+      console.error("Error loading pricing:", error);
     }
   };
 
@@ -225,44 +190,58 @@ const AdminDashboard: React.FC = () => {
       navigate("/mooj-admin");
     } catch (error) {
       console.error("Logout error:", error);
-      toast.error("خطا در خروج");
     }
   };
 
-  // Blog functions
-  const saveBlog = async (blogData: Partial<BlogPost>) => {
+  // Blog management functions
+  const handleSaveBlog = async () => {
     try {
       const url = editingBlog
         ? `/api/admin/blogs/${editingBlog.id}`
         : "/api/admin/blogs";
-
       const method = editingBlog ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify(blogData),
+        body: JSON.stringify(blogForm),
       });
 
       if (response.ok) {
-        toast.success(editingBlog ? "مقاله ویرایش شد" : "مقاله ایجاد شد");
-        setShowBlogForm(false);
-        setEditingBlog(null);
+        toast.success(
+          editingBlog ? "مقاله ویرایش شد" : "مقاله جدید ایجاد شد"
+        );
         loadBlogs();
+        resetBlogForm();
       } else {
         const error = await response.json();
         toast.error(error.message || "خطا در ذخیره مقاله");
       }
     } catch (error) {
-      console.error("Server connection error:", error);
-      toast.error("خطا در ارتباط با سرور");
+      console.error("Error saving blog:", error);
+      toast.error("خطا در ذخیره مقاله");
     }
   };
 
-  const deleteBlog = async (id: number) => {
+  const handleEditBlog = (blog: BlogPost) => {
+    setBlogForm({
+      title: blog.title,
+      excerpt: blog.excerpt,
+      content: blog.content,
+      image: blog.image,
+      author: blog.author,
+      readTime: blog.readTime,
+      category: blog.category,
+      tags: blog.tags,
+      featured: blog.featured,
+      published: blog.published,
+    });
+    setEditingBlog(blog);
+    setShowBlogForm(true);
+  };
+
+  const handleDeleteBlog = async (id: number) => {
     if (!confirm("آیا از حذف این مقاله اطمینان دارید؟")) return;
 
     try {
@@ -278,44 +257,74 @@ const AdminDashboard: React.FC = () => {
         toast.error("خطا در حذف مقاله");
       }
     } catch (error) {
-      console.error("Server connection error:", error);
-      toast.error("خطا در ارتباط با سرور");
+      console.error("Error deleting blog:", error);
+      toast.error("خطا در حذف مقاله");
     }
   };
 
-  // Pricing functions
-  const savePlan = async (planData: Partial<PricingPlan>) => {
-    try {
-      const url = editingPlan
-        ? `/api/admin/pricing/${editingPlan.id}`
-        : "/api/admin/pricing";
+  const resetBlogForm = () => {
+    setBlogForm({
+      title: "",
+      excerpt: "",
+      content: "",
+      image: "",
+      author: "تیم موج پیام",
+      readTime: "5",
+      category: "آموزش",
+      tags: [],
+      featured: false,
+      published: true,
+    });
+    setEditingBlog(null);
+    setShowBlogForm(false);
+  };
 
-      const method = editingPlan ? "PUT" : "POST";
+  // Pricing management functions
+  const handleSavePricing = async () => {
+    try {
+      const url = editingPricing
+        ? `/api/admin/pricing/${editingPricing.id}`
+        : "/api/admin/pricing";
+      const method = editingPricing ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify(planData),
+        body: JSON.stringify(pricingForm),
       });
 
       if (response.ok) {
-        toast.success(editingPlan ? "پلن ویرایش شد" : "پلن ایجاد شد");
-        setShowPlanForm(false);
-        setEditingPlan(null);
+        toast.success(editingPricing ? "پلن ویرایش شد" : "پلن جدید ایجاد شد");
         loadPricing();
+        resetPricingForm();
       } else {
-        toast.error("خطا در ذخیره پلن");
+        const error = await response.json();
+        toast.error(error.message || "خطا در ذخیره پلن");
       }
     } catch (error) {
-      console.error("Server connection error:", error);
-      toast.error("خطا در ارتباط با سرور");
+      console.error("Error saving pricing:", error);
+      toast.error("خطا در ذخیره پلن");
     }
   };
 
-  const deletePlan = async (id: number) => {
+  const handleEditPricing = (plan: PricingPlan) => {
+    setPricingForm({
+      name: plan.name,
+      price: plan.price,
+      description: plan.description,
+      features: plan.features,
+      cta: plan.cta,
+      popular: plan.popular,
+      color: plan.color,
+      active: plan.active,
+      discount: plan.discount || 0,
+    });
+    setEditingPricing(plan);
+    setShowPricingForm(true);
+  };
+
+  const handleDeletePricing = async (id: number) => {
     if (!confirm("آیا از حذف این پلن اطمینان دارید؟")) return;
 
     try {
@@ -331,453 +340,595 @@ const AdminDashboard: React.FC = () => {
         toast.error("خطا در حذف پلن");
       }
     } catch (error) {
-      console.error("Server connection error:", error);
-      toast.error("خطا در ارتباط با سرور");
+      console.error("Error deleting pricing:", error);
+      toast.error("خطا در حذف پلن");
     }
   };
 
-  // Helper function to calculate discounted price
-  const getDiscountedPrice = (
-    price: string,
-    discount?: number
-  ): string | null => {
-    if (!discount || discount <= 0) return null;
+  const resetPricingForm = () => {
+    setPricingForm({
+      name: "",
+      price: "",
+      description: "",
+      features: [],
+      cta: "انتخاب پلن",
+      popular: false,
+      color: "border-blue-400",
+      active: true,
+      discount: 0,
+    });
+    setEditingPricing(null);
+    setShowPricingForm(false);
+  };
 
-    const numericPrice = parseInt(price.replace(/[^\d]/g, ""));
-    if (isNaN(numericPrice)) return null;
+  const addFeature = () => {
+    setPricingForm({
+      ...pricingForm,
+      features: [...pricingForm.features, { title: "", included: true }],
+    });
+  };
 
-    const discountedPrice = Math.round(numericPrice * (1 - discount / 100));
-    return discountedPrice.toLocaleString("fa-IR");
+  const updateFeature = (index: number, field: string, value: any) => {
+    const newFeatures = [...pricingForm.features];
+    newFeatures[index] = { ...newFeatures[index], [field]: value };
+    setPricingForm({ ...pricingForm, features: newFeatures });
+  };
+
+  const removeFeature = (index: number) => {
+    setPricingForm({
+      ...pricingForm,
+      features: pricingForm.features.filter((_, i) => i !== index),
+    });
   };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">در حال بارگذاری پنل مدیریت...</p>
-        </div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex" dir="rtl">
-      {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg">
-        <div className="p-6 border-b border-gray-200">
-          <h1 className="text-xl font-bold text-gray-800">
-            پنل مدیریت موج پیام
-          </h1>
-        </div>
-
-        <nav className="mt-6">
-          <div className="px-6 space-y-2">
-            <div className="flex flex-col gap-2 mb-8">
+    <div className="min-h-screen bg-gray-100">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <img
+                src="/assets/logo.png"
+                alt="موج پیام"
+                className="h-10 w-auto ml-3"
+              />
+              <h1 className="text-2xl font-bold text-gray-900">
+                پنل مدیریت موج پیام
+              </h1>
+            </div>
+            <div className="flex items-center space-x-4 space-x-reverse">
               <button
-                className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
-                  ${
-                    activeTab === "dashboard"
-                      ? "bg-blue-100 text-blue-700 font-bold shadow"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
-                onClick={() => setActiveTab("dashboard")}
-              >
-                <BarChart3 className="ml-2" size={18} /> داشبورد
-              </button>
-              <button
-                className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
-                  ${
-                    activeTab === "blogs"
-                      ? "bg-blue-100 text-blue-700 font-bold shadow"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
-                onClick={() => setActiveTab("blogs")}
-              >
-                <FileText className="ml-2" size={18} /> مقالات
-              </button>
-              <button
-                className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
-                  ${
-                    activeTab === "pricing"
-                      ? "bg-blue-100 text-blue-700 font-bold shadow"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
-                onClick={() => setActiveTab("pricing")}
-              >
-                <DollarSign className="ml-2" size={18} /> تعرفه‌ها
-              </button>
-              <button
-                className={`flex items-center w-full px-4 py-3 rounded-lg transition-colors text-right text-base font-medium
-                  ${
-                    showLogsViewer
-                      ? "bg-blue-100 text-blue-700 font-bold shadow"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
                 onClick={() => setShowLogsViewer(true)}
+                className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
-                <Activity className="ml-2" size={18} /> گزارش‌ها
+                <Activity size={20} className="ml-2" />
+                گزارش‌های فعالیت
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex items-center px-4 py-2 text-red-600 hover:text-red-800 transition-colors"
+              >
+                <LogOut size={20} className="ml-2" />
+                خروج
               </button>
             </div>
           </div>
-        </nav>
-
-        <div className="absolute bottom-6 left-6 right-6">
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-          >
-            <LogOut className="ml-3" size={20} />
-            خروج
-          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          {/* Dashboard Tab */}
-          {activeTab === "dashboard" && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-8">داشبورد</h2>
-              {notifications.length > 0 && (
-                <div className="mb-6">
-                  <div className="bg-white border-l-4 border-blue-500 rounded-xl shadow p-4 flex flex-col gap-3">
-                    <div className="flex items-center mb-2">
-                      <MessageSquare className="text-blue-500 ml-2" size={22} />
-                      <span className="font-bold text-blue-700 text-lg">
-                        اعلان‌های جدید فرم تماس
-                      </span>
-                    </div>
-                    {notifications.map((notif) => (
-                      <div
-                        key={notif.id}
-                        className="flex items-center justify-between bg-blue-50 hover:bg-blue-100 transition rounded-lg p-3 mb-1 shadow-sm border border-blue-100"
-                      >
-                        <div className="flex items-center text-gray-800">
-                          <span className="inline-block w-2 h-2 bg-blue-500 rounded-full ml-2"></span>
-                          <span>{notif.message}</span>
-                          <span className="text-xs text-gray-400 ml-4">
-                            {new Date(notif.createdAt).toLocaleString("fa-IR")}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() => markNotificationRead(notif.id)}
-                          className="ml-4 px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-400 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-500 transition text-sm font-semibold"
-                        >
-                          خواندم
-                        </button>
-                      </div>
-                    ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Navigation Tabs */}
+        <div className="mb-8">
+          <nav className="flex space-x-8 space-x-reverse">
+            {[
+              { id: "dashboard", label: "داشبورد", icon: BarChart3 },
+              { id: "blogs", label: "مقالات", icon: FileText },
+              { id: "pricing", label: "تعرفه‌ها", icon: DollarSign },
+              { id: "announcements", label: "اعلان‌ها", icon: Megaphone },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center px-4 py-2 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === tab.id
+                    ? "border-blue-500 text-blue-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+              >
+                <tab.icon size={20} className="ml-2" />
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        {/* Dashboard Tab */}
+        {activeTab === "dashboard" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <FileText className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <div className="mr-5 w-0 flex-1">
+                    <dl>
+                      <dt className="text-sm font-medium text-gray-500 truncate">
+                        مقالات منتشر شده
+                      </dt>
+                      <dd className="text-lg font-medium text-gray-900">
+                        {stats?.totalPosts || 0}
+                      </dd>
+                    </dl>
                   </div>
                 </div>
-              )}
+              </div>
 
-              {stats && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-white rounded-xl shadow-sm p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-600 text-sm">
-                          مقالات منتشر شده
-                        </p>
-                        <p className="text-2xl font-bold text-gray-800">
-                          {stats.totalPosts}
-                        </p>
-                      </div>
-                      <div className="bg-blue-100 p-3 rounded-lg">
-                        <FileText className="text-blue-600" size={24} />
-                      </div>
-                    </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <Eye className="h-8 w-8 text-green-600" />
                   </div>
-
-                  <div className="bg-white rounded-xl shadow-sm p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-600 text-sm">کل بازدیدها</p>
-                        <p className="text-2xl font-bold text-gray-800">
-                          {stats.totalViews.toLocaleString()}
-                        </p>
-                      </div>
-                      <div className="bg-green-100 p-3 rounded-lg">
-                        <Eye className="text-green-600" size={24} />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-xl shadow-sm p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-600 text-sm">پلن‌های فعال</p>
-                        <p className="text-2xl font-bold text-gray-800">
-                          {stats.activePlans}
-                        </p>
-                      </div>
-                      <div className="bg-purple-100 p-3 rounded-lg">
-                        <DollarSign className="text-purple-600" size={24} />
-                      </div>
-                    </div>
+                  <div className="mr-5 w-0 flex-1">
+                    <dl>
+                      <dt className="text-sm font-medium text-gray-500 truncate">
+                        کل بازدیدها
+                      </dt>
+                      <dd className="text-lg font-medium text-gray-900">
+                        {stats?.totalViews?.toLocaleString("fa-IR") || 0}
+                      </dd>
+                    </dl>
                   </div>
                 </div>
-              )}
+              </div>
 
-              {stats && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="bg-white rounded-xl shadow-sm p-6">
-                    <h3 className="text-lg font-bold text-gray-800 mb-4">
-                      محبوب‌ترین مقاله
-                    </h3>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {stats.mostViewedPost.title}
-                        </p>
-                        <p className="text-gray-600 text-sm">
-                          {stats.mostViewedPost.views.toLocaleString()} بازدید
-                        </p>
-                      </div>
-                      <TrendingUp className="text-green-500" size={24} />
-                    </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <DollarSign className="h-8 w-8 text-purple-600" />
                   </div>
+                  <div className="mr-5 w-0 flex-1">
+                    <dl>
+                      <dt className="text-sm font-medium text-gray-500 truncate">
+                        پلن‌های فعال
+                      </dt>
+                      <dd className="text-lg font-medium text-gray-900">
+                        {stats?.activePlans || 0}
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
 
-                  <div className="bg-white rounded-xl shadow-sm p-6">
-                    <h3 className="text-lg font-bold text-gray-800 mb-4">
-                      آخرین بازدیدها
-                    </h3>
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <Users className="h-8 w-8 text-orange-600" />
+                  </div>
+                  <div className="mr-5 w-0 flex-1">
+                    <dl>
+                      <dt className="text-sm font-medium text-gray-500 truncate">
+                        پیش‌نویس‌ها
+                      </dt>
+                      <dd className="text-lg font-medium text-gray-900">
+                        {stats?.draftPosts || 0}
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h3 className="text-lg font-medium text-gray-900">
+                    محبوب‌ترین مقاله
+                  </h3>
+                </div>
+                <div className="p-6">
+                  {stats?.mostViewedPost ? (
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">
+                        {stats.mostViewedPost.title}
+                      </h4>
+                      <p className="text-sm text-gray-500">
+                        {stats.mostViewedPost.views.toLocaleString("fa-IR")}{" "}
+                        بازدید
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-gray-500">هیچ مقاله‌ای وجود ندارد</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h3 className="text-lg font-medium text-gray-900">
+                    آخرین بازدیدها
+                  </h3>
+                </div>
+                <div className="p-6">
+                  {stats?.recentViews && stats.recentViews.length > 0 ? (
                     <div className="space-y-3">
-                      {stats.recentViews.slice(0, 3).map((post) => (
+                      {stats.recentViews.slice(0, 5).map((post) => (
                         <div
                           key={post.id}
-                          className="flex items-center justify-between"
+                          className="flex justify-between items-center"
                         >
-                          <div>
-                            <p className="font-medium text-gray-800 text-sm">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">
                               {post.title}
                             </p>
-                            <p className="text-gray-600 text-xs">
-                              {post.views.toLocaleString()} بازدید
+                            <p className="text-xs text-gray-500">
+                              {post.views.toLocaleString("fa-IR")} بازدید
                             </p>
                           </div>
-                          <Activity className="text-blue-500" size={16} />
                         </div>
                       ))}
                     </div>
+                  ) : (
+                    <p className="text-gray-500">هیچ بازدیدی وجود ندارد</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Blogs Tab */}
+        {activeTab === "blogs" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">مدیریت مقالات</h2>
+              <button
+                onClick={() => setShowBlogForm(true)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+              >
+                <Plus size={20} className="ml-2" />
+                مقاله جدید
+              </button>
+            </div>
+
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      عنوان
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      دسته‌بندی
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      بازدید
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      وضعیت
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      عملیات
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {blogs.map((blog) => (
+                    <tr key={blog.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <img
+                            className="h-10 w-10 rounded-lg object-cover ml-4"
+                            src={blog.image}
+                            alt={blog.title}
+                          />
+                          <div>
+                            <div className="text-sm font-medium text-gray-900">
+                              {blog.title.substring(0, 50)}...
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {blog.author}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                          {blog.category}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {blog.views.toLocaleString("fa-IR")}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span
+                          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            blog.published
+                              ? "bg-green-100 text-green-800"
+                              : "bg-yellow-100 text-yellow-800"
+                          }`}
+                        >
+                          {blog.published ? "منتشر شده" : "پیش‌نویس"}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2 space-x-reverse">
+                          <button
+                            onClick={() => handleEditBlog(blog)}
+                            className="text-blue-600 hover:text-blue-900"
+                          >
+                            <Edit size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteBlog(blog.id)}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Blog Form Modal */}
+            {showBlogForm && (
+              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+                <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
+                  <div className="mt-3">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {editingBlog ? "ویرایش مقاله" : "مقاله جدید"}
+                      </h3>
+                      <button
+                        onClick={resetBlogForm}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          عنوان
+                        </label>
+                        <input
+                          type="text"
+                          value={blogForm.title}
+                          onChange={(e) =>
+                            setBlogForm({ ...blogForm, title: e.target.value })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          دسته‌بندی
+                        </label>
+                        <select
+                          value={blogForm.category}
+                          onChange={(e) =>
+                            setBlogForm({
+                              ...blogForm,
+                              category: e.target.value,
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        >
+                          <option value="آموزش">آموزش</option>
+                          <option value="نکات">نکات</option>
+                          <option value="بهینه‌سازی">بهینه‌سازی</option>
+                          <option value="قوانین">قوانین</option>
+                          <option value="تحلیل">تحلیل</option>
+                          <option value="خلاقیت">خلاقیت</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        خلاصه
+                      </label>
+                      <textarea
+                        value={blogForm.excerpt}
+                        onChange={(e) =>
+                          setBlogForm({ ...blogForm, excerpt: e.target.value })
+                        }
+                        rows={3}
+                        className="w-full border border-gray-300 rounded-md p-2"
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <ImageUpload
+                        value={blogForm.image}
+                        onChange={(url) =>
+                          setBlogForm({ ...blogForm, image: url })
+                        }
+                        label="تصویر مقاله"
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        محتوا
+                      </label>
+                      <textarea
+                        value={blogForm.content}
+                        onChange={(e) =>
+                          setBlogForm({ ...blogForm, content: e.target.value })
+                        }
+                        rows={10}
+                        className="w-full border border-gray-300 rounded-md p-2"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          نویسنده
+                        </label>
+                        <input
+                          type="text"
+                          value={blogForm.author}
+                          onChange={(e) =>
+                            setBlogForm({ ...blogForm, author: e.target.value })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          زمان مطالعه (دقیقه)
+                        </label>
+                        <input
+                          type="text"
+                          value={blogForm.readTime}
+                          onChange={(e) =>
+                            setBlogForm({
+                              ...blogForm,
+                              readTime: e.target.value,
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          برچسب‌ها (با کاما جدا کنید)
+                        </label>
+                        <input
+                          type="text"
+                          value={blogForm.tags.join(", ")}
+                          onChange={(e) =>
+                            setBlogForm({
+                              ...blogForm,
+                              tags: e.target.value
+                                .split(",")
+                                .map((tag) => tag.trim()),
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 space-x-reverse mb-4">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={blogForm.featured}
+                          onChange={(e) =>
+                            setBlogForm({
+                              ...blogForm,
+                              featured: e.target.checked,
+                            })
+                          }
+                          className="ml-2"
+                        />
+                        مقاله ویژه
+                      </label>
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={blogForm.published}
+                          onChange={(e) =>
+                            setBlogForm({
+                              ...blogForm,
+                              published: e.target.checked,
+                            })
+                          }
+                          className="ml-2"
+                        />
+                        منتشر شده
+                      </label>
+                    </div>
+
+                    <div className="flex justify-end space-x-3 space-x-reverse">
+                      <button
+                        onClick={resetBlogForm}
+                        className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                      >
+                        انصراف
+                      </button>
+                      <button
+                        onClick={handleSaveBlog}
+                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                      >
+                        ذخیره
+                      </button>
+                    </div>
                   </div>
                 </div>
-              )}
-            </div>
-          )}
-
-          {/* Blogs Tab */}
-          {activeTab === "blogs" && (
-            <div>
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800">
-                  مدیریت مقالات
-                </h2>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => {
-                      setEditingBlog(null);
-                      setShowBlogForm(true);
-                    }}
-                    className="btn btn-primary flex items-center"
-                  >
-                    <Plus className="ml-2" size={20} />
-                    مقاله جدید
-                  </button>
-                  <button
-                    onClick={() => {
-                      const dataStr =
-                        "data:text/json;charset=utf-8," +
-                        encodeURIComponent(JSON.stringify(blogs, null, 2));
-                      const downloadAnchorNode = document.createElement("a");
-                      downloadAnchorNode.setAttribute("href", dataStr);
-                      downloadAnchorNode.setAttribute("download", "blogs.json");
-                      document.body.appendChild(downloadAnchorNode);
-                      downloadAnchorNode.click();
-                      downloadAnchorNode.remove();
-                    }}
-                    className="btn btn-outline flex items-center"
-                  >
-                    <FileText className="ml-2" size={20} />
-                    خروجی JSON
-                  </button>
-                </div>
               </div>
+            )}
+          </motion.div>
+        )}
 
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          عنوان
-                        </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          نویسنده
-                        </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          دسته‌بندی
-                        </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          بازدید
-                        </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          وضعیت
-                        </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          عملیات
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {blogs.map((blog) => (
-                        <tr key={blog.id} className="hover:bg-gray-50">
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex items-center">
-                              <img
-                                src={blog.image}
-                                alt={blog.title}
-                                className="w-10 h-10 rounded-lg object-cover ml-3"
-                              />
-                              <div>
-                                <div className="text-sm font-medium text-gray-900">
-                                  {blog.title}
-                                </div>
-                                <div className="text-sm text-gray-500">
-                                  {blog.date}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {blog.author}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                              {blog.category}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {blog.views.toLocaleString()}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex items-center">
-                              {blog.published ? (
-                                <>
-                                  <CheckCircle
-                                    className="text-green-500 ml-1"
-                                    size={16}
-                                  />
-                                  <span className="text-green-600 text-sm">
-                                    منتشر شده
-                                  </span>
-                                </>
-                              ) : (
-                                <>
-                                  <Clock
-                                    className="text-yellow-500 ml-1"
-                                    size={16}
-                                  />
-                                  <span className="text-yellow-600 text-sm">
-                                    پیش‌نویس
-                                  </span>
-                                </>
-                              )}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <div className="flex space-x-2 space-x-reverse">
-                              <button
-                                onClick={() => {
-                                  setEditingBlog(blog);
-                                  setShowBlogForm(true);
-                                }}
-                                className="text-blue-600 hover:text-blue-900"
-                              >
-                                <Edit size={16} />
-                              </button>
-                              <button
-                                onClick={() => deleteBlog(blog.id)}
-                                className="text-red-600 hover:text-red-900"
-                              >
-                                <Trash2 size={16} />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+        {/* Pricing Tab */}
+        {activeTab === "pricing" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">
+                مدیریت تعرفه‌ها
+              </h2>
+              <button
+                onClick={() => setShowPricingForm(true)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+              >
+                <Plus size={20} className="ml-2" />
+                پلن جدید
+              </button>
             </div>
-          )}
 
-          {/* Pricing Tab */}
-          {activeTab === "pricing" && (
-            <div>
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800">
-                  مدیریت تعرفه‌ها
-                </h2>
-                <button
-                  onClick={() => {
-                    setEditingPlan(null);
-                    setShowPlanForm(true);
-                  }}
-                  className="btn btn-primary flex items-center"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pricing.map((plan) => (
+                <div
+                  key={plan.id}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden"
                 >
-                  <Plus className="ml-2" size={20} />
-                  پلن جدید
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {pricing.map((plan) => (
-                  <div
-                    key={plan.id}
-                    className="bg-white rounded-xl shadow-sm p-6"
-                  >
+                  <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-lg font-bold text-gray-800">
+                        <h3 className="text-xl font-bold text-gray-900">
                           {plan.name}
                         </h3>
-                        <div className="flex items-center gap-2">
-                          {plan.discount && plan.discount > 0 ? (
-                            <>
-                              <span className="text-lg text-gray-400 line-through">
-                                {plan.price} تومان
-                              </span>
-                              <span className="text-2xl font-bold text-green-600">
-                                {getDiscountedPrice(plan.price, plan.discount)}{" "}
-                                تومان
-                              </span>
-                              <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">
-                                {plan.discount}% تخفیف
-                              </span>
-                            </>
-                          ) : (
-                            <span className="text-2xl font-bold text-primary-600">
-                              {plan.price} تومان
-                            </span>
-                          )}
-                        </div>
+                        <p className="text-gray-600">{plan.description}</p>
                       </div>
                       <div className="flex space-x-2 space-x-reverse">
                         <button
-                          onClick={() => {
-                            setEditingPlan(plan);
-                            setShowPlanForm(true);
-                          }}
+                          onClick={() => handleEditPricing(plan)}
                           className="text-blue-600 hover:text-blue-900"
                         >
                           <Edit size={16} />
                         </button>
                         <button
-                          onClick={() => deletePlan(plan.id)}
+                          onClick={() => handleDeletePricing(plan.id)}
                           className="text-red-600 hover:text-red-900"
                         >
                           <Trash2 size={16} />
@@ -785,671 +936,325 @@ const AdminDashboard: React.FC = () => {
                       </div>
                     </div>
 
-                    <p className="text-gray-600 text-sm mb-4">
-                      {plan.description}
-                    </p>
+                    <div className="mb-4">
+                      <span className="text-3xl font-bold text-gray-900">
+                        {plan.price}
+                      </span>
+                      {plan.id !== 3 && (
+                        <span className="text-gray-600 mr-2">
+                          هزار تومان / سالانه
+                        </span>
+                      )}
+                      {plan.discount && plan.discount > 0 && (
+                        <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs mr-2">
+                          {plan.discount}% تخفیف
+                        </span>
+                      )}
+                    </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-4">
                       {plan.features.slice(0, 3).map((feature, index) => (
-                        <div key={index} className="flex items-center text-sm">
-                          {feature.included ? (
-                            <CheckCircle
-                              className="text-green-500 ml-2"
-                              size={16}
-                            />
-                          ) : (
-                            <X className="text-red-500 ml-2" size={16} />
-                          )}
+                        <div key={index} className="flex items-center">
                           <span
-                            className={
+                            className={`w-4 h-4 rounded-full ml-2 ${
                               feature.included
-                                ? "text-gray-800"
-                                : "text-gray-400"
-                            }
-                          >
+                                ? "bg-green-500"
+                                : "bg-gray-300"
+                            }`}
+                          ></span>
+                          <span className="text-sm text-gray-700">
                             {feature.title}
                           </span>
                         </div>
                       ))}
+                      {plan.features.length > 3 && (
+                        <p className="text-sm text-gray-500">
+                          و {plan.features.length - 3} ویژگی دیگر...
+                        </p>
+                      )}
                     </div>
 
-                    <div className="mt-4 flex items-center justify-between">
+                    <div className="flex items-center justify-between">
                       <span
-                        className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${
                           plan.active
                             ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
+                            : "bg-gray-100 text-gray-800"
                         }`}
                       >
                         {plan.active ? "فعال" : "غیرفعال"}
                       </span>
                       {plan.popular && (
-                        <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
+                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
                           محبوب
                         </span>
                       )}
                     </div>
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Pricing Form Modal */}
+            {showPricingForm && (
+              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+                <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
+                  <div className="mt-3">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {editingPricing ? "ویرایش پلن" : "پلن جدید"}
+                      </h3>
+                      <button
+                        onClick={resetPricingForm}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          نام پلن
+                        </label>
+                        <input
+                          type="text"
+                          value={pricingForm.name}
+                          onChange={(e) =>
+                            setPricingForm({
+                              ...pricingForm,
+                              name: e.target.value,
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          قیمت
+                        </label>
+                        <input
+                          type="text"
+                          value={pricingForm.price}
+                          onChange={(e) =>
+                            setPricingForm({
+                              ...pricingForm,
+                              price: e.target.value,
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        توضیحات
+                      </label>
+                      <textarea
+                        value={pricingForm.description}
+                        onChange={(e) =>
+                          setPricingForm({
+                            ...pricingForm,
+                            description: e.target.value,
+                          })
+                        }
+                        rows={3}
+                        className="w-full border border-gray-300 rounded-md p-2"
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="block text-sm font-medium text-gray-700">
+                          ویژگی‌ها
+                        </label>
+                        <button
+                          onClick={addFeature}
+                          className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700"
+                        >
+                          افزودن ویژگی
+                        </button>
+                      </div>
+                      <div className="space-y-2">
+                        {pricingForm.features.map((feature, index) => (
+                          <div key={index} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={feature.title}
+                              onChange={(e) =>
+                                updateFeature(index, "title", e.target.value)
+                              }
+                              className="flex-1 border border-gray-300 rounded-md p-2"
+                              placeholder="عنوان ویژگی"
+                            />
+                            <label className="flex items-center">
+                              <input
+                                type="checkbox"
+                                checked={feature.included}
+                                onChange={(e) =>
+                                  updateFeature(
+                                    index,
+                                    "included",
+                                    e.target.checked
+                                  )
+                                }
+                                className="ml-1"
+                              />
+                              شامل
+                            </label>
+                            <button
+                              onClick={() => removeFeature(index)}
+                              className="text-red-600 hover:text-red-800"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          متن دکمه
+                        </label>
+                        <input
+                          type="text"
+                          value={pricingForm.cta}
+                          onChange={(e) =>
+                            setPricingForm({
+                              ...pricingForm,
+                              cta: e.target.value,
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          درصد تخفیف
+                        </label>
+                        <input
+                          type="number"
+                          value={pricingForm.discount}
+                          onChange={(e) =>
+                            setPricingForm({
+                              ...pricingForm,
+                              discount: parseInt(e.target.value) || 0,
+                            })
+                          }
+                          className="w-full border border-gray-300 rounded-md p-2"
+                          min="0"
+                          max="100"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 space-x-reverse mb-4">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={pricingForm.popular}
+                          onChange={(e) =>
+                            setPricingForm({
+                              ...pricingForm,
+                              popular: e.target.checked,
+                            })
+                          }
+                          className="ml-2"
+                        />
+                        پلن محبوب
+                      </label>
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={pricingForm.active}
+                          onChange={(e) =>
+                            setPricingForm({
+                              ...pricingForm,
+                              active: e.target.checked,
+                            })
+                          }
+                          className="ml-2"
+                        />
+                        فعال
+                      </label>
+                    </div>
+
+                    <div className="flex justify-end space-x-3 space-x-reverse">
+                      <button
+                        onClick={resetPricingForm}
+                        className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                      >
+                        انصراف
+                      </button>
+                      <button
+                        onClick={handleSavePricing}
+                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                      >
+                        ذخیره
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* Announcements Tab */}
+        {activeTab === "announcements" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">مدیریت اعلان‌ها</h2>
+              <button
+                onClick={() => setShowAnnouncementManager(true)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+              >
+                <Megaphone size={20} className="ml-2" />
+                مدیریت اعلان‌ها
+              </button>
+            </div>
+
+            <div className="bg-white rounded-lg shadow p-6">
+              <div className="text-center py-12">
+                <Megaphone size={48} className="mx-auto text-gray-300 mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  مدیریت اعلان‌های سایت
+                </h3>
+                <p className="text-gray-500 mb-6">
+                  از این بخش می‌توانید اعلان‌های بالای سایت را مدیریت کنید
+                </p>
+                <button
+                  onClick={() => setShowAnnouncementManager(true)}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center mx-auto"
+                >
+                  <Megaphone size={20} className="ml-2" />
+                  باز کردن پنل مدیریت
+                </button>
               </div>
             </div>
-          )}
-        </div>
+          </motion.div>
+        )}
       </div>
 
-      {/* Blog Form Modal */}
-      <AnimatePresence>
-        {showBlogForm && (
-          <BlogFormModal
-            blog={editingBlog}
-            blogs={blogs}
-            onSave={saveBlog}
-            onClose={() => {
-              setShowBlogForm(false);
-              setEditingBlog(null);
-            }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Pricing Form Modal */}
-      <AnimatePresence>
-        {showPlanForm && (
-          <PricingFormModal
-            plan={editingPlan}
-            onSave={savePlan}
-            onClose={() => {
-              setShowPlanForm(false);
-              setEditingPlan(null);
-            }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Logs Viewer Modal */}
+      {/* Admin Logs Viewer */}
       <AdminLogsViewer
         isOpen={showLogsViewer}
         onClose={() => setShowLogsViewer(false)}
       />
+
+      {/* Announcement Manager */}
+      <AnnouncementManager
+        isOpen={showAnnouncementManager}
+        onClose={() => setShowAnnouncementManager(false)}
+      />
     </div>
-  );
-};
-
-// Blog Form Modal Component
-const BlogFormModal: React.FC<{
-  blog: BlogPost | null;
-  blogs: BlogPost[];
-  onSave: (data: Partial<BlogPost>) => void;
-  onClose: () => void;
-}> = ({ blog, blogs, onSave, onClose }) => {
-  const [formData, setFormData] = useState({
-    title: blog?.title || "",
-    excerpt: blog?.excerpt || "",
-    content: blog?.content || "",
-    image: blog?.image || "",
-    author: blog?.author || "",
-    readTime: blog?.readTime || "",
-    category: blog?.category || "آموزش",
-    tags: blog?.tags?.join(", ") || "",
-    featured: blog?.featured || false,
-    published: blog?.published || false,
-    relatedPosts: blog?.relatedPosts || [],
-  });
-
-  const categories = [
-    "آموزش",
-    "نکات",
-    "بهینه‌سازی",
-    "قوانین",
-    "تحلیل",
-    "خلاقیت",
-  ];
-
-  // Get available posts for related posts selection (exclude current post)
-  const availablePosts = blogs.filter((p) => p.published && p.id !== blog?.id);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const blogData = {
-      ...formData,
-      tags: formData.tags
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter((tag) => tag),
-      relatedPosts:
-        formData.relatedPosts.length > 0
-          ? formData.relatedPosts
-          : getAutoRelatedPosts(),
-    };
-
-    onSave(blogData);
-  };
-
-  // Auto-select related posts if none selected
-  const getAutoRelatedPosts = () => {
-    const sameCategoryPosts = availablePosts
-      .filter((p) => p.category === formData.category)
-      .slice(0, 2);
-
-    if (sameCategoryPosts.length >= 2) {
-      return sameCategoryPosts.map((p) => p.id);
-    }
-
-    // If not enough in same category, get from all posts
-    return availablePosts.slice(0, 2).map((p) => p.id);
-  };
-
-  const handleRelatedPostChange = (postId: number, checked: boolean) => {
-    if (checked && formData.relatedPosts.length < 2) {
-      setFormData((prev) => ({
-        ...prev,
-        relatedPosts: [...prev.relatedPosts, postId],
-      }));
-    } else if (!checked) {
-      setFormData((prev) => ({
-        ...prev,
-        relatedPosts: prev.relatedPosts.filter((id) => id !== postId),
-      }));
-    }
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-bold text-gray-800">
-            {blog ? "ویرایش مقاله" : "مقاله جدید"}
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <X size={24} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                عنوان مقاله *
-              </label>
-              <input
-                type="text"
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, title: e.target.value }))
-                }
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                نویسنده *
-              </label>
-              <input
-                type="text"
-                value={formData.author}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, author: e.target.value }))
-                }
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              خلاصه مقاله *
-            </label>
-            <textarea
-              value={formData.excerpt}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, excerpt: e.target.value }))
-              }
-              rows={3}
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none resize-none"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              محتوای مقاله *
-            </label>
-            <textarea
-              value={formData.content}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, content: e.target.value }))
-              }
-              rows={8}
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none resize-none"
-              required
-            />
-          </div>
-
-          <ImageUpload
-            value={formData.image}
-            onChange={(url) => setFormData((prev) => ({ ...prev, image: url }))}
-            label="تصویر مقاله"
-            required
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                دسته‌بندی *
-              </label>
-              <select
-                value={formData.category}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, category: e.target.value }))
-                }
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              >
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                زمان مطالعه *
-              </label>
-              <input
-                type="text"
-                value={formData.readTime}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, readTime: e.target.value }))
-                }
-                placeholder="مثال: ۵ دقیقه"
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                برچسب‌ها
-              </label>
-              <input
-                type="text"
-                value={formData.tags}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, tags: e.target.value }))
-                }
-                placeholder="برچسب‌ها را با کاما جدا کنید"
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Related Posts Selection */}
-          {availablePosts.length > 0 && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                مقالات مرتبط (حداکثر ۲ مقاله)
-              </label>
-              <div className="border border-gray-300 rounded-lg p-4 max-h-40 overflow-y-auto">
-                {availablePosts.map((post) => (
-                  <label
-                    key={post.id}
-                    className="flex items-center mb-2 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formData.relatedPosts.includes(post.id)}
-                      onChange={(e) =>
-                        handleRelatedPostChange(post.id, e.target.checked)
-                      }
-                      disabled={
-                        !formData.relatedPosts.includes(post.id) &&
-                        formData.relatedPosts.length >= 2
-                      }
-                      className="ml-2"
-                    />
-                    <span className="text-sm text-gray-700">{post.title}</span>
-                  </label>
-                ))}
-              </div>
-              <p className="text-xs text-gray-500 mt-1">
-                اگر مقاله‌ای انتخاب نکنید، به صورت خودکار ۲ مقاله مرتبط انتخاب
-                می‌شود
-              </p>
-            </div>
-          )}
-
-          <div className="flex items-center space-x-6 space-x-reverse">
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.featured}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    featured: e.target.checked,
-                  }))
-                }
-                className="ml-2"
-              />
-              <span className="text-sm text-gray-700">مقاله ویژه</span>
-            </label>
-
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.published}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    published: e.target.checked,
-                  }))
-                }
-                className="ml-2"
-              />
-              <span className="text-sm text-gray-700">انتشار مقاله</span>
-            </label>
-          </div>
-
-          <div className="flex justify-end space-x-4 space-x-reverse">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              انصراف
-            </button>
-            <button type="submit" className="btn btn-primary flex items-center">
-              <Save className="ml-2" size={20} />
-              {blog ? "ویرایش" : "ایجاد"} مقاله
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Pricing Form Modal Component
-const PricingFormModal: React.FC<{
-  plan: PricingPlan | null;
-  onSave: (data: Partial<PricingPlan>) => void;
-  onClose: () => void;
-}> = ({ plan, onSave, onClose }) => {
-  const [formData, setFormData] = useState({
-    name: plan?.name || "",
-    price: plan?.price || "",
-    description: plan?.description || "",
-    features: plan?.features || [{ title: "", included: true }],
-    cta: plan?.cta || "انتخاب پلن",
-    popular: plan?.popular || false,
-    color: plan?.color || "border-blue-400",
-    active: plan?.active !== undefined ? plan.active : true,
-    discount: plan?.discount || 0, // New discount field
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave(formData);
-  };
-
-  const addFeature = () => {
-    setFormData((prev) => ({
-      ...prev,
-      features: [...prev.features, { title: "", included: true }],
-    }));
-  };
-
-  const removeFeature = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      features: prev.features.filter((_, i) => i !== index),
-    }));
-  };
-
-  const updateFeature = (
-    index: number,
-    field: "title" | "included",
-    value: string | boolean
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      features: prev.features.map((feature, i) =>
-        i === index ? { ...feature, [field]: value } : feature
-      ),
-    }));
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-bold text-gray-800">
-            {plan ? "ویرایش پلن" : "پلن جدید"}
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <X size={24} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                نام پلن *
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, name: e.target.value }))
-                }
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                قیمت *
-              </label>
-              <input
-                type="text"
-                value={formData.price}
-                onChange={(e) => {
-                  // Only allow English digits and commas
-                  const englishOnly = e.target.value.replace(/[^0-9,]/g, "");
-                  setFormData((prev) => ({ ...prev, price: englishOnly }));
-                }}
-                placeholder="مثال: 200,000"
-                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Discount Field */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              درصد تخفیف (اختیاری)
-            </label>
-            <input
-              type="number"
-              min="0"
-              max="100"
-              value={formData.discount}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  discount: parseInt(e.target.value) || 0,
-                }))
-              }
-              placeholder="مثال: 20"
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              برای حذف تخفیف، مقدار را 0 قرار دهید
-            </p>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              توضیحات *
-            </label>
-            <textarea
-              value={formData.description}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  description: e.target.value,
-                }))
-              }
-              rows={3}
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none resize-none"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              ویژگی‌ها
-            </label>
-            <div className="space-y-3">
-              {formData.features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-3 space-x-reverse"
-                >
-                  <input
-                    type="text"
-                    value={feature.title}
-                    onChange={(e) =>
-                      updateFeature(index, "title", e.target.value)
-                    }
-                    placeholder="عنوان ویژگی"
-                    className="flex-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-                  />
-                  <label className="flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={feature.included}
-                      onChange={(e) =>
-                        updateFeature(index, "included", e.target.checked)
-                      }
-                      className="ml-1"
-                    />
-                    <span className="text-sm text-gray-700">شامل</span>
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => removeFeature(index)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={addFeature}
-              className="mt-3 text-primary-600 hover:text-primary-700 text-sm flex items-center"
-            >
-              <Plus size={16} className="ml-1" />
-              افزودن ویژگی
-            </button>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              متن دکمه
-            </label>
-            <input
-              type="text"
-              value={formData.cta}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, cta: e.target.value }))
-              }
-              className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none"
-            />
-          </div>
-
-          <div className="flex items-center space-x-6 space-x-reverse">
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.popular}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    popular: e.target.checked,
-                  }))
-                }
-                className="ml-2"
-              />
-              <span className="text-sm text-gray-700">پلن محبوب</span>
-            </label>
-
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.active}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, active: e.target.checked }))
-                }
-                className="ml-2"
-              />
-              <span className="text-sm text-gray-700">فعال</span>
-            </label>
-          </div>
-
-          <div className="flex justify-end space-x-4 space-x-reverse">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              انصراف
-            </button>
-            <button type="submit" className="btn btn-primary flex items-center">
-              <Save className="ml-2" size={20} />
-              {plan ? "ویرایش" : "ایجاد"} پلن
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
   );
 };
 
