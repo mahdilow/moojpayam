@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1751140476965_kojnpu5zt",
+    "timestamp": "2025-06-28T19:54:36.965Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751140476953_4gifmtil4",
+    "timestamp": "2025-06-28T19:54:36.953Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "399"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "399"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1751140466215_2v0yrnqly",
     "timestamp": "2025-06-28T19:54:26.215Z",
     "adminUser": "admin",
