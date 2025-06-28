@@ -1,5 +1,16 @@
 [
   {
+    "message": "امروز",
+    "type": "promotion",
+    "isActive": true,
+    "dismissible": true,
+    "link": "",
+    "linkText": "",
+    "expiresAt": null,
+    "id": "announcement_1751141431243_xeh4el26v",
+    "createdAt": "2025-06-28T20:10:31.243Z"
+  },
+  {
     "message": "test اعلان",
     "type": "info",
     "isActive": true,
