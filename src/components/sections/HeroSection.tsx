@@ -19,58 +19,65 @@ const HeroSection: React.FC = () => {
           {/* Left Content - Image */}
           <div className="w-full lg:w-5/12 mb-8 lg:mb-0">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
               className="relative flex items-center justify-center"
             >
-              {/* Main Wave Image with Simple Animation */}
-              <motion.div
+              {/* Main Wave Image with Subtle Professional Animation */}
+              <motion.img
+                src="/assets/mooj_payam_wave_hero.png"
+                alt="موج پیام - ارسال پیامک مثل موج دریا"
+                className="w-full max-w-md h-auto drop-shadow-2xl"
                 animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 2, -2, 0],
+                  y: [0, -8, 0],
                 }}
                 transition={{
-                  duration: 6,
+                  duration: 4,
                   repeat: Infinity,
                   repeatType: "reverse",
                   ease: "easeInOut"
                 }}
-                className="relative z-10"
-              >
-                <img
-                  src="/assets/mooj_payam_wave_hero.png"
-                  alt="موج پیام - ارسال پیامک مثل موج دریا"
-                  className="w-full max-w-md h-auto drop-shadow-2xl"
-                />
-              </motion.div>
+              />
 
-              {/* Subtle Background Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl scale-150 -z-10"></div>
+              {/* Subtle Professional Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-2xl scale-110 -z-10"></div>
             </motion.div>
           </div>
 
           {/* Right Content - Text */}
           <div className="w-full lg:w-7/12 lg:pr-8">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
               className="text-center lg:text-right"
             >
-              {/* Simple Two-Line Headline */}
+              {/* Clean Two-Line Headline */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-8">
-                <span className="block mb-2">پیامک‌های شما</span>
-                <span className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text">
+                <motion.span 
+                  className="block mb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                  پیامک‌های شما
+                </motion.span>
+                <motion.span 
+                  className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                >
                   مثل موج دریا به همه می‌رسد
-                </span>
+                </motion.span>
               </h1>
 
               {/* Two Action Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               >
                 <a
@@ -96,7 +103,7 @@ const HeroSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
           className="mt-16 text-center"
         >
           <a
@@ -105,8 +112,8 @@ const HeroSection: React.FC = () => {
           >
             <span className="ml-2 font-medium">کشف امکانات شگفت‌انگیز</span>
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
               <ArrowDownCircle size={24} />
             </motion.div>
