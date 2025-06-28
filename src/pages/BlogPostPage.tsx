@@ -10,7 +10,7 @@ import {
   Share2,
   BookOpen,
 } from "lucide-react";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "../components/SEOHead";
 
 interface BlogPost {
   id: number;
@@ -28,6 +28,8 @@ interface BlogPost {
   slug?: string;
   metaDescription?: string;
   relatedPosts?: BlogPost[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 const BlogPostPage: React.FC = () => {
@@ -123,31 +125,44 @@ const BlogPostPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="py-20 bg-white min-h-screen">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-            <p className="text-gray-600">در حال بارگذاری مقاله...</p>
+      <>
+        <SEOHead 
+          title="در حال بارگذاری..."
+          noindex={true}
+        />
+        <div className="py-20 bg-white min-h-screen">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+              <p className="text-gray-600">در حال بارگذاری مقاله...</p>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (error || !blogPost) {
     return (
-      <div className="py-20 bg-white min-h-screen">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">
-              {error || "مقاله یافت نشد"}
-            </h1>
-            <Link to="/blog" className="btn btn-primary">
-              بازگشت به بلاگ
-            </Link>
+      <>
+        <SEOHead 
+          title="مقاله یافت نشد"
+          description="متأسفانه مقاله مورد نظر یافت نشد."
+          noindex={true}
+        />
+        <div className="py-20 bg-white min-h-screen">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-gray-800 mb-4">
+                {error || "مقاله یافت نشد"}
+              </h1>
+              <Link to="/blog" className="btn btn-primary">
+                بازگشت به بلاگ
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -157,7 +172,12 @@ const BlogPostPage: React.FC = () => {
     "@type": "BlogPosting",
     headline: blogPost.title,
     description: blogPost.metaDescription || blogPost.excerpt,
-    image: blogPost.image,
+    image: {
+      "@type": "ImageObject",
+      url: blogPost.image,
+      width: 1200,
+      height: 630
+    },
     author: {
       "@type": "Person",
       name: blogPost.author,
@@ -168,10 +188,12 @@ const BlogPostPage: React.FC = () => {
       logo: {
         "@type": "ImageObject",
         url: "https://moojpayam.ir/assets/logo.png",
+        width: 200,
+        height: 200
       },
     },
-    datePublished: blogPost.date,
-    dateModified: blogPost.date,
+    datePublished: blogPost.createdAt || blogPost.date,
+    dateModified: blogPost.updatedAt || blogPost.createdAt || blogPost.date,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": window.location.href,
@@ -179,55 +201,34 @@ const BlogPostPage: React.FC = () => {
     keywords: blogPost.tags.join(", "),
     articleSection: blogPost.category,
     wordCount: blogPost.content.replace(/<[^>]*>/g, "").split(" ").length,
+    url: window.location.href,
+    isPartOf: {
+      "@type": "Blog",
+      name: "بلاگ موج پیام",
+      url: "https://moojpayam.ir/blog"
+    }
   };
 
   return (
     <>
-      <Helmet>
-        <title>{blogPost.title} | بلاگ موج پیام</title>
-        <meta
-          name="description"
-          content={blogPost.metaDescription || blogPost.excerpt}
-        />
-        <meta name="keywords" content={blogPost.tags.join(", ")} />
-        <meta name="author" content={blogPost.author} />
-
-        {/* Open Graph tags */}
-        <meta property="og:title" content={blogPost.title} />
-        <meta
-          property="og:description"
-          content={blogPost.metaDescription || blogPost.excerpt}
-        />
-        <meta property="og:image" content={blogPost.image} />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="موج پیام" />
-
-        {/* Twitter Card tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blogPost.title} />
-        <meta
-          name="twitter:description"
-          content={blogPost.metaDescription || blogPost.excerpt}
-        />
-        <meta name="twitter:image" content={blogPost.image} />
-
-        {/* Article specific tags */}
-        <meta property="article:author" content={blogPost.author} />
-        <meta property="article:published_time" content={blogPost.date} />
-        <meta property="article:section" content={blogPost.category} />
-        {blogPost.tags.map((tag) => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
-
-        {/* Canonical URL */}
-        <link rel="canonical" href={window.location.href} />
-
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      </Helmet>
+      <SEOHead
+        title={blogPost.title}
+        description={blogPost.metaDescription || blogPost.excerpt}
+        keywords={`${blogPost.tags.join(", ")}, ${blogPost.category}, موج پیام, پیامک`}
+        image={blogPost.image}
+        url={window.location.href}
+        type="article"
+        author={blogPost.author}
+        publishedTime={blogPost.createdAt}
+        modifiedTime={blogPost.updatedAt}
+        section={blogPost.category}
+        tags={blogPost.tags}
+      />
+      
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
 
       <div className="py-20 bg-white min-h-screen">
         <div className="container mx-auto px-4">

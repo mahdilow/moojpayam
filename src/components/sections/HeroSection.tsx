@@ -1,255 +1,124 @@
-import React, { useState } from "react";
-import { ArrowDownCircle, MapPin } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  MapContainer,
-  TileLayer,
-  Circle,
-  Popup,
-  useMapEvents,
-  useMap,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { LeafletMouseEvent } from "leaflet";
-import toast from "react-hot-toast";
-
-const MapEvents = ({
-  onMapClick,
-}: {
-  onMapClick: (e: LeafletMouseEvent) => void;
-}) => {
-  useMapEvents({
-    click: onMapClick,
-  });
-  return null;
-};
-
-const MapBoundsComponent = ({
-  bounds,
-}: {
-  bounds: [[number, number], [number, number]];
-}) => {
-  const map = useMap();
-
-  React.useEffect(() => {
-    // Set max bounds to restrict panning
-    map.setMaxBounds(bounds);
-
-    // Handle when user tries to drag outside bounds
-    map.on("drag", () => {
-      map.panInsideBounds(bounds, { animate: false });
-    });
-
-    return () => {
-      map.off("drag");
-    };
-  }, [map, bounds]);
-
-  return null;
-};
+import React from "react";
+import { ArrowDownCircle, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HeroSection: React.FC = () => {
-  const [selectedArea, setSelectedArea] = useState<{
-    lat: number;
-    lng: number;
-    radius: number;
-  } | null>(null);
-  const [message, setMessage] = useState("");
-  const [showNotification, setShowNotification] = useState(false);
-  // Tehran position as initial center
-  const tehranPosition: [number, number] = [35.6892, 51.389];
-  // Iran bounds (southwest and northeast corners)
-  const iranBounds: [[number, number], [number, number]] = [
-    [25.0, 44.0], // Southwest corner
-    [40.0, 63.3], // Northeast corner
-  ];
-
-  const handleMapClick = (e: LeafletMouseEvent) => {
-    setSelectedArea({
-      lat: e.latlng.lat,
-      lng: e.latlng.lng,
-      radius: 1000, // 1km radius
-    });
-    setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 3000);
-  };
-
-  const handleSubmit = () => {
-    const pricingSection = document.getElementById("pricing");
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleSubmitClick = () => {
-    if (!selectedArea) {
-      toast.error("لطفاً ابتدا یک منطقه را انتخاب کنید.");
-      return;
-    }
-    if (!message) {
-      toast.error("لطفاً پیام خود را وارد کنید.");
-      return;
-    }
-
-    handleSubmit();
-  };
-
   return (
     <section
       id="home"
-      className="pt-24 pb-20 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 to-purple-50"
+      className="pt-24 pb-20 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-hidden relative"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap items-center">
-          <div className="w-full lg:w-1/2 mb-12 lg:mb-0">
+      {/* Simple Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-wrap items-center justify-center min-h-[70vh] max-w-5xl mx-auto">
+          {/* Left Content - Image */}
+          <div className="w-full lg:w-5/12 mb-8 lg:mb-0">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="relative flex items-center justify-center"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-6">
-                ارسال هدفمند{" "}
-                <span className="text-primary-500">پیامک تبلیغاتی</span> بر اساس
-                منطقه
-              </h1>
-              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-                با انتخاب منطقه مورد نظر روی نقشه، پیام تبلیغاتی خود را به
-                مشتریان بالقوه در آن محدوده ارسال کنید هدفمندسازی تبلیغات و
-                افزایش نرخ تبدیل با موج پیام
-              </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
-                <a
-                  href="#pricing"
-                  className="btn btn-primary text-center px-8 py-3 text-lg"
+              {/* Main Wave Image with Subtle Professional Animation */}
+              <motion.img
+                src="/assets/mooj_payam_wave_hero.png"
+                alt="موج پیام - ارسال پیامک مثل موج دریا"
+                className="w-full max-w-md h-auto drop-shadow-2xl"
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }}
+              />
+
+              {/* Subtle Professional Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-2xl scale-110 -z-10"></div>
+            </motion.div>
+          </div>
+
+          {/* Right Content - Text */}
+          <div className="w-full lg:w-7/12 lg:pr-8">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="text-center lg:text-right"
+            >
+              {/* Clean Two-Line Headline */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-8">
+                <motion.span 
+                  className="block mb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
                 >
-                  شروع کنید
+                  پیامک‌های شما
+                </motion.span>
+                <motion.span 
+                  className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                >
+                  مثل موج دریا به همه می‌رسد
+                </motion.span>
+              </h1>
+
+              {/* Two Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              >
+                <a
+                  target="_blank"
+                  href="http://dash.moojpayam.ir/userregister.aspx"
+                  className="btn btn-primary text-center px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
+                >
+                  <Zap className="ml-2" size={20} />
+                  شروع رایگان
                 </a>
                 <a
                   href="#features"
-                  className="btn btn-outline text-center px-8 py-3 text-lg"
+                  className="btn btn-outline text-center px-8 py-4 text-lg hover:bg-blue-50 transition-all duration-300 flex items-center justify-center"
                 >
-                  امکانات بیشتر
+                  کشف امکانات
                 </a>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="w-full lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-6 relative z-10">
-                <div className="bg-blue-600 text-white rounded-lg p-4 mb-6 flex items-center">
-                  <MapPin className="ml-3" />
-                  <div>
-                    <h3 className="font-bold">ارسال پیامک منطقه‌ای</h3>
-                    <p className="text-sm text-blue-100">
-                      منطقه مورد نظر را انتخاب کنید
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mb-6 h-64 rounded-lg overflow-hidden border border-gray-200 relative">
-                  <MapContainer
-                    center={tehranPosition}
-                    zoom={10}
-                    maxBounds={iranBounds}
-                    minZoom={5}
-                    maxZoom={18}
-                    className="h-full w-full"
-                  >
-                    <TileLayer
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <MapEvents onMapClick={handleMapClick} />
-                    <MapBoundsComponent bounds={iranBounds} />
-                    {selectedArea && (
-                      <Circle
-                        center={[selectedArea.lat, selectedArea.lng]}
-                        radius={selectedArea.radius}
-                        pathOptions={{ color: "blue", fillColor: "blue" }}
-                      >
-                        <Popup>منطقه انتخاب شده برای ارسال پیامک</Popup>
-                      </Circle>
-                    )}
-                  </MapContainer>
-
-                  <AnimatePresence>
-                    {showNotification && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg"
-                      >
-                        منطقه مورد نظر به لیست اضافه شد
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    متن پیام
-                  </label>
-                  <textarea
-                    className="w-full border border-gray-300 rounded-lg p-3 resize-none"
-                    rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="متن پیام خود را وارد کنید..."
-                  ></textarea>
-                </div>
-
-                <div className="flex justify-between mb-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      زمان ارسال
-                    </label>
-                    <select className="border border-gray-300 rounded-lg p-2">
-                      <option>هم اکنون</option>
-                      <option>زمانبندی</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      نوع پیام
-                    </label>
-                    <select className="border border-gray-300 rounded-lg p-2">
-                      <option>تبلیغاتی</option>
-                      <option>خدماتی</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleSubmitClick}
-                  className="w-full bg-blue-600 text-white rounded-lg py-3 font-bold hover:bg-blue-700 transition-colors"
-                >
-                  ارسال پیام به منطقه انتخاب شده
-                </button>
-              </div>
-
-              {/* Decorative elements */}
-              <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-400 rounded-full opacity-20 blur-3xl"></div>
-              <div className="absolute bottom-0 left-10 w-40 h-40 bg-secondary-400 rounded-full opacity-20 blur-3xl"></div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
 
-        <div className="mt-16 text-center">
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+          className="mt-16 text-center"
+        >
           <a
             href="#features"
-            className="inline-flex items-center text-primary-500 hover:text-primary-600"
+            className="inline-flex items-center text-blue-500 hover:text-blue-600 transition-colors group"
           >
-            <span className="ml-2">مشاهده امکانات</span>
-            <ArrowDownCircle className="animate-bounce" size={20} />
+            <span className="ml-2 font-medium">کشف امکانات شگفت‌انگیز</span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowDownCircle size={24} />
+            </motion.div>
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

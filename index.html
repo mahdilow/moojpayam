@@ -1,56 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    
+    <!-- Font loading with display swap for better performance -->
     <link
       href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap"
       rel="stylesheet"
     />
-    <title>موج پیام | سامانه ارسال پیامک هوشمند</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>موج پیام | سامانه ارسال پیامک هوشمند و منطقه‌ای</title>
+    <meta
+      name="title"
+      content="موج پیام | سامانه ارسال پیامک هوشمند و منطقه‌ای"
+    />
     <meta
       name="description"
-      content="سامانه ارسال پیامک هوشمند موج پیام - ارسال پیامک تبلیغاتی و اطلاع رسانی با امکانات پیشرفته و سرعت بالا."
+      content="سامانه پیشرفته ارسال پیامک تبلیغاتی و اطلاع‌رسانی موج پیام. ارسال پیامک منطقه‌ای، هدفمند و انبوه با بالاترین نرخ تحویل و قیمت مناسب. پنل حرفه‌ای پیامک با امکانات پیشرفته."
     />
     <meta
       name="keywords"
-      content="پیامک, ارسال پیامک, سامانه پیامک, پیامک تبلیغاتی, موج پیام"
+      content="پیامک, ارسال پیامک, سامانه پیامک, پیامک تبلیغاتی, پیامک منطقه‌ای, پنل پیامک, ارسال انبوه پیامک, پیامک هدفمند, موج پیام, SMS, بازاریابی پیامکی, پیامک نقشه‌ای, ارسال پیامک به کد پستی"
     />
-    <meta name="robots" content="index, follow" />
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="موج پیام | سامانه ارسال پیامک هوشمند" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="language" content="Persian" />
+    <meta name="author" content="موج پیام" />
+    <meta name="publisher" content="موج پیام" />
+    <meta name="copyright" content="موج پیام" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    
+    <!-- Geo Meta Tags -->
+    <meta name="geo.region" content="IR" />
+    <meta name="geo.country" content="Iran" />
+    <meta name="geo.placename" content="کرج, ایران" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="موج پیام" />
+    <meta property="og:title" content="موج پیام | سامانه ارسال پیامک هوشمند و منطقه‌ای" />
     <meta
       property="og:description"
-      content="سامانه ارسال پیامک هوشمند موج پیام - ارسال پیامک تبلیغاتی و اطلاع رسانی با امکانات پیشرفته و سرعت بالا."
+      content="سامانه پیشرفته ارسال پیامک تبلیغاتی و اطلاع‌رسانی موج پیام. ارسال پیامک منطقه‌ای، هدفمند و انبوه با بالاترین نرخ تحویل و قیمت مناسب."
     />
-    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://moojpayam.ir" />
     <meta property="og:image" content="https://moojpayam.ir/assets/logo.png" />
-    <!-- Twitter Card Meta Tags -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="موج پیام - سامانه ارسال پیامک هوشمند" />
+    <meta property="og:locale" content="fa_IR" />
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="موج پیام | سامانه ارسال پیامک هوشمند" />
+    <meta name="twitter:site" content="@moojpayam" />
+    <meta name="twitter:creator" content="@moojpayam" />
+    <meta name="twitter:title" content="موج پیام | سامانه ارسال پیامک هوشمند و منطقه‌ای" />
     <meta
       name="twitter:description"
-      content="سامانه ارسال پیامک هوشمند موج پیام - ارسال پیامک تبلیغاتی و اطلاع رسانی با امکانات پیشرفته و سرعت بالا."
+      content="سامانه پیشرفته ارسال پیامک تبلیغاتی و اطلاع‌رسانی موج پیام. ارسال پیامک منطقه‌ای، هدفمند و انبوه با بالاترین نرخ تحویل و قیمت مناسب."
     />
     <meta name="twitter:image" content="https://moojpayam.ir/assets/logo.png" />
+    <meta name="twitter:image:alt" content="موج پیام - سامانه ارسال پیامک هوشمند" />
+    
+    <!-- Additional Meta Tags for SEO -->
+    <meta name="theme-color" content="#4A90E2" />
+    <meta name="msapplication-TileColor" content="#4A90E2" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://moojpayam.ir" />
+    
+    <!-- Alternative language versions -->
+    <link rel="alternate" hreflang="fa" href="https://moojpayam.ir" />
+    <link rel="alternate" hreflang="x-default" href="https://moojpayam.ir" />
+    
+    <!-- Favicon and App Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/logo.png" as="image" type="image/png" />
+    <link rel="preload" href="/assets/mooj_payam_wave_hero.png" as="image" type="image/png" />
+    
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "موج پیام",
+        "alternateName": "Mooj Payam",
         "url": "https://moojpayam.ir",
         "logo": "https://moojpayam.ir/assets/logo.png",
-        "description": "سامانه ارسال پیامک هوشمند موج پیام - ارسال پیامک تبلیغاتی و اطلاع رسانی با امکانات پیشرفته و سرعت بالا."
+        "description": "سامانه پیشرفته ارسال پیامک تبلیغاتی و اطلاع‌رسانی موج پیام. ارسال پیامک منطقه‌ای، هدفمند و انبوه با بالاترین نرخ تحویل و قیمت مناسب.",
+        "foundingDate": "2022",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+98-910-071-1835",
+          "contactType": "customer service",
+          "availableLanguage": "Persian"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "کرج",
+          "addressRegion": "البرز",
+          "addressCountry": "IR"
+        },
+        "sameAs": [
+          "https://t.me/moojpayam",
+          "https://instagram.com/moojpayam"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "description": "خدمات ارسال پیامک تبلیغاتی و اطلاع‌رسانی",
+          "category": "SMS Marketing Services"
+        }
       }
     </script>
+    
+    <!-- Website Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "موج پیام",
+        "url": "https://moojpayam.ir",
+        "description": "سامانه ارسال پیامک هوشمند و منطقه‌ای",
+        "inLanguage": "fa",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://moojpayam.ir/blog?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    
+    <!-- Service Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "خدمات ارسال پیامک موج پیام",
+        "description": "ارسال پیامک تبلیغاتی، اطلاع‌رسانی و منطقه‌ای با بالاترین کیفیت",
+        "provider": {
+          "@type": "Organization",
+          "name": "موج پیام"
+        },
+        "serviceType": "SMS Marketing",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Iran"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "پکیج‌های ارسال پیامک",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "پکیج پایه"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "پکیج حرفه‌ای"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "پکیج ویژه"
+              }
+            }
+          ]
+        }
+      }
+    </script>
+    
     <style>
+      /* Critical CSS for above-the-fold content */
       * {
         font-family: "Lalezar", sans-serif !important;
+      }
+      
+      /* Prevent layout shift */
+      .logo-pulse {
+        width: 80px;
+        height: 80px;
+      }
+      
+      /* Optimize font loading */
+      .font-display-swap {
+        font-display: swap;
+      }
+      
+      /* Reduce cumulative layout shift */
+      img {
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>

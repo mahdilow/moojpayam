@@ -58,6 +58,13 @@ body {
   direction: rtl;
   text-align: right;
   font-family: 'Lalezar', 'Vazir', system-ui, sans-serif;
+  /* Add padding-top to account for announcement banner */
+  padding-top: 0;
+}
+
+/* Ensure announcement banner doesn't interfere with content */
+.announcement-banner-active {
+  padding-top: 60px; /* Adjust based on banner height */
 }
 
 .font-vazir {
