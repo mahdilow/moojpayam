@@ -1,5 +1,17 @@
 [
   {
+    "id": "log_1751142212867_llw6h4dui",
+    "timestamp": "2025-06-28T20:23:32.867Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751142210468_17n7eevcy",
     "timestamp": "2025-06-28T20:23:30.468Z",
     "adminUser": "admin",
