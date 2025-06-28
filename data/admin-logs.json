@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1751142380212_8x7boxaia",
+    "timestamp": "2025-06-28T20:26:20.212Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751142380195_uq198g743",
+    "timestamp": "2025-06-28T20:26:20.195Z",
+    "adminUser": "admin",
+    "action": "Update announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751142282483_zdpuyqd5f",
+      "oldData": {
+        "message": "aaaaaaaaaaaaaaaa",
+        "type": "warning"
+      },
+      "newData": {
+        "message": "aaaaaaaaaaaaaaaa",
+        "type": "warning"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1751142367393_c6p9y3urz",
     "timestamp": "2025-06-28T20:26:07.393Z",
     "adminUser": "admin",

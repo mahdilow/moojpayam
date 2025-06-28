@@ -3,12 +3,13 @@
     "message": "aaaaaaaaaaaaaaaa",
     "type": "warning",
     "isActive": true,
-    "dismissible": true,
+    "dismissible": false,
     "link": "",
     "linkText": "",
     "expiresAt": null,
     "id": "announcement_1751142282483_zdpuyqd5f",
-    "createdAt": "2025-06-28T20:24:42.483Z"
+    "createdAt": "2025-06-28T20:24:42.483Z",
+    "updatedAt": "2025-06-28T20:26:20.193Z"
   },
   {
     "message": "امروز",
