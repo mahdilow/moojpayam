@@ -1,5 +1,21 @@
 [
   {
+    "id": "log_1751139836188_1u7n36uf7",
+    "timestamp": "2025-06-28T19:43:56.188Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 90,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751139811044_dmz26vtze",
     "timestamp": "2025-06-28T19:43:31.044Z",
     "adminUser": "admin",
