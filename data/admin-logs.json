@@ -1,5 +1,18 @@
 [
   {
+    "id": "log_1751141340086_zdwmzaqjv",
+    "timestamp": "2025-06-28T20:09:00.086Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751141330933_0a72ohe9r",
     "timestamp": "2025-06-28T20:08:50.933Z",
     "adminUser": "admin",
