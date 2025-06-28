@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1751142210468_17n7eevcy",
+    "timestamp": "2025-06-28T20:23:30.468Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751142210455_ii9y6m64n",
+    "timestamp": "2025-06-28T20:23:30.455Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1751142206114_ytzsl9d0b",
     "timestamp": "2025-06-28T20:23:26.114Z",
     "adminUser": "admin",
