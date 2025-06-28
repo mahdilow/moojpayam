@@ -429,7 +429,7 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
   }
 
   try {
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransporter({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
@@ -1421,23 +1421,25 @@ app.use((error, req, res, next) => {
   res.status(500).json({ message: 'خطای سرور' });
 });
 
-// Proxy to Vite dev server
+// Proxy to Vite dev server in development
 if (process.env.NODE_ENV === 'development') {
-  // Only in dev: proxy to Vite dev server
+  // Only in dev: proxy to Vite dev server for non-API routes
   app.use('/', (req, res) => {
     res.redirect(new URL(req.url, 'http://localhost:5173').href);
   });
+} else {
+  // Serve frontend (production)
+  app.use(express.static(path.join(__dirname, 'dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });
 }
-// Serve frontend (production)
-app.use(express.static(path.join(__dirname, 'dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+
+// 404 handler for API routes (should be last)
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ message: 'API endpoint not found' });
 });
 
-// 404 handler (should be last)
-app.use((req, res) => {
-  res.status(404).send('Not Found');
-});
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
