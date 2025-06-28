@@ -1,5 +1,34 @@
 [
   {
+    "id": "log_1751138641216_di7h1z4ug",
+    "timestamp": "2025-06-28T19:24:01.216Z",
+    "adminUser": "admin",
+    "action": "View admin logs",
+    "category": "system",
+    "details": {
+      "filters": {
+        "dateRange": "7d"
+      },
+      "resultCount": 84,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751138640698_53krpdif7",
+    "timestamp": "2025-06-28T19:24:00.698Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751138640050_fq7x04tcn",
     "timestamp": "2025-06-28T19:24:00.050Z",
     "adminUser": "admin",
