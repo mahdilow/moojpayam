@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "message": "test اعلان",
+    "type": "info",
+    "isActive": true,
+    "dismissible": true,
+    "link": "",
+    "linkText": "",
+    "expiresAt": "2025-06-29",
+    "id": "announcement_1751140363534_zt3pn1pek",
+    "createdAt": "2025-06-28T19:52:43.534Z"
+  }
+]
