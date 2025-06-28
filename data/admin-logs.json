@@ -1,5 +1,20 @@
 [
   {
+    "id": "log_1751138614173_21mhuojui",
+    "timestamp": "2025-06-28T19:23:34.173Z",
+    "adminUser": "1",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "efu5fc2lmnd9a1pudqu78",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "efu5fc2lmnd9a1pudqu78"
+  },
+  {
     "id": "log_1750949211838_zs651err4",
     "timestamp": "2025-06-26T14:46:51.838Z",
     "adminUser": "admin",
