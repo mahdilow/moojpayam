@@ -65,7 +65,7 @@ const HowItWorksSection: React.FC = () => {
   } | null>(null);
   const [message, setMessage] = useState("");
   const [showNotification, setShowNotification] = useState(false);
-  
+
   // Tehran position as initial center
   const tehranPosition: [number, number] = [35.6892, 51.389];
   // Iran bounds (southwest and northeast corners)
@@ -207,9 +207,9 @@ const HowItWorksSection: React.FC = () => {
             <div className="bg-blue-600 text-white p-4 flex items-center">
               <MapPin className="ml-3" />
               <div>
-                <h3 className="font-bold">دمو ارسال پیامک منطقه‌ای</h3>
+                <h3 className="font-bold"> ارسال پیامک منطقه‌ای</h3>
                 <p className="text-sm text-blue-100">
-                  منطقه مورد نظر را انتخاب کنید و پیام خود را تست کنید
+                  منطقه مورد نظر را انتخاب کنید و پیام خود را ارسال کنید
                 </p>
               </div>
             </div>
@@ -310,7 +310,7 @@ const HowItWorksSection: React.FC = () => {
                     onClick={handleSubmitClick}
                     className="w-full bg-blue-600 text-white rounded-lg py-3 font-bold hover:bg-blue-700 transition-colors text-sm"
                   >
-                    مشاهده تعرفه‌ها و شروع کار
+                    ارسال پیامک
                   </button>
 
                   <div className="text-center">

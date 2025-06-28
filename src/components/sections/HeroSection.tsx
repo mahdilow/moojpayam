@@ -15,9 +15,9 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-wrap items-center justify-center min-h-[70vh] max-w-5xl mx-auto">
+        <div className="flex flex-wrap items-center justify-between min-h-[70vh] max-w-5xl mx-auto lg:flex-row-reverse">
           {/* Left Content - Image */}
-          <div className="w-full lg:w-5/12 mb-8 lg:mb-0">
+          <div className="w-full lg:w-6/12 mb-8 lg:mb-0 ">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
               <motion.img
                 src="/assets/mooj_payam_wave_hero.png"
                 alt="موج پیام - ارسال پیامک مثل موج دریا"
-                className="w-full max-w-md h-auto drop-shadow-2xl"
+                className="w-full max-w-none h-auto drop-shadow-2xl"
                 animate={{
                   y: [0, -8, 0],
                 }}
@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
                   duration: 4,
                   repeat: Infinity,
                   repeatType: "reverse",
-                  ease: "easeInOut"
+                  ease: "easeInOut",
                 }}
               />
 
@@ -46,7 +46,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Right Content - Text */}
-          <div className="w-full lg:w-7/12 lg:pr-8">
+          <div className="w-full lg:w-6/12 lg:pr-8">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -54,30 +54,40 @@ const HeroSection: React.FC = () => {
               className="text-center lg:text-right"
             >
               {/* Clean Two-Line Headline */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-8">
-                <motion.span 
-                  className="block mb-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                >
-                  پیامک‌های شما
-                </motion.span>
-                <motion.span 
-                  className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text"
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
+                <motion.span
+                  className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
                 >
-                  مثل موج دریا به همه می‌رسد
+                  موج پیام
+                </motion.span>
+                <motion.span
+                  className="block mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                  با پیامک شروع کن؛ با فروش بیشتر ادامه بده
                 </motion.span>
               </h1>
+
+              {/* Sub-Tagline (with subtle animation and better spacing) */}
+              <motion.p
+                className="text-gray-600 text-sm sm:text-base lg:text-lg mb-8 leading-loose "
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.85 }}
+              >
+                بازاریابی پیامکی آسان، مؤثر و با امکاناتی که دقیقاً نیاز دارید
+              </motion.p>
 
               {/* Two Action Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
+                transition={{ duration: 0.8, delay: 0.95 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               >
                 <a
@@ -92,7 +102,7 @@ const HeroSection: React.FC = () => {
                   href="#features"
                   className="btn btn-outline text-center px-8 py-4 text-lg hover:bg-blue-50 transition-all duration-300 flex items-center justify-center"
                 >
-                  کشف امکانات
+                  همه امکانات
                 </a>
               </motion.div>
             </motion.div>
@@ -110,7 +120,7 @@ const HeroSection: React.FC = () => {
             href="#features"
             className="inline-flex items-center text-blue-500 hover:text-blue-600 transition-colors group"
           >
-            <span className="ml-2 font-medium">کشف امکانات شگفت‌انگیز</span>
+            <span className="ml-2 font-medium"> قابلیت های پنل</span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

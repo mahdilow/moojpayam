@@ -429,7 +429,7 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
   }
 
   try {
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
@@ -716,7 +716,7 @@ app.get('/api/content/announcement', async (req, res) => {
       if (announcement.expiresAt && new Date() > new Date(announcement.expiresAt)) return false;
       return true;
     });
-    
+
     res.json(activeAnnouncement || null);
   } catch (error) {
     res.status(500).json({ message: 'خطا در بارگذاری اعلان' });
@@ -807,13 +807,13 @@ app.put('/api/admin/announcements/:id', requireAdmin, async (req, res) => {
     }
 
     const oldAnnouncement = { ...announcements[announcementIndex] };
-    announcements[announcementIndex] = { 
-      ...announcements[announcementIndex], 
-      ...req.body, 
+    announcements[announcementIndex] = {
+      ...announcements[announcementIndex],
+      ...req.body,
       id: announcementId,
       updatedAt: new Date().toISOString()
     };
-    
+
     const success = await writeJsonFile('announcements.json', announcements);
 
     if (success) {
@@ -907,7 +907,7 @@ app.patch('/api/admin/announcements/:id/toggle', requireAdmin, async (req, res) 
     const oldStatus = announcements[announcementIndex].isActive;
     announcements[announcementIndex].isActive = req.body.isActive;
     announcements[announcementIndex].updatedAt = new Date().toISOString();
-    
+
     const success = await writeJsonFile('announcements.json', announcements);
 
     if (success) {
