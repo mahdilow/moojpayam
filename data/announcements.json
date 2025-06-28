@@ -4,10 +4,11 @@
     "type": "info",
     "isActive": true,
     "dismissible": true,
-    "link": "",
-    "linkText": "",
+    "link": "/#pricing",
+    "linkText": "خرید",
     "expiresAt": "2025-06-29",
     "id": "announcement_1751140363534_zt3pn1pek",
-    "createdAt": "2025-06-28T19:52:43.534Z"
+    "createdAt": "2025-06-28T19:52:43.534Z",
+    "updatedAt": "2025-06-28T19:55:32.163Z"
   }
 ]

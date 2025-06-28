@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1751140532175_6iiv7e7pn",
+    "timestamp": "2025-06-28T19:55:32.175Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751140532163_mr3ga8uht",
+    "timestamp": "2025-06-28T19:55:32.163Z",
+    "adminUser": "admin",
+    "action": "Update announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751140363534_zt3pn1pek",
+      "oldData": {
+        "message": "test اعلان",
+        "type": "info"
+      },
+      "newData": {
+        "message": "test اعلان",
+        "type": "info"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1751140498698_n5dagc26p",
     "timestamp": "2025-06-28T19:54:58.698Z",
     "adminUser": "admin",
