@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Megaphone, AlertCircle, Info, Star } from 'lucide-react';
+import { X, Megaphone, AlertCircle, Info, Star, ChevronRight } from 'lucide-react';
 
 interface AnnouncementData {
   id: string;
@@ -61,26 +61,42 @@ const AnnouncementBanner: React.FC = () => {
   const getIcon = (type: string) => {
     switch (type) {
       case 'warning':
-        return <AlertCircle size={18} />;
+        return <AlertCircle size={18} className="flex-shrink-0" />;
       case 'success':
-        return <Star size={18} />;
+        return <Star size={18} className="flex-shrink-0" />;
       case 'promotion':
-        return <Megaphone size={18} />;
+        return <Megaphone size={18} className="flex-shrink-0" />;
       default:
-        return <Info size={18} />;
+        return <Info size={18} className="flex-shrink-0" />;
     }
   };
 
-  const getColors = (type: string) => {
+  const getStyles = (type: string) => {
     switch (type) {
       case 'warning':
-        return 'bg-orange-500 text-white';
+        return {
+          bg: 'bg-gradient-to-r from-orange-500 to-orange-600',
+          text: 'text-white',
+          accent: 'bg-orange-400/20'
+        };
       case 'success':
-        return 'bg-green-500 text-white';
+        return {
+          bg: 'bg-gradient-to-r from-green-500 to-green-600',
+          text: 'text-white',
+          accent: 'bg-green-400/20'
+        };
       case 'promotion':
-        return 'bg-gradient-to-r from-purple-600 to-blue-600 text-white';
+        return {
+          bg: 'bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600',
+          text: 'text-white',
+          accent: 'bg-white/10'
+        };
       default:
-        return 'bg-blue-500 text-white';
+        return {
+          bg: 'bg-gradient-to-r from-blue-500 to-blue-600',
+          text: 'text-white',
+          accent: 'bg-blue-400/20'
+        };
     }
   };
 
@@ -88,51 +104,95 @@ const AnnouncementBanner: React.FC = () => {
     return null;
   }
 
+  const styles = getStyles(announcement.type);
+
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{ height: 'auto', opacity: 1 }}
-        exit={{ height: 0, opacity: 0 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`w-full ${getColors(announcement.type)} shadow-lg relative z-40`}
+        initial={{ height: 0, opacity: 0, y: -20 }}
+        animate={{ height: 'auto', opacity: 1, y: 0 }}
+        exit={{ height: 0, opacity: 0, y: -20 }}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        className={`w-full ${styles.bg} ${styles.text} shadow-lg relative overflow-hidden`}
+        style={{ zIndex: 30 }}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-3">
-            <div className="flex items-center flex-1">
-              <div className="flex items-center ml-3">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <motion.div
+            animate={{ x: ['-100%', '100%'] }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent w-full h-full"
+            style={{ width: '200%' }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 relative">
+          <div className="flex items-center justify-between py-4">
+            {/* Left side - Icon and Message */}
+            <div className="flex items-center flex-1 min-w-0">
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className={`flex items-center justify-center w-10 h-10 rounded-full ${styles.accent} ml-4 flex-shrink-0`}
+              >
                 {getIcon(announcement.type)}
-              </div>
+              </motion.div>
               
-              <div className="flex-1 text-center lg:text-right">
-                <span className="text-sm md:text-base font-medium">
-                  {announcement.message}
-                </span>
-                
-                {announcement.link && announcement.linkText && (
-                  <a
-                    href={announcement.link}
-                    className="mr-3 text-sm font-bold underline hover:no-underline transition-all"
-                    target={announcement.link.startsWith('http') ? '_blank' : '_self'}
-                    rel={announcement.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  >
-                    {announcement.linkText}
-                  </a>
-                )}
+              <div className="flex-1 min-w-0">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex flex-col sm:flex-row sm:items-center gap-2"
+                >
+                  <span className="text-sm md:text-base font-medium leading-relaxed">
+                    {announcement.message}
+                  </span>
+                  
+                  {announcement.link && announcement.linkText && (
+                    <motion.a
+                      href={announcement.link}
+                      className="inline-flex items-center text-sm font-bold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 flex-shrink-0"
+                      target={announcement.link.startsWith('http') ? '_blank' : '_self'}
+                      rel={announcement.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {announcement.linkText}
+                      <ChevronRight size={14} className="mr-1" />
+                    </motion.a>
+                  )}
+                </motion.div>
               </div>
             </div>
 
+            {/* Right side - Dismiss button */}
             {announcement.dismissible && (
-              <button
+              <motion.button
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
                 onClick={handleDismiss}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors flex-shrink-0"
+                className="p-2 hover:bg-white/20 rounded-full transition-all duration-200 flex-shrink-0 ml-3 hover:scale-110"
                 aria-label="بستن اعلان"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <X size={18} />
-              </button>
+              </motion.button>
             )}
           </div>
         </div>
+
+        {/* Bottom accent line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/30"
+          style={{ transformOrigin: 'left' }}
+        />
       </motion.div>
     </AnimatePresence>
   );

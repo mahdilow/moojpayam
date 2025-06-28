@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Optimize crawling
+Crawl-delay: 1
+
+# Important pages
+Sitemap: https://moojpayam.ir/sitemap.xml
+
+# Block admin areas
+Disallow: /admin/
+Disallow: /mooj-admin
+Disallow: /api/
+
+# Allow specific API endpoints for SEO
+Allow: /api/content/
+
+# Block development files
+Disallow: /*.json$
+Disallow: /src/
+Disallow: /node_modules/
+
+# Cache directives
+User-agent: *
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content

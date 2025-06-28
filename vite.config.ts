@@ -16,7 +16,30 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist", // <-- output build to /dist folder (root/dist)
+    outDir: "dist",
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: ['framer-motion', 'react-hot-toast'],
+          maps: ['leaflet', 'react-leaflet'],
+        },
+      },
+    },
+    // Enable compression
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+  },
+  // Performance optimizations
+  esbuild: {
+    // Remove console logs in production
+    drop: ['console', 'debugger'],
   },
 });
