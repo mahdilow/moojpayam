@@ -1,5 +1,18 @@
 [
   {
+    "id": "log_1751141409341_excigerrp",
+    "timestamp": "2025-06-28T20:10:09.341Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751141405168_4lfm8ee3o",
     "timestamp": "2025-06-28T20:10:05.168Z",
     "adminUser": "admin",
