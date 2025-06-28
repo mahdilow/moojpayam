@@ -1,5 +1,29 @@
 [
   {
+    "id": "log_1751142200538_cirxp7bvo",
+    "timestamp": "2025-06-28T20:23:20.538Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751142200525_uha1c2rpg",
+    "timestamp": "2025-06-28T20:23:20.525Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751142198993_2uv7qgw4a",
     "timestamp": "2025-06-28T20:23:18.993Z",
     "adminUser": "1",
