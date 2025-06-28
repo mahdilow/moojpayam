@@ -219,23 +219,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Performance monitoring -->
-    <script>
-      // Monitor Core Web Vitals
-      function sendToAnalytics(metric) {
-        // Send to your analytics service
-        console.log(metric);
-      }
-      
-      // Measure and report Core Web Vitals
-      import('https://unpkg.com/web-vitals@3/dist/web-vitals.js').then(({onCLS, onFID, onFCP, onLCP, onTTFB}) => {
-        onCLS(sendToAnalytics);
-        onFID(sendToAnalytics);
-        onFCP(sendToAnalytics);
-        onLCP(sendToAnalytics);
-        onTTFB(sendToAnalytics);
-      });
-    </script>
   </body>
 </html>
