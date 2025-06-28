@@ -1,5 +1,18 @@
 [
   {
+    "id": "log_1751142154468_ajptr187f",
+    "timestamp": "2025-06-28T20:22:34.468Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
     "id": "log_1751142152105_hzn850b6a",
     "timestamp": "2025-06-28T20:22:32.105Z",
     "adminUser": "admin",
