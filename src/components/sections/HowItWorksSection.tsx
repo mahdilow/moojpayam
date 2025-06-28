@@ -194,16 +194,17 @@ const HowItWorksSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Interactive Demo */}
+        {/* Interactive Demo - Two Column Layout */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-6 relative z-10">
-            <div className="bg-blue-600 text-white rounded-lg p-4 mb-6 flex items-center">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            {/* Header */}
+            <div className="bg-blue-600 text-white p-4 flex items-center">
               <MapPin className="ml-3" />
               <div>
                 <h3 className="font-bold">دمو ارسال پیامک منطقه‌ای</h3>
@@ -213,86 +214,113 @@ const HowItWorksSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="mb-6 h-64 rounded-lg overflow-hidden border border-gray-200 relative">
-              <MapContainer
-                center={tehranPosition}
-                zoom={10}
-                maxBounds={iranBounds}
-                minZoom={5}
-                maxZoom={18}
-                className="h-full w-full"
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                <MapEvents onMapClick={handleMapClick} />
-                <MapBoundsComponent bounds={iranBounds} />
-                {selectedArea && (
-                  <Circle
-                    center={[selectedArea.lat, selectedArea.lng]}
-                    radius={selectedArea.radius}
-                    pathOptions={{ color: "blue", fillColor: "blue" }}
+            {/* Two Column Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Map Column */}
+              <div className="relative">
+                <div className="h-80 relative">
+                  <MapContainer
+                    center={tehranPosition}
+                    zoom={10}
+                    maxBounds={iranBounds}
+                    minZoom={5}
+                    maxZoom={18}
+                    className="h-full w-full"
                   >
-                    <Popup>منطقه انتخاب شده برای ارسال پیامک</Popup>
-                  </Circle>
-                )}
-              </MapContainer>
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <MapEvents onMapClick={handleMapClick} />
+                    <MapBoundsComponent bounds={iranBounds} />
+                    {selectedArea && (
+                      <Circle
+                        center={[selectedArea.lat, selectedArea.lng]}
+                        radius={selectedArea.radius}
+                        pathOptions={{ color: "blue", fillColor: "blue" }}
+                      >
+                        <Popup>منطقه انتخاب شده برای ارسال پیامک</Popup>
+                      </Circle>
+                    )}
+                  </MapContainer>
 
-              <AnimatePresence>
-                {showNotification && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg"
+                  <AnimatePresence>
+                    {showNotification && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center"
+                      >
+                        <CheckCircle size={16} className="ml-2" />
+                        منطقه انتخاب شد
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Controls Column */}
+              <div className="p-6 bg-gray-50">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      متن پیام
+                    </label>
+                    <textarea
+                      className="w-full border border-gray-300 rounded-lg p-3 resize-none text-sm"
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="متن پیام خود را وارد کنید..."
+                    ></textarea>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        زمان ارسال
+                      </label>
+                      <select className="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                        <option>هم اکنون</option>
+                        <option>زمانبندی</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        نوع پیام
+                      </label>
+                      <select className="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                        <option>تبلیغاتی</option>
+                        <option>خدماتی</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {selectedArea && (
+                    <div className="bg-blue-50 p-3 rounded-lg">
+                      <div className="flex items-center text-blue-600 text-sm">
+                        <Target size={16} className="ml-2" />
+                        <span>منطقه انتخاب شده: شعاع ۱ کیلومتری</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <button
+                    onClick={handleSubmitClick}
+                    className="w-full bg-blue-600 text-white rounded-lg py-3 font-bold hover:bg-blue-700 transition-colors text-sm"
                   >
-                    منطقه مورد نظر به لیست اضافه شد
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                    مشاهده تعرفه‌ها و شروع کار
+                  </button>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                متن پیام
-              </label>
-              <textarea
-                className="w-full border border-gray-300 rounded-lg p-3 resize-none"
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="متن پیام خود را وارد کنید..."
-              ></textarea>
-            </div>
-
-            <div className="flex justify-between mb-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  زمان ارسال
-                </label>
-                <select className="border border-gray-300 rounded-lg p-2">
-                  <option>هم اکنون</option>
-                  <option>زمانبندی</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  نوع پیام
-                </label>
-                <select className="border border-gray-300 rounded-lg p-2">
-                  <option>تبلیغاتی</option>
-                  <option>خدماتی</option>
-                </select>
+                  <div className="text-center">
+                    <p className="text-xs text-gray-500">
+                      💡 روی نقشه کلیک کنید تا منطقه هدف را انتخاب کنید
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <button
-              onClick={handleSubmitClick}
-              className="w-full bg-blue-600 text-white rounded-lg py-3 font-bold hover:bg-blue-700 transition-colors"
-            >
-              مشاهده تعرفه‌ها و شروع کار
-            </button>
           </div>
         </motion.div>
 
