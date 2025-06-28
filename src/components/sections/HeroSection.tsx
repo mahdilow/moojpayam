@@ -15,9 +15,9 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-wrap items-center min-h-[70vh] gap-8">
+        <div className="flex flex-wrap items-center justify-center min-h-[70vh] max-w-5xl mx-auto">
           {/* Left Content - Image */}
-          <div className="w-full lg:w-1/2 order-2 lg:order-1">
+          <div className="w-full lg:w-5/12 mb-8 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
                 <img
                   src="/assets/mooj_payam_wave_hero.png"
                   alt="موج پیام - ارسال پیامک مثل موج دریا"
-                  className="w-full max-w-lg h-auto drop-shadow-2xl"
+                  className="w-full max-w-md h-auto drop-shadow-2xl"
                 />
               </motion.div>
 
@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Right Content - Text */}
-          <div className="w-full lg:w-1/2 order-1 lg:order-2 lg:pr-8">
+          <div className="w-full lg:w-7/12 lg:pr-8">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
