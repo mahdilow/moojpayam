@@ -1,5 +1,38 @@
 [
   {
+    "id": "log_1751142381038_8u20c2nm7",
+    "timestamp": "2025-06-28T20:26:21.038Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751142381024_dd1ybrrkz",
+    "timestamp": "2025-06-28T20:26:21.024Z",
+    "adminUser": "admin",
+    "action": "Toggle announcement status",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751141431243_xeh4el26v",
+      "oldData": {
+        "isActive": false
+      },
+      "newData": {
+        "isActive": true
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1751142380212_8x7boxaia",
     "timestamp": "2025-06-28T20:26:20.212Z",
     "adminUser": "admin",
