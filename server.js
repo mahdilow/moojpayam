@@ -319,7 +319,7 @@ app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'
 
     res.json({
       message: 'تصویر با موفقیت آپلود شد',
-      imageUrl: `http://localhost:3000${imageUrl}`,
+      imageUrl: imageUrl,
       filename: req.file.filename
     });
   } catch (error) {
@@ -1441,7 +1441,7 @@ app.use('/api/*', (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
   console.log(`📧 Email API: http://localhost:${PORT}/api/send-email`);

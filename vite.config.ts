@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  base: "./",
   plugins: [react()],
   optimizeDeps: {
     exclude: ["lucide-react"],
@@ -9,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        target: "http://localhost:80",
         changeOrigin: true,
         secure: false,
       },
@@ -21,15 +22,15 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['framer-motion', 'react-hot-toast'],
-          maps: ['leaflet', 'react-leaflet'],
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          ui: ["framer-motion", "react-hot-toast"],
+          maps: ["leaflet", "react-leaflet"],
         },
       },
     },
     // Enable compression
-    minify: 'terser',
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true,
@@ -40,6 +41,6 @@ export default defineConfig({
   // Performance optimizations
   esbuild: {
     // Remove console logs in production
-    drop: ['console', 'debugger'],
+    drop: ["console", "debugger"],
   },
 });

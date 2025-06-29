@@ -3,13 +3,14 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
     
-# Install dependencies
+# Install dependencies (including devDeps like terser)
 COPY package*.json ./
 RUN npm install
     
-# Copy source files for Vite build
+# Copy required source files
 COPY tsconfig*.json ./
 COPY vite.config.ts ./
+COPY index.html ./
 COPY public ./public
 COPY src ./src
     
@@ -21,24 +22,20 @@ FROM node:20-alpine
     
 WORKDIR /app
     
-# Copy server and production deps
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY server.js ./
+# فقط deps لازم برای اجرا رو نصب کن
 COPY package*.json ./
+RUN npm install --omit=dev
     
-# These will be replaced/mounted as volumes in runtime
-RUN mkdir uploads data
-    
-# Optional: copy initial data (only used if volume is empty)
-# You can uncomment this if you want initial data seeded from image
-# COPY data ./data
-# COPY uploads ./uploads
-
-# Use environment variables from host or runtime
+# Copy backend files and built frontend
+COPY server.js ./
 COPY .env .env
+COPY --from=builder /app/dist ./dist
     
-# Expose the backend port
-EXPOSE 3000
+# Create runtime folders
+RUN mkdir -p uploads data
+    
+# Expose backend port
+EXPOSE 80
     
 CMD ["node", "server.js"]
+    

@@ -1,5 +1,105 @@
 [
   {
+    "id": "log_1751189247241_j6y4707ct",
+    "timestamp": "2025-06-29T09:27:27.241Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751189246909_j9296id1y",
+    "timestamp": "2025-06-29T09:27:26.909Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751189238946_330u2z8a3",
+    "timestamp": "2025-06-29T09:27:18.946Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751189235699_2ry8jt24q",
+    "timestamp": "2025-06-29T09:27:15.699Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751189232113_z73xhv9vv",
+    "timestamp": "2025-06-29T09:27:12.113Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751189231806_uajbc5wmz",
+    "timestamp": "2025-06-29T09:27:11.806Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751189229942_k5fcw1eby",
+    "timestamp": "2025-06-29T09:27:09.942Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "4eq7sfj62a205g4n5n0g0oi",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "4eq7sfj62a205g4n5n0g0oi"
+  },
+  {
     "id": "log_1751150517659_0d1a40nkg",
     "timestamp": "2025-06-28T22:41:57.659Z",
     "adminUser": "admin",
