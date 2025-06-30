@@ -309,8 +309,8 @@ const ContactSection: React.FC = () => {
                   <Mail className="ml-4 mt-1" size={24} />
                   <div>
                     <h4 className="font-bold mb-1">ایمیل</h4>
-                    <a href="mailto:moojpayam@protom.me">
-                      <p className="opacity-90">Moojpayam@proton.me</p>
+                    <a href="mailto:contact@moojpayam.ir">
+                      <p className="opacity-90">contact@moojpayam.ir</p>
                     </a>
                   </div>
                 </div>

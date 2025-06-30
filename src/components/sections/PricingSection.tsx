@@ -124,11 +124,11 @@ const PricingSection: React.FC = () => {
               <div
                 className={`p-8 flex flex-col flex-grow backdrop-blur-md shadow-inner border border-white/20 ${
                   plan.id === 2
-                    ? "rounded-b-2xl rounded-t-none bg-gradient-to-b from-purple-300/40 to-blue-200/20"
+                    ? "rounded-b-2xl rounded-t-none bg-gradient-to-b from-blue-100/40 to-purple-700/20"
                     : plan.id === 1
-                    ? "rounded-2xl bg-gradient-to-b from-slate-200/50 to-white/20"
+                    ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-blue-600/20"
                     : plan.id === 3
-                    ? "rounded-2xl bg-gradient-to-b from-emerald-200/40 to-green-100/20"
+                    ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-emerald-600/20"
                     : "rounded-2xl bg-white/20"
                 }`}
               >
@@ -138,9 +138,9 @@ const PricingSection: React.FC = () => {
                       plan.id === 2
                         ? "bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text"
                         : plan.id === 1
-                        ? "bg-gradient-to-r from-gray-700 to-gray-400 text-transparent bg-clip-text"
+                        ? "bg-gradient-to-r from-blue-400 to-blue-900 text-transparent bg-clip-text"
                         : plan.id === 3
-                        ? "bg-gradient-to-r from-green-500 to-teal-400 text-transparent bg-clip-text"
+                        ? "bg-gradient-to-r from-green-600 to-teal-400 text-transparent bg-clip-text"
                         : "text-gray-800"
                     }`}
                   >
@@ -155,7 +155,7 @@ const PricingSection: React.FC = () => {
                     {plan.discount && plan.discount > 0 ? (
                       <div className="text-center">
                         {/* Discount Badge */}
-                        <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-2 inline-block">
+                        <div className="bg-red-500 text-white px-3 py-1 rounded-full text-md font-bold mb-2 inline-block">
                           {plan.discount}% تخفیف
                         </div>
 
@@ -165,7 +165,7 @@ const PricingSection: React.FC = () => {
                         </div>
 
                         {/* Discounted Price */}
-                        <div className="text-4xl font-bold text-green-600">
+                        <div className="text-5xl font-bold text-green-600">
                           {getDiscountedPrice(plan.price, plan.discount)}
                         </div>
                         <span className="text-gray-600 text-sm">

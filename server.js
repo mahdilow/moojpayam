@@ -301,7 +301,7 @@ app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'
     }
 
     // Return the URL path for the uploaded image
-    const imageUrl = `/uploads/${req.file.filename}`;
+    const imageUrl = `${FRONTEND_URL}/uploads/${req.file.filename}`;
 
     await logAdminAction(createLogEntry(
       adminUser,

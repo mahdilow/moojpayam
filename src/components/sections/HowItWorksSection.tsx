@@ -125,11 +125,12 @@ const HowItWorksSection: React.FC = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
           >
-            چگونه{" "}
+            چطوری{" "}
             <span className="text-primary-500 relative">
-              کار می‌کند؟
+              پیامک منطقه ای
               <span className="absolute bottom-0 left-0 w-full h-1 bg-primary-500/30 rounded-full"></span>
-            </span>
+            </span>{" "}
+            بفرستم؟
           </motion.h2>
 
           <motion.p

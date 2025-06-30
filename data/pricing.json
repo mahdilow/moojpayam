@@ -2,11 +2,11 @@
   {
     "id": 1,
     "name": "پایه",
-    "price": "399",
+    "price": "499",
     "description": "مناسب برای کسب و کارهای کوچک و تازه شروع شده",
     "features": [
       {
-        "title": "شارژ اولیه 400 پیامک",
+        "title": "شارژ اولیه 600 پیامک",
         "included": true
       },
       {
@@ -54,16 +54,16 @@
     "popular": false,
     "color": "border-blue-400",
     "active": true,
-    "discount": 2
+    "discount": 0
   },
   {
     "id": 2,
     "name": "حرفه‌ای",
-    "price": "799",
+    "price": "899",
     "description": "مناسب برای کسب و کارهای متوسط و در حال رشد",
     "features": [
       {
-        "title": "شارژ اولیه 1200 پیامک",
+        "title": "شارژ اولیه 1600 پیامک",
         "included": true
       },
       {
@@ -103,7 +103,7 @@
     "popular": true,
     "color": "border-primary-500",
     "active": true,
-    "discount": 5
+    "discount": 20
   },
   {
     "name": "ویژه",

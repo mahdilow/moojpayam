@@ -161,8 +161,8 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-start">
                 <Mail size={18} className="ml-2 mt-1 text-blue-400" />
-                <a href="mailto:moojpayam@proton.me">
-                  <span className="text-gray-400">moojpayam@proton.me</span>
+                <a href="mailto:contact@moojpayam.ir">
+                  <span className="text-gray-400">contact@moojpayam.ir</span>
                 </a>
               </li>
               <li className="flex items-start">

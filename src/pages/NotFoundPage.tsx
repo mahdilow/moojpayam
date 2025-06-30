@@ -157,12 +157,12 @@ const NotFoundPage: React.FC = () => {
                   <div className="text-sm text-gray-600">۰۹۱۰۰۷۱۱۸۳۵</div>
                 </a>
                 <a
-                  href="mailto:moojpayam@proton.me"
+                  href="mailto:contact@moojpayam.ir"
                   className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"
                 >
                   <div className="font-medium text-gray-900">ایمیل</div>
                   <div className="text-sm text-gray-600">
-                    moojpayam@proton.me
+                    contact@moojpayam.ir
                   </div>
                 </a>
               </div>

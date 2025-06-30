@@ -1,8 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, User, ArrowLeft, Clock, Eye, BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useContentData } from '../../hooks/useContentData';
+import React from "react";
+import { motion } from "framer-motion";
+import { Calendar, User, ArrowLeft, Clock, Eye, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useContentData } from "../../hooks/useContentData";
 
 const LatestBlogsSection: React.FC = () => {
   const { latestBlogs, loading, error } = useContentData();
@@ -25,7 +25,7 @@ const LatestBlogsSection: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="text-red-600">{error || 'مقاله‌ای یافت نشد'}</p>
+            <p className="text-red-600">{error || "مقاله‌ای یافت نشد"}</p>
           </div>
         </div>
       </section>
@@ -55,10 +55,12 @@ const LatestBlogsSection: React.FC = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
           >
-            از <span className="text-primary-500 relative">
+            در{" "}
+            <span className="text-primary-500 relative">
               بلاگ ما
               <span className="absolute bottom-0 left-0 w-full h-1 bg-primary-500/30 rounded-full"></span>
-            </span> بخوانید
+            </span>{" "}
+            بخوانید
           </motion.h2>
 
           <motion.p
@@ -79,15 +81,15 @@ const LatestBlogsSection: React.FC = () => {
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ 
+              whileHover={{
                 y: -10,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               }}
-              transition={{ 
+              transition={{
                 duration: 0.3,
                 delay: index * 0.1,
                 type: "spring",
-                stiffness: 300
+                stiffness: 300,
               }}
               viewport={{ once: true }}
               className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer"
@@ -99,30 +101,28 @@ const LatestBlogsSection: React.FC = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Category Badge */}
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-primary-600 px-3 py-1 rounded-full text-sm font-medium">
                   {post.category}
                 </div>
-                
+
                 {/* Views Counter */}
                 <div className="absolute bottom-4 left-4 flex items-center text-white text-sm bg-black/50 backdrop-blur px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Eye size={14} className="ml-1" />
                   {post.views.toLocaleString()}
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary-600 transition-colors line-clamp-2">
-                  <Link to={`/blog/${post.id}`}>
-                    {post.title}
-                  </Link>
+                  <Link to={`/blog/${post.id}`}>{post.title}</Link>
                 </h3>
-                
+
                 <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
-                
+
                 {/* Meta Information */}
                 <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                   <div className="flex items-center">
@@ -134,7 +134,7 @@ const LatestBlogsSection: React.FC = () => {
                     {post.readTime}
                   </div>
                 </div>
-                
+
                 {/* Footer */}
                 <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                   <div className="flex items-center text-gray-500 text-sm">
@@ -150,7 +150,7 @@ const LatestBlogsSection: React.FC = () => {
                   </Link>
                 </div>
               </div>
-              
+
               {/* Hover Effect Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </motion.article>

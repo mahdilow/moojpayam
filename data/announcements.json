@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "message": "تخفیف ویژه افتتاح وبسایت🎉",
+    "type": "promotion",
+    "isActive": true,
+    "dismissible": true,
+    "link": "/#pricing",
+    "linkText": "مدت محدود",
+    "expiresAt": null,
+    "id": "announcement_1751301160005_faqod1zjn",
+    "createdAt": "2025-06-30T16:32:40.005Z",
+    "updatedAt": "2025-06-30T16:59:35.797Z"
+  }
+]
