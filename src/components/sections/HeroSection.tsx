@@ -15,21 +15,23 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-wrap items-center justify-between min-h-[70vh] max-w-5xl mx-auto lg:flex-row-reverse">
+        <div className="flex flex-wrap items-center justify-between min-h-[70vh] max-w-7xl mx-auto lg:flex-row-reverse lg:gap-16">
           {/* Left Content - Image */}
-          <div className="w-full lg:w-6/12 mb-8 lg:mb-0 ">
+          <div className="w-full lg:w-5/12 mb-8 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="relative flex items-center justify-center"
             >
-              {/* Main Wave Image */}
+              {/* Main Wave Image with Subtle Professional Animation */}
               <motion.img
                 src="/assets/mooj_payam_wave_hero.png"
                 alt="موج پیام - ارسال پیامک مثل موج دریا"
                 className="w-full max-w-none h-auto drop-shadow-2xl"
-                animate={{ y: [0, -8, 0] }}
+                animate={{
+                  y: [0, -8, 0],
+                }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
@@ -38,25 +40,32 @@ const HeroSection: React.FC = () => {
                 }}
               />
 
-              {/* Glow Effect */}
+              {/* Subtle Professional Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-2xl scale-110 -z-10"></div>
             </motion.div>
           </div>
 
           {/* Right Content - Text */}
-          <div className="w-full lg:w-6/12 lg:pr-8">
+          <div className="w-full lg:w-5/12">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-              className="text-center lg:text-right mt-6"
+              className="text-center lg:text-right"
             >
+              {/* Clean Two-Line Headline */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
                 <motion.span
-                  className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text mb-4"
+                  className="block text-transparent bg-clip-text mb-6 pb-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(90deg, #2563eb 0%, #9333ea 50%, #0d9488 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                  }}
                 >
                   موج پیام
                 </motion.span>
@@ -70,8 +79,9 @@ const HeroSection: React.FC = () => {
                 </motion.span>
               </h1>
 
+              {/* Sub-Tagline (with subtle animation and better spacing) */}
               <motion.p
-                className="text-gray-600 text-sm sm:text-base lg:text-lg mb-8 leading-loose"
+                className="text-gray-600 text-sm sm:text-base lg:text-lg mb-8 leading-loose "
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.85 }}
@@ -79,6 +89,7 @@ const HeroSection: React.FC = () => {
                 بازاریابی پیامکی آسان، مؤثر و با امکاناتی که دقیقاً نیاز دارید
               </motion.p>
 
+              {/* Two Action Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
