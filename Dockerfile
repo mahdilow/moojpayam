@@ -12,7 +12,7 @@
     COPY dist ./dist
     
     # Copy runtime folders
-    #COPY uploads ./uploads
+    COPY uploads ./uploads
     COPY data ./data
     
     EXPOSE 80

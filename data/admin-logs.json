@@ -1,5 +1,187 @@
 [
   {
+    "id": "log_1751310081859_dsymyo2kp",
+    "timestamp": "2025-06-30T19:01:21.859Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310073931_o1x1h3per",
+    "timestamp": "2025-06-30T19:01:13.931Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310060723_hcz2ziuvc",
+    "timestamp": "2025-06-30T19:01:00.723Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310060402_dok0q0445",
+    "timestamp": "2025-06-30T19:01:00.402Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "899"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "899"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310053041_4tav4wn8d",
+    "timestamp": "2025-06-30T19:00:53.041Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310052716_y3x4bwcps",
+    "timestamp": "2025-06-30T19:00:52.716Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 1,
+      "oldData": {
+        "name": "پایه",
+        "price": "499"
+      },
+      "newData": {
+        "name": "پایه",
+        "price": "499"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310048052_rkkk4fgsb",
+    "timestamp": "2025-06-30T19:00:48.052Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310047800_246z5054t",
+    "timestamp": "2025-06-30T19:00:47.800Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 2,
+      "oldData": {
+        "name": "حرفه‌ای",
+        "price": "899"
+      },
+      "newData": {
+        "name": "حرفه‌ای",
+        "price": "899"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310039903_k75tei5se",
+    "timestamp": "2025-06-30T19:00:39.903Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310038023_bn1b9odnc",
+    "timestamp": "2025-06-30T19:00:38.023Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310037715_oh3ibdr3d",
+    "timestamp": "2025-06-30T19:00:37.715Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751310036110_8msym4zeu",
+    "timestamp": "2025-06-30T19:00:36.110Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      "sessionId": "v9uai8i7jvhehz79cn6qwv",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "v9uai8i7jvhehz79cn6qwv"
+  },
+  {
     "id": "log_1751303118733_vmrpzrc44",
     "timestamp": "2025-06-30T17:05:18.733Z",
     "adminUser": "admin",
