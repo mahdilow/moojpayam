@@ -3,22 +3,66 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
+interface ScrollLinkProps {
+  to: string; // id or route path
+  children: React.ReactNode;
+  className?: string;
+  closeMenu: () => void;
+  isHashLink?: boolean; // true if scrolling to an ID on the page
+}
+
+const ScrollLink: React.FC<ScrollLinkProps> = ({
+  to,
+  children,
+  className,
+  closeMenu,
+  isHashLink = false,
+}) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (isHashLink) {
+      e.preventDefault();
+      closeMenu();
+      const el = document.getElementById(to);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+      }
+    } else {
+      closeMenu();
+    }
+  };
+
+  // If it's a hash link, use <a>, otherwise react-router <Link>
+  if (isHashLink) {
+    return (
+      <a href={`#${to}`} className={className} onClick={handleClick}>
+        {children}
+      </a>
+    );
+  } else {
+    return (
+      <Link to={to} className={className} onClick={handleClick}>
+        {children}
+      </Link>
+    );
+  }
+};
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const closeMenu = () => setIsOpen(false);
+
+  const linkClass =
+    "text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium";
 
   return (
     <nav
@@ -41,53 +85,57 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-6 space-x-reverse">
-            <Link
-              to="/"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
-            >
+            <ScrollLink to="/" className={linkClass} closeMenu={closeMenu}>
               صفحه اصلی
-            </Link>
-            <a
-              href="#features"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
+            </ScrollLink>
+            <ScrollLink
+              to="features"
+              className={linkClass}
+              closeMenu={closeMenu}
+              isHashLink
             >
               امکانات
-            </a>
-            <a
-              href="#pricing"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
+            </ScrollLink>
+            <ScrollLink
+              to="pricing"
+              className={linkClass}
+              closeMenu={closeMenu}
+              isHashLink
             >
               تعرفه‌ها
-            </a>
-            <Link
-              to="/blog"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
-            >
+            </ScrollLink>
+            <ScrollLink to="/blog" className={linkClass} closeMenu={closeMenu}>
               بلاگ
-            </Link>
-            <a
-              href="#faq"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
+            </ScrollLink>
+            <ScrollLink
+              to="faq"
+              className={linkClass}
+              closeMenu={closeMenu}
+              isHashLink
             >
               سوالات متداول
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
+            </ScrollLink>
+            <ScrollLink
+              to="contact"
+              className={linkClass}
+              closeMenu={closeMenu}
+              isHashLink
             >
               تماس با ما
-            </a>
+            </ScrollLink>
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/"
               className="btn btn-outline text-md flex items-center justify-center"
+              rel="noreferrer"
             >
               ورود
             </a>
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/userregister.aspx"
-              className="btn btn-primary text-md  flex items-center justify-center ml-4"
+              className="btn btn-primary text-md flex items-center justify-center ml-4"
+              rel="noreferrer"
             >
               ثبت نام
             </a>
@@ -117,48 +165,52 @@ const Navbar: React.FC = () => {
             >
               <div className="pt-4 pb-3 border-t border-gray-200 mt-3">
                 <div className="flex flex-col space-y-1">
-                  <Link
+                  <ScrollLink
                     to="/"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                    className={linkClass}
+                    closeMenu={closeMenu}
                   >
                     صفحه اصلی
-                  </Link>
-                  <a
-                    href="#features"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                  </ScrollLink>
+                  <ScrollLink
+                    to="features"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                    isHashLink
                   >
                     امکانات
-                  </a>
-                  <a
-                    href="#pricing"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                  </ScrollLink>
+                  <ScrollLink
+                    to="pricing"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                    isHashLink
                   >
                     تعرفه‌ها
-                  </a>
-                  <Link
+                  </ScrollLink>
+                  <ScrollLink
                     to="/blog"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                    className={linkClass}
+                    closeMenu={closeMenu}
                   >
                     بلاگ
-                  </Link>
-                  <a
-                    href="#faq"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                  </ScrollLink>
+                  <ScrollLink
+                    to="faq"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                    isHashLink
                   >
                     سوالات متداول
-                  </a>
-                  <a
-                    href="#contact"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
+                  </ScrollLink>
+                  <ScrollLink
+                    to="contact"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                    isHashLink
                   >
                     تماس با ما
-                  </a>
+                  </ScrollLink>
 
                   {/* Mobile Action Buttons */}
                   <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200 mt-3">
@@ -166,7 +218,8 @@ const Navbar: React.FC = () => {
                       target="_blank"
                       href="http://dash.moojpayam.ir"
                       className="btn btn-outline text-center py-3 text-base font-medium"
-                      onClick={() => setIsOpen(false)}
+                      onClick={closeMenu}
+                      rel="noreferrer"
                     >
                       ورود
                     </a>
@@ -174,7 +227,8 @@ const Navbar: React.FC = () => {
                       target="_blank"
                       href="http://dash.moojpayam.ir/userregister.aspx"
                       className="btn btn-primary text-center py-3 text-base font-medium"
-                      onClick={() => setIsOpen(false)}
+                      onClick={closeMenu}
+                      rel="noreferrer"
                     >
                       ثبت نام
                     </a>
