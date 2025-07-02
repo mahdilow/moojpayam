@@ -1,5 +1,40 @@
 [
   {
+    "id": "log_1751448422120_uy2u1grq6",
+    "timestamp": "2025-07-02T09:27:02.120Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751448422104_welohi4py",
+    "timestamp": "2025-07-02T09:27:02.104Z",
+    "adminUser": "admin",
+    "action": "Update announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751448377262_ft0fa40qp",
+      "oldData": {
+        "message": "jhjgbjhgjhg",
+        "type": "info"
+      },
+      "newData": {
+        "message": "jhjgbjhgjhg",
+        "type": "info"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
     "id": "log_1751448411717_94yogifi8",
     "timestamp": "2025-07-02T09:26:51.717Z",
     "adminUser": "admin",
