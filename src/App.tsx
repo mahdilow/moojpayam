@@ -10,6 +10,7 @@ import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import AboutUsPage from "./pages/AboutUsPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import LoadingScreen from "./components/LoadingScreen";
@@ -69,6 +70,14 @@ function AppContent() {
           element={
             <MainLayout>
               <BlogPostPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <MainLayout>
+              <AboutUsPage />
             </MainLayout>
           }
         />

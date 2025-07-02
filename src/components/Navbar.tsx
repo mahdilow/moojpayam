@@ -44,6 +44,12 @@ const Navbar: React.FC = () => {
             >
               صفحه اصلی
             </Link>
+            <Link
+              to="/about-us"
+              className="text-gray-700 hover:text-primary-500 transition-colors px-2"
+            >
+              درباره ما
+            </Link>
             <a
               href="#features"
               className="text-gray-700 hover:text-primary-500 transition-colors px-2"
@@ -116,6 +122,13 @@ const Navbar: React.FC = () => {
                 onClick={() => setIsOpen(false)}
               >
                 صفحه اصلی
+              </Link>
+              <Link
+                to="/about-us"
+                className="text-gray-700 hover:text-primary-500 transition-colors py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                درباره ما
               </Link>
               <a
                 href="#features"

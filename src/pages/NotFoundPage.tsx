@@ -98,6 +98,15 @@ const NotFoundPage: React.FC = () => {
               </h3>
               <div className="space-y-3">
                 <Link
+                  to="/about-us"
+                  className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"
+                >
+                  <div className="font-medium text-gray-900">درباره ما</div>
+                  <div className="text-sm text-gray-600">
+                    آشنایی با تیم و ماموریت موج پیام
+                  </div>
+                </Link>
+                <Link
                   to="/#features"
                   className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"
                 >

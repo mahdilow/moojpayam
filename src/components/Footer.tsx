@@ -1,6 +1,7 @@
 import React from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
@@ -44,12 +45,20 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-bold mb-4 text-white">لینک‌های سریع</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   صفحه اصلی
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about-us"
+                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                >
+                  درباره ما
+                </Link>
               </li>
               <li>
                 <a
@@ -68,20 +77,12 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="/blog"
+                <Link
+                  to="/blog"
                   className="text-gray-400 hover:text-blue-400 transition-colors"
                 >
                   بلاگ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                >
-                  درباره ما
-                </a>
+                </Link>
               </li>
               <li>
                 <a
