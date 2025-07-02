@@ -46,15 +46,15 @@ const ContactSection: React.FC = () => {
   const [statusMessage, setStatusMessage] = useState("");
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-16 sm:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-gray-900"
           >
             تماس <span className="text-primary-500">با ما</span>
           </motion.h2>
@@ -63,22 +63,22 @@ const ContactSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0"
           >
             سوالی دارید؟ تیم پشتیبانی ما آماده پاسخگویی و راهنمایی شما هستند
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white rounded-xl shadow-md p-8"
+            className="bg-white rounded-xl shadow-md p-6 sm:p-8"
           >
-            <h3 className="text-2xl font-bold mb-6 text-gray-800">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800">
               پیام خود را ارسال کنید
             </h3>
 
@@ -134,7 +134,7 @@ const ContactSection: React.FC = () => {
                       <h4 className="text-xl font-bold text-green-600">
                         با تشکر!
                       </h4>
-                      <p className="text-gray-700">{statusMessage}</p>
+                      <p className="text-gray-700 text-center px-4">{statusMessage}</p>
                     </motion.div>
                   )}
 
@@ -148,7 +148,7 @@ const ContactSection: React.FC = () => {
                       <h4 className="text-xl font-bold text-red-600">
                         خطا در ارسال پیام
                       </h4>
-                      <p className="text-gray-700">{statusMessage}</p>
+                      <p className="text-gray-700 text-center px-4">{statusMessage}</p>
                       <button
                         onClick={() => setFormStatus("idle")}
                         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
@@ -158,7 +158,7 @@ const ContactSection: React.FC = () => {
                     </motion.div>
                   )}
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                     <div>
                       <label
                         htmlFor="name"
@@ -174,7 +174,7 @@ const ContactSection: React.FC = () => {
                           touched.name && errors.name
                             ? "border-red-500"
                             : "border-gray-300"
-                        } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors`}
+                        } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors text-sm sm:text-base`}
                         placeholder="نام خود را وارد کنید"
                       />
                       <ErrorMessage
@@ -183,10 +183,10 @@ const ContactSection: React.FC = () => {
                         className="text-red-500 text-sm mt-1"
                       />
                     </div>
-                    <div className="mb-6">
+                    <div>
                       <label
                         htmlFor="phone"
-                        className="block text-gray-700 font-medium mb-2"
+                        className="block text-sm font-medium text-gray-700 mb-1"
                       >
                         شماره موبایل
                       </label>
@@ -194,19 +194,23 @@ const ContactSection: React.FC = () => {
                         type="tel"
                         id="phone"
                         name="phone"
-                        className="w-full bg-gray-50 border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-md py-2 px-4 text-gray-700 leading-tight focus:outline-none transition duration-300"
+                        className={`w-full border ${
+                          touched.phone && errors.phone
+                            ? "border-red-500"
+                            : "border-gray-300"
+                        } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors text-sm sm:text-base`}
                         placeholder="09123456789"
                         disabled={formStatus === "submitting"}
                       />
                       <ErrorMessage
                         name="phone"
                         component="p"
-                        className="text-red-500 mt-1 text-sm"
+                        className="text-red-500 text-sm mt-1"
                       />
                     </div>
                   </div>
 
-                  <div className="mb-6">
+                  <div className="mb-4 sm:mb-6">
                     <label
                       htmlFor="subject"
                       className="block text-sm font-medium text-gray-700 mb-1"
@@ -221,7 +225,7 @@ const ContactSection: React.FC = () => {
                         touched.subject && errors.subject
                           ? "border-red-500"
                           : "border-gray-300"
-                      } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors`}
+                      } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors text-sm sm:text-base`}
                       placeholder="موضوع پیام"
                     />
                     <ErrorMessage
@@ -231,7 +235,7 @@ const ContactSection: React.FC = () => {
                     />
                   </div>
 
-                  <div className="mb-6">
+                  <div className="mb-4 sm:mb-6">
                     <label
                       htmlFor="message"
                       className="block text-sm font-medium text-gray-700 mb-1"
@@ -242,12 +246,12 @@ const ContactSection: React.FC = () => {
                       as="textarea"
                       id="message"
                       name="message"
-                      rows={5}
+                      rows={4}
                       className={`w-full border ${
                         touched.message && errors.message
                           ? "border-red-500"
                           : "border-gray-300"
-                      } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors resize-none`}
+                      } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors resize-none text-sm sm:text-base`}
                       placeholder="پیام خود را بنویسید..."
                     />
                     <ErrorMessage
@@ -260,7 +264,7 @@ const ContactSection: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || formStatus === "submitting"}
-                    className={`btn btn-primary w-full py-3 flex items-center justify-center ${
+                    className={`btn btn-primary w-full py-3 flex items-center justify-center text-sm sm:text-base ${
                       isSubmitting || formStatus === "submitting"
                         ? "opacity-70 cursor-not-allowed"
                         : ""
@@ -287,46 +291,45 @@ const ContactSection: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl shadow-md p-8 h-full">
-              <h3 className="text-2xl font-bold mb-8">اطلاعات تماس</h3>
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl shadow-md p-6 sm:p-8 h-full">
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">اطلاعات تماس</h3>
 
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start">
-                  <Phone className="ml-4 mt-1" size={24} />
+                  <Phone className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
                   <div>
-                    <h4 className="font-bold mb-1">شماره تماس</h4>
-
-                    <a href="tel:+9100711835">
+                    <h4 className="font-bold mb-1 text-sm sm:text-base">شماره تماس</h4>
+                    <a href="tel:+9100711835" className="block text-sm sm:text-base">
                       <p className="opacity-90">۰۹۱۰۰۷۱۱۸۳۵</p>
                     </a>
-                    <a href="tel:+9108680274">
+                    <a href="tel:+9108680274" className="block text-sm sm:text-base">
                       <p className="opacity-90">۰۹۱۰۸۶۸۰۲۷۴</p>
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <Mail className="ml-4 mt-1" size={24} />
+                  <Mail className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
                   <div>
-                    <h4 className="font-bold mb-1">ایمیل</h4>
-                    <a href="mailto:contact@moojpayam.ir">
+                    <h4 className="font-bold mb-1 text-sm sm:text-base">ایمیل</h4>
+                    <a href="mailto:contact@moojpayam.ir" className="text-sm sm:text-base">
                       <p className="opacity-90">contact@moojpayam.ir</p>
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <MapPin className="ml-4 mt-1" size={24} />
+                  <MapPin className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
                   <div>
-                    <h4 className="font-bold mb-1">آدرس</h4>
-                    <p className="opacity-90">کرج طالقانی جنوبی</p>
+                    <h4 className="font-bold mb-1 text-sm sm:text-base">آدرس</h4>
+                    <p className="opacity-90 text-sm sm:text-base">کرج طالقانی جنوبی</p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10">
-                <h4 className="font-bold mb-4">ساعات کاری</h4>
-                <div className="grid grid-cols-2 gap-2">
+              <div className="mt-8 sm:mt-10">
+                <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base">ساعات کاری</h4>
+                <div className="grid grid-cols-2 gap-2 text-sm sm:text-base">
                   <div className="text-white opacity-90">شنبه تا چهارشنبه:</div>
                   <div className="text-white">۸ صبح تا ۶ عصر</div>
                   <div className="text-white opacity-90">پنج‌شنبه:</div>
@@ -336,9 +339,9 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-10 flex items-center">
-                <MessageSquare className="ml-2" size={20} />
-                <p className="opacity-90">
+              <div className="mt-8 sm:mt-10 flex items-center">
+                <MessageSquare className="ml-2 flex-shrink-0" size={18} />
+                <p className="opacity-90 text-sm sm:text-base">
                   پشتیبانی آنلاین: ۲۴ ساعته، ۷ روز هفته
                 </p>
               </div>

@@ -24,7 +24,7 @@ const PricingSection: React.FC = () => {
     return (
       <section
         id="pricing"
-        className="py-20 bg-gradient-to-br from-white to-blue-50"
+        className="py-16 sm:py-20 bg-gradient-to-br from-white to-blue-50"
       >
         <div className="container mx-auto px-4">
           <div className="text-center">
@@ -40,7 +40,7 @@ const PricingSection: React.FC = () => {
     return (
       <section
         id="pricing"
-        className="py-20 bg-gradient-to-br from-white to-blue-50"
+        className="py-16 sm:py-20 bg-gradient-to-br from-white to-blue-50"
       >
         <div className="container mx-auto px-4">
           <div className="text-center">
@@ -54,18 +54,18 @@ const PricingSection: React.FC = () => {
   return (
     <section
       id="pricing"
-      className="py-20 bg-gradient-to-br from-white to-blue-50"
+      className="py-16 sm:py-20 bg-gradient-to-br from-white to-blue-50"
     >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-flex items-center bg-blue-100 text-primary-500 px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center bg-blue-100 text-primary-500 px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6"
           >
-            <span className="font-semibold">تعرفه‌های اقتصادی</span>
+            <span className="font-semibold text-sm sm:text-base">تعرفه‌های اقتصادی</span>
           </motion.div>
 
           <motion.h2
@@ -73,7 +73,7 @@ const PricingSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-gray-900"
           >
             تعرفه‌های{" "}
             <span className="text-primary-500 relative">
@@ -87,14 +87,14 @@ const PricingSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0"
           >
             پلن مناسب کسب و کار خود را انتخاب کنید و از مزایای پنل پیامک حرفه‌ای
             ما بهره‌مند شوید
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
@@ -112,17 +112,17 @@ const PricingSection: React.FC = () => {
               }}
               viewport={{ once: true }}
               className={`bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col ${
-                plan.popular ? "border-t transform md:-translate-y-4" : ""
+                plan.popular ? "border-t transform lg:-translate-y-4" : ""
               }`}
             >
               {plan.popular && (
-                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-6 rounded-t-xl text-base font-extrabold tracking-wide shadow-md">
+                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-6 rounded-t-xl text-sm sm:text-base font-extrabold tracking-wide shadow-md">
                   محبوب‌ترین
                 </div>
               )}
 
               <div
-                className={`p-8 flex flex-col flex-grow backdrop-blur-md shadow-inner border border-white/20 ${
+                className={`p-4 sm:p-6 lg:p-8 flex flex-col flex-grow backdrop-blur-md shadow-inner border border-white/20 ${
                   plan.id === 2
                     ? "rounded-b-2xl rounded-t-none bg-gradient-to-b from-blue-100/40 to-purple-700/20"
                     : plan.id === 1
@@ -132,9 +132,9 @@ const PricingSection: React.FC = () => {
                     : "rounded-2xl bg-white/20"
                 }`}
               >
-                <div className="text-center mb-8">
+                <div className="text-center mb-6 sm:mb-8">
                   <h3
-                    className={`text-3xl font-extrabold mb-2 ${
+                    className={`text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 ${
                       plan.id === 2
                         ? "bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text"
                         : plan.id === 1
@@ -147,38 +147,38 @@ const PricingSection: React.FC = () => {
                     {plan.name}
                   </h3>
 
-                  <p className="text-gray-600 mb-6 min-h-[48px]">
+                  <p className="text-gray-600 mb-4 sm:mb-6 min-h-[48px] text-sm sm:text-base px-2 sm:px-0">
                     {plan.description}
                   </p>
 
-                  <div className="flex items-center justify-center mb-6">
+                  <div className="flex items-center justify-center mb-4 sm:mb-6">
                     {plan.discount && plan.discount > 0 ? (
                       <div className="text-center">
                         {/* Discount Badge */}
-                        <div className="bg-red-500 text-white px-3 py-1 rounded-full text-md font-bold mb-2 inline-block">
+                        <div className="bg-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-2 inline-block">
                           {plan.discount}% تخفیف
                         </div>
 
                         {/* Original Price (crossed out) */}
-                        <div className="text-lg text-gray-400 line-through mb-1">
+                        <div className="text-sm sm:text-lg text-gray-400 line-through mb-1">
                           {plan.price} هزار تومان
                         </div>
 
                         {/* Discounted Price */}
-                        <div className="text-5xl font-bold text-green-600">
+                        <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">
                           {getDiscountedPrice(plan.price, plan.discount)}
                         </div>
-                        <span className="text-gray-600 text-sm">
+                        <span className="text-gray-600 text-xs sm:text-sm">
                           هزار تومان / سالانه
                         </span>
                       </div>
                     ) : (
                       <>
-                        <span className="text-4xl font-bold text-gray-900">
+                        <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
                           {plan.price}
                         </span>
                         {plan.id !== 3 && (
-                          <span className="text-gray-600 mr-2">
+                          <span className="text-gray-600 mr-2 text-xs sm:text-sm">
                             هزار تومان / سالانه
                           </span>
                         )}
@@ -186,24 +186,24 @@ const PricingSection: React.FC = () => {
                     )}
                   </div>
                 </div>
-                <hr className="border-t-2 border-primary-100 opacity-40 my-6" />
+                <hr className="border-t-2 border-primary-100 opacity-40 my-4 sm:my-6" />
 
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-grow">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center">
+                    <li key={i} className="flex items-start">
                       {feature.included ? (
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center ml-3">
-                          <Check size={16} className="text-green-500" />
+                        <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
+                          <Check size={12} className="sm:w-4 sm:h-4 text-green-500" />
                         </div>
                       ) : (
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center ml-3">
-                          <X size={16} className="text-gray-400" />
+                        <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
+                          <X size={12} className="sm:w-4 sm:h-4 text-gray-400" />
                         </div>
                       )}
                       <span
-                        className={
+                        className={`text-sm sm:text-base leading-relaxed ${
                           feature.included ? "text-gray-800" : "text-gray-400"
-                        }
+                        }`}
                       >
                         {feature.title}
                       </span>
@@ -222,7 +222,7 @@ const PricingSection: React.FC = () => {
                       target: "_blank",
                       rel: "noopener noreferrer",
                     })}
-                    className={`block w-full py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] ${
+                    className={`block w-full py-3 sm:py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] text-sm sm:text-base ${
                       plan.popular
                         ? "bg-blue-700 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl"
                         : "bg-gray-100 hover:bg-gray-200 text-gray-800"
@@ -241,12 +241,12 @@ const PricingSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
         >
-          <p className="text-gray-600 mb-4">نیاز به پلن اختصاصی دارید؟</p>
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">نیاز به پلن اختصاصی دارید؟</p>
           <a
             href="#contact"
-            className="inline-flex items-center bg-white border-2 border-primary-500 text-primary-500 px-8 py-3 rounded-xl font-bold hover:bg-primary-50 transition-colors"
+            className="inline-flex items-center bg-white border-2 border-primary-500 text-primary-500 px-6 sm:px-8 py-3 rounded-xl font-bold hover:bg-primary-50 transition-colors text-sm sm:text-base"
           >
             با ما تماس بگیرید
           </a>

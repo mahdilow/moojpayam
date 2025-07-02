@@ -7,20 +7,20 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center mb-4">
               <img
                 src={"/assets/logo.png"}
                 alt="موج پیام"
-                className="h-20 w-auto"
+                className="h-16 sm:h-20 w-auto"
               />
-              <span className="mr-2 text-xl font-bold text-blue-400">
+              <span className="mr-2 text-lg sm:text-xl font-bold text-blue-400">
                 موج پیام
               </span>
             </div>
-            <p className="text-gray-400 mb-4 leading-relaxed">
+            <p className="text-gray-400 mb-4 leading-relaxed text-sm sm:text-base">
               ارائه دهنده خدمات پیامک تبلیغاتی با بالاترین کیفیت و به صرفه ترین
               تعرفه . با اطمینان پیام خود را به مخاطبان برسانید.
             </p>
@@ -28,12 +28,14 @@ const Footer: React.FC = () => {
               <a
                 href="#"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="اینستاگرام"
               >
                 <FaInstagram size={20} />
               </a>
               <a
                 href="#"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="تلگرام"
               >
                 <FaTelegramPlane size={20} />
               </a>
@@ -42,12 +44,12 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">لینک‌های سریع</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">لینک‌های سریع</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   to="/"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   صفحه اصلی
                 </Link>
@@ -55,7 +57,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/about-us"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   درباره ما
                 </Link>
@@ -63,7 +65,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   خدمات
                 </a>
@@ -71,7 +73,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#pricing"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   تعرفه‌ها
                 </a>
@@ -79,7 +81,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/blog"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   بلاگ
                 </Link>
@@ -87,7 +89,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#contact"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   تماس با ما
                 </a>
@@ -97,12 +99,12 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">خدمات</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">خدمات</h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   پنل پیامک انبوه
                 </a>
@@ -110,7 +112,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   ارسال هوشمند
                 </a>
@@ -118,7 +120,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   پیامک تبلیغاتی
                 </a>
@@ -126,7 +128,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   پیامک مناسبتی
                 </a>
@@ -134,7 +136,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   پیامک خدماتی
                 </a>
@@ -142,7 +144,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
                 >
                   وب سرویس پیامک
                 </a>
@@ -152,29 +154,34 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">اطلاعات تماس</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">اطلاعات تماس</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <Phone size={18} className="ml-2 mt-1 text-blue-400" />
-                <a href="tel:+989100711835">
-                  <span className="text-gray-400">۰۹۱۰۰۷۱۱۸۳۵</span>
+                <Phone size={16} className="ml-2 mt-1 text-blue-400 flex-shrink-0" />
+                <div className="text-sm sm:text-base">
+                  <a href="tel:+989100711835" className="text-gray-400 hover:text-blue-400 transition-colors block">
+                    ۰۹۱۰۰۷۱۱۸۳۵
+                  </a>
+                  <a href="tel:+989108680274" className="text-gray-400 hover:text-blue-400 transition-colors block">
+                    ۰۹۱۰۸۶۸۰۲۷۴
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <Mail size={16} className="ml-2 mt-1 text-blue-400 flex-shrink-0" />
+                <a href="mailto:contact@moojpayam.ir" className="text-sm sm:text-base">
+                  <span className="text-gray-400 hover:text-blue-400 transition-colors">contact@moojpayam.ir</span>
                 </a>
               </li>
               <li className="flex items-start">
-                <Mail size={18} className="ml-2 mt-1 text-blue-400" />
-                <a href="mailto:contact@moojpayam.ir">
-                  <span className="text-gray-400">contact@moojpayam.ir</span>
-                </a>
-              </li>
-              <li className="flex items-start">
-                <MapPin size={18} className="ml-2 mt-1 text-blue-400" />
-                <span className="text-gray-400">کرج طالقانی جنوبی</span>
+                <MapPin size={16} className="ml-2 mt-1 text-blue-400 flex-shrink-0" />
+                <span className="text-gray-400 text-sm sm:text-base">کرج طالقانی جنوبی</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <hr className="border-gray-800 my-8" />
+        <hr className="border-gray-800 my-6 sm:my-8" />
 
         <div className="text-center text-gray-500 text-sm">
           <p> تمامی حقوق محفوظ است. موج پیام ۱۴۰۴ ©</p>
