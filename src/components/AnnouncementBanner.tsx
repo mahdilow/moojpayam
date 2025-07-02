@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Megaphone, AlertCircle, Info, Star, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Info, AlertTriangle, CheckCircle2, Gift } from "lucide-react";
 
 interface AnnouncementData {
   id: string;
   message: string;
-  type: 'info' | 'warning' | 'success' | 'promotion';
+  type: "info" | "warning" | "success" | "promotion";
   isActive: boolean;
   link?: string;
   linkText?: string;
@@ -15,7 +15,9 @@ interface AnnouncementData {
 }
 
 const AnnouncementBanner: React.FC = () => {
-  const [announcement, setAnnouncement] = useState<AnnouncementData | null>(null);
+  const [announcement, setAnnouncement] = useState<AnnouncementData | null>(
+    null
+  );
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -25,14 +27,14 @@ const AnnouncementBanner: React.FC = () => {
 
   const loadAnnouncement = async () => {
     try {
-      const response = await fetch('/api/content/announcement');
+      const response = await fetch("/api/content/announcement");
       if (response.ok) {
         const data = await response.json();
         if (data && data.isActive && !isExpired(data)) {
           // Check if user has dismissed this announcement
           const dismissedKey = `announcement_dismissed_${data.id}`;
           const wasDismissed = localStorage.getItem(dismissedKey);
-          
+
           if (!wasDismissed || !data.dismissible) {
             setAnnouncement(data);
             setIsVisible(true);
@@ -40,7 +42,7 @@ const AnnouncementBanner: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('Error loading announcement:', error);
+      console.error("Error loading announcement:", error);
     }
   };
 
@@ -52,7 +54,7 @@ const AnnouncementBanner: React.FC = () => {
   const handleDismiss = () => {
     if (announcement && announcement.dismissible) {
       const dismissedKey = `announcement_dismissed_${announcement.id}`;
-      localStorage.setItem(dismissedKey, 'true');
+      localStorage.setItem(dismissedKey, "true");
       setIsDismissed(true);
       setIsVisible(false);
     }
@@ -60,42 +62,41 @@ const AnnouncementBanner: React.FC = () => {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'warning':
-        return <AlertCircle size={18} className="flex-shrink-0" />;
-      case 'success':
-        return <Star size={18} className="flex-shrink-0" />;
-      case 'promotion':
-        return <Megaphone size={18} className="flex-shrink-0" />;
+      case "warning":
+        return <AlertTriangle size={18} className="flex-shrink-0" />;
+      case "success":
+        return <CheckCircle2 size={18} className="flex-shrink-0" />;
+      case "promotion":
+        return <Gift size={18} className="flex-shrink-0" />;
       default:
         return <Info size={18} className="flex-shrink-0" />;
     }
   };
-
   const getStyles = (type: string) => {
     switch (type) {
-      case 'warning':
+      case "warning":
         return {
-          bg: 'bg-gradient-to-r from-orange-500 to-orange-600',
-          text: 'text-white',
-          accent: 'bg-orange-400/20'
+          bg: "bg-gradient-to-r from-orange-500 to-orange-600",
+          text: "text-white",
+          accent: "bg-orange-400/20",
         };
-      case 'success':
+      case "success":
         return {
-          bg: 'bg-gradient-to-r from-green-500 to-green-600',
-          text: 'text-white',
-          accent: 'bg-green-400/20'
+          bg: "bg-gradient-to-r from-green-500 to-green-600",
+          text: "text-white",
+          accent: "bg-green-400/20",
         };
-      case 'promotion':
+      case "promotion":
         return {
-          bg: 'bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600',
-          text: 'text-white',
-          accent: 'bg-white/10'
+          bg: "bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600",
+          text: "text-white",
+          accent: "bg-white/10",
         };
       default:
         return {
-          bg: 'bg-gradient-to-r from-blue-500 to-blue-600',
-          text: 'text-white',
-          accent: 'bg-blue-400/20'
+          bg: "bg-gradient-to-r from-blue-500 to-blue-600",
+          text: "text-white",
+          accent: "bg-blue-400/20",
         };
     }
   };
@@ -110,19 +111,19 @@ const AnnouncementBanner: React.FC = () => {
     <AnimatePresence>
       <motion.div
         initial={{ height: 0, opacity: 0, y: -20 }}
-        animate={{ height: 'auto', opacity: 1, y: 0 }}
+        animate={{ height: "auto", opacity: 1, y: 0 }}
         exit={{ height: 0, opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
         className={`w-full ${styles.bg} ${styles.text} shadow-lg relative overflow-hidden`}
         style={{ zIndex: 30 }}
       >
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-10">
           <motion.div
-            animate={{ x: ['-100%', '100%'] }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            animate={{ x: ["-100%", "100%"] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent w-full h-full"
-            style={{ width: '200%' }}
+            style={{ width: "200%" }}
           />
         </div>
 
@@ -138,7 +139,7 @@ const AnnouncementBanner: React.FC = () => {
               >
                 {getIcon(announcement.type)}
               </motion.div>
-              
+
               <div className="flex-1 min-w-0">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -149,18 +150,25 @@ const AnnouncementBanner: React.FC = () => {
                   <span className="text-sm md:text-base font-medium leading-relaxed">
                     {announcement.message}
                   </span>
-                  
+
                   {announcement.link && announcement.linkText && (
                     <motion.a
                       href={announcement.link}
                       className="inline-flex items-center text-sm font-bold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 flex-shrink-0"
-                      target={announcement.link.startsWith('http') ? '_blank' : '_self'}
-                      rel={announcement.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      target={
+                        announcement.link.startsWith("http")
+                          ? "_blank"
+                          : "_self"
+                      }
+                      rel={
+                        announcement.link.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       {announcement.linkText}
-                      <ChevronRight size={14} className="mr-1" />
                     </motion.a>
                   )}
                 </motion.div>
@@ -191,7 +199,7 @@ const AnnouncementBanner: React.FC = () => {
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/30"
-          style={{ transformOrigin: 'left' }}
+          style={{ transformOrigin: "left" }}
         />
       </motion.div>
     </AnimatePresence>

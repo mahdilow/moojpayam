@@ -1,5 +1,139 @@
 [
   {
+    "id": "log_1751452115430_ipjp1m9hj",
+    "timestamp": "2025-07-02T10:28:35.430Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452113720_8ntk7lsf7",
+    "timestamp": "2025-07-02T10:28:33.720Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452112794_85twq5lpg",
+    "timestamp": "2025-07-02T10:28:32.794Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452109056_374g9h6kx",
+    "timestamp": "2025-07-02T10:28:29.056Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452108790_1qmms1t1x",
+    "timestamp": "2025-07-02T10:28:28.790Z",
+    "adminUser": "admin",
+    "action": "Delete announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751448377262_ft0fa40qp",
+      "oldData": {
+        "message": "jhjgbjhgjhg",
+        "type": "info"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452103556_y03svk1ct",
+    "timestamp": "2025-07-02T10:28:23.556Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452101606_ucqls43c1",
+    "timestamp": "2025-07-02T10:28:21.606Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452098677_y81z7prpi",
+    "timestamp": "2025-07-02T10:28:18.677Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452098348_bsqbz6hdp",
+    "timestamp": "2025-07-02T10:28:18.348Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751452096750_stdq0hk25",
+    "timestamp": "2025-07-02T10:28:16.750Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "ry36399qfd719q1b4gedt",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "ry36399qfd719q1b4gedt"
+  },
+  {
     "id": "log_1751448422120_uy2u1grq6",
     "timestamp": "2025-07-02T09:27:02.120Z",
     "adminUser": "admin",

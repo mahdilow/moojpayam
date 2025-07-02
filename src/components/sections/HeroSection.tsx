@@ -15,9 +15,9 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row-reverse lg:items-center lg:justify-between min-h-[60vh] sm:min-h-[70vh] max-w-7xl mx-auto lg:gap-16">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between min-h-[60vh] sm:min-h-[70vh] max-w-7xl mx-auto lg:gap-16">
           {/* Image Section */}
-          <div className="w-full lg:w-5/12 mb-8 lg:mb-0 order-1 lg:order-2">
+          <div className="w-full lg:w-6/12 mb-8 lg:mb-0 order-1 lg:order-2">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -123,7 +123,9 @@ const HeroSection: React.FC = () => {
             href="#features"
             className="inline-flex items-center text-blue-500 hover:text-blue-600 transition-colors group"
           >
-            <span className="ml-2 font-medium text-sm sm:text-base">قابلیت های پنل</span>
+            <span className="ml-2 font-medium text-sm sm:text-base">
+              قابلیت های پنل
+            </span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

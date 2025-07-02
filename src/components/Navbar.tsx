@@ -34,7 +34,9 @@ const Navbar: React.FC = () => {
               alt="موج پیام"
               className="h-14 sm:h-16 md:h-20 w-auto logo-pulse"
             />
-            <span className="mr-2 text-lg sm:text-xl md:text-2xl brand-name">موج پیام</span>
+            <span className="mr-2 text-lg sm:text-xl md:text-2xl brand-name">
+              موج پیام
+            </span>
           </Link>
 
           {/* Desktop Menu */}
@@ -44,12 +46,6 @@ const Navbar: React.FC = () => {
               className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
             >
               صفحه اصلی
-            </Link>
-            <Link
-              to="/about-us"
-              className="text-gray-700 hover:text-primary-500 transition-colors px-2 text-sm xl:text-base"
-            >
-              درباره ما
             </Link>
             <a
               href="#features"
@@ -84,14 +80,14 @@ const Navbar: React.FC = () => {
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/"
-              className="btn btn-outline mr-4 text-sm px-4 py-2"
+              className="btn btn-outline text-md flex items-center justify-center"
             >
               ورود
             </a>
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/userregister.aspx"
-              className="btn btn-primary text-sm px-4 py-2"
+              className="btn btn-primary text-md  flex items-center justify-center ml-4"
             >
               ثبت نام
             </a>
@@ -128,13 +124,6 @@ const Navbar: React.FC = () => {
                   >
                     صفحه اصلی
                   </Link>
-                  <Link
-                    to="/about-us"
-                    className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    درباره ما
-                  </Link>
                   <a
                     href="#features"
                     className="text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium"
@@ -170,7 +159,7 @@ const Navbar: React.FC = () => {
                   >
                     تماس با ما
                   </a>
-                  
+
                   {/* Mobile Action Buttons */}
                   <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200 mt-3">
                     <a

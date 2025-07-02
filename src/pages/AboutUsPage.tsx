@@ -8,27 +8,41 @@ import {
   MessageSquare,
   Zap,
   Shield,
-  Clock,
   CheckCircle,
   Star,
   TrendingUp,
-  Globe,
 } from "lucide-react";
 import SEOHead from "../components/SEOHead";
 
 const AboutUsPage: React.FC = () => {
   const stats = [
-    { icon: Users, label: "مشتریان راضی", value: "۱۰۰۰+", color: "text-blue-600" },
-    { icon: MessageSquare, label: "پیامک ارسالی", value: "۵۰۰M+", color: "text-green-600" },
+    {
+      icon: Users,
+      label: "مشتریان راضی",
+      value: "۱۰۰۰+",
+      color: "text-blue-600",
+    },
+    {
+      icon: MessageSquare,
+      label: "پیامک ارسالی",
+      value: "۵۰۰K+",
+      color: "text-green-600",
+    },
     { icon: Award, label: "سال تجربه", value: "۳+", color: "text-purple-600" },
-    { icon: TrendingUp, label: "نرخ تحویل", value: "۹۹.۹%", color: "text-orange-600" },
+    {
+      icon: TrendingUp,
+      label: "نرخ تحویل",
+      value: "۹۹.۹%",
+      color: "text-orange-600",
+    },
   ];
 
   const values = [
     {
       icon: Shield,
       title: "قابلیت اطمینان",
-      description: "با زیرساخت قدرتمند و امن، اطمینان کامل در ارسال پیام‌هایتان داشته باشید",
+      description:
+        "با زیرساخت قدرتمند و امن، اطمینان کامل در ارسال پیام‌هایتان داشته باشید",
     },
     {
       icon: Zap,
@@ -77,17 +91,17 @@ const AboutUsPage: React.FC = () => {
     {
       year: "۱۴۰۲",
       title: "توسعه خدمات",
-      description: "اضافه شدن قابلیت‌های پیشرفته مانند پیامک منطقه‌ای و زمانبندی",
+      description: "همواره به دنبال توسعه و استفاده از تکنولوژی های جدید هستیم",
     },
     {
       year: "۱۴۰۳",
       title: "رشد و گسترش",
-      description: "جذب بیش از ۱۰۰۰ مشتری و ارسال میلیون‌ها پیامک موفق",
+      description: "جذب بیش از ۱۰۰ مشتری و ارسال هزاران پیامک موفق",
     },
     {
       year: "۱۴۰۴",
       title: "نوآوری مستمر",
-      description: "معرفی تکنولوژی‌های جدید و بهبود مستمر خدمات",
+      description: "معرفی قابلیت های  جدید و بهبود مستمر خدمات فنی و پشتیبانی ",
     },
   ];
 
@@ -134,8 +148,9 @@ const AboutUsPage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
             >
-              با هدف ارائه بهترین خدمات پیامک تبلیغاتی و اطلاع‌رسانی، ما در موج پیام
-              تلاش می‌کنیم تا کسب‌وکارها را در رسیدن به مشتریان‌شان یاری کنیم
+              با هدف ارائه بهترین خدمات پیامک تبلیغاتی و اطلاع‌رسانی، ما در موج
+              پیام تلاش می‌کنیم تا کسب‌وکارها را در رسیدن به مشتریان‌شان یاری
+              کنیم
             </motion.p>
           </div>
 
@@ -155,9 +170,10 @@ const AboutUsPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-900">ماموریت ما</h2>
               </div>
               <p className="text-gray-600 leading-relaxed text-lg">
-                ماموریت ما ارائه راه‌حل‌های نوآورانه و قابل اطمینان در حوزه ارتباطات
-                پیامکی است. ما معتقدیم که هر کسب‌وکاری، صرف‌نظر از اندازه‌اش، باید
-                بتواند به راحتی و با کمترین هزینه با مشتریان خود ارتباط برقرار کند.
+                ماموریت ما ارائه راه‌حل‌های نوآورانه و قابل اطمینان در حوزه
+                ارتباطات پیامکی است. ما معتقدیم که هر کسب‌وکاری، صرف‌نظر از
+                اندازه‌اش، باید بتواند به راحتی و با کمترین هزینه با مشتریان خود
+                ارتباط برقرار کند.
               </p>
             </motion.div>
 
@@ -172,12 +188,15 @@ const AboutUsPage: React.FC = () => {
                 <div className="bg-purple-100 rounded-full p-3 ml-4">
                   <Star className="w-8 h-8 text-purple-500" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">چشم‌انداز ما</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  چشم‌انداز ما
+                </h2>
               </div>
               <p className="text-gray-600 leading-relaxed text-lg">
                 چشم‌انداز ما تبدیل شدن به پیشرو و معتبرترین ارائه‌دهنده خدمات
-                پیامک در ایران است. ما می‌خواهیم با استفاده از فناوری‌های روز دنیا،
-                تجربه‌ای بی‌نظیر از ارتباطات دیجیتال را برای مشتریان‌مان فراهم کنیم.
+                پیامک در ایران است. ما می‌خواهیم با استفاده از فناوری‌های روز
+                دنیا، تجربه‌ای بی‌نظیر از ارتباطات دیجیتال را برای مشتریان‌مان
+                فراهم کنیم.
               </p>
             </motion.div>
           </div>
@@ -195,7 +214,9 @@ const AboutUsPage: React.FC = () => {
                 key={index}
                 className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300"
               >
-                <div className={`inline-flex p-3 rounded-full bg-gray-100 mb-4`}>
+                <div
+                  className={`inline-flex p-3 rounded-full bg-gray-100 mb-4`}
+                >
                   <stat.icon className={`w-8 h-8 ${stat.color}`} />
                 </div>
                 <div className="text-2xl font-bold text-gray-900 mb-2">

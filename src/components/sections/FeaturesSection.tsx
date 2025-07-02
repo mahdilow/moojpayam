@@ -154,7 +154,9 @@ const FeaturesSection: React.FC = () => {
             className="inline-flex items-center bg-blue-100 text-primary-500 px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6"
           >
             <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
-            <span className="font-semibold text-sm sm:text-base">ویژگی‌های منحصر به فرد</span>
+            <span className="font-semibold text-sm sm:text-base">
+              ویژگی‌های منحصر به فرد
+            </span>
           </motion.div>
 
           <motion.h2
@@ -205,7 +207,7 @@ const FeaturesSection: React.FC = () => {
         >
           <a
             href="#pricing"
-            className="inline-flex items-center bg-primary-500 text-white px-6 sm:px-8 py-3 rounded-lg font-bold hover:bg-primary-600 transition-colors group text-sm sm:text-base"
+            className="btn btn-outline inline-flex items-center sm:px-8 py-3 rounded-lg font-bold hover:bg-blue-50 transition-all duration-300 group text-sm sm:text-base"
           >
             <span>مشاهده تعرفه‌ها</span>
             <motion.div
