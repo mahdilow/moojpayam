@@ -36,10 +36,7 @@ const BlogPage: React.FC = () => {
   if (loading) {
     return (
       <>
-        <SEOHead 
-          title="در حال بارگذاری بلاگ..."
-          noindex={true}
-        />
+        <SEOHead title="در حال بارگذاری بلاگ..." noindex={true} />
         <div className="py-20 bg-gradient-to-br from-white to-blue-50 min-h-screen">
           <div className="container mx-auto px-4">
             <div className="text-center">
@@ -55,10 +52,7 @@ const BlogPage: React.FC = () => {
   if (error) {
     return (
       <>
-        <SEOHead 
-          title="خطا در بارگذاری بلاگ"
-          noindex={true}
-        />
+        <SEOHead title="خطا در بارگذاری بلاگ" noindex={true} />
         <div className="py-20 bg-gradient-to-br from-white to-blue-50 min-h-screen">
           <div className="container mx-auto px-4">
             <div className="text-center">
@@ -78,7 +72,7 @@ const BlogPage: React.FC = () => {
         keywords="بلاگ پیامک, آموزش پیامک, نکات پیامک بازاریابی, راهنمای ارسال پیامک, استراتژی پیامک تبلیغاتی, موج پیام بلاگ"
         url="https://moojpayam.ir/blog"
       />
-      
+
       <div className="py-20 bg-gradient-to-br from-white to-blue-50 min-h-screen">
         <div className="container mx-auto px-4">
           {/* Header */}
@@ -158,6 +152,7 @@ const BlogPage: React.FC = () => {
             >
               <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
+                  {/* Left: Image */}
                   <div className="relative">
                     <img
                       src={featuredBlog.image}
@@ -168,47 +163,54 @@ const BlogPage: React.FC = () => {
                       ویژه
                     </div>
                   </div>
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-4">
+
+                  {/* Right: Content */}
+                  <div className="p-8 lg:p-12 flex flex-col h-full">
+                    {/* Meta Info at Top */}
+                    <div className="mb-6 text-sm text-gray-500 flex flex-wrap items-center gap-4">
                       <span className="bg-primary-100 text-primary-600 px-3 py-1 rounded-full text-sm font-medium">
                         {featuredBlog.category}
                       </span>
-                      <div className="flex items-center text-gray-500 text-sm">
+
+                      <div className="flex items-center">
                         <Eye size={16} className="ml-1" />
                         {featuredBlog.views.toLocaleString()}
                       </div>
-                    </div>
 
-                    <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
-                      {featuredBlog.title}
-                    </h2>
-
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {featuredBlog.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center text-gray-500 text-sm">
-                        <User size={16} className="ml-2" />
+                      <div className="flex items-center">
+                        <User size={16} className="ml-1" />
                         {featuredBlog.author}
                       </div>
-                      <div className="flex items-center text-gray-500 text-sm">
-                        <Calendar size={16} className="ml-2" />
+
+                      <div className="flex items-center">
+                        <Calendar size={16} className="ml-1" />
                         {featuredBlog.date}
                       </div>
-                      <div className="flex items-center text-gray-500 text-sm">
-                        <Clock size={16} className="ml-2" />
+
+                      <div className="flex items-center">
+                        <Clock size={16} className="ml-1" />
                         {featuredBlog.readTime}
                       </div>
                     </div>
 
-                    <Link
-                      to={`/blog/${featuredBlog.id}`}
-                      className="btn btn-primary inline-flex items-center w-fit"
-                    >
-                      <span>ادامه مطالعه</span>
-                      <ArrowLeft size={20} className="mr-2" />
-                    </Link>
+                    {/* Title, Excerpt, Button in Center */}
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                        {featuredBlog.title}
+                      </h2>
+
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {featuredBlog.excerpt}
+                      </p>
+
+                      <Link
+                        to={`/blog/${featuredBlog.id}`}
+                        className="btn btn-primary inline-flex items-center w-fit"
+                      >
+                        <span>ادامه مطالعه</span>
+                        <ArrowLeft size={20} className="mr-2" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -223,7 +225,7 @@ const BlogPage: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full"
               >
                 <div className="relative">
                   <img
@@ -240,46 +242,52 @@ const BlogPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight hover:text-primary-600 transition-colors">
-                    <Link to={`/blog/${post.id}`}>{post.title}</Link>
-                  </h3>
+                {/* Content area - structured to stick footer to bottom */}
+                <div className="p-6 flex flex-col h-full">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight hover:text-primary-600 transition-colors">
+                      <Link to={`/blog/${post.id}`}>{post.title}</Link>
+                    </h3>
 
-                  <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
-                    {post.excerpt}
-                  </p>
+                    <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
+                      {post.excerpt}
+                    </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-gray-100 text-gray-600 px-2 py-1 rounded-lg text-xs"
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="bg-gray-100 text-gray-600 px-2 py-1 rounded-lg text-xs"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Divider & Meta/Footer pushed to bottom */}
+                  <div className="border-t border-gray-100 pt-4 mt-auto">
+                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                      <div className="flex items-center">
+                        <User size={14} className="ml-1" />
+                        {post.author}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock size={14} className="ml-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-500 text-sm">{post.date}</span>
+                      <Link
+                        to={`/blog/${post.id}`}
+                        className="text-primary-500 hover:text-primary-600 font-medium text-sm flex items-center"
                       >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                    <div className="flex items-center">
-                      <User size={14} className="ml-1" />
-                      {post.author}
+                        ادامه مطالعه
+                        <ArrowLeft size={16} className="mr-1" />
+                      </Link>
                     </div>
-                    <div className="flex items-center">
-                      <Clock size={14} className="ml-1" />
-                      {post.readTime}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-500 text-sm">{post.date}</span>
-                    <Link
-                      to={`/blog/${post.id}`}
-                      className="text-primary-500 hover:text-primary-600 font-medium text-sm flex items-center"
-                    >
-                      ادامه مطالعه
-                      <ArrowLeft size={16} className="mr-1" />
-                    </Link>
                   </div>
                 </div>
               </motion.article>

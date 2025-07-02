@@ -145,7 +145,7 @@ const AnnouncementBanner: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="flex flex-col items-center lg:flex-row gap-2"
+                  className="flex flex-col items-center md:flex-row lg:flex-row gap-2"
                 >
                   <span className="text-sm md:text-base font-medium leading-relaxed">
                     {announcement.message}

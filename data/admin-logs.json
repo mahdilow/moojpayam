@@ -1,5 +1,192 @@
 [
   {
+    "id": "log_1751472053150_25aby3z7n",
+    "timestamp": "2025-07-02T16:00:53.150Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751472052836_flu2x6kpw",
+    "timestamp": "2025-07-02T16:00:52.836Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751472046851_qrno9suuy",
+    "timestamp": "2025-07-02T16:00:46.851Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751472045898_jfa9cfcyg",
+    "timestamp": "2025-07-02T16:00:45.898Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751472043708_dohwsdxhc",
+    "timestamp": "2025-07-02T16:00:43.708Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751472043405_1wqzmyij5",
+    "timestamp": "2025-07-02T16:00:43.405Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751472041852_3g32dyxa0",
+    "timestamp": "2025-07-02T16:00:41.852Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "qut0f4sypooof6in2y2je",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "qut0f4sypooof6in2y2je"
+  },
+  {
+    "id": "log_1751471938462_iqotriotl",
+    "timestamp": "2025-07-02T15:58:58.462Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751471938212_66clug88x",
+    "timestamp": "2025-07-02T15:58:58.212Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "    چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751471932913_foeu7bv9j",
+    "timestamp": "2025-07-02T15:58:52.913Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751471930800_dsx4xqfzm",
+    "timestamp": "2025-07-02T15:58:50.800Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751471930477_vyaqcfy4v",
+    "timestamp": "2025-07-02T15:58:50.478Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751471928887_d834wes2s",
+    "timestamp": "2025-07-02T15:58:48.887Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "jssctlcmkj4oh38sha8rr",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "jssctlcmkj4oh38sha8rr"
+  },
+  {
     "id": "log_1751459465167_8nyp27lve",
     "timestamp": "2025-07-02T12:31:05.167Z",
     "adminUser": "admin",

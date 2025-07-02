@@ -92,7 +92,7 @@ const LatestBlogsSection: React.FC = () => {
                 stiffness: 300,
               }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer flex flex-col h-full"
             >
               <div className="relative overflow-hidden">
                 <img
@@ -101,20 +101,16 @@ const LatestBlogsSection: React.FC = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Category Badge */}
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-primary-600 px-3 py-1 rounded-full text-sm font-medium">
                   {post.category}
                 </div>
-
-                {/* Views Counter */}
                 <div className="absolute bottom-4 left-4 flex items-center text-white text-sm bg-black/50 backdrop-blur px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <Eye size={14} className="ml-1" />
                   {post.views.toLocaleString()}
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary-600 transition-colors line-clamp-2">
                   <Link to={`/blog/${post.id}`}>{post.title}</Link>
                 </h3>
@@ -123,35 +119,36 @@ const LatestBlogsSection: React.FC = () => {
                   {post.excerpt}
                 </p>
 
-                {/* Meta Information */}
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                  <div className="flex items-center">
-                    <User size={14} className="ml-1" />
-                    <span className="truncate">{post.author}</span>
+                <div className="mt-auto">
+                  {/* Meta Info */}
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center">
+                      <User size={14} className="ml-1" />
+                      <span className="truncate">{post.author}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Clock size={14} className="ml-1" />
+                      {post.readTime}
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <Clock size={14} className="ml-1" />
-                    {post.readTime}
-                  </div>
-                </div>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <Calendar size={14} className="ml-1" />
-                    {post.date}
+                  {/* Footer */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center text-gray-500 text-sm">
+                      <Calendar size={14} className="ml-1" />
+                      {post.date}
+                    </div>
+                    <Link
+                      to={`/blog/${post.id}`}
+                      className="text-primary-500 hover:text-primary-600 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform"
+                    >
+                      ادامه مطالعه
+                      <ArrowLeft size={16} className="mr-1" />
+                    </Link>
                   </div>
-                  <Link
-                    to={`/blog/${post.id}`}
-                    className="text-primary-500 hover:text-primary-600 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform"
-                  >
-                    ادامه مطالعه
-                    <ArrowLeft size={16} className="mr-1" />
-                  </Link>
                 </div>
               </div>
 
-              {/* Hover Effect Overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </motion.article>
           ))}
