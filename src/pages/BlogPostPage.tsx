@@ -11,6 +11,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import SEOHead from "../components/SEOHead";
+import toast from "react-hot-toast";
 
 interface BlogPost {
   id: number;
@@ -117,19 +118,20 @@ const BlogPostPage: React.FC = () => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      // You could show a toast notification here
-      alert("لینک کپی شد!");
-    });
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => {
+        toast.success("لینک با موفقیت کپی شد ✅");
+      })
+      .catch(() => {
+        toast.error("خطا در کپی لینک ❌");
+      });
   };
 
   if (loading) {
     return (
       <>
-        <SEOHead 
-          title="در حال بارگذاری..."
-          noindex={true}
-        />
+        <SEOHead title="در حال بارگذاری..." noindex={true} />
         <div className="py-20 bg-white min-h-screen">
           <div className="container mx-auto px-4">
             <div className="text-center">
@@ -145,7 +147,7 @@ const BlogPostPage: React.FC = () => {
   if (error || !blogPost) {
     return (
       <>
-        <SEOHead 
+        <SEOHead
           title="مقاله یافت نشد"
           description="متأسفانه مقاله مورد نظر یافت نشد."
           noindex={true}
@@ -176,7 +178,7 @@ const BlogPostPage: React.FC = () => {
       "@type": "ImageObject",
       url: blogPost.image,
       width: 1200,
-      height: 630
+      height: 630,
     },
     author: {
       "@type": "Person",
@@ -189,7 +191,7 @@ const BlogPostPage: React.FC = () => {
         "@type": "ImageObject",
         url: "https://moojpayam.ir/assets/logo.png",
         width: 200,
-        height: 200
+        height: 200,
       },
     },
     datePublished: blogPost.createdAt || blogPost.date,
@@ -205,8 +207,8 @@ const BlogPostPage: React.FC = () => {
     isPartOf: {
       "@type": "Blog",
       name: "بلاگ موج پیام",
-      url: "https://moojpayam.ir/blog"
-    }
+      url: "https://moojpayam.ir/blog",
+    },
   };
 
   return (
@@ -214,7 +216,9 @@ const BlogPostPage: React.FC = () => {
       <SEOHead
         title={blogPost.title}
         description={blogPost.metaDescription || blogPost.excerpt}
-        keywords={`${blogPost.tags.join(", ")}, ${blogPost.category}, موج پیام, پیامک`}
+        keywords={`${blogPost.tags.join(", ")}, ${
+          blogPost.category
+        }, موج پیام, پیامک`}
         image={blogPost.image}
         url={window.location.href}
         type="article"
@@ -224,7 +228,7 @@ const BlogPostPage: React.FC = () => {
         section={blogPost.category}
         tags={blogPost.tags}
       />
-      
+
       {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}

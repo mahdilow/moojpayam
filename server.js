@@ -458,17 +458,7 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    // Save notification
-    const notifications = await readJsonFile('notifications.json');
-    notifications.unshift({
-      id: `notif_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      type: 'contact',
-      message: `پیام جدید از ${name} (${phone}) با موضوع: ${subject}`,
-      read: false,
-      createdAt: new Date().toISOString(),
-      data: { name, phone, subject, message }
-    });
-    await writeJsonFile('notifications.json', notifications);
+
     return res.status(200).json({ message: 'پیام شما با موفقیت ارسال شد' });
   } catch (error) {
     console.error('Email sending error:', error);
@@ -1367,28 +1357,6 @@ app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
       'high'
     ));
     res.status(500).json({ message: 'خطا در حذف پلن' });
-  }
-});
-
-// Admin notifications endpoints
-app.get('/api/admin/notifications', requireAdmin, async (req, res) => {
-  try {
-    const notifications = await readJsonFile('notifications.json');
-    res.json(notifications.filter(n => !n.read));
-  } catch (error) {
-    res.status(500).json({ message: 'خطا در دریافت اعلان‌ها' });
-  }
-});
-
-app.post('/api/admin/notifications/read/:id', requireAdmin, async (req, res) => {
-  try {
-    const { id } = req.params;
-    let notifications = await readJsonFile('notifications.json');
-    notifications = notifications.map(n => n.id === id ? { ...n, read: true } : n);
-    await writeJsonFile('notifications.json', notifications);
-    res.json({ message: 'اعلان خوانده شد' });
-  } catch (error) {
-    res.status(500).json({ message: 'خطا در حذف اعلان' });
   }
 });
 
