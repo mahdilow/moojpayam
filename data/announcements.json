@@ -1,5 +1,16 @@
 [
   {
+    "message": "jhjgbjhgjhg",
+    "type": "info",
+    "isActive": true,
+    "dismissible": true,
+    "link": "",
+    "linkText": "",
+    "expiresAt": null,
+    "id": "announcement_1751448377262_ft0fa40qp",
+    "createdAt": "2025-07-02T09:26:17.262Z"
+  },
+  {
     "message": "تخفیف ویژه افتتاح وبسایت🎉",
     "type": "promotion",
     "isActive": true,
