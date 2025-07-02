@@ -145,7 +145,7 @@ const AnnouncementBanner: React.FC = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="flex flex-col sm:flex-row sm:items-center gap-2"
+                  className="flex flex-col items-center lg:flex-row gap-2"
                 >
                   <span className="text-sm md:text-base font-medium leading-relaxed">
                     {announcement.message}
@@ -154,7 +154,7 @@ const AnnouncementBanner: React.FC = () => {
                   {announcement.link && announcement.linkText && (
                     <motion.a
                       href={announcement.link}
-                      className="inline-flex items-center text-sm font-bold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 flex-shrink-0"
+                      className="inline-flex items-center text-sm w-40 font-bold md:flex-row bg-white/20 justify-center hover:bg-white/30 px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105 flex-shrink-0"
                       target={
                         announcement.link.startsWith("http")
                           ? "_blank"

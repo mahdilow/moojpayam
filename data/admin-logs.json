@@ -1,5 +1,374 @@
 [
   {
+    "id": "log_1751459465167_8nyp27lve",
+    "timestamp": "2025-07-02T12:31:05.167Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459464843_et98jnxoh",
+    "timestamp": "2025-07-02T12:31:04.843Z",
+    "adminUser": "admin",
+    "action": "Update announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751459112313_v3q2s818p",
+      "oldData": {
+        "message": "surprise ",
+        "type": "promotion"
+      },
+      "newData": {
+        "message": "surprise 🙃",
+        "type": "promotion"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459451340_2kgdqlnno",
+    "timestamp": "2025-07-02T12:30:51.340Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459449135_4uzjyt6yh",
+    "timestamp": "2025-07-02T12:30:49.135Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459446986_scp485oi1",
+    "timestamp": "2025-07-02T12:30:46.986Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459446670_0dtp12nbx",
+    "timestamp": "2025-07-02T12:30:46.670Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459445073_y73mrzoos",
+    "timestamp": "2025-07-02T12:30:45.073Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "6mvoqmmbbt9wxv9gvi2kfa",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "6mvoqmmbbt9wxv9gvi2kfa"
+  },
+  {
+    "id": "log_1751459233538_incgvy3ns",
+    "timestamp": "2025-07-02T12:27:13.538Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459233270_e8qt1fv5e",
+    "timestamp": "2025-07-02T12:27:13.270Z",
+    "adminUser": "admin",
+    "action": "Update announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751459112313_v3q2s818p",
+      "oldData": {
+        "message": "surprise 😲",
+        "type": "promotion"
+      },
+      "newData": {
+        "message": "surprise ",
+        "type": "promotion"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459220978_6nbdag55b",
+    "timestamp": "2025-07-02T12:27:00.978Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459220078_xzsppcwf7",
+    "timestamp": "2025-07-02T12:27:00.078Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459217502_qrgxj1142",
+    "timestamp": "2025-07-02T12:26:57.502Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459217174_gpqquddmr",
+    "timestamp": "2025-07-02T12:26:57.174Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459215617_7783oge5e",
+    "timestamp": "2025-07-02T12:26:55.617Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "xelm3btx3t21gsyqxtw24",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "xelm3btx3t21gsyqxtw24"
+  },
+  {
+    "id": "log_1751459112582_066691izr",
+    "timestamp": "2025-07-02T12:25:12.582Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459112314_z897z8vj6",
+    "timestamp": "2025-07-02T12:25:12.314Z",
+    "adminUser": "admin",
+    "action": "Create announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751459112313_v3q2s818p",
+      "newData": {
+        "message": "surprise 😲",
+        "type": "promotion"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459033611_jyb7sym8t",
+    "timestamp": "2025-07-02T12:23:53.611Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751459032621_2gyyek1w5",
+    "timestamp": "2025-07-02T12:23:52.621Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458781298_qxzmraon8",
+    "timestamp": "2025-07-02T12:19:41.298Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458451110_ffua8m2jg",
+    "timestamp": "2025-07-02T12:14:11.110Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458450848_nvzvk68pg",
+    "timestamp": "2025-07-02T12:14:10.849Z",
+    "adminUser": "admin",
+    "action": "Update announcement",
+    "category": "content",
+    "details": {
+      "resourceType": "announcement",
+      "resourceId": "announcement_1751301160005_faqod1zjn",
+      "oldData": {
+        "message": "تخفیف ویژه افتتاح وبسایت🎉",
+        "type": "promotion"
+      },
+      "newData": {
+        "message": "تخفیف ویژه افتتاح وبسایت🎉",
+        "type": "promotion"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458441080_0lmkhs15q",
+    "timestamp": "2025-07-02T12:14:01.080Z",
+    "adminUser": "admin",
+    "action": "View announcements",
+    "category": "content",
+    "details": {
+      "announcementCount": 1,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458440217_s82k2xlq3",
+    "timestamp": "2025-07-02T12:14:00.217Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458438169_o21tyzy9z",
+    "timestamp": "2025-07-02T12:13:58.169Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458437838_6e65vbwvg",
+    "timestamp": "2025-07-02T12:13:57.838Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1751458436271_p1iof61um",
+    "timestamp": "2025-07-02T12:13:56.271Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "1nr9eon6zsoiipjf546yl",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "1nr9eon6zsoiipjf546yl"
+  },
+  {
     "id": "log_1751452115430_ipjp1m9hj",
     "timestamp": "2025-07-02T10:28:35.430Z",
     "adminUser": "admin",
