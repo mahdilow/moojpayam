@@ -20,23 +20,28 @@ import { useState, useEffect } from "react";
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
-
-  // Only trigger loading on pathname change, not hash change
   const { pathname } = location;
 
+  // Detect if we're on the home page
+  const isHomePage = pathname === "/";
+
   useEffect(() => {
+    // Disable loading screen on home page to fix LCP
+    if (isHomePage) {
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     const timeout = setTimeout(() => setIsLoading(false), 900);
     return () => clearTimeout(timeout);
   }, [pathname]);
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
   return (
     <div dir="rtl" className="font-vazir overflow-x-hidden max-w-screen">
-      <LoadingScreen isLoading={isLoading} />
+      {/* Only show loading screen on non-home pages */}
+      {!isHomePage && <LoadingScreen isLoading={isLoading} />}
+
       <Toaster
         position="top-center"
         toastOptions={{
@@ -48,6 +53,7 @@ function AppContent() {
           },
         }}
       />
+
       <Routes>
         <Route
           path="/"
@@ -57,6 +63,7 @@ function AppContent() {
             </MainLayout>
           }
         />
+        {/* other routes */}
         <Route
           path="/blog"
           element={
@@ -83,7 +90,6 @@ function AppContent() {
         />
         <Route path="/mooj-admin" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        {/* 404 Page - This should be the last route */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

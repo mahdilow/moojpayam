@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center mb-4">
               <img
                 src={"/assets/logo.png"}
-                alt="موج پیام"
+                alt="لوگو پنل پیامک موج پیام"
                 className="h-16 sm:h-20 w-auto"
               />
               <span className="mr-2 text-lg sm:text-xl font-bold text-blue-400">
@@ -44,7 +44,9 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">لینک‌های سریع</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">
+              لینک‌های سریع
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -99,7 +101,9 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">خدمات</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">
+              خدمات
+            </h3>
             <ul className="space-y-2">
               <li>
                 <a
@@ -154,28 +158,52 @@ const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">اطلاعات تماس</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">
+              اطلاعات تماس
+            </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <Phone size={16} className="ml-2 mt-1 text-blue-400 flex-shrink-0" />
+                <Phone
+                  size={16}
+                  className="ml-2 mt-1 text-blue-400 flex-shrink-0"
+                />
                 <div className="text-sm sm:text-base">
-                  <a href="tel:+989100711835" className="text-gray-400 hover:text-blue-400 transition-colors block">
+                  <a
+                    href="tel:+989100711835"
+                    className="text-gray-400 hover:text-blue-400 transition-colors block"
+                  >
                     ۰۹۱۰۰۷۱۱۸۳۵
                   </a>
-                  <a href="tel:+989108680274" className="text-gray-400 hover:text-blue-400 transition-colors block">
+                  <a
+                    href="tel:+989108680274"
+                    className="text-gray-400 hover:text-blue-400 transition-colors block"
+                  >
                     ۰۹۱۰۸۶۸۰۲۷۴
                   </a>
                 </div>
               </li>
               <li className="flex items-start">
-                <Mail size={16} className="ml-2 mt-1 text-blue-400 flex-shrink-0" />
-                <a href="mailto:contact@moojpayam.ir" className="text-sm sm:text-base">
-                  <span className="text-gray-400 hover:text-blue-400 transition-colors">contact@moojpayam.ir</span>
+                <Mail
+                  size={16}
+                  className="ml-2 mt-1 text-blue-400 flex-shrink-0"
+                />
+                <a
+                  href="mailto:contact@moojpayam.ir"
+                  className="text-sm sm:text-base"
+                >
+                  <span className="text-gray-400 hover:text-blue-400 transition-colors">
+                    contact@moojpayam.ir
+                  </span>
                 </a>
               </li>
               <li className="flex items-start">
-                <MapPin size={16} className="ml-2 mt-1 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm sm:text-base">کرج طالقانی جنوبی</span>
+                <MapPin
+                  size={16}
+                  className="ml-2 mt-1 text-blue-400 flex-shrink-0"
+                />
+                <span className="text-gray-400 text-sm sm:text-base">
+                  کرج طالقانی جنوبی
+                </span>
               </li>
             </ul>
           </div>

@@ -12,7 +12,6 @@ import {
   Plus,
   LogOut,
   Activity,
-  Upload,
   Megaphone,
 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -97,7 +96,9 @@ const AdminDashboard: React.FC = () => {
 
   // Pricing form state
   const [showPricingForm, setShowPricingForm] = useState(false);
-  const [editingPricing, setEditingPricing] = useState<PricingPlan | null>(null);
+  const [editingPricing, setEditingPricing] = useState<PricingPlan | null>(
+    null
+  );
   const [pricingForm, setPricingForm] = useState({
     name: "",
     price: "",
@@ -209,9 +210,7 @@ const AdminDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        toast.success(
-          editingBlog ? "مقاله ویرایش شد" : "مقاله جدید ایجاد شد"
-        );
+        toast.success(editingBlog ? "مقاله ویرایش شد" : "مقاله جدید ایجاد شد");
         loadBlogs();
         resetBlogForm();
       } else {
@@ -398,7 +397,7 @@ const AdminDashboard: React.FC = () => {
             <div className="flex items-center">
               <img
                 src="/assets/logo.png"
-                alt="موج پیام"
+                alt="لوگو پنل پیامک موج پیام"
                 className="h-10 w-auto ml-3"
               />
               <h1 className="text-2xl font-bold text-gray-900">
@@ -599,7 +598,9 @@ const AdminDashboard: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">مدیریت مقالات</h2>
+              <h2 className="text-2xl font-bold text-gray-900">
+                مدیریت مقالات
+              </h2>
               <button
                 onClick={() => setShowBlogForm(true)}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
@@ -957,9 +958,7 @@ const AdminDashboard: React.FC = () => {
                         <div key={index} className="flex items-center">
                           <span
                             className={`w-4 h-4 rounded-full ml-2 ${
-                              feature.included
-                                ? "bg-green-500"
-                                : "bg-gray-300"
+                              feature.included ? "bg-green-500" : "bg-gray-300"
                             }`}
                           ></span>
                           <span className="text-sm text-gray-700">
@@ -1211,7 +1210,9 @@ const AdminDashboard: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">مدیریت اعلان‌ها</h2>
+              <h2 className="text-2xl font-bold text-gray-900">
+                مدیریت اعلان‌ها
+              </h2>
               <button
                 onClick={() => setShowAnnouncementManager(true)}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"

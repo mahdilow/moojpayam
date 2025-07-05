@@ -18,20 +18,15 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between min-h-[60vh] sm:min-h-[70vh] max-w-7xl mx-auto lg:gap-16">
           {/* Image Section */}
           <div className="w-full lg:w-6/12 mb-8 lg:mb-0 order-1 lg:order-2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative flex items-center justify-center"
-            >
+            <div className="relative flex items-center justify-center">
               <motion.img
-                src="/assets/mooj_payam_wave_hero.png"
-                alt="موج پیام - ارسال پیامک مثل موج دریا"
+                src="/assets/mooj_payam_wave_hero.webp"
+                alt="موج پیام | ارسال پیامک سریع و ارزان"
                 className="w-full max-w-sm sm:max-w-md lg:max-w-none h-auto drop-shadow-2xl"
-                animate={{
-                  y: [0, -8, 0],
-                }}
+                fetchPriority="high"
+                animate={{ y: [0, -8, 0] }}
                 transition={{
+                  delay: 1, // delays animation to let image paint first
                   duration: 4,
                   repeat: Infinity,
                   repeatType: "reverse",
@@ -39,7 +34,7 @@ const HeroSection: React.FC = () => {
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-2xl scale-110 -z-10"></div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Content Section */}

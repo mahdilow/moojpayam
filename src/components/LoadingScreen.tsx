@@ -25,7 +25,11 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
         }}
         className="relative mb-6"
       >
-        <img src={"/assets/logo.png"} alt="موج پیام" className="h-32 w-auto" />
+        <img
+          src={"/assets/logo.png"}
+          alt="لوگو پنل یپامک موج پیام"
+          className="h-32 w-auto"
+        />
       </motion.div>
 
       <motion.div

@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="flex items-center">
             <img
               src={"/assets/logo.png"}
-              alt="موج پیام"
+              alt="لوگو پنل پیامک موج پیام"
               className="h-14 sm:h-16 md:h-20 w-auto logo-pulse"
             />
             <span className="mr-2 text-lg sm:text-xl md:text-2xl brand-name">
