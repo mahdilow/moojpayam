@@ -2,14 +2,14 @@
   {
     "message": "surprise 🙃",
     "type": "promotion",
-    "isActive": true,
+    "isActive": false,
     "dismissible": true,
     "link": "/#pricing",
     "linkText": "دریافت",
     "expiresAt": null,
     "id": "announcement_1751459112313_v3q2s818p",
     "createdAt": "2025-07-02T12:25:12.313Z",
-    "updatedAt": "2025-07-02T12:31:04.842Z"
+    "updatedAt": "2025-07-03T16:15:04.011Z"
   },
   {
     "message": "تخفیف ویژه افتتاح وبسایت🎉",

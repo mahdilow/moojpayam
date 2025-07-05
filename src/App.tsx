@@ -35,7 +35,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div dir="rtl" className="font-vazir">
+    <div dir="rtl" className="font-vazir overflow-x-hidden max-w-screen">
       <LoadingScreen isLoading={isLoading} />
       <Toaster
         position="top-center"
