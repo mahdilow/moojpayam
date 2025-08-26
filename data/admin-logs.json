@@ -1,5 +1,454 @@
 [
   {
+    "id": "log_1755509096069_n9hfrlkpa",
+    "timestamp": "2025-08-18T09:24:56.069Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509095810_qtgcp7u1y",
+    "timestamp": "2025-08-18T09:24:55.810Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1752222018210,
+      "oldData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های مختلف آن",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های مختلف آن",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509091438_xj88h2430",
+    "timestamp": "2025-08-18T09:24:51.438Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509089154_0zt1n05gy",
+    "timestamp": "2025-08-18T09:24:49.154Z",
+    "adminUser": "admin",
+    "action": "Upload image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1755509089149-765504475.jpg",
+      "originalName": "sms_marketing_improves_sales_afzayesh_forosh_ba_sms_moojpayam.jpg",
+      "size": 98409,
+      "mimetype": "image/jpeg",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509080469_q5qzv2z26",
+    "timestamp": "2025-08-18T09:24:40.469Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509080153_k0zqloxas",
+    "timestamp": "2025-08-18T09:24:40.153Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509079544_bonoyp1i4",
+    "timestamp": "2025-08-18T09:24:39.544Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755509078649_c15lg8yd7",
+    "timestamp": "2025-08-18T09:24:38.649Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755508251643_ekl0kmaqs",
+    "timestamp": "2025-08-18T09:10:51.643Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506787259_a7n6ff47q",
+    "timestamp": "2025-08-18T08:46:27.259Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506787008_xy6wd0m56",
+    "timestamp": "2025-08-18T08:46:27.008Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1752222018210,
+      "oldData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های تبلیغات پیامکی",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های مختلف آن",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506563462_ksme2l87m",
+    "timestamp": "2025-08-18T08:42:43.462Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506561586_d6iz3h17s",
+    "timestamp": "2025-08-18T08:42:41.586Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506561276_8n8l030rp",
+    "timestamp": "2025-08-18T08:42:41.276Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506559719_7jy1mdaso",
+    "timestamp": "2025-08-18T08:42:39.719Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "z05kfhy7xy93x3yfi7sf5",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "z05kfhy7xy93x3yfi7sf5"
+  },
+  {
+    "id": "log_1755506246459_lpv4jntnh",
+    "timestamp": "2025-08-18T08:37:26.459Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506239483_93q3nxh7u",
+    "timestamp": "2025-08-18T08:37:19.483Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506239181_iwql9vg0i",
+    "timestamp": "2025-08-18T08:37:19.181Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1755506237618_vhpp14muw",
+    "timestamp": "2025-08-18T08:37:17.618Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "mp9hu3xkfpr95zr6ilxlal",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "mp9hu3xkfpr95zr6ilxlal"
+  },
+  {
+    "id": "log_1752222018555_nt8uaj46o",
+    "timestamp": "2025-07-11T08:20:18.555Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752222018239_zpckgmcmg",
+    "timestamp": "2025-07-11T08:20:18.239Z",
+    "adminUser": "admin",
+    "action": "Create blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1752222018210,
+      "newData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های تبلیغات پیامکی",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752222014060_hpe6bltox",
+    "timestamp": "2025-07-11T08:20:14.060Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221449036_nguar7tdf",
+    "timestamp": "2025-07-11T08:10:49.036Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 2,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221443854_z5t54ql8k",
+    "timestamp": "2025-07-11T08:10:43.854Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221443526_hs3vaoime",
+    "timestamp": "2025-07-11T08:10:43.526Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221441959_sktdotpbo",
+    "timestamp": "2025-07-11T08:10:41.959Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "el1tjpze2lcmfq6a70mdo",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "el1tjpze2lcmfq6a70mdo"
+  },
+  {
+    "id": "log_1752221308030_zva8q3j7l",
+    "timestamp": "2025-07-11T08:08:28.030Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221307703_sxj49lnv3",
+    "timestamp": "2025-07-11T08:08:27.703Z",
+    "adminUser": "admin",
+    "action": "Update pricing plan",
+    "category": "content",
+    "details": {
+      "resourceType": "pricing",
+      "resourceId": 3,
+      "oldData": {
+        "name": "ویژه",
+        "price": "قیمت گذاری سفارشی"
+      },
+      "newData": {
+        "name": "ویژه",
+        "price": "قیمت گذاری سفارشی"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221296851_529ygkjeq",
+    "timestamp": "2025-07-11T08:08:16.851Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221293061_t0nzj7mb8",
+    "timestamp": "2025-07-11T08:08:13.061Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221292739_xx5pm7431",
+    "timestamp": "2025-07-11T08:08:12.739Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1752221291162_obf05q4fy",
+    "timestamp": "2025-07-11T08:08:11.162Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "sessionId": "arq3o77wxq8b6n4bzjy9jo",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "arq3o77wxq8b6n4bzjy9jo"
+  },
+  {
     "id": "log_1751472053150_25aby3z7n",
     "timestamp": "2025-07-02T16:00:53.150Z",
     "adminUser": "admin",
