@@ -163,26 +163,6 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <Phone
-                  size={16}
-                  className="ml-2 mt-1 text-blue-400 flex-shrink-0"
-                />
-                <div className="text-sm sm:text-base">
-                  <a
-                    href="tel:+989100711835"
-                    className="text-gray-400 hover:text-blue-400 transition-colors block"
-                  >
-                    ۰۹۱۰۰۷۱۱۸۳۵
-                  </a>
-                  <a
-                    href="tel:+989108680274"
-                    className="text-gray-400 hover:text-blue-400 transition-colors block"
-                  >
-                    ۰۹۱۰۸۶۸۰۲۷۴
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start">
                 <Mail
                   size={16}
                   className="ml-2 mt-1 text-blue-400 flex-shrink-0"

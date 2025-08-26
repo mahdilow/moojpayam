@@ -148,7 +148,7 @@ const NotFoundPage: React.FC = () => {
               </h3>
               <div className="space-y-3">
                 <a
-                  href="#contact"
+                  href="/#contact"
                   className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"
                 >
                   <div className="font-medium text-gray-900">
@@ -158,13 +158,7 @@ const NotFoundPage: React.FC = () => {
                     ۲۴ ساعته در خدمت شما هستیم
                   </div>
                 </a>
-                <a
-                  href="tel:+989100711835"
-                  className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"
-                >
-                  <div className="font-medium text-gray-900">تماس تلفنی</div>
-                  <div className="text-sm text-gray-600">۰۹۱۰۰۷۱۱۸۳۵</div>
-                </a>
+
                 <a
                   href="mailto:contact@moojpayam.ir"
                   className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"

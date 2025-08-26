@@ -134,7 +134,9 @@ const ContactSection: React.FC = () => {
                       <h4 className="text-xl font-bold text-green-600">
                         با تشکر!
                       </h4>
-                      <p className="text-gray-700 text-center px-4">{statusMessage}</p>
+                      <p className="text-gray-700 text-center px-4">
+                        {statusMessage}
+                      </p>
                     </motion.div>
                   )}
 
@@ -148,7 +150,9 @@ const ContactSection: React.FC = () => {
                       <h4 className="text-xl font-bold text-red-600">
                         خطا در ارسال پیام
                       </h4>
-                      <p className="text-gray-700 text-center px-4">{statusMessage}</p>
+                      <p className="text-gray-700 text-center px-4">
+                        {statusMessage}
+                      </p>
                       <button
                         onClick={() => setFormStatus("idle")}
                         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
@@ -292,43 +296,46 @@ const ContactSection: React.FC = () => {
             viewport={{ once: true }}
           >
             <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl shadow-md p-6 sm:p-8 h-full">
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">اطلاعات تماس</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">
+                اطلاعات تماس
+              </h3>
 
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start">
-                  <Phone className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
-                  <div>
-                    <h4 className="font-bold mb-1 text-sm sm:text-base">شماره تماس</h4>
-                    <a href="tel:+9100711835" className="block text-sm sm:text-base">
-                      <p className="opacity-90">۰۹۱۰۰۷۱۱۸۳۵</p>
-                    </a>
-                    <a href="tel:+9108680274" className="block text-sm sm:text-base">
-                      <p className="opacity-90">۰۹۱۰۸۶۸۰۲۷۴</p>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
                   <Mail className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
                   <div>
-                    <h4 className="font-bold mb-1 text-sm sm:text-base">ایمیل</h4>
-                    <a href="mailto:contact@moojpayam.ir" className="text-sm sm:text-base">
+                    <h4 className="font-bold mb-1 text-sm sm:text-base">
+                      ایمیل
+                    </h4>
+                    <a
+                      href="mailto:contact@moojpayam.ir"
+                      className="text-sm sm:text-base"
+                    >
                       <p className="opacity-90">contact@moojpayam.ir</p>
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <MapPin className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
+                  <MapPin
+                    className="ml-3 sm:ml-4 mt-1 flex-shrink-0"
+                    size={20}
+                  />
                   <div>
-                    <h4 className="font-bold mb-1 text-sm sm:text-base">آدرس</h4>
-                    <p className="opacity-90 text-sm sm:text-base">کرج طالقانی جنوبی</p>
+                    <h4 className="font-bold mb-1 text-sm sm:text-base">
+                      آدرس
+                    </h4>
+                    <p className="opacity-90 text-sm sm:text-base">
+                      کرج طالقانی جنوبی
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8 sm:mt-10">
-                <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base">ساعات کاری</h4>
+                <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base">
+                  ساعات کاری
+                </h4>
                 <div className="grid grid-cols-2 gap-2 text-sm sm:text-base">
                   <div className="text-white opacity-90">شنبه تا چهارشنبه:</div>
                   <div className="text-white">۸ صبح تا ۶ عصر</div>
