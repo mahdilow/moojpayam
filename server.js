@@ -422,10 +422,26 @@ app.get('/api/admin/images', requireAdmin, async (req, res) => {
 
 // Email endpoint
 app.post('/api/send-email', contactFormLimiter, async (req, res) => {
-  const { name, phone, subject, message } = req.body;
+  const { name, phone, email, subject, message, otpVerified } = req.body;
 
+  // Validate required fields
   if (!name || !phone || !subject || !message) {
-    return res.status(400).json({ message: 'لطفا همه فیلدها را پر کنید' });
+    return res.status(400).json({ message: 'لطفاً همه فیلدهای الزامی را پر کنید' });
+  }
+  
+  // Validate phone number
+  const phoneRegex = /^(\+98|0)?9\d{9}$/;
+  if (!phoneRegex.test(phone)) {
+    return res.status(400).json({ 
+      message: 'شماره موبایل نامعتبر است. فرمت صحیح: 09XXXXXXXXX' 
+    });
+  }
+  
+  // Check OTP verification (mandatory for phone)
+  if (!otpVerified) {
+    return res.status(400).json({ 
+      message: 'لطفاً ابتدا شماره موبایل خود را تایید کنید' 
+    });
   }
 
   try {
@@ -446,11 +462,14 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
           <h2>پیام جدید از فرم تماس سایت موج پیام</h2>
           <p><strong>نام:</strong> ${name}</p>
           <p><strong>شماره موبایل:</strong> ${phone}</p>
+          ${email ? `<p><strong>ایمیل:</strong> ${email}</p>` : ''}
           <p><strong>موضوع:</strong> ${subject}</p>
           <p><strong>پیام:</strong></p>
           <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
             ${message.replace(/\n/g, '<br>')}
           </div>
+          <hr style="border: 1px solid #eee; margin: 20px 0;" />
+          <p style="color: #28a745; font-weight: bold;">✅ شماره موبایل تایید شده</p>
           <hr style="border: 1px solid #eee; margin: 20px 0;" />
           <p>این ایمیل به صورت خودکار از سایت موج پیام ارسال شده است.</p>
         </div>
