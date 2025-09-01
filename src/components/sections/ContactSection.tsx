@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Phone,
   Mail,
   MapPin,
   MessageSquare,
@@ -59,7 +58,9 @@ const ContactSection: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<FormStep>("contact");
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
   const [statusMessage, setStatusMessage] = useState("");
-  const [contactData, setContactData] = useState<ContactFormValues | null>(null);
+  const [contactData, setContactData] = useState<ContactFormValues | null>(
+    null
+  );
   const [otpExpiresAt, setOtpExpiresAt] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [canResend, setCanResend] = useState(false);
@@ -107,7 +108,8 @@ const ContactSection: React.FC = () => {
       }
     } catch (error) {
       setFormStatus("error");
-      const errorMsg = error instanceof Error ? error.message : "خطا در ارسال کد تایید";
+      const errorMsg =
+        error instanceof Error ? error.message : "خطا در ارسال کد تایید";
       setStatusMessage(errorMsg);
       toast.error(errorMsg);
     }
@@ -142,7 +144,8 @@ const ContactSection: React.FC = () => {
       }
     } catch (error) {
       setFormStatus("error");
-      const errorMsg = error instanceof Error ? error.message : "خطا در تایید کد";
+      const errorMsg =
+        error instanceof Error ? error.message : "خطا در تایید کد";
       setStatusMessage(errorMsg);
       toast.error(errorMsg);
     }
@@ -165,7 +168,8 @@ const ContactSection: React.FC = () => {
       }
     } catch (error) {
       setFormStatus("error");
-      const errorMsg = error instanceof Error ? error.message : "خطا در ارسال مجدد کد";
+      const errorMsg =
+        error instanceof Error ? error.message : "خطا در ارسال مجدد کد";
       toast.error(errorMsg);
     }
   };
@@ -321,10 +325,14 @@ const ContactSection: React.FC = () => {
                                   : "border-gray-300"
                               } rounded-lg p-3 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 outline-none transition-colors text-sm sm:text-base`}
                               placeholder="09123456789"
-                              onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                              onInput={(
+                                e: React.FormEvent<HTMLInputElement>
+                              ) => {
                                 const target = e.target as HTMLInputElement;
                                 // Only allow digits and limit to 11 characters
-                                target.value = target.value.replace(/\D/g, '').slice(0, 11);
+                                target.value = target.value
+                                  .replace(/\D/g, "")
+                                  .slice(0, 11);
                               }}
                             />
                             <ErrorMessage
@@ -428,15 +436,10 @@ const ContactSection: React.FC = () => {
                           ) : (
                             <>
                               <Shield className="ml-2" size={20} />
-                              ارسال کد تایید
+                              ارسال پبام
                             </>
                           )}
                         </button>
-
-                        <div className="text-center text-sm text-gray-500">
-                          <Shield className="inline w-4 h-4 ml-1" />
-                          برای امنیت، کد تایید به شماره موبایل شما ارسال می‌شود
-                        </div>
                       </Form>
                     )}
                   </Formik>
@@ -473,7 +476,13 @@ const ContactSection: React.FC = () => {
                     validationSchema={OTPSchema}
                     onSubmit={handleOTPSubmit}
                   >
-                    {({ isSubmitting, errors, touched, values, setFieldValue }) => (
+                    {({
+                      isSubmitting,
+                      errors,
+                      touched,
+                      values,
+                      setFieldValue,
+                    }) => (
                       <Form className="space-y-6">
                         <div>
                           <Field
@@ -489,8 +498,10 @@ const ContactSection: React.FC = () => {
                             onInput={(e: React.FormEvent<HTMLInputElement>) => {
                               const target = e.target as HTMLInputElement;
                               // Only allow digits and limit to 4 characters
-                              const value = target.value.replace(/\D/g, '').slice(0, 4);
-                              setFieldValue('otp', value);
+                              const value = target.value
+                                .replace(/\D/g, "")
+                                .slice(0, 4);
+                              setFieldValue("otp", value);
                             }}
                           />
                           <ErrorMessage
@@ -505,7 +516,9 @@ const ContactSection: React.FC = () => {
                           <div className="text-center">
                             <div className="flex items-center justify-center text-gray-600">
                               <Clock size={16} className="ml-2" />
-                              <span>زمان باقی‌مانده: {formatTime(timeLeft)}</span>
+                              <span>
+                                زمان باقی‌مانده: {formatTime(timeLeft)}
+                              </span>
                             </div>
                           </div>
                         )}
@@ -581,20 +594,17 @@ const ContactSection: React.FC = () => {
                   transition={{ duration: 0.3 }}
                   className="text-center py-8"
                 >
-                  <CheckCircle className="text-green-500 mb-4 mx-auto" size={60} />
+                  <CheckCircle
+                    className="text-green-500 mb-4 mx-auto"
+                    size={60}
+                  />
                   <h3 className="text-2xl font-bold text-green-600 mb-4">
                     پیام شما با موفقیت ارسال شد!
                   </h3>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    {statusMessage}
-                  </p>
                   <p className="text-gray-600 mb-6">
                     تیم پشتیبانی ما در اسرع وقت با شما تماس خواهند گرفت.
                   </p>
-                  <button
-                    onClick={resetForm}
-                    className="btn btn-primary"
-                  >
+                  <button onClick={resetForm} className="btn btn-primary">
                     ارسال پیام جدید
                   </button>
                 </motion.div>
@@ -616,80 +626,78 @@ const ContactSection: React.FC = () => {
             </AnimatePresence>
           </motion.div>
 
-          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl shadow-md p-6 sm:p-8 h-full">
+            {/* The main container is now a flex column without vertical centering */}
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl shadow-md p-6 sm:p-8 h-full flex flex-col">
+              {/* This title will stay at the top */}
               <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">
                 اطلاعات تماس
               </h3>
 
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex items-start">
-                  <Mail className="ml-3 sm:ml-4 mt-1 flex-shrink-0" size={20} />
-                  <div>
-                    <h4 className="font-bold mb-1 text-sm sm:text-base">
-                      ایمیل
-                    </h4>
-                    <a
-                      href="mailto:contact@moojpayam.ir"
-                      className="text-sm sm:text-base"
-                    >
-                      <p className="opacity-90">contact@moojpayam.ir</p>
-                    </a>
+              {/* This new wrapper will grow to fill space and center the content below */}
+              <div className="flex-1 flex flex-col justify-center">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-start">
+                    <Mail
+                      className="ml-3 sm:ml-4 mt-1 flex-shrink-0"
+                      size={20}
+                    />
+                    <div>
+                      <h4 className="font-bold mb-1 text-sm sm:text-base">
+                        ایمیل
+                      </h4>
+                      <a
+                        href="mailto:contact@moojpayam.ir"
+                        className="text-sm sm:text-base"
+                      >
+                        <p className="opacity-90">contact@moojpayam.ir</p>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <MapPin
+                      className="ml-3 sm:ml-4 mt-1 flex-shrink-0"
+                      size={20}
+                    />
+                    <div>
+                      <h4 className="font-bold mb-1 text-sm sm:text-base">
+                        آدرس
+                      </h4>
+                      <p className="opacity-90 text-sm sm:text-base">
+                        کرج طالقانی جنوبی
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start">
-                  <MapPin
-                    className="ml-3 sm:ml-4 mt-1 flex-shrink-0"
-                    size={20}
-                  />
-                  <div>
-                    <h4 className="font-bold mb-1 text-sm sm:text-base">
-                      آدرس
-                    </h4>
-                    <p className="opacity-90 text-sm sm:text-base">
-                      کرج طالقانی جنوبی
-                    </p>
+                <div className="mt-8 sm:mt-10">
+                  <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base">
+                    ساعات کاری
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2 text-sm sm:text-base">
+                    <div className="text-white opacity-90">
+                      شنبه تا چهارشنبه:
+                    </div>
+                    <div className="text-white">۸ صبح تا ۶ عصر</div>
+                    <div className="text-white opacity-90">پنج‌شنبه:</div>
+                    <div className="text-white">۸ صبح تا ۱ بعدازظهر</div>
+                    <div className="text-white opacity-90">جمعه:</div>
+                    <div className="text-white">تعطیل</div>
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-8 sm:mt-10">
-                <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base">
-                  ساعات کاری
-                </h4>
-                <div className="grid grid-cols-2 gap-2 text-sm sm:text-base">
-                  <div className="text-white opacity-90">شنبه تا چهارشنبه:</div>
-                  <div className="text-white">۸ صبح تا ۶ عصر</div>
-                  <div className="text-white opacity-90">پنج‌شنبه:</div>
-                  <div className="text-white">۸ صبح تا ۱ بعدازظهر</div>
-                  <div className="text-white opacity-90">جمعه:</div>
-                  <div className="text-white">تعطیل</div>
+                <div className="mt-8 sm:mt-10 flex items-center">
+                  <MessageSquare className="ml-2 flex-shrink-0" size={18} />
+                  <p className="opacity-90 text-sm sm:text-base">
+                    پشتیبانی آنلاین: ۲۴ ساعته، ۷ روز هفته
+                  </p>
                 </div>
-              </div>
-
-              <div className="mt-8 sm:mt-10 flex items-center">
-                <MessageSquare className="ml-2 flex-shrink-0" size={18} />
-                <p className="opacity-90 text-sm sm:text-base">
-                  پشتیبانی آنلاین: ۲۴ ساعته، ۷ روز هفته
-                </p>
-              </div>
-
-              {/* Security Notice */}
-              <div className="mt-8 bg-white/10 backdrop-blur rounded-lg p-4">
-                <div className="flex items-center mb-2">
-                  <Shield className="ml-2 text-white" size={16} />
-                  <span className="font-bold text-sm">امنیت اطلاعات</span>
-                </div>
-                <p className="text-white/90 text-xs">
-                  تمام اطلاعات شما با رمزنگاری SSL محافظت می‌شود و کد تایید پیامکی برای اطمینان از هویت شما ارسال می‌گردد.
-                </p>
               </div>
             </div>
           </motion.div>

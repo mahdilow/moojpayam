@@ -10,6 +10,8 @@ import cookieParser from 'cookie-parser';
 import fs from 'fs/promises';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
+import soap from 'soap'; // if using ESM
+
 
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -70,12 +72,20 @@ const upload = multer({
     }
   }
 });
-
+app.set('trust proxy', 1); // Trust the first proxy
 // Rate limiters
 const contactFormLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 2,
   message: { message: 'شما بیش از حد مجاز در ساعت پیام ارسال کرده‌اید. لطفاً بعداً دوباره تلاش کنید.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const otpLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 5,
+  message: { message: 'تعداد درخواست‌های کد تایید بیش از حد مجاز. لطفاً ۵ دقیقه صبر کنید.' },
   standardHeaders: true,
   legacyHeaders: false,
 });
@@ -111,6 +121,7 @@ const viewTrackingLimiter = rateLimit({
 
 // Simple session store
 const activeSessions = new Set();
+const otpStore = new Map(); // In-memory OTP store
 
 // Helper functions for JSON file operations
 const readJsonFile = async (filename) => {
@@ -420,6 +431,93 @@ app.get('/api/admin/images', requireAdmin, async (req, res) => {
   }
 });
 
+
+// OTP endpoint
+app.post('/api/send-otp', otpLimiter, async (req, res) => {
+  const { phone } = req.body;
+
+  if (!phone || !/^(\+98|0)?9\d{9}$/.test(phone)) {
+    return res.status(400).json({ message: 'شماره موبایل نامعتبر است' });
+  }
+
+  try {
+    // Generate OTP
+    const otp = Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit OTP
+    const expires = Date.now() + 2 * 60 * 1000; // 2 minutes
+    const expiresInSeconds = 120; // 2 minutes in seconds
+
+
+    otpStore.set(phone, { otp, expires });
+
+    // WSDL SOAP client
+    const wsdlUrl = 'http://api.payamak-panel.com/post/send.asmx?wsdl';
+    const username = process.env.SMS_USERNAME;
+    const password = process.env.SMS_PASSWORD;
+    const bodyId = process.env.SMS_BODY_ID;
+
+    const client = await soap.createClientAsync(wsdlUrl);
+
+    const args = {
+      username,
+      password,
+      text: { string: [otp] }, // OTP as array
+      to: phone,
+      bodyId,
+    };
+
+    // Call SendByBaseNumber
+    const result = await client.SendByBaseNumberAsync(args);
+
+    // Access numeric response safely
+    const responseCode =
+      (result && result.SendByBaseNumberResult) ||
+      (Array.isArray(result) && result[0]?.SendByBaseNumberResult);
+
+    if (!responseCode || parseInt(responseCode) <= 0) {
+      console.error('Failed to send OTP, response code:', responseCode);
+      return res.status(500).json({ message: 'خطا در ارسال کد تایید' });
+    }
+
+    console.log(`✅ OTP for ${phone}: ${otp} (response code: ${responseCode})`);
+
+    res.json({
+      success: true,
+      message: `کد تایید به شماره ${phone} ارسال شد`,
+      expiresIn: expiresInSeconds,
+    });
+  } catch (error) {
+    console.error('OTP sending error:', error);
+    res.status(500).json({ message: 'خطا در ارسال کد تایید' });
+  }
+});
+
+app.post('/api/verify-otp', otpLimiter, async (req, res) => {
+  const { phone, otp } = req.body;
+
+  if (!phone || !otp) {
+    return res.status(400).json({ message: 'شماره موبایل و کد تایید الزامی است' });
+  }
+
+  const storedOtp = otpStore.get(phone);
+
+  if (!storedOtp) {
+    return res.status(400).json({ message: 'کد تایید برای این شماره یافت نشد' });
+  }
+
+  if (Date.now() > storedOtp.expires) {
+    otpStore.delete(phone);
+    return res.status(400).json({ message: 'کد تایید منقضی شده است' });
+  }
+
+  if (storedOtp.otp === otp) {
+    otpStore.delete(phone); // OTP is used, so delete it
+    return res.json({ success: true, verified: true, message: 'شماره موبایل با موفقیت تایید شد' });
+  } else {
+    return res.status(400).json({ success: false, verified: false, message: 'کد تایید نامعتبر است' });
+  }
+});
+
+
 // Email endpoint
 app.post('/api/send-email', contactFormLimiter, async (req, res) => {
   const { name, phone, email, subject, message, otpVerified } = req.body;
@@ -428,19 +526,19 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
   if (!name || !phone || !subject || !message) {
     return res.status(400).json({ message: 'لطفاً همه فیلدهای الزامی را پر کنید' });
   }
-  
+
   // Validate phone number
   const phoneRegex = /^(\+98|0)?9\d{9}$/;
   if (!phoneRegex.test(phone)) {
-    return res.status(400).json({ 
-      message: 'شماره موبایل نامعتبر است. فرمت صحیح: 09XXXXXXXXX' 
+    return res.status(400).json({
+      message: 'شماره موبایل نامعتبر است. فرمت صحیح: 09XXXXXXXXX'
     });
   }
-  
+
   // Check OTP verification (mandatory for phone)
   if (!otpVerified) {
-    return res.status(400).json({ 
-      message: 'لطفاً ابتدا شماره موبایل خود را تایید کنید' 
+    return res.status(400).json({
+      message: 'لطفاً ابتدا شماره موبایل خود را تایید کنید'
     });
   }
 
