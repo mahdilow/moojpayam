@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 <FaInstagram size={20} />
               </a>
               <a
-                href="#"
+                href="https://t.me/moojpayam_support"
                 className="text-gray-400 hover:text-blue-400 transition-colors"
                 aria-label="تلگرام"
               >
