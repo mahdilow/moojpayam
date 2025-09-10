@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between min-h-[60vh] sm:min-h-[70vh] max-w-7xl mx-auto lg:gap-16">
           {/* Image Section */}
           <div className="w-full lg:w-6/12 mb-8 lg:mb-0 order-1 lg:order-2">
-            <div className="relative flex items-center justify-center">
+            <div className="relative flex items-start justify-center">
               <motion.img
                 src="/assets/mooj_payam_wave_hero.webp"
                 alt="موج پیام | ارسال پیامک سریع و ارزان"
@@ -112,7 +112,7 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="mt-12 sm:mt-16 text-center"
+          className="mt-4 sm:-mt-8 text-center"
         >
           <a
             href="#features"

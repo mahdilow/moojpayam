@@ -89,15 +89,11 @@ const Navbar: React.FC = () => {
               صفحه اصلی
             </ScrollLink>
             <ScrollLink
-              to="features"
+              to="/features"
               className={linkClass}
               closeMenu={closeMenu}
-              isHashLink
             >
               امکانات
-            </ScrollLink>
-            <ScrollLink to="/features" className={linkClass} closeMenu={closeMenu}>
-              امکانات کامل
             </ScrollLink>
             <ScrollLink
               to="pricing"
@@ -176,19 +172,11 @@ const Navbar: React.FC = () => {
                     صفحه اصلی
                   </ScrollLink>
                   <ScrollLink
-                    to="features"
-                    className={linkClass}
-                    closeMenu={closeMenu}
-                    isHashLink
-                  >
-                    امکانات
-                  </ScrollLink>
-                  <ScrollLink
                     to="/features"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
-                    امکانات کامل
+                    امکانات
                   </ScrollLink>
                   <ScrollLink
                     to="pricing"

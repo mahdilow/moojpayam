@@ -11,6 +11,7 @@ import fs from 'fs/promises';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import soap from 'soap'; // if using ESM
+import slugify from 'slugify';
 
 
 // ES module compatibility
@@ -804,6 +805,60 @@ app.get('/api/content/blogs/:id', async (req, res) => {
   }
 });
 
+// Get single blog post with SEO data and related posts by slug
+app.get('/api/content/blogs/slug/:slug', async (req, res) => {
+  try {
+    const blogSlug = req.params.slug;
+    const blogs = await readJsonFile('blogs.json');
+    const blog = blogs.find(blog => blog.slug === blogSlug && blog.published);
+
+    if (!blog) {
+      return res.status(404).json({ message: 'مقاله یافت نشد' });
+    }
+
+    // Get related posts
+    let relatedPosts = [];
+    if (blog.relatedPosts && blog.relatedPosts.length > 0) {
+      relatedPosts = blogs.filter(b =>
+        blog.relatedPosts.includes(b.id) &&
+        b.published &&
+        b.id !== blog.id
+      );
+    }
+
+    // If no related posts specified or found, auto-select based on category
+    if (relatedPosts.length === 0) {
+      relatedPosts = blogs
+        .filter(b =>
+          b.published &&
+          b.id !== blog.id &&
+          b.category === blog.category
+        )
+        .slice(0, 2);
+
+      // If still not enough, get from all published posts
+      if (relatedPosts.length < 2) {
+        const additionalPosts = blogs
+          .filter(b =>
+            b.published &&
+            b.id !== blog.id &&
+            !relatedPosts.some(rp => rp.id === b.id)
+          )
+          .slice(0, 2 - relatedPosts.length);
+
+        relatedPosts = [...relatedPosts, ...additionalPosts];
+      }
+    }
+
+    res.json({
+      ...blog,
+      relatedPosts
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'خطا در بارگذاری مقاله' });
+  }
+});
+
 app.get('/api/content/pricing', async (req, res) => {
   try {
     const pricing = await readJsonFile('pricing.json');
@@ -1156,7 +1211,7 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       updatedAt: new Date().toISOString(),
       relatedPosts,
       // SEO fields
-      slug: req.body.title.replace(/\s+/g, '-').toLowerCase(),
+      slug: slugify(req.body.title, { lower: true, strict: true }),
       metaDescription: req.body.excerpt || req.body.title
     };
 
@@ -1234,7 +1289,7 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
       updatedAt: new Date().toISOString(),
       relatedPosts,
       // Update SEO fields
-      slug: req.body.title ? req.body.title.replace(/\s+/g, '-').toLowerCase() : blogs[blogIndex].slug,
+      slug: req.body.title ? slugify(req.body.title, { lower: true, strict: true }) : blogs[blogIndex].slug,
       metaDescription: req.body.excerpt || req.body.title || blogs[blogIndex].metaDescription
     };
 

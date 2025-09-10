@@ -65,7 +65,9 @@ const PricingSection: React.FC = () => {
             viewport={{ once: true }}
             className="inline-flex items-center bg-blue-100 text-primary-500 px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6"
           >
-            <span className="font-semibold text-sm sm:text-base">تعرفه‌های اقتصادی</span>
+            <span className="font-semibold text-sm sm:text-base">
+              تعرفه‌های اقتصادی
+            </span>
           </motion.div>
 
           <motion.h2
@@ -193,11 +195,17 @@ const PricingSection: React.FC = () => {
                     <li key={i} className="flex items-start">
                       {feature.included ? (
                         <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
-                          <Check size={12} className="sm:w-4 sm:h-4 text-green-500" />
+                          <Check
+                            size={12}
+                            className="sm:w-4 sm:h-4 text-green-500"
+                          />
                         </div>
                       ) : (
                         <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
-                          <X size={12} className="sm:w-4 sm:h-4 text-gray-400" />
+                          <X
+                            size={12}
+                            className="sm:w-4 sm:h-4 text-gray-400"
+                          />
                         </div>
                       )}
                       <span
@@ -243,7 +251,9 @@ const PricingSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mt-12 sm:mt-16"
         >
-          <p className="text-gray-600 mb-4 text-sm sm:text-base">نیاز به پلن اختصاصی دارید؟</p>
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">
+            نیاز به پلن اختصاصی دارید؟
+          </p>
           <a
             href="#contact"
             className="inline-flex items-center bg-white border-2 border-primary-500 text-primary-500 px-6 sm:px-8 py-3 rounded-xl font-bold hover:bg-primary-50 transition-colors text-sm sm:text-base"

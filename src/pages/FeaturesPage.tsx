@@ -69,7 +69,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       <ul className="space-y-2">
         {benefits.map((benefit, index) => (
           <li key={index} className="flex items-start text-sm text-gray-600">
-            <CheckCircle size={16} className="text-green-500 ml-2 mt-0.5 flex-shrink-0" />
+            <CheckCircle
+              size={16}
+              className="text-green-500 ml-2 mt-0.5 flex-shrink-0"
+            />
             <span>{benefit}</span>
           </li>
         ))}
@@ -91,8 +94,8 @@ const FeaturesPage: React.FC = () => {
         "ارسال تا ۱۰۰,۰۰۰ پیامک در ساعت",
         "نرخ تحویل بالای ۹۹%",
         "پشتیبانی از تمام اپراتورها",
-        "ارسال فوری و بدون تأخیر"
-      ]
+        "ارسال فوری و بدون تأخیر",
+      ],
     },
     {
       icon: <Users className="h-8 w-8" />,
@@ -103,8 +106,8 @@ const FeaturesPage: React.FC = () => {
         "ایمپورت از فایل Excel و CSV",
         "دسته‌بندی بر اساس ویژگی‌ها",
         "فیلتر پیشرفته مخاطبان",
-        "مدیریت لیست سیاه"
-      ]
+        "مدیریت لیست سیاه",
+      ],
     },
     {
       icon: <BarChart3 className="h-8 w-8" />,
@@ -115,8 +118,8 @@ const FeaturesPage: React.FC = () => {
         "گزارش لحظه‌ای وضعیت ارسال",
         "آمار تحویل و عدم تحویل",
         "نمودارهای تحلیلی",
-        "خروجی Excel از گزارش‌ها"
-      ]
+        "خروجی Excel از گزارش‌ها",
+      ],
     },
     {
       icon: <Calendar className="h-8 w-8" />,
@@ -127,8 +130,8 @@ const FeaturesPage: React.FC = () => {
         "ارسال در زمان‌های مشخص",
         "تکرار دوره‌ای پیام‌ها",
         "تقویم مناسبت‌های ایرانی",
-        "بهینه‌سازی زمان ارسال"
-      ]
+        "بهینه‌سازی زمان ارسال",
+      ],
     },
     {
       icon: <LocateIcon className="h-8 w-8" />,
@@ -139,8 +142,8 @@ const FeaturesPage: React.FC = () => {
         "انتخاب منطقه از روی نقشه",
         "فیلتر بر اساس کد پستی",
         "تقسیم‌بندی شهری و استانی",
-        "هدف‌گیری دقیق جغرافیایی"
-      ]
+        "هدف‌گیری دقیق جغرافیایی",
+      ],
     },
     {
       icon: <Zap className="h-8 w-8" />,
@@ -151,8 +154,8 @@ const FeaturesPage: React.FC = () => {
         "ارسال فوری در کمتر از ۳۰ ثانیه",
         "خطوط اختصاصی پرسرعت",
         "پردازش موازی درخواست‌ها",
-        "بدون محدودیت تعداد ارسال"
-      ]
+        "بدون محدودیت تعداد ارسال",
+      ],
     },
     {
       icon: <AudioLinesIcon className="h-8 w-8" />,
@@ -163,8 +166,8 @@ const FeaturesPage: React.FC = () => {
         "تبدیل متن به گفتار فارسی",
         "آپلود فایل صوتی دلخواه",
         "کیفیت صوتی بالا",
-        "ارسال انبوه پیامک صوتی"
-      ]
+        "ارسال انبوه پیامک صوتی",
+      ],
     },
     {
       icon: <Target className="h-8 w-8" />,
@@ -175,8 +178,8 @@ const FeaturesPage: React.FC = () => {
         "فیلتر بر اساس سن و جنسیت",
         "دسته‌بندی شغلی و صنفی",
         "فیلتر منطقه‌ای پیشرفته",
-        "ترکیب چندین فیلتر"
-      ]
+        "ترکیب چندین فیلتر",
+      ],
     },
     {
       icon: <SatelliteDish className="h-8 w-8" />,
@@ -187,8 +190,8 @@ const FeaturesPage: React.FC = () => {
         "ردیابی موقعیت لحظه‌ای",
         "ارسال بر اساس حضور فیزیکی",
         "تنظیم شعاع جغرافیایی",
-        "اطلاع‌رسانی رویدادهای محلی"
-      ]
+        "اطلاع‌رسانی رویدادهای محلی",
+      ],
     },
     {
       icon: <PlugIcon className="h-8 w-8" />,
@@ -199,20 +202,19 @@ const FeaturesPage: React.FC = () => {
         "API کامل و مستندات جامع",
         "اتصال به وردپرس و ووکامرس",
         "پترن‌های آماده پیامک",
-        "پشتیبانی فنی تخصصی"
-      ]
+        "پشتیبانی فنی تخصصی",
+      ],
     },
     {
       icon: <ListChecks className="h-8 w-8" />,
       title: "ارسال هدفمند",
-      description:
-        "دسترسی به‌روز به شماره‌های مشاغل و اصناف مختلف",
+      description: "دسترسی به‌روز به شماره‌های مشاغل و اصناف مختلف",
       benefits: [
         "بانک شماره مشاغل مختلف",
         "به‌روزرسانی مستمر اطلاعات",
         "تفکیک صنفی دقیق",
-        "کیفیت تضمینی شماره‌ها"
-      ]
+        "کیفیت تضمینی شماره‌ها",
+      ],
     },
     {
       icon: <Clock className="h-8 w-8" />,
@@ -223,8 +225,8 @@ const FeaturesPage: React.FC = () => {
         "پشتیبانی تلفنی و آنلاین",
         "پاسخ‌گویی در کمتر از ۱ ساعت",
         "راهنمایی تخصصی رایگان",
-        "آموزش استفاده از پنل"
-      ]
+        "آموزش استفاده از پنل",
+      ],
     },
   ];
 
@@ -287,7 +289,8 @@ const FeaturesPage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
             >
-              با ابزارهای قدرتمند و پیشرفته موج پیام، کمپین‌های پیامکی موثر و هدفمند ایجاد کنید
+              با ابزارهای قدرتمند و پیشرفته موج پیام، کمپین‌های پیامکی موثر و
+              هدفمند ایجاد کنید
             </motion.p>
           </div>
 
@@ -317,7 +320,9 @@ const FeaturesPage: React.FC = () => {
               <div className="bg-white/20 rounded-full p-4 inline-flex mb-6">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold mb-6">چرا موج پیام بهترین انتخاب است؟</h2>
+              <h2 className="text-3xl font-bold mb-6">
+                چرا موج پیام بهترین انتخاب است؟
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div>
                   <div className="text-4xl font-bold mb-2">۹۹.۹%</div>
@@ -348,7 +353,8 @@ const FeaturesPage: React.FC = () => {
                 آماده شروع هستید؟
               </h3>
               <p className="text-gray-600 mb-6">
-                همین امروز پنل پیامک خود را راه‌اندازی کنید و از تمام این امکانات بهره‌مند شوید
+                همین امروز پنل پیامک خود را راه‌اندازی کنید و از تمام این
+                امکانات بهره‌مند شوید
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a

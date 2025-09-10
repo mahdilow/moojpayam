@@ -1,53 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html, body, #root, *, *::before, *::after {
-    font-family: 'Lalezar', system-ui, sans-serif !important;
+  html,
+  body,
+  #root,
+  *,
+  *::before,
+  *::after {
+    font-family: "Lalezar", system-ui, sans-serif !important;
   }
 }
 
 @font-face {
-  font-family: 'Vazir';
-  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff') format('woff');
+  font-family: "Vazir";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff")
+      format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Vazir';
-  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff') format('woff');
+  font-family: "Vazir";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff")
+      format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Vazir';
-  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Light.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Light.woff') format('woff');
+  font-family: "Vazir";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Light.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Light.woff")
+      format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  --primary-color: #4A90E2;
-  --secondary-color: #9B6DFF;
-  --accent-color: #FF7E5F;
-  --success-color: #48BB78;
-  --warning-color: #FFD93D;
-  --error-color: #FF6B6B;
-  --moojpayam-blue: #4A90E2;
-  --moojpayam-teal: #20B2AA;
-  --moojpayam-gradient-start: #4A90E2;
-  --moojpayam-gradient-end: #20B2AA;
+  --primary-color: #4a90e2;
+  --secondary-color: #9b6dff;
+  --accent-color: #ff7e5f;
+  --success-color: #48bb78;
+  --warning-color: #ffd93d;
+  --error-color: #ff6b6b;
+  --moojpayam-blue: #4a90e2;
+  --moojpayam-teal: #20b2aa;
+  --moojpayam-gradient-start: #4a90e2;
+  --moojpayam-gradient-end: #20b2aa;
 }
 
 html {
@@ -57,7 +68,7 @@ html {
 body {
   direction: rtl;
   text-align: right;
-  font-family: 'Lalezar', 'Vazir', system-ui, sans-serif;
+  font-family: "Lalezar", "Vazir", system-ui, sans-serif;
   /* Add padding-top to account for announcement banner */
   padding-top: 0;
 }
@@ -68,12 +79,16 @@ body {
 }
 
 .font-vazir {
-  font-family: 'Lalezar', 'Vazir', system-ui, sans-serif;
+  font-family: "Lalezar", "Vazir", system-ui, sans-serif;
 }
 
 .brand-name {
-  font-family: 'Vazir', 'Lalezar', system-ui, sans-serif;
-  background: linear-gradient(45deg, var(--moojpayam-blue), var(--moojpayam-teal));
+  font-family: "Vazir", "Lalezar", system-ui, sans-serif;
+  background: linear-gradient(
+    45deg,
+    var(--moojpayam-blue),
+    var(--moojpayam-teal)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -85,8 +100,13 @@ body {
 }
 
 @keyframes logo-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* Cartoon-style elements */
@@ -113,8 +133,13 @@ body {
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
 }
 
 .bounce-hover:hover {
@@ -122,8 +147,13 @@ body {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Leaflet map styles */
@@ -159,7 +189,8 @@ body {
   line-height: 1.8;
 }
 
-.blog-content ul, .blog-content ol {
+.blog-content ul,
+.blog-content ol {
   margin: 1.5rem 0;
   padding-right: 1.5rem;
 }
@@ -190,33 +221,33 @@ body {
 
 @layer components {
   .btn {
-    @apply px-6 py-3 rounded-2xl font-bold transition-all duration-300 text-center cartoon-shadow hover:translate-y-[-2px] hover:shadow-lg;
+    @apply px-6 py-3 rounded-2xl font-medium transition-all duration-300 text-center cartoon-shadow hover:translate-y-[-2px] hover:shadow-lg;
   }
-  
+
   .btn-primary {
     @apply bg-blue-500 text-white hover:bg-blue-600;
   }
-  
+
   .btn-secondary {
     @apply bg-purple-500 text-white hover:bg-purple-600;
   }
-  
+
   .btn-accent {
     @apply bg-[#FF7E5F] text-white hover:bg-[#FF6B6B];
   }
-  
+
   .btn-outline {
     @apply border-3 border-blue-500 text-blue-500 hover:bg-blue-50;
   }
-  
+
   .section-title {
     @apply text-2xl md:text-3xl font-bold mb-6 text-gray-800 font-vazir;
   }
-  
+
   .card {
     @apply bg-white rounded-3xl p-6 transition-all duration-300 cartoon-shadow hover:translate-y-[-2px];
   }
-  
+
   .pricing-card {
     @apply card hover:shadow-xl border-t-4;
   }

@@ -34,7 +34,7 @@ interface BlogPost {
 }
 
 const BlogPostPage: React.FC = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +46,7 @@ const BlogPostPage: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`/api/content/blogs/${id}`);
+        const response = await fetch(`/api/content/blogs/slug/${slug}`);
 
         if (!response.ok) {
           if (response.status === 404) {
@@ -62,7 +62,7 @@ const BlogPostPage: React.FC = () => {
 
         // Track view after successful load
         if (!viewTracked) {
-          trackView();
+          trackView(data.id);
         }
       } catch (err) {
         setError("خطا در ارتباط با سرور");
@@ -72,14 +72,14 @@ const BlogPostPage: React.FC = () => {
       }
     };
 
-    if (id) {
+    if (slug) {
       loadBlogPost();
     }
-  }, [id, viewTracked]);
+  }, [slug, viewTracked]);
 
-  const trackView = async () => {
+  const trackView = async (postId: number) => {
     try {
-      const response = await fetch(`/api/blog/${id}/view`, {
+      const response = await fetch(`/api/blog/${postId}/view`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -384,7 +384,7 @@ const BlogPostPage: React.FC = () => {
                   {blogPost.relatedPosts.map((post) => (
                     <Link
                       key={post.id}
-                      to={`/blog/${post.id}`}
+                      to={`/blog/${post.slug}`}
                       className="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
                     >
                       <img

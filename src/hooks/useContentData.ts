@@ -14,6 +14,7 @@ interface BlogPost {
   tags: string[];
   featured?: boolean;
   published: boolean;
+  slug?: string;
 }
 
 interface PricingPlan {
