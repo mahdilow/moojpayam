@@ -73,6 +73,14 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <Link
+                  to="/features"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
+                >
+                  امکانات کامل
+                </Link>
+              </li>
+              <li>
                 <a
                   href="#pricing"
                   className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
