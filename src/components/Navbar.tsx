@@ -114,6 +114,9 @@ const Navbar: React.FC = () => {
             >
               سوالات متداول
             </ScrollLink>
+            <ScrollLink to="/faq" className={linkClass} closeMenu={closeMenu}>
+              راهنمای کامل
+            </ScrollLink>
             <ScrollLink
               to="contact"
               className={linkClass}
@@ -200,6 +203,13 @@ const Navbar: React.FC = () => {
                     isHashLink
                   >
                     سوالات متداول
+                  </ScrollLink>
+                  <ScrollLink
+                    to="/faq"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                  >
+                    راهنمای کامل
                   </ScrollLink>
                   <ScrollLink
                     to="contact"
