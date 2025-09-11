@@ -12,6 +12,7 @@ import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import FeaturesPage from "./pages/FeaturesPage";
+import FaqPage from "./pages/FaqPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import LoadingScreen from "./components/LoadingScreen";
@@ -94,6 +95,14 @@ function AppContent() {
           element={
             <MainLayout>
               <FeaturesPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/faq"
+          element={
+            <MainLayout>
+              <FaqPage />
             </MainLayout>
           }
         />
