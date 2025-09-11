@@ -116,8 +116,8 @@ const FaqSection: React.FC = () => {
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-4">هنوز سوال دیگری دارید؟</p>
-          <a href="#contact" className="btn btn-primary">
-            با ما تماس بگیرید
+          <a href="/faq" className="btn btn-primary">
+            مشاهده راهمنای کامل
           </a>
         </div>
       </div>

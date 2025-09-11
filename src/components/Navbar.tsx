@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
   const closeMenu = () => setIsOpen(false);
 
   const linkClass =
-    "text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-base font-medium";
+    "text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors py-3 px-3 rounded-lg text-lg font-medium";
 
   return (
     <nav
@@ -106,14 +106,6 @@ const Navbar: React.FC = () => {
             <ScrollLink to="/blog" className={linkClass} closeMenu={closeMenu}>
               بلاگ
             </ScrollLink>
-            <ScrollLink
-              to="faq"
-              className={linkClass}
-              closeMenu={closeMenu}
-              isHashLink
-            >
-              سوالات متداول
-            </ScrollLink>
             <ScrollLink to="/faq" className={linkClass} closeMenu={closeMenu}>
               راهنمای کامل
             </ScrollLink>
@@ -125,10 +117,17 @@ const Navbar: React.FC = () => {
             >
               تماس با ما
             </ScrollLink>
+            <ScrollLink
+              to="about-us"
+              className={linkClass}
+              closeMenu={closeMenu}
+            >
+              درباره ما
+            </ScrollLink>
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/"
-              className="btn btn-outline text-md flex items-center justify-center"
+              className="btn btn-outline text-lg flex items-center justify-center"
               rel="noreferrer"
             >
               ورود
@@ -136,7 +135,7 @@ const Navbar: React.FC = () => {
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/userregister.aspx"
-              className="btn btn-primary text-md flex items-center justify-center ml-4"
+              className="btn btn-primary text-lg flex items-center justify-center ml-4"
               rel="noreferrer"
             >
               ثبت نام
@@ -197,14 +196,6 @@ const Navbar: React.FC = () => {
                     بلاگ
                   </ScrollLink>
                   <ScrollLink
-                    to="faq"
-                    className={linkClass}
-                    closeMenu={closeMenu}
-                    isHashLink
-                  >
-                    سوالات متداول
-                  </ScrollLink>
-                  <ScrollLink
                     to="/faq"
                     className={linkClass}
                     closeMenu={closeMenu}
@@ -218,6 +209,13 @@ const Navbar: React.FC = () => {
                     isHashLink
                   >
                     تماس با ما
+                  </ScrollLink>
+                  <ScrollLink
+                    to="about-us"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                  >
+                    درباره ما
                   </ScrollLink>
 
                   {/* Mobile Action Buttons */}
