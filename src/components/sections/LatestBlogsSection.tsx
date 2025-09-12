@@ -77,7 +77,11 @@ const LatestBlogsSection: React.FC = () => {
         {/* Blog Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {latestBlogs.map((post, index) => (
-            <Link to={`/blog/${encodeURIComponent(post.slug)}`} key={post.id} className="block group">
+            <Link
+              to={`/blog/${post.slug}`}
+              key={post.id}
+              className="block group"
+            >
               <motion.article
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -138,9 +142,7 @@ const LatestBlogsSection: React.FC = () => {
                         <Calendar size={14} className="ml-1" />
                         {post.date}
                       </div>
-                      <div
-                        className="text-primary-500 hover:text-primary-600 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform"
-                      >
+                      <div className="text-primary-500 hover:text-primary-600 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform">
                         ادامه مطالعه
                         <ArrowLeft size={16} className="mr-1" />
                       </div>

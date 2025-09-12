@@ -808,7 +808,7 @@ app.get('/api/content/blogs/:id', async (req, res) => {
 // Get single blog post with SEO data and related posts by slug
 app.get('/api/content/blogs/slug/:slug', async (req, res) => {
   try {
-    const blogSlug = req.params.slug;
+    const blogSlug = decodeURIComponent(req.params.slug);
     const blogs = await readJsonFile('blogs.json');
     const blog = blogs.find(blog => blog.slug === blogSlug && blog.published);
 
