@@ -11,7 +11,6 @@ import fs from 'fs/promises';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import soap from 'soap'; // if using ESM
-import slugify from 'slugify';
 
 
 // ES module compatibility
@@ -1211,7 +1210,7 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       updatedAt: new Date().toISOString(),
       relatedPosts,
       // SEO fields
-      slug: slugify(req.body.title, { lower: true, strict: true }),
+      slug: req.body.title.trim(),
       metaDescription: req.body.excerpt || req.body.title
     };
 
@@ -1289,7 +1288,7 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
       updatedAt: new Date().toISOString(),
       relatedPosts,
       // Update SEO fields
-      slug: req.body.title ? slugify(req.body.title, { lower: true, strict: true }) : blogs[blogIndex].slug,
+      slug: req.body.title ? req.body.title.trim() : blogs[blogIndex].slug,
       metaDescription: req.body.excerpt || req.body.title || blogs[blogIndex].metaDescription
     };
 
