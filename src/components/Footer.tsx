@@ -1,9 +1,51 @@
 import React from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
+interface NavLinkProps {
+  to: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+const NavLink: React.FC<NavLinkProps> = ({ to, children, className }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isHashLink = to.includes("#");
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    if (isHashLink) {
+      const hash = to.split("#")[1];
+      if (isHomePage) {
+        // Already on the home page, just scroll
+        const el = document.getElementById(hash);
+        if (el) {
+          setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+        }
+      } else {
+        // Navigate to home page and then scroll
+        navigate(to);
+      }
+    } else {
+      navigate(to);
+    }
+  };
+
+  return (
+    <a href={to} className={className} onClick={handleClick}>
+      {children}
+    </a>
+  );
+};
 
 const Footer: React.FC = () => {
+  const linkClass =
+    "text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base";
+
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-8">
       <div className="container mx-auto px-4">
@@ -49,60 +91,39 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link
-                  to="/"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/" className={linkClass}>
                   صفحه اصلی
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
-                  to="/about-us"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/about-us" className={linkClass}>
                   درباره ما
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   خدمات
-                </a>
+                </NavLink>
               </li>
               <li>
-                <Link
-                  to="/faq"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/faq" className={linkClass}>
                   راهنمای کامل
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="#pricing"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/#pricing" className={linkClass}>
                   تعرفه‌ها
-                </a>
+                </NavLink>
               </li>
               <li>
-                <Link
-                  to="/blog"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/blog" className={linkClass}>
                   بلاگ
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="#contact"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/#contact" className={linkClass}>
                   تماس با ما
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -114,52 +135,34 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   پنل پیامک انبوه
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   ارسال هوشمند
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   پیامک تبلیغاتی
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   پیامک مناسبتی
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   پیامک خدماتی
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/features"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm sm:text-base"
-                >
+                <NavLink to="/features" className={linkClass}>
                   وب سرویس پیامک
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

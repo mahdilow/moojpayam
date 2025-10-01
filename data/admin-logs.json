@@ -1,5 +1,340 @@
 [
   {
+    "id": "log_1759330511886_pm5pcz5ka",
+    "timestamp": "2025-10-01T14:55:11.886Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759330511635_aq9g9rtce",
+    "timestamp": "2025-10-01T14:55:11.635Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759330419206_ww8tpxof9",
+    "timestamp": "2025-10-01T14:53:39.206Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759330418942_wqqzviklc",
+    "timestamp": "2025-10-01T14:53:38.942Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759329117460_drjmbrfha",
+    "timestamp": "2025-10-01T14:31:57.460Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759329117215_umglk832w",
+    "timestamp": "2025-10-01T14:31:57.215Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759329004036_eitzvv09c",
+    "timestamp": "2025-10-01T14:30:04.036Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759329003773_xifgmwqip",
+    "timestamp": "2025-10-01T14:30:03.773Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759328852664_ot4wl963f",
+    "timestamp": "2025-10-01T14:27:32.664Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759328852415_jpnlmcldl",
+    "timestamp": "2025-10-01T14:27:32.415Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327867587_ez5u0y9ds",
+    "timestamp": "2025-10-01T14:11:07.587Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327867324_lsnwtttf7",
+    "timestamp": "2025-10-01T14:11:07.324Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327593467_ef10g9n67",
+    "timestamp": "2025-10-01T14:06:33.467Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327593224_o8s7tcmcc",
+    "timestamp": "2025-10-01T14:06:33.224Z",
+    "adminUser": "admin",
+    "action": "Create blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327500912_2vt0dn7o3",
+    "timestamp": "2025-10-01T14:05:00.912Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327497210_k2a0cfvnz",
+    "timestamp": "2025-10-01T14:04:57.210Z",
+    "adminUser": "admin",
+    "action": "Upload image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759327497189-675981217.png",
+      "originalName": "ChatGPT Image Oct 1, 2025, 01_33_05 PM.png",
+      "size": 2090640,
+      "mimetype": "image/png",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327481794_yyht2rbb8",
+    "timestamp": "2025-10-01T14:04:41.794Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327404011_5458nbeg7",
+    "timestamp": "2025-10-01T14:03:24.011Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327401886_n11nzxief",
+    "timestamp": "2025-10-01T14:03:21.886Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327401576_wc7m3ugkv",
+    "timestamp": "2025-10-01T14:03:21.576Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759327400014_k6k9u5vuw",
+    "timestamp": "2025-10-01T14:03:20.014Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sessionId": "mklhpfpl6jtdbxn3wbbvl",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "mklhpfpl6jtdbxn3wbbvl"
+  },
+  {
     "id": "log_1759126564324_gtwa190p9",
     "timestamp": "2025-09-29T06:16:04.324Z",
     "adminUser": "admin",

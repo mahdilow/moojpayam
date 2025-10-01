@@ -185,7 +185,7 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-white">
+    <section id="contact" className="pt-24 sm:pt-28 pb-16 sm:pb-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 sm:mb-16">
           <motion.h2

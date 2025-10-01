@@ -1,50 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-interface ScrollLinkProps {
-  to: string; // id or route path
+interface NavLinkProps {
+  to: string;
   children: React.ReactNode;
   className?: string;
   closeMenu: () => void;
-  isHashLink?: boolean; // true if scrolling to an ID on the page
 }
 
-const ScrollLink: React.FC<ScrollLinkProps> = ({
+const NavLink: React.FC<NavLinkProps> = ({
   to,
   children,
   className,
   closeMenu,
-  isHashLink = false,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isHashLink = to.includes("#");
+
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    closeMenu();
+
     if (isHashLink) {
-      e.preventDefault();
-      closeMenu();
-      const el = document.getElementById(to);
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+      const hash = to.split("#")[1];
+      if (isHomePage) {
+        // Already on the home page, just scroll
+        const el = document.getElementById(hash);
+        if (el) {
+          setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+        }
+      } else {
+        // Navigate to home page and then scroll
+        navigate(`/#${hash}`);
       }
     } else {
-      closeMenu();
+      navigate(to);
     }
   };
 
-  // If it's a hash link, use <a>, otherwise react-router <Link>
-  if (isHashLink) {
-    return (
-      <a href={`#${to}`} className={className} onClick={handleClick}>
-        {children}
-      </a>
-    );
-  } else {
-    return (
-      <Link to={to} className={className} onClick={handleClick}>
-        {children}
-      </Link>
-    );
-  }
+  return (
+    <a href={to} className={className} onClick={handleClick}>
+      {children}
+    </a>
+  );
 };
 
 const Navbar: React.FC = () => {
@@ -85,45 +87,43 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-6 space-x-reverse">
-            <ScrollLink to="/" className={linkClass} closeMenu={closeMenu}>
+            <NavLink to="/" className={linkClass} closeMenu={closeMenu}>
               صفحه اصلی
-            </ScrollLink>
-            <ScrollLink
+            </NavLink>
+            <NavLink
               to="/features"
               className={linkClass}
               closeMenu={closeMenu}
             >
               امکانات
-            </ScrollLink>
-            <ScrollLink
-              to="pricing"
+            </NavLink>
+            <NavLink
+              to="/#pricing"
               className={linkClass}
               closeMenu={closeMenu}
-              isHashLink
             >
               تعرفه‌ها
-            </ScrollLink>
-            <ScrollLink to="/blog" className={linkClass} closeMenu={closeMenu}>
+            </NavLink>
+            <NavLink to="/blog" className={linkClass} closeMenu={closeMenu}>
               بلاگ
-            </ScrollLink>
-            <ScrollLink to="/faq" className={linkClass} closeMenu={closeMenu}>
+            </NavLink>
+            <NavLink to="/faq" className={linkClass} closeMenu={closeMenu}>
               راهنمای کامل
-            </ScrollLink>
-            <ScrollLink
-              to="contact"
+            </NavLink>
+            <NavLink
+              to="/#contact"
               className={linkClass}
               closeMenu={closeMenu}
-              isHashLink
             >
               تماس با ما
-            </ScrollLink>
-            <ScrollLink
-              to="about-us"
+            </NavLink>
+            <NavLink
+              to="/about-us"
               className={linkClass}
               closeMenu={closeMenu}
             >
               درباره ما
-            </ScrollLink>
+            </NavLink>
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/"
@@ -166,57 +166,55 @@ const Navbar: React.FC = () => {
             >
               <div className="pt-4 pb-3 border-t border-gray-200 mt-3">
                 <div className="flex flex-col space-y-1">
-                  <ScrollLink
+                  <NavLink
                     to="/"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
                     صفحه اصلی
-                  </ScrollLink>
-                  <ScrollLink
+                  </NavLink>
+                  <NavLink
                     to="/features"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
                     امکانات
-                  </ScrollLink>
-                  <ScrollLink
-                    to="pricing"
+                  </NavLink>
+                  <NavLink
+                    to="/#pricing"
                     className={linkClass}
                     closeMenu={closeMenu}
-                    isHashLink
                   >
                     تعرفه‌ها
-                  </ScrollLink>
-                  <ScrollLink
+                  </NavLink>
+                  <NavLink
                     to="/blog"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
                     بلاگ
-                  </ScrollLink>
-                  <ScrollLink
+                  </NavLink>
+                  <NavLink
                     to="/faq"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
                     راهنمای کامل
-                  </ScrollLink>
-                  <ScrollLink
-                    to="contact"
+                  </NavLink>
+                  <NavLink
+                    to="/#contact"
                     className={linkClass}
                     closeMenu={closeMenu}
-                    isHashLink
                   >
                     تماس با ما
-                  </ScrollLink>
-                  <ScrollLink
-                    to="about-us"
+                  </NavLink>
+                  <NavLink
+                    to="/about-us"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
                     درباره ما
-                  </ScrollLink>
+                  </NavLink>
 
                   {/* Mobile Action Buttons */}
                   <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200 mt-3">

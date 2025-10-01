@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import HeroSection from "../components/sections/HeroSection";
 import FeaturesSection from "../components/sections/FeaturesSection";
@@ -11,6 +12,21 @@ import ContactSection from "../components/sections/ContactSection";
 import CtaSection from "../components/sections/CtaSection";
 
 const HomePage: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(
+          () => element.scrollIntoView({ behavior: "smooth", block: "start" }),
+          100
+        );
+      }
+    }
+  }, [location]);
+
   return (
     <>
       <SEOHead
