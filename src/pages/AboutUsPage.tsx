@@ -387,7 +387,7 @@ const AboutUsPage: React.FC = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="/#contact"
+                  href="/contact-us"
                   className="bg-white text-primary-600 px-8 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors"
                 >
                   تماس با ما

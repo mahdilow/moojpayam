@@ -223,7 +223,7 @@ const PricingSection: React.FC = () => {
                   <a
                     href={
                       plan.id === 3
-                        ? "#contact"
+                        ? "/contact-us"
                         : "http://dash.moojpayam.ir/userregister.aspx"
                     }
                     {...(plan.id !== 3 && {
@@ -255,7 +255,7 @@ const PricingSection: React.FC = () => {
             نیاز به پلن اختصاصی دارید؟
           </p>
           <a
-            href="#contact"
+            href="/contact-us"
             className="inline-flex items-center bg-white border-2 border-primary-500 text-primary-500 px-6 sm:px-8 py-3 rounded-xl font-bold hover:bg-primary-50 transition-colors text-sm sm:text-base"
           >
             با ما تماس بگیرید

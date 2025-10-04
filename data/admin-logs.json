@@ -1,5 +1,1104 @@
 [
   {
+    "id": "log_1759609505657_0tpws4a9s",
+    "timestamp": "2025-10-04T20:25:05.657Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759609505413_coac1x6bw",
+    "timestamp": "2025-10-04T20:25:05.413Z",
+    "adminUser": "admin",
+    "action": "Create blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759609505390,
+      "newData": {
+        "title": "jhgjghkjg",
+        "category": "خلاقیت"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759609494661_xhxpb3arz",
+    "timestamp": "2025-10-04T20:24:54.661Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759609487381_ul6kobzfb",
+    "timestamp": "2025-10-04T20:24:47.381Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759609485417_zx3lt7z79",
+    "timestamp": "2025-10-04T20:24:45.418Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759609485097_3y0a4efz7",
+    "timestamp": "2025-10-04T20:24:45.097Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759609483524_n2887mrnl",
+    "timestamp": "2025-10-04T20:24:43.524Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sessionId": "kg78yliw4s0tzsl6vo201j",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "kg78yliw4s0tzsl6vo201j"
+  },
+  {
+    "id": "log_1759606010242_g1k10qy0p",
+    "timestamp": "2025-10-04T19:26:50.242Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759606009978_nzucik66f",
+    "timestamp": "2025-10-04T19:26:49.978Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1757527248843,
+      "oldData": {
+        "title": "این یک تست برای اسالاگ هست ۲۳ ؟ تست",
+        "category": "بهینه‌سازی"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605975174_62gtpfdiq",
+    "timestamp": "2025-10-04T19:26:15.174Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605974770_k1eukj03x",
+    "timestamp": "2025-10-04T19:26:14.770Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605971769_fxi2t9u72",
+    "timestamp": "2025-10-04T19:26:11.769Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605966033_p0uuipgw9",
+    "timestamp": "2025-10-04T19:26:06.033Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605965416_ammw8mgqq",
+    "timestamp": "2025-10-04T19:26:05.416Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605964695_gelfbjdtb",
+    "timestamp": "2025-10-04T19:26:04.695Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605962693_lrj6oamvq",
+    "timestamp": "2025-10-04T19:26:02.693Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605961226_s9m3m9zeu",
+    "timestamp": "2025-10-04T19:26:01.226Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605960646_ij6557dc4",
+    "timestamp": "2025-10-04T19:26:00.646Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605956422_zlopv9wgz",
+    "timestamp": "2025-10-04T19:25:56.422Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605956103_vu83ij5wp",
+    "timestamp": "2025-10-04T19:25:56.103Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605954491_x2tx07a09",
+    "timestamp": "2025-10-04T19:25:54.491Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sessionId": "froe2vw3hdi6us4xr5mylq",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "froe2vw3hdi6us4xr5mylq"
+  },
+  {
+    "id": "log_1759605596884_aqkw3qxlt",
+    "timestamp": "2025-10-04T19:19:56.884Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605596634_b1ovjqqr4",
+    "timestamp": "2025-10-04T19:19:56.634Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1751406532521,
+      "oldData": {
+        "title": "آموزش کامل اتصال پنل پیامکی به سایت | افزایش امنیت و فروش",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "آموزش کامل اتصال پنل پیامکی به سایت | افزایش امنیت و فروش",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605592311_5eapadjte",
+    "timestamp": "2025-10-04T19:19:52.311Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605589658_98vy6n86j",
+    "timestamp": "2025-10-04T19:19:49.658Z",
+    "adminUser": "admin",
+    "action": "Upload and optimize image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759605589057-15368418.webp",
+      "originalName": "man_sending_message.png",
+      "originalSize": 2451552,
+      "optimizedSize": 103134,
+      "compressionRatio": "95.79%",
+      "format": "webp",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605578393_piw8ic67u",
+    "timestamp": "2025-10-04T19:19:38.393Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605572735_2vsmtyrmy",
+    "timestamp": "2025-10-04T19:19:32.735Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605572420_1g39n1tjk",
+    "timestamp": "2025-10-04T19:19:32.420Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1752222018210,
+      "oldData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های مختلف آن",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "افزایش فروش با تبلیغات پیامکی و روش های مختلف آن",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605569296_k9yz3n2ut",
+    "timestamp": "2025-10-04T19:19:29.296Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605565426_wjdqdvlw7",
+    "timestamp": "2025-10-04T19:19:25.426Z",
+    "adminUser": "admin",
+    "action": "Upload and optimize image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759605564817-66087475.webp",
+      "originalName": "sms_marketing_improves_sales_afzayesh_forosh_ba_sms_moojpayam.jpg",
+      "originalSize": 611021,
+      "optimizedSize": 116640,
+      "compressionRatio": "80.91%",
+      "format": "webp",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605548955_b7jdjvm4x",
+    "timestamp": "2025-10-04T19:19:08.955Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 4,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605548622_p8cqqrpdi",
+    "timestamp": "2025-10-04T19:19:08.622Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1751406422506-248129563.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605536503_jub9s1r2r",
+    "timestamp": "2025-10-04T19:18:56.503Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605536235_uyhwlpqkm",
+    "timestamp": "2025-10-04T19:18:56.235Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1755509089149-765504475.jpg",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605532506_fevwrhnd1",
+    "timestamp": "2025-10-04T19:18:52.506Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605325673_8fv3q4z5k",
+    "timestamp": "2025-10-04T19:15:25.673Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605325351_1ndsrclxc",
+    "timestamp": "2025-10-04T19:15:25.351Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605320909_ze0l0p55t",
+    "timestamp": "2025-10-04T19:15:20.909Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605319008_83o3v7mud",
+    "timestamp": "2025-10-04T19:15:19.008Z",
+    "adminUser": "admin",
+    "action": "Upload and optimize image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759605318754-27207297.webp",
+      "originalName": "ChatGPT Image Oct 1, 2025, 01_33_05 PM.png",
+      "originalSize": 2090640,
+      "optimizedSize": 57786,
+      "compressionRatio": "97.24%",
+      "format": "webp",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605305053_mem305ys9",
+    "timestamp": "2025-10-04T19:15:05.053Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605304734_r18ptuohn",
+    "timestamp": "2025-10-04T19:15:04.734Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759588544887-473893958.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605301124_lkg7gxy7t",
+    "timestamp": "2025-10-04T19:15:01.124Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605300798_a5k1c4o4c",
+    "timestamp": "2025-10-04T19:15:00.798Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1750167491889-108398558.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605296787_ddcaur4fq",
+    "timestamp": "2025-10-04T19:14:56.787Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605243692_vofpd6zkx",
+    "timestamp": "2025-10-04T19:14:03.692Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605243443_xoe1uie57",
+    "timestamp": "2025-10-04T19:14:03.443Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605234030_royouqfnk",
+    "timestamp": "2025-10-04T19:13:54.030Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605227804_e2bxp2tbf",
+    "timestamp": "2025-10-04T19:13:47.804Z",
+    "adminUser": "admin",
+    "action": "Upload and optimize image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759605227402-443078133.webp",
+      "originalName": "map-sms-marketing.png",
+      "originalSize": 2576794,
+      "optimizedSize": 92546,
+      "compressionRatio": "96.41%",
+      "format": "webp",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605167845_ynskfyv98",
+    "timestamp": "2025-10-04T19:12:47.845Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605167525_9j9uu016h",
+    "timestamp": "2025-10-04T19:12:47.525Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1750166474308,
+      "oldData": {
+        "title": "چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "newData": {
+        "title": "چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟",
+        "category": "نکات"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605159169_8vd2jk6ts",
+    "timestamp": "2025-10-04T19:12:39.169Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605154078_70ohoshep",
+    "timestamp": "2025-10-04T19:12:34.078Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605152005_l25jqm0na",
+    "timestamp": "2025-10-04T19:12:32.005Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605151681_2zxua6m81",
+    "timestamp": "2025-10-04T19:12:31.681Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759605150092_4chby53za",
+    "timestamp": "2025-10-04T19:12:30.092Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sessionId": "id84lbex4a9k5hd09stu2",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "id84lbex4a9k5hd09stu2"
+  },
+  {
+    "id": "log_1759601467614_8qgt5layv",
+    "timestamp": "2025-10-04T18:11:07.614Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601467349_q3ssmmdp1",
+    "timestamp": "2025-10-04T18:11:07.349Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601344332_yg2qyh63v",
+    "timestamp": "2025-10-04T18:09:04.332Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601344070_7ntwco6vn",
+    "timestamp": "2025-10-04T18:09:04.070Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601179910_95sdv4abd",
+    "timestamp": "2025-10-04T18:06:19.910Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601179585_nhwu6bhfo",
+    "timestamp": "2025-10-04T18:06:19.585Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601140542_vsmcqxx7v",
+    "timestamp": "2025-10-04T18:05:40.542Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601138289_6enkz7t6o",
+    "timestamp": "2025-10-04T18:05:38.289Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601138275_tgxbmgi5a",
+    "timestamp": "2025-10-04T18:05:38.275Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759601136397_vqndi04ju",
+    "timestamp": "2025-10-04T18:05:36.397Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sessionId": "nsm755mfdht08fqzy2ncy6c",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "nsm755mfdht08fqzy2ncy6c"
+  },
+  {
+    "id": "log_1759588551324_7sqp4zerk",
+    "timestamp": "2025-10-04T14:35:51.324Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588551003_1m7zz11c1",
+    "timestamp": "2025-10-04T14:35:51.003Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1759327593200,
+      "oldData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "newData": {
+        "title": "بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588548022_wgq96zx0k",
+    "timestamp": "2025-10-04T14:35:48.022Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588544916_q7i23zt54",
+    "timestamp": "2025-10-04T14:35:44.916Z",
+    "adminUser": "admin",
+    "action": "Upload image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759588544887-473893958.png",
+      "originalName": "ChatGPT Image Oct 1, 2025, 01_33_05 PM.png",
+      "size": 2090640,
+      "mimetype": "image/png",
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588533402_32lylmvoj",
+    "timestamp": "2025-10-04T14:35:33.402Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588533079_sdkuge89g",
+    "timestamp": "2025-10-04T14:35:33.079Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1759327497189-675981217.png",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588529638_9n7fo9z1d",
+    "timestamp": "2025-10-04T14:35:29.638Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588525391_efyuej1j4",
+    "timestamp": "2025-10-04T14:35:25.391Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588523129_vorj5nyo2",
+    "timestamp": "2025-10-04T14:35:23.129Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588522799_9tid5apu9",
+    "timestamp": "2025-10-04T14:35:22.799Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1759588521241_zkmdt5ab0",
+    "timestamp": "2025-10-04T14:35:21.241Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      "sessionId": "87kqbv7kidmptqm5mgvc8",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "87kqbv7kidmptqm5mgvc8"
+  },
+  {
     "id": "log_1759581970145_lkr3d9zlv",
     "timestamp": "2025-10-04T12:46:10.145Z",
     "adminUser": "admin",

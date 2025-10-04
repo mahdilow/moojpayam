@@ -148,7 +148,7 @@ const NotFoundPage: React.FC = () => {
               </h3>
               <div className="space-y-3">
                 <a
-                  href="/#contact"
+                  href="/contact-us"
                   className="block p-3 rounded-lg hover:bg-blue-50 transition-colors text-right"
                 >
                   <div className="font-medium text-gray-900">
