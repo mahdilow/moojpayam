@@ -11,6 +11,7 @@ import fs from 'fs/promises';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import soap from 'soap'; // if using ESM
+import sharp from 'sharp';
 
 
 // ES module compatibility
@@ -39,24 +40,8 @@ app.use(cookieParser());
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: async (req, file, cb) => {
-    const uploadDir = path.join(__dirname, 'uploads');
-    try {
-      await fs.mkdir(uploadDir, { recursive: true });
-      cb(null, uploadDir);
-    } catch (error) {
-      cb(error, null);
-    }
-  },
-  filename: (req, file, cb) => {
-    // Generate unique filename with timestamp
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
-  }
-});
+// Configure multer for file uploads (using memory storage for image processing)
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage: storage,
@@ -311,27 +296,61 @@ app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'
       return res.status(400).json({ message: 'هیچ فایلی انتخاب نشده است' });
     }
 
+    // Ensure uploads directory exists
+    const uploadDir = path.join(__dirname, 'uploads');
+    await fs.mkdir(uploadDir, { recursive: true });
+
+    // Generate unique filename with .webp extension
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const filename = `image-${uniqueSuffix}.webp`;
+    const filePath = path.join(uploadDir, filename);
+
+    // Original file size
+    const originalSize = req.file.size;
+
+    // Convert and optimize image to WebP format
+    await sharp(req.file.buffer)
+      .webp({
+        quality: 85, // High quality WebP (85 is excellent quality with good compression)
+        effort: 6    // Higher effort = better compression (0-6, default is 4)
+      })
+      .resize(2000, 2000, { // Max dimensions, maintains aspect ratio
+        fit: 'inside',
+        withoutEnlargement: true
+      })
+      .toFile(filePath);
+
+    // Get optimized file size
+    const stats = await fs.stat(filePath);
+    const optimizedSize = stats.size;
+    const compressionRatio = ((1 - optimizedSize / originalSize) * 100).toFixed(2);
+
     // Return the URL path for the uploaded image
-    const imageUrl = `${FRONTEND_URL}/uploads/${req.file.filename}`;
+    const imageUrl = `${FRONTEND_URL}/uploads/${filename}`;
 
     await logAdminAction(createLogEntry(
       adminUser,
-      'Upload image',
+      'Upload and optimize image',
       'upload',
       {
-        filename: req.file.filename,
+        filename: filename,
         originalName: req.file.originalname,
-        size: req.file.size,
-        mimetype: req.file.mimetype,
+        originalSize: originalSize,
+        optimizedSize: optimizedSize,
+        compressionRatio: `${compressionRatio}%`,
+        format: 'webp',
         success: true
       },
       'low'
     ));
 
     res.json({
-      message: 'تصویر با موفقیت آپلود شد',
+      message: 'تصویر با موفقیت آپلود و بهینه‌سازی شد',
       imageUrl: imageUrl,
-      filename: req.file.filename
+      filename: filename,
+      originalSize: originalSize,
+      optimizedSize: optimizedSize,
+      compressionRatio: `${compressionRatio}%`
     });
   } catch (error) {
     console.error('Upload error:', error);

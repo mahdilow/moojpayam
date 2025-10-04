@@ -88,7 +88,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       if (response.ok) {
         const result = await response.json();
         onChange(result.imageUrl);
-        toast.success("تصویر با موفقیت آپلود شد");
+
+        // Show optimization details in toast
+        if (result.compressionRatio) {
+          toast.success(
+            `تصویر با موفقیت آپلود و بهینه‌سازی شد!\nفرمت: WebP | فشرده‌سازی: ${result.compressionRatio}`,
+            { duration: 5000 }
+          );
+        } else {
+          toast.success("تصویر با موفقیت آپلود شد");
+        }
 
         // Refresh gallery if it's open
         if (showGallery) {
@@ -185,7 +194,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           ) : (
             <Upload className="ml-2" size={16} />
           )}
-          {uploading ? "در حال آپلود..." : "آپلود تصویر"}
+          {uploading ? "در حال آپلود و بهینه‌سازی..." : "آپلود تصویر"}
         </button>
 
         {/* Gallery Button */}
@@ -225,6 +234,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         <p className="text-sm text-gray-500">یا روی دکمه آپلود کلیک کنید</p>
         <p className="text-xs text-gray-400 mt-2">
           فرمت‌های مجاز: JPG, PNG, GIF, WEBP (حداکثر ۵ مگابایت)
+        </p>
+        <p className="text-xs text-green-600 mt-1 font-medium">
+          ✓ تصاویر به‌صورت خودکار به WebP تبدیل و بهینه‌سازی می‌شوند
         </p>
       </div>
 
