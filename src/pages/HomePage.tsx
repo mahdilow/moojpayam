@@ -8,7 +8,6 @@ import StatisticsSection from "../components/sections/StatisticsSection";
 import PricingSection from "../components/sections/PricingSection";
 import LatestBlogsSection from "../components/sections/LatestBlogsSection";
 import FaqSection from "../components/sections/FaqSection";
-import ContactSection from "../components/sections/ContactSection";
 import CtaSection from "../components/sections/CtaSection";
 
 const HomePage: React.FC = () => {
@@ -46,7 +45,6 @@ const HomePage: React.FC = () => {
         <FaqSection />
         <CtaSection />
         <LatestBlogsSection />
-        <ContactSection />
       </div>
     </>
   );

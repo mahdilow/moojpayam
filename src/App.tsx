@@ -15,6 +15,7 @@ import FeaturesPage from "./pages/FeaturesPage";
 import FaqPage from "./pages/FaqPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import ContactUsPage from "./pages/ContactUsPage";
 import LoadingScreen from "./components/LoadingScreen";
 import NotFoundPage from "./pages/NotFoundPage";
 import { useState, useEffect } from "react";
@@ -103,6 +104,14 @@ function AppContent() {
           element={
             <MainLayout>
               <FaqPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/contact-us"
+          element={
+            <MainLayout>
+              <ContactUsPage />
             </MainLayout>
           }
         />

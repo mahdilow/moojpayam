@@ -121,7 +121,7 @@ const Footer: React.FC = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/#contact" className={linkClass}>
+                <NavLink to="/contact-us" className={linkClass}>
                   تماس با ما
                 </NavLink>
               </li>
