@@ -46,9 +46,9 @@ const HeroSection: React.FC = () => {
               className="text-center lg:text-right"
             >
               {/* Main Headline */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-gray-900">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug text-gray-900">
                 <motion.span
-                  className="block text-transparent bg-clip-text mb-4 sm:mb-6 pb-2"
+                  className="block text-transparent bg-clip-text mb-1 sm:mb-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
@@ -62,7 +62,7 @@ const HeroSection: React.FC = () => {
                   موج پیام
                 </motion.span>
                 <motion.span
-                  className="block mb-4 sm:mb-6 leading-tight"
+                  className="block font-semibold leading-snug"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.5 }}

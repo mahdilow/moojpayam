@@ -1,52 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Lalezar&display=swap");
+@import url("/assets/Yekan Bakh Webfonts/fontiran.css");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html,
-  body,
-  #root,
-  *,
-  *::before,
-  *::after {
-    font-family: "Lalezar", system-ui, sans-serif !important;
-  }
-}
 
-@font-face {
-  font-family: "Vazir";
-  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2")
-      format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff")
-      format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: "Vazir";
-  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff2")
-      format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff")
-      format("woff");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: "Vazir";
-  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Light.woff2")
-      format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Light.woff")
-      format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   --primary-color: #4a90e2;
@@ -68,7 +28,6 @@ html {
 body {
   direction: rtl;
   text-align: right;
-  font-family: "Lalezar", "Vazir", system-ui, sans-serif;
   /* Add padding-top to account for announcement banner */
   padding-top: 0;
 }
@@ -79,11 +38,11 @@ body {
 }
 
 .font-vazir {
-  font-family: "Lalezar", "Vazir", system-ui, sans-serif;
+  font-family: "Yekan Bakh", system-ui, sans-serif;
 }
 
 .brand-name {
-  font-family: "Vazir", "Lalezar", system-ui, sans-serif;
+  font-family: "Yekan Bakh", "Lalezar", system-ui, sans-serif;
   background: linear-gradient(
     45deg,
     var(--moojpayam-blue),
@@ -241,7 +200,7 @@ body {
   }
 
   .section-title {
-    @apply text-2xl md:text-3xl font-bold mb-6 text-gray-800 font-vazir;
+    @apply text-2xl md:text-3xl font-bold mb-6 text-gray-800 font-sans;
   }
 
   .card {

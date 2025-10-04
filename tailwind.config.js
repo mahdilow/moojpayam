@@ -3,7 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['Lalezar', 'Vazir', 'system-ui', 'sans-serif'],
+      sans: ['Yekan Bakh', 'system-ui', 'sans-serif'],
     },
     extend: {
       colors: {
@@ -45,8 +45,8 @@ export default {
         },
       },
       fontFamily: {
-        vazir: ['Lalezar', 'Vazir', 'sans-serif'],
-        comfortaa: ['Lalezar', 'Vazir', 'sans-serif'],
+        vazir: ['Yekan Bakh', 'sans-serif'],
+        comfortaa: ['Yekan Bakh', 'sans-serif'],
       },
       animation: {
         'float': 'float 3s ease-in-out infinite',

@@ -105,27 +105,27 @@ const LatestBlogsSection: React.FC = () => {
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-primary-600 px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-primary-600 px-3 py-1 rounded-full text-xs font-medium">
                     {post.category}
                   </div>
-                  <div className="absolute bottom-4 left-4 flex items-center text-white text-sm bg-black/50 backdrop-blur px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 flex items-center text-white text-xs bg-black/50 backdrop-blur px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <Eye size={14} className="ml-1" />
                     {post.views.toLocaleString()}
                   </div>
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary-600 transition-colors line-clamp-2">
+                <div className="p-5 flex-1 flex flex-col">
+                  <h3 className="text-lg sm:text-xl font-bold  text-gray-800 leading-snug group-hover:text-primary-600 transition-colors line-clamp-2">
                     {post.title}
                   </h3>
 
-                  <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
+                  <p className="text-gray-600 mb-3 text-sm sm:text-base leading-relaxed line-clamp-3">
                     {post.excerpt}
                   </p>
 
                   <div className="mt-auto">
                     {/* Meta Info */}
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-gray-500 mb-3">
                       <div className="flex items-center">
                         <User size={14} className="ml-1" />
                         <span className="truncate">{post.author}</span>
@@ -137,8 +137,8 @@ const LatestBlogsSection: React.FC = () => {
                     </div>
 
                     {/* Footer */}
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center text-gray-500 text-sm">
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                      <div className="flex items-center text-gray-500 text-xs sm:text-sm">
                         <Calendar size={14} className="ml-1" />
                         {post.date}
                       </div>

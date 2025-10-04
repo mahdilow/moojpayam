@@ -55,9 +55,9 @@ export const brandAnimations = {
 };
 
 export const brandFonts = {
-  primary: "'Lalezar', system-ui, sans-serif",
-  secondary: "'Vazir', system-ui, sans-serif",
-  brandName: "'Vazir', 'Lalezar', system-ui, sans-serif",
+  primary: "'Yekan Bakh', system-ui, sans-serif",
+  secondary: "'Yekan Bakh', system-ui, sans-serif",
+  brandName: "'Yekan Bakh', 'Lalezar', system-ui, sans-serif",
 };
 
 export const brandTheme = {

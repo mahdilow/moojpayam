@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-Thin.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-Light.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-Regular.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-SemiBold.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-Bold.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-ExtraBold.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-Black.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/assets/Yekan Bakh Webfonts/fonts/woff2/YekanBakh-ExtraBlack.woff2') format('woff2'),
+         url('/assets/Yekan Bakh Webfonts/fonts/woff/YekanBakh-ExtraBlack.woff') format('woff');
+    font-weight: 950;
+    font-style: normal;
+}

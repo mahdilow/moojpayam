@@ -58,7 +58,7 @@ const FaqSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
+            className="text-3xl md:text-4xl font-light mb-4 text-gray-800"
           >
             سوالات <span className="text-primary-500">متداول</span>
           </motion.h2>
