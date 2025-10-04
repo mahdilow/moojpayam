@@ -274,7 +274,7 @@ const BlogPostPage: React.FC = () => {
                 </div>
               </div>
 
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight text-justify">
                 {blogPost.title}
               </h1>
 

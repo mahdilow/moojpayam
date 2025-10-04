@@ -198,7 +198,7 @@ const BlogPage: React.FC = () => {
 
                     {/* Title & Excerpt */}
                     <div className="flex-1 flex flex-col justify-center">
-                      <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                      <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight text-justify">
                         {featuredBlog.title}
                       </h2>
 
@@ -249,7 +249,7 @@ const BlogPage: React.FC = () => {
                   {/* Content area - structured to stick footer to bottom */}
                   <div className="p-6 flex flex-col h-full">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary-600 transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary-600 transition-colors text-justify">
                         {post.title}
                       </h3>
 

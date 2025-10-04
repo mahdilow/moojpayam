@@ -558,6 +558,7 @@ app.post('/api/send-email', contactFormLimiter, async (req, res) => {
       html: `
         <div dir="rtl" style="font-family: Arial, sans-serif; line-height: 1.6;">
           <h2>پیام جدید از فرم تماس سایت موج پیام</h2>
+          <p><strong>زمان ارسال:</strong> ${new Date().toLocaleString('fa-IR', { timeZone: 'Asia/Tehran' })}</p>
           <p><strong>نام:</strong> ${name}</p>
           <p><strong>شماره موبایل:</strong> ${phone}</p>
           ${email ? `<p><strong>ایمیل:</strong> ${email}</p>` : ''}
