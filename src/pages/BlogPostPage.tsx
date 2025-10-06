@@ -39,6 +39,7 @@ const BlogPostPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [viewTracked, setViewTracked] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
 
   useEffect(() => {
     const loadBlogPost = async () => {
@@ -100,20 +101,42 @@ const BlogPostPage: React.FC = () => {
   };
 
   const sharePost = async () => {
-    if (navigator.share && blogPost) {
-      try {
-        await navigator.share({
-          title: blogPost.title,
-          text: blogPost.excerpt,
-          url: window.location.href,
-        });
-      } catch (error) {
-        console.error("Share Post error", error);
-        // Fallback to copying URL
-        copyToClipboard();
+    if (!blogPost) return;
+    setIsSharing(true);
+    try {
+      const response = await fetch('/api/shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          longUrl: window.location.href,
+          slug: blogPost.slug 
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create short link');
       }
-    } else {
+
+      const { shortUrl } = await response.json();
+      const shareData = {
+        title: blogPost.title,
+        text: blogPost.excerpt,
+        url: shortUrl,
+      };
+
+      if (navigator.share && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shortUrl);
+        toast.success('لینک کوتاه در کلیپ‌بورد کپی شد!');
+      }
+    } catch (error) {
+      console.error('Share error:', error);
+      toast.error('خطا در ایجاد لینک کوتاه, لینک اصلی کپی شد.');
+      // Fallback to copying the original URL if shortening fails
       copyToClipboard();
+    } finally {
+      setIsSharing(false);
     }
   };
 
@@ -293,10 +316,11 @@ const BlogPostPage: React.FC = () => {
                 </div>
                 <button
                   onClick={sharePost}
-                  className="flex items-center hover:text-primary-500 transition-colors"
+                  disabled={isSharing}
+                  className="flex items-center hover:text-primary-500 transition-colors disabled:opacity-50"
                 >
                   <Share2 size={16} className="ml-1" />
-                  اشتراک‌گذاری
+                  {isSharing ? 'در حال ایجاد لینک...' : 'اشتراک‌گذاری'}
                 </button>
               </div>
 
@@ -359,8 +383,8 @@ const BlogPostPage: React.FC = () => {
                 آن را با دوستان و همکاران خود به اشتراک بگذارید
               </p>
               <div className="flex justify-center gap-4">
-                <button onClick={sharePost} className="btn btn-primary">
-                  اشتراک‌گذاری
+                <button onClick={sharePost} disabled={isSharing} className="btn btn-primary">
+                  {isSharing ? 'در حال ایجاد لینک...' : 'اشتراک‌گذاری'}
                 </button>
                 <Link to="/blog" className="btn btn-outline">
                   مقالات بیشتر

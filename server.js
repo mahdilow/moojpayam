@@ -12,11 +12,13 @@ import multer from 'multer';
 import { fileURLToPath } from 'url';
 import soap from 'soap'; // if using ESM
 import sharp from 'sharp';
-
+import { nanoid } from 'nanoid';
 
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const SHORTLINKS_PATH = path.join(__dirname, 'data/shortlinks.json');
 
 // Load environment variables
 dotenv.config();
@@ -1548,6 +1550,73 @@ app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
       'high'
     ));
     res.status(500).json({ message: 'خطا در حذف پلن' });
+  }
+});
+
+// URL Shortener Endpoints
+app.post('/api/shorten', async (req, res) => {
+  let { longUrl, slug } = req.body;
+
+  if (!longUrl) {
+    return res.status(400).json({ message: 'longUrl is required' });
+  }
+
+  // 1. Clean the URL to ensure stability (remove query params and hash)
+  const cleanedUrl = longUrl.split('?')[0].split('#')[0];
+
+  try {
+    const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
+    
+    // 2. Check if this exact URL has already been shortened to ensure stability
+    const existing = Object.entries(shortlinks).find(([, val]) => val === cleanedUrl);
+    if (existing) {
+      // Use FRONTEND_URL for production-ready links
+      return res.json({ shortUrl: `${FRONTEND_URL}/s/${existing[0]}` });
+    }
+
+    // 3. Create a new, more meaningful short code using the slug
+    let shortCode = slug ? slug.substring(0, 50) : nanoid(7); // Use slug if provided, limit length
+    
+    // If the desired shortCode is already taken, append a short random suffix
+    let counter = 0;
+    while (shortlinks[shortCode]) {
+      counter++;
+      // After 5 tries with slug, fall back to a completely random id
+      if (counter > 5) {
+        shortCode = nanoid(7);
+      } else {
+        shortCode = `${slug.substring(0, 45)}-${nanoid(3)}`;
+      }
+    }
+    
+    shortlinks[shortCode] = cleanedUrl;
+
+    await fs.writeFile(SHORTLINKS_PATH, JSON.stringify(shortlinks, null, 2));
+
+    // Use FRONTEND_URL for production-ready links
+    const shortUrl = `${FRONTEND_URL}/s/${shortCode}`;
+    res.json({ shortUrl });
+
+  } catch (error) {
+    console.error('Shortening error:', error);
+    res.status(500).json({ message: 'Server error while shortening URL' });
+  }
+});
+
+app.get('/s/:shortCode', async (req, res) => {
+  try {
+    const { shortCode } = req.params;
+    const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH));
+    
+    const longUrl = shortlinks[shortCode];
+
+    if (longUrl) {
+      res.redirect(301, longUrl);
+    } else {
+      res.status(404).send('URL not found');
+    }
+  } catch (error) {
+    res.status(500).send('Server error');
   }
 });
 
