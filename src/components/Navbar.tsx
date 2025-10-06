@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
             <img
-              src={"/assets/logo.png"}
+              src={"/assets/logo.webp"}
               alt="لوگو پنل پیامک موج پیام"
               className="h-14 sm:h-16 md:h-20 w-auto logo-pulse"
             />
@@ -90,18 +90,10 @@ const Navbar: React.FC = () => {
             <NavLink to="/" className={linkClass} closeMenu={closeMenu}>
               صفحه اصلی
             </NavLink>
-            <NavLink
-              to="/features"
-              className={linkClass}
-              closeMenu={closeMenu}
-            >
+            <NavLink to="/features" className={linkClass} closeMenu={closeMenu}>
               امکانات
             </NavLink>
-            <NavLink
-              to="/#pricing"
-              className={linkClass}
-              closeMenu={closeMenu}
-            >
+            <NavLink to="/#pricing" className={linkClass} closeMenu={closeMenu}>
               تعرفه‌ها
             </NavLink>
             <NavLink to="/blog" className={linkClass} closeMenu={closeMenu}>
@@ -117,11 +109,7 @@ const Navbar: React.FC = () => {
             >
               تماس با ما
             </NavLink>
-            <NavLink
-              to="/about-us"
-              className={linkClass}
-              closeMenu={closeMenu}
-            >
+            <NavLink to="/about-us" className={linkClass} closeMenu={closeMenu}>
               درباره ما
             </NavLink>
             <a
@@ -166,11 +154,7 @@ const Navbar: React.FC = () => {
             >
               <div className="pt-4 pb-3 border-t border-gray-200 mt-3">
                 <div className="flex flex-col space-y-1">
-                  <NavLink
-                    to="/"
-                    className={linkClass}
-                    closeMenu={closeMenu}
-                  >
+                  <NavLink to="/" className={linkClass} closeMenu={closeMenu}>
                     صفحه اصلی
                   </NavLink>
                   <NavLink

@@ -189,7 +189,7 @@ const BlogPostPage: React.FC = () => {
       name: "موج پیام",
       logo: {
         "@type": "ImageObject",
-        url: "https://moojpayam.ir/assets/logo.png",
+        url: "https://moojpayam.ir/assets/logo.webp",
         width: 200,
         height: 200,
       },

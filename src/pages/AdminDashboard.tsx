@@ -396,7 +396,7 @@ const AdminDashboard: React.FC = () => {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <img
-                src="/assets/logo.png"
+                src="/assets/logo.webp"
                 alt="لوگو پنل پیامک موج پیام"
                 className="h-10 w-auto ml-3"
               />

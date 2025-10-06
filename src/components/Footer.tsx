@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center mb-4">
               <img
-                src={"/assets/logo.png"}
+                src={"/assets/logo.webp"}
                 alt="لوگو پنل پیامک موج پیام"
                 className="h-16 sm:h-20 w-auto"
               />

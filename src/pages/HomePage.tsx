@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
         description="سامانه پیشرفته ارسال پیامک تبلیغاتی و اطلاع‌رسانی موج پیام. ارسال پیامک منطقه‌ای، هدفمند و انبوه با بالاترین نرخ تحویل و قیمت مناسب. پنل حرفه‌ای پیامک با امکانات پیشرفته."
         keywords="پیامک, ارسال پیامک, سامانه پیامک, پیامک تبلیغاتی, پیامک منطقه‌ای, پنل پیامک, ارسال انبوه پیامک, پیامک هدفمند, موج پیام, SMS, بازاریابی پیامکی, پیامک نقشه‌ای, ارسال پیامک به کد پستی"
         url="https://moojpayam.ir"
-        image="https://moojpayam.ir/assets/mooj_payam_wave_hero.png"
+        image="https://moojpayam.ir/assets/mooj_payam_wave_hero.webp"
       />
 
       <div>
