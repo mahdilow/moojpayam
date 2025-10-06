@@ -1555,37 +1555,42 @@ app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
 
 // URL Shortener Endpoints
 app.post('/api/shorten', async (req, res) => {
-  let { longUrl, slug } = req.body;
+  let { longUrl, slug, category } = req.body;
 
-  if (!longUrl) {
-    return res.status(400).json({ message: 'longUrl is required' });
+  if (!longUrl || !slug || !category) {
+    return res.status(400).json({ message: 'longUrl, slug, and category are required' });
   }
 
-  // 1. Clean the URL to ensure stability (remove query params and hash)
+  // 1. Clean the URL to ensure stability
   const cleanedUrl = longUrl.split('?')[0].split('#')[0];
 
   try {
     const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
     
-    // 2. Check if this exact URL has already been shortened to ensure stability
+    // 2. Check if this exact URL has already been shortened
     const existing = Object.entries(shortlinks).find(([, val]) => val === cleanedUrl);
     if (existing) {
-      // Use FRONTEND_URL for production-ready links
       return res.json({ shortUrl: `${FRONTEND_URL}/s/${existing[0]}` });
     }
 
-    // 3. Create a new, more meaningful short code using the slug
-    let shortCode = slug ? slug.substring(0, 50) : nanoid(7); // Use slug if provided, limit length
+    // 3. Create a new structured, short, and meaningful code
+    // Sanitize category, providing a fallback
+    const sanitizedCategory = (category || 'general').replace(/[^a-zA-Z0-9\u0600-\u06FF-]/g, '').toLowerCase();
     
-    // If the desired shortCode is already taken, append a short random suffix
+    // Create a short title from the first 3-4 words of the slug
+    const shortTitle = slug.split('-').slice(0, 4).join('-');
+    
+    let shortCode = `${sanitizedCategory}/${shortTitle}`;
+    
+    // Handle potential collisions by appending a short random suffix
     let counter = 0;
     while (shortlinks[shortCode]) {
       counter++;
-      // After 5 tries with slug, fall back to a completely random id
-      if (counter > 5) {
-        shortCode = nanoid(7);
-      } else {
-        shortCode = `${slug.substring(0, 45)}-${nanoid(3)}`;
+      const randomSuffix = nanoid(3);
+      shortCode = `${sanitizedCategory}/${shortTitle}-${randomSuffix}`;
+      // Failsafe to prevent infinite loops
+      if (counter > 10) {
+         shortCode = nanoid(10);
       }
     }
     
@@ -1593,7 +1598,6 @@ app.post('/api/shorten', async (req, res) => {
 
     await fs.writeFile(SHORTLINKS_PATH, JSON.stringify(shortlinks, null, 2));
 
-    // Use FRONTEND_URL for production-ready links
     const shortUrl = `${FRONTEND_URL}/s/${shortCode}`;
     res.json({ shortUrl });
 
@@ -1603,10 +1607,10 @@ app.post('/api/shorten', async (req, res) => {
   }
 });
 
-app.get('/s/:shortCode', async (req, res) => {
+app.get('/s/:shortCode(*)', async (req, res) => {
   try {
     const { shortCode } = req.params;
-    const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH));
+    const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
     
     const longUrl = shortlinks[shortCode];
 
@@ -1616,6 +1620,7 @@ app.get('/s/:shortCode', async (req, res) => {
       res.status(404).send('URL not found');
     }
   } catch (error) {
+    console.error('Redirect error:', error);
     res.status(500).send('Server error');
   }
 });

@@ -109,7 +109,8 @@ const BlogPostPage: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           longUrl: window.location.href,
-          slug: blogPost.slug 
+          slug: blogPost.slug,
+          category: blogPost.category
         }),
       });
 
