@@ -1573,26 +1573,23 @@ app.post('/api/shorten', async (req, res) => {
       return res.json({ shortUrl: `${FRONTEND_URL}/s/${existing[0]}` });
     }
 
-    // 3. Create a new structured, short, and meaningful code
+    // 3. Create a new structured, short, and random code
     // Sanitize category, providing a fallback
     const sanitizedCategory = (category || 'general').replace(/[^a-zA-Z0-9\u0600-\u06FF-]/g, '').toLowerCase();
     
-    // Create a short title from the first 3-4 words of the slug
-    const shortTitle = slug.split('-').slice(0, 4).join('-');
-    
-    let shortCode = `${sanitizedCategory}/${shortTitle}`;
-    
-    // Handle potential collisions by appending a short random suffix
+    let shortCode;
     let counter = 0;
-    while (shortlinks[shortCode]) {
+    
+    // Handle potential collisions by generating a new random code until it's unique
+    do {
+      const randomPart = nanoid(6); // Generate a 6-character random string
+      shortCode = `${sanitizedCategory}/${randomPart}`;
       counter++;
-      const randomSuffix = nanoid(3);
-      shortCode = `${sanitizedCategory}/${shortTitle}-${randomSuffix}`;
-      // Failsafe to prevent infinite loops
-      if (counter > 10) {
-         shortCode = nanoid(10);
+      // Failsafe to prevent an extremely unlikely infinite loop
+      if (counter > 20) {
+         shortCode = nanoid(12); // Use a longer random string as a fallback
       }
-    }
+    } while (shortlinks[shortCode]);
     
     shortlinks[shortCode] = cleanedUrl;
 
