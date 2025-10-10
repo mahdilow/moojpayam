@@ -725,11 +725,12 @@ function requireAdmin(req, res, next) {
 }
 
 // Blog post view tracking endpoint
-app.post('/api/blog/:id/view', viewTrackingLimiter, async (req, res) => {
+app.post('/api/blogs/:id/view', viewTrackingLimiter, async (req, res) => {
   try {
-    const blogId = parseInt(req.params.id);
+    const blogId = parseInt(req.params.id, 10);
+    const clientIp = req.ip; // Get client's IP address
 
-    if (!blogId || isNaN(blogId)) {
+    if (isNaN(blogId)) {
       return res.status(400).json({ message: 'شناسه مقاله نامعتبر است' });
     }
 
@@ -740,18 +741,40 @@ app.post('/api/blog/:id/view', viewTrackingLimiter, async (req, res) => {
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
 
+    const blogViews = await readJsonFile('blog-views.json');
+
+    // Check if this IP has already viewed this post
+    if (blogViews[blogId] && blogViews[blogId].includes(clientIp)) {
+      return res.json({
+        message: 'بازدید شما قبلاً ثبت شده است',
+        views: blogs[blogIndex].views
+      });
+    }
+
+    // If not, add the IP and increment the view count
+    if (!blogViews[blogId]) {
+      blogViews[blogId] = [];
+    }
+    blogViews[blogId].push(clientIp);
+
     // Increment view count
     blogs[blogIndex].views = (blogs[blogIndex].views || 0) + 1;
     blogs[blogIndex].lastViewed = new Date().toISOString();
 
-    const success = await writeJsonFile('blogs.json', blogs);
+    // Write both files
+    const [viewsSuccess, blogsSuccess] = await Promise.all([
+      writeJsonFile('blog-views.json', blogViews),
+      writeJsonFile('blogs.json', blogs)
+    ]);
 
-    if (success) {
+    if (viewsSuccess && blogsSuccess) {
       res.json({
-        message: 'بازدید ثبت شد',
+        message: 'بازدید شما با موفقیت ثبت شد',
         views: blogs[blogIndex].views
       });
     } else {
+      // Log an error if the write fails but don't expose details
+      console.error('Failed to write view tracking or blogs file.');
       res.status(500).json({ message: 'خطا در ثبت بازدید' });
     }
   } catch (error) {

@@ -61,10 +61,12 @@ const BlogPostPage: React.FC = () => {
         const data = await response.json();
         setBlogPost(data);
 
-        // Track view after successful load
-        if (!viewTracked) {
+        // Track view after successful load, checking local storage first
+        const viewedPosts = JSON.parse(localStorage.getItem('viewedBlogPosts') || '[]');
+        if (!viewedPosts.includes(data.id)) {
           trackView(data.id);
         }
+
       } catch (err) {
         setError("خطا در ارتباط با سرور");
         console.error("Error loading blog post:", err);
@@ -76,11 +78,11 @@ const BlogPostPage: React.FC = () => {
     if (slug) {
       loadBlogPost();
     }
-  }, [slug, viewTracked]);
+  }, [slug]);
 
   const trackView = async (postId: number) => {
     try {
-      const response = await fetch(`/api/blog/${postId}/view`, {
+      const response = await fetch(`/api/blogs/${postId}/view`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +91,13 @@ const BlogPostPage: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setViewTracked(true);
+        
+        // Add to local storage to prevent re-tracking
+        const viewedPosts = JSON.parse(localStorage.getItem('viewedBlogPosts') || '[]');
+        if (!viewedPosts.includes(postId)) {
+          viewedPosts.push(postId);
+          localStorage.setItem('viewedBlogPosts', JSON.stringify(viewedPosts));
+        }
 
         // Update view count in state
         setBlogPost((prev) => (prev ? { ...prev, views: data.views } : null));
