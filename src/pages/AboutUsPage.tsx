@@ -131,8 +131,8 @@ const AboutUsPage: React.FC = () => {
             address: {
               "@type": "PostalAddress",
               addressLocality: "کرج",
-              addressRegion": "البرز",
-              addressCountry": "IR",
+              addressRegion: "البرز",
+              addressCountr: "IR",
             },
             sameAs: [
               "https://t.me/moojpayam",
