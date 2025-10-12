@@ -190,6 +190,20 @@ const ContactUsPage: React.FC = () => {
         url="https://moojpayam.ir/contact-us"
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPoint",
+            telephone: "+98-910-071-1835",
+            contactType: "customer service",
+            areaServed: "IR",
+            availableLanguage: ["Persian"],
+          }),
+        }}
+      />
+
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 pt-28 sm:pt-32 pb-16 sm:pb-20">
           <motion.div

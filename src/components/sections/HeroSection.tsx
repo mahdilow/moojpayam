@@ -48,7 +48,7 @@ const HeroSection: React.FC = () => {
               {/* Main Headline */}
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug text-gray-900">
                 <motion.span
-                  className="block text-transparent bg-clip-text mb-1 sm:mb-2"
+                  className="block text-transparent bg-clip-text pb-2 mb-4 sm:mb-6 text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.7 }}

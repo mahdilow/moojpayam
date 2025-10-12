@@ -114,6 +114,34 @@ const AboutUsPage: React.FC = () => {
         url="https://moojpayam.ir/about-us"
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "موج پیام",
+            url: "https://moojpayam.ir",
+            logo: "https://moojpayam.ir/assets/logo.webp",
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+98-910-071-1835",
+              contactType: "customer service",
+            },
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "کرج",
+              addressRegion": "البرز",
+              addressCountry": "IR",
+            },
+            sameAs: [
+              "https://t.me/moojpayam",
+              "https://instagram.com/moojpayam",
+            ],
+          }),
+        }}
+      />
+
       <div className="py-20 bg-gradient-to-br from-white to-blue-50 min-h-screen">
         <div className="container mx-auto px-4">
           {/* Header */}

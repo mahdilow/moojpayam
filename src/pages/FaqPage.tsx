@@ -305,6 +305,24 @@ const FaqPage: React.FC = () => {
         url="https://moojpayam.ir/faq"
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
+              },
+            })),
+          }),
+        }}
+      />
+
       <div className="py-20 bg-gradient-to-br from-white to-blue-50 min-h-screen">
         <div className="container mx-auto px-4">
           {/* Breadcrumb */}

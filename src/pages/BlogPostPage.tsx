@@ -116,7 +116,7 @@ const BlogPostPage: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          longUrl: window.location.href,
+          longUrl: postUrl,
           slug: blogPost.slug,
           category: blogPost.category
         }),
@@ -151,7 +151,7 @@ const BlogPostPage: React.FC = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard
-      .writeText(window.location.href)
+      .writeText(postUrl)
       .then(() => {
         toast.success("لینک با موفقیت کپی شد ✅");
       })
@@ -200,6 +200,8 @@ const BlogPostPage: React.FC = () => {
     );
   }
 
+  const postUrl = `https://moojpayam.ir/blog/${blogPost.slug}`;
+
   // Generate structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
@@ -230,12 +232,12 @@ const BlogPostPage: React.FC = () => {
     dateModified: blogPost.updatedAt || blogPost.createdAt || blogPost.date,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": window.location.href,
+      "@id": postUrl,
     },
     keywords: blogPost.tags.join(", "),
     articleSection: blogPost.category,
     wordCount: blogPost.content.replace(/<[^>]*>/g, "").split(" ").length,
-    url: window.location.href,
+    url: postUrl,
     isPartOf: {
       "@type": "Blog",
       name: "بلاگ موج پیام",
@@ -252,7 +254,7 @@ const BlogPostPage: React.FC = () => {
           blogPost.category
         }, موج پیام, پیامک`}
         image={blogPost.image}
-        url={window.location.href}
+        url={postUrl}
         type="article"
         author={blogPost.author}
         publishedTime={blogPost.createdAt}
