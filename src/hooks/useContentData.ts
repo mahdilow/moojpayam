@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { supabase } from "../api/supabaseClient";
 
 interface BlogPost {
   id: number;
@@ -49,23 +50,20 @@ export const useContentData = () => {
       setLoading(true);
       setError(null);
 
-      // Load content from API endpoints
-      const [blogsRes, pricingRes] = await Promise.all([
-        fetch("/api/content/blogs"),
-        fetch("/api/content/pricing"),
-      ]);
+      // Load content from Supabase
+      const { data: blogsData, error: blogsError } = await supabase
+        .from("blogs")
+        .select("*");
+      const { data: pricingData, error: pricingError } = await supabase
+        .from("pricing")
+        .select("*");
 
-      if (!blogsRes.ok || !pricingRes.ok) {
+      if (blogsError || pricingError) {
         throw new Error("خطا در بارگذاری محتوا");
       }
 
-      const [blogsData, pricingData] = await Promise.all([
-        blogsRes.json(),
-        pricingRes.json(),
-      ]);
-
-      setBlogs(blogsData);
-      setPricing(pricingData);
+      setBlogs(blogsData || []);
+      setPricing(pricingData || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : "خطا در بارگذاری محتوا");
       console.error("Error loading content:", err);
