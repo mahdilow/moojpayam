@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url';
 import soap from 'soap'; // if using ESM
 import sharp from 'sharp';
 import { nanoid } from 'nanoid';
+import { createClient } from '@supabase/supabase-js';
 
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +23,11 @@ const SHORTLINKS_PATH = path.join(__dirname, 'data/shortlinks.json');
 
 // Load environment variables
 dotenv.config();
+
+// Supabase Admin Client
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
 
@@ -918,234 +924,87 @@ app.get('/api/content/pricing', async (req, res) => {
 // Announcement endpoints
 app.get('/api/content/announcement', async (req, res) => {
   try {
-    const announcements = await readJsonFile('announcements.json');
-    // Find the first active announcement that hasn't expired
-    const activeAnnouncement = announcements.find(announcement => {
-      if (!announcement.isActive) return false;
-      if (announcement.expiresAt && new Date() > new Date(announcement.expiresAt)) return false;
-      return true;
-    });
+    const { data, error } = await supabase
+      .from('announcements')
+      .select('*')
+      .eq('isActive', true)
+      .or(`expiresAt.is.null,expiresAt.gt.${new Date().toISOString()}`)
+      .limit(1)
+      .single();
 
-    res.json(activeAnnouncement || null);
+    if (error && error.code !== 'PGRST116') throw error; // Ignore no rows found
+
+    res.json(data);
   } catch (error) {
+    console.error('Error fetching announcement:', error);
     res.status(500).json({ message: 'خطا در بارگذاری اعلان' });
   }
 });
 
 app.get('/api/admin/announcements', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const announcements = await readJsonFile('announcements.json');
+    const { data, error } = await supabase
+      .from('announcements')
+      .select('*')
+      .order('createdAt', { ascending: false });
 
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View announcements',
-      'content',
-      { announcementCount: announcements.length, success: true },
-      'low'
-    ));
-
-    res.json(announcements);
+    if (error) throw error;
+    res.json(data);
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View announcements failed',
-      'content',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
+    console.error('Error fetching announcements:', error);
     res.status(500).json({ message: 'خطا در بارگذاری اعلان‌ها' });
   }
 });
 
 app.post('/api/admin/announcements', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const announcements = await readJsonFile('announcements.json');
-    const newAnnouncement = {
-      ...req.body,
-      id: `announcement_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      createdAt: new Date().toISOString()
-    };
-
-    announcements.unshift(newAnnouncement);
-    const success = await writeJsonFile('announcements.json', announcements);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Create announcement',
-        'content',
-        {
-          resourceType: 'announcement',
-          resourceId: newAnnouncement.id,
-          newData: { message: newAnnouncement.message, type: newAnnouncement.type },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'اعلان با موفقیت ایجاد شد', announcement: newAnnouncement });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره اعلان' });
-    }
+    const { error } = await supabase.from('announcements').insert([req.body]);
+    if (error) throw error;
+    res.json({ message: 'اعلان با موفقیت ایجاد شد' });
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Create announcement failed',
-      'content',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
+    console.error('Error creating announcement:', error);
     res.status(500).json({ message: 'خطا در ایجاد اعلان' });
   }
 });
 
 app.put('/api/admin/announcements/:id', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const announcements = await readJsonFile('announcements.json');
-    const announcementId = req.params.id;
-    const announcementIndex = announcements.findIndex(announcement => announcement.id === announcementId);
-
-    if (announcementIndex === -1) {
-      return res.status(404).json({ message: 'اعلان یافت نشد' });
-    }
-
-    const oldAnnouncement = { ...announcements[announcementIndex] };
-    announcements[announcementIndex] = {
-      ...announcements[announcementIndex],
-      ...req.body,
-      id: announcementId,
-      updatedAt: new Date().toISOString()
-    };
-
-    const success = await writeJsonFile('announcements.json', announcements);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Update announcement',
-        'content',
-        {
-          resourceType: 'announcement',
-          resourceId: announcementId,
-          oldData: { message: oldAnnouncement.message, type: oldAnnouncement.type },
-          newData: { message: announcements[announcementIndex].message, type: announcements[announcementIndex].type },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'اعلان با موفقیت ویرایش شد', announcement: announcements[announcementIndex] });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
-    }
+    const { error } = await supabase
+      .from('announcements')
+      .update(req.body)
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ message: 'اعلان با موفقیت ویرایش شد' });
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Update announcement failed',
-      'content',
-      { resourceType: 'announcement', resourceId: req.params.id, success: false, errorMessage: error.message },
-      'medium'
-    ));
+    console.error('Error updating announcement:', error);
     res.status(500).json({ message: 'خطا در ویرایش اعلان' });
   }
 });
 
 app.delete('/api/admin/announcements/:id', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const announcements = await readJsonFile('announcements.json');
-    const announcementId = req.params.id;
-    const announcementToDelete = announcements.find(announcement => announcement.id === announcementId);
-    const filteredAnnouncements = announcements.filter(announcement => announcement.id !== announcementId);
-
-    if (filteredAnnouncements.length === announcements.length) {
-      return res.status(404).json({ message: 'اعلان یافت نشد' });
-    }
-
-    const success = await writeJsonFile('announcements.json', filteredAnnouncements);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Delete announcement',
-        'content',
-        {
-          resourceType: 'announcement',
-          resourceId: announcementId,
-          oldData: { message: announcementToDelete?.message, type: announcementToDelete?.type },
-          success: true
-        },
-        'high'
-      ));
-
-      res.json({ message: 'اعلان با موفقیت حذف شد' });
-    } else {
-      res.status(500).json({ message: 'خطا در حذف اعلان' });
-    }
+    const { error } = await supabase
+      .from('announcements')
+      .delete()
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ message: 'اعلان با موفقیت حذف شد' });
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Delete announcement failed',
-      'content',
-      { resourceType: 'announcement', resourceId: req.params.id, success: false, errorMessage: error.message },
-      'high'
-    ));
+    console.error('Error deleting announcement:', error);
     res.status(500).json({ message: 'خطا در حذف اعلان' });
   }
 });
 
 app.patch('/api/admin/announcements/:id/toggle', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const announcements = await readJsonFile('announcements.json');
-    const announcementId = req.params.id;
-    const announcementIndex = announcements.findIndex(announcement => announcement.id === announcementId);
-
-    if (announcementIndex === -1) {
-      return res.status(404).json({ message: 'اعلان یافت نشد' });
-    }
-
-    const oldStatus = announcements[announcementIndex].isActive;
-    announcements[announcementIndex].isActive = req.body.isActive;
-    announcements[announcementIndex].updatedAt = new Date().toISOString();
-
-    const success = await writeJsonFile('announcements.json', announcements);
-
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Toggle announcement status',
-        'content',
-        {
-          resourceType: 'announcement',
-          resourceId: announcementId,
-          oldData: { isActive: oldStatus },
-          newData: { isActive: announcements[announcementIndex].isActive },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'وضعیت اعلان تغییر کرد', announcement: announcements[announcementIndex] });
-    } else {
-      res.status(500).json({ message: 'خطا در تغییر وضعیت اعلان' });
-    }
+    const { error } = await supabase
+      .from('announcements')
+      .update({ isActive: req.body.isActive })
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ message: 'وضعیت اعلان تغییر کرد' });
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Toggle announcement status failed',
-      'content',
-      { resourceType: 'announcement', resourceId: req.params.id, success: false, errorMessage: error.message },
-      'medium'
-    ));
+    console.error('Error toggling announcement status:', error);
     res.status(500).json({ message: 'خطا در تغییر وضعیت اعلان' });
   }
 });
@@ -1592,7 +1451,7 @@ app.post('/api/shorten', async (req, res) => {
 
   try {
     const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
-    
+
     // 2. Check if this exact URL has already been shortened
     const existing = Object.entries(shortlinks).find(([, val]) => val === cleanedUrl);
     if (existing) {
@@ -1602,10 +1461,10 @@ app.post('/api/shorten', async (req, res) => {
     // 3. Create a new structured, short, and random code
     // Sanitize category, providing a fallback
     const sanitizedCategory = (category || 'general').replace(/[^a-zA-Z0-9\u0600-\u06FF-]/g, '').toLowerCase();
-    
+
     let shortCode;
     let counter = 0;
-    
+
     // Handle potential collisions by generating a new random code until it's unique
     do {
       const randomPart = nanoid(6); // Generate a 6-character random string
@@ -1613,10 +1472,10 @@ app.post('/api/shorten', async (req, res) => {
       counter++;
       // Failsafe to prevent an extremely unlikely infinite loop
       if (counter > 20) {
-         shortCode = nanoid(12); // Use a longer random string as a fallback
+        shortCode = nanoid(12); // Use a longer random string as a fallback
       }
     } while (shortlinks[shortCode]);
-    
+
     shortlinks[shortCode] = cleanedUrl;
 
     await fs.writeFile(SHORTLINKS_PATH, JSON.stringify(shortlinks, null, 2));
@@ -1634,7 +1493,7 @@ app.get('/s/:shortCode(*)', async (req, res) => {
   try {
     const { shortCode } = req.params;
     const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
-    
+
     const longUrl = shortlinks[shortCode];
 
     if (longUrl) {
