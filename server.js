@@ -784,6 +784,7 @@ app.post('/api/blogs/:id/view', viewTrackingLimiter, async (req, res) => {
 });
 
 // Public content endpoints (no authentication required)
+/*
 app.get('/api/content/blogs', async (req, res) => {
   try {
     const blogs = await readJsonFile('blogs.json');
@@ -794,6 +795,7 @@ app.get('/api/content/blogs', async (req, res) => {
     res.status(500).json({ message: 'خطا در بارگذاری مقالات' });
   }
 });
+*/
 
 // Get single blog post with SEO data and related posts
 app.get('/api/content/blogs/:id', async (req, res) => {
@@ -902,7 +904,7 @@ app.get('/api/content/blogs/slug/:slug', async (req, res) => {
     res.status(500).json({ message: 'خطا در بارگذاری مقاله' });
   }
 });
-
+/*
 app.get('/api/content/pricing', async (req, res) => {
   try {
     const pricing = await readJsonFile('pricing.json');
@@ -911,6 +913,7 @@ app.get('/api/content/pricing', async (req, res) => {
     res.status(500).json({ message: 'خطا در بارگذاری تعرفه‌ها' });
   }
 });
+*/
 
 // Announcement endpoints
 app.get('/api/content/announcement', async (req, res) => {
