@@ -294,166 +294,74 @@ app.post('/api/admin/upload', uploadLimiter, requireAdmin, upload.single('image'
 
   try {
     if (!req.file) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Upload image failed - no file',
-        'upload',
-        { success: false, errorMessage: 'No file selected' },
-        'low'
-      ));
       return res.status(400).json({ message: 'هیچ فایلی انتخاب نشده است' });
     }
 
-    // Ensure uploads directory exists
-    const uploadDir = path.join(__dirname, 'uploads');
-    await fs.mkdir(uploadDir, { recursive: true });
-
     // Generate unique filename with .webp extension
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const filename = `image-${uniqueSuffix}.webp`;
-    const filePath = path.join(uploadDir, filename);
+    const filename = `image-${nanoid()}.webp`;
 
-    // Original file size
-    const originalSize = req.file.size;
+    // Convert and optimize image to WebP format in memory
+    const optimizedBuffer = await sharp(req.file.buffer)
+      .webp({ quality: 85, effort: 6 })
+      .resize(2000, 2000, { fit: 'inside', withoutEnlargement: true })
+      .toBuffer();
 
-    // Convert and optimize image to WebP format
-    await sharp(req.file.buffer)
-      .webp({
-        quality: 85, // High quality WebP (85 is excellent quality with good compression)
-        effort: 6    // Higher effort = better compression (0-6, default is 4)
-      })
-      .resize(2000, 2000, { // Max dimensions, maintains aspect ratio
-        fit: 'inside',
-        withoutEnlargement: true
-      })
-      .toFile(filePath);
+    // Upload to Supabase Storage
+    const { data, error: uploadError } = await supabase.storage
+      .from('blog-images')
+      .upload(filename, optimizedBuffer, {
+        contentType: 'image/webp',
+        upsert: false,
+      });
 
-    // Get optimized file size
-    const stats = await fs.stat(filePath);
-    const optimizedSize = stats.size;
-    const compressionRatio = ((1 - optimizedSize / originalSize) * 100).toFixed(2);
+    if (uploadError) {
+      throw uploadError;
+    }
 
-    // Return the URL path for the uploaded image
-    const imageUrl = `${FRONTEND_URL}/uploads/${filename}`;
-
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Upload and optimize image',
-      'upload',
-      {
-        filename: filename,
-        originalName: req.file.originalname,
-        originalSize: originalSize,
-        optimizedSize: optimizedSize,
-        compressionRatio: `${compressionRatio}%`,
-        format: 'webp',
-        success: true
-      },
-      'low'
-    ));
+    // Get the public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from('blog-images')
+      .getPublicUrl(filename);
 
     res.json({
       message: 'تصویر با موفقیت آپلود و بهینه‌سازی شد',
-      imageUrl: imageUrl,
-      filename: filename,
-      originalSize: originalSize,
-      optimizedSize: optimizedSize,
-      compressionRatio: `${compressionRatio}%`
+      imageUrl: publicUrl,
     });
   } catch (error) {
     console.error('Upload error:', error);
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Upload image failed',
-      'upload',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
     res.status(500).json({ message: 'خطا در آپلود تصویر' });
   }
 });
 
 // Delete uploaded image endpoint
 app.delete('/api/admin/upload/:filename', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
     const filename = req.params.filename;
-    const filePath = path.join(__dirname, 'uploads', filename);
-
-    // Check if file exists
-    try {
-      await fs.access(filePath);
-    } catch (error) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Delete image failed - file not found',
-        'upload',
-        { filename, success: false, errorMessage: 'File not found' },
-        'low'
-      ));
-      return res.status(404).json({ message: 'فایل یافت نشد' });
-    }
-
-    // Delete the file
-    await fs.unlink(filePath);
-
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Delete image',
-      'upload',
-      { filename, success: true },
-      'medium'
-    ));
+    const { error } = await supabase.storage.from('blog-images').remove([filename]);
+    if (error) throw error;
 
     res.json({ message: 'تصویر با موفقیت حذف شد' });
   } catch (error) {
     console.error('Delete error:', error);
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Delete image failed',
-      'upload',
-      { filename: req.params.filename, success: false, errorMessage: error.message },
-      'medium'
-    ));
     res.status(500).json({ message: 'خطا در حذف تصویر' });
   }
 });
 
 // Get list of uploaded images
 app.get('/api/admin/images', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const uploadsDir = path.join(__dirname, 'uploads');
-    const files = await fs.readdir(uploadsDir);
+    const { data, error } = await supabase.storage.from('blog-images').list();
+    if (error) throw error;
 
-    const images = files
-      .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
-      .map(file => ({
-        filename: file,
-        url: `${req.protocol}://${req.get('host')}/uploads/${file}`,
-        uploadDate: new Date().toISOString()
-      }));
-
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View uploaded images',
-      'upload',
-      { imageCount: images.length, success: true },
-      'low'
-    ));
+    const images = data.map(file => ({
+      filename: file.name,
+      url: `${supabaseUrl}/storage/v1/object/public/blog-images/${file.name}`,
+      uploadDate: file.created_at,
+    }));
 
     res.json(images);
   } catch (error) {
     console.error('Error reading images:', error);
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View uploaded images failed',
-      'upload',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
     res.status(500).json({ message: 'خطا در بارگذاری لیست تصاویر' });
   }
 });

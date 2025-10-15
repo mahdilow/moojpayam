@@ -1,5 +1,309 @@
 [
   {
+    "id": "log_1760514477817_3zou31cpr",
+    "timestamp": "2025-10-15T07:47:57.817Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514477488_l7xq4yu67",
+    "timestamp": "2025-10-15T07:47:57.488Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1760015031854,
+      "oldData": {
+        "title": "افزایش فروش سایت: راه‌های عملی و گام‌به‌گام برای رشد",
+        "category": "تحلیل"
+      },
+      "newData": {
+        "title": "افزایش فروش سایت: راه‌های عملی و گام‌به‌گام برای رشد",
+        "category": "تحلیل"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514380276_pg1keqls3",
+    "timestamp": "2025-10-15T07:46:20.276Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514378537_hd0687v3f",
+    "timestamp": "2025-10-15T07:46:18.537Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514378279_ssqpv6uhy",
+    "timestamp": "2025-10-15T07:46:18.279Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514375602_igdmb5l0g",
+    "timestamp": "2025-10-15T07:46:15.602Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "7a6z80tpisfeohyhlx1kce",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "7a6z80tpisfeohyhlx1kce"
+  },
+  {
+    "id": "log_1760513991513_9e0n85v5k",
+    "timestamp": "2025-10-15T07:39:51.513Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 6,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513991248_zrr9f99ic",
+    "timestamp": "2025-10-15T07:39:51.249Z",
+    "adminUser": "admin",
+    "action": "Delete image",
+    "category": "upload",
+    "details": {
+      "filename": "image-1760115174165-673859560.webp",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513985006_2jimg8tbr",
+    "timestamp": "2025-10-15T07:39:45.006Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513979580_ovvgmerok",
+    "timestamp": "2025-10-15T07:39:39.580Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513979257_r74y91h0n",
+    "timestamp": "2025-10-15T07:39:39.257Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": 1760015031854,
+      "oldData": {
+        "title": "افزایش فروش سایت: راه‌های عملی و گام‌به‌گام برای رشد",
+        "category": "تحلیل"
+      },
+      "newData": {
+        "title": "افزایش فروش سایت: راه‌های عملی و گام‌به‌گام برای رشد",
+        "category": "تحلیل"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513976443_1oslkr2c5",
+    "timestamp": "2025-10-15T07:39:36.443Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513966534_ups51p48v",
+    "timestamp": "2025-10-15T07:39:26.534Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513950383_chr7k6oyw",
+    "timestamp": "2025-10-15T07:39:10.383Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513939713_zdi4xry12",
+    "timestamp": "2025-10-15T07:38:59.713Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513934853_2aqsa52gn",
+    "timestamp": "2025-10-15T07:38:54.853Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513834841_xsbtmsi6l",
+    "timestamp": "2025-10-15T07:37:14.841Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513777968_abw8tbdfk",
+    "timestamp": "2025-10-15T07:36:17.968Z",
+    "adminUser": "admin",
+    "action": "View uploaded images",
+    "category": "upload",
+    "details": {
+      "imageCount": 7,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513773908_sy0ptkqc7",
+    "timestamp": "2025-10-15T07:36:13.908Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513772323_i1hr36dba",
+    "timestamp": "2025-10-15T07:36:12.323Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513772072_383h1iihe",
+    "timestamp": "2025-10-15T07:36:12.072Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513770196_2ipsul1fw",
+    "timestamp": "2025-10-15T07:36:10.196Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "m9ii9dv0ymspftemcz42oi",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "m9ii9dv0ymspftemcz42oi"
+  },
+  {
     "id": "log_1760513315790_uyi5n0sh5",
     "timestamp": "2025-10-15T07:28:35.790Z",
     "adminUser": "admin",
