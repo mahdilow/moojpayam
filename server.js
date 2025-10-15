@@ -958,7 +958,11 @@ app.get('/api/admin/announcements', requireAdmin, async (req, res) => {
 
 app.post('/api/admin/announcements', requireAdmin, async (req, res) => {
   try {
-    const { error } = await supabase.from('announcements').insert([req.body]);
+    const newAnnouncement = {
+      ...req.body,
+      id: nanoid() // Generate a unique ID
+    };
+    const { error } = await supabase.from('announcements').insert([newAnnouncement]);
     if (error) throw error;
     res.json({ message: 'اعلان با موفقیت ایجاد شد' });
   } catch (error) {

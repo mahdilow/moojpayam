@@ -1,5 +1,160 @@
 [
   {
+    "id": "log_1760513315790_uyi5n0sh5",
+    "timestamp": "2025-10-15T07:28:35.790Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513314168_dfzx11ovj",
+    "timestamp": "2025-10-15T07:28:34.168Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513313546_69oyqszel",
+    "timestamp": "2025-10-15T07:28:33.546Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513312655_pdv51554h",
+    "timestamp": "2025-10-15T07:28:32.655Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513214422_og4ue8u5l",
+    "timestamp": "2025-10-15T07:26:54.422Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513212292_2mj0lnf7h",
+    "timestamp": "2025-10-15T07:26:52.292Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513212278_v12qmr4ds",
+    "timestamp": "2025-10-15T07:26:52.278Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760513210410_x8b41ct87",
+    "timestamp": "2025-10-15T07:26:50.410Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "t1rchshkoqwsmic5g2bko",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "t1rchshkoqwsmic5g2bko"
+  },
+  {
+    "id": "log_1760512830733_0ocf8rmpz",
+    "timestamp": "2025-10-15T07:20:30.733Z",
+    "adminUser": "admin",
+    "action": "View all blogs",
+    "category": "content",
+    "details": {
+      "blogCount": 5,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760512829281_lgdfqg42i",
+    "timestamp": "2025-10-15T07:20:29.281Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760512828958_u1evnlq6r",
+    "timestamp": "2025-10-15T07:20:28.958Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760512826975_vphekaibz",
+    "timestamp": "2025-10-15T07:20:26.975Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "ccph6lim8htntvyvs2ydqm",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "ccph6lim8htntvyvs2ydqm"
+  },
+  {
     "id": "log_1760437021064_tc1l9lnz3",
     "timestamp": "2025-10-14T10:17:01.064Z",
     "adminUser": "admin",
