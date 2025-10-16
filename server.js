@@ -1013,6 +1013,20 @@ app.get('/api/admin/blogs', requireAdmin, async (req, res) => {
 app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
   try {
     const post = req.body;
+
+    // Auto-generate slug from title
+    const generateSlug = (title) => {
+      const baseSlug = title
+        .toString()
+        .toLowerCase()
+        .replace(/\s+/g, '-') // Replace spaces with -
+        .replace(/[^\u0600-\u06FF\w\-]+/g, '') // Remove all non-word chars except Persian
+        .replace(/\-\-+/g, '-') // Replace multiple - with single -
+        .replace(/^-+/, '') // Trim - from start of text
+        .replace(/-+$/, ''); // Trim - from end of text
+      return `${baseSlug}-${nanoid(6)}`;
+    };
+
     const newPost = {
       title: post.title,
       excerpt: post.excerpt,
@@ -1026,17 +1040,39 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       tags: post.tags,
       featured: post.featured,
       published: post.published,
-      slug: post.slug,
+      slug: generateSlug(post.title), // Generate the slug here
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       related_posts: post.relatedPosts,
       meta_description: post.metaDescription,
     };
 
-    const { error } = await supabase.from('blogs').insert([newPost]);
+    const { data, error } = await supabase.from('blogs').insert([newPost]).select().single();
     if (error) throw error;
 
-    res.json({ message: 'مقاله با موفقیت ایجاد شد', blog: post });
+    // Convert snake_case to camelCase for the frontend
+    const camelCaseBlog = {
+      id: data.id,
+      title: data.title,
+      excerpt: data.excerpt,
+      content: data.content,
+      image: data.image,
+      author: data.author,
+      date: data.date,
+      readTime: data.read_time,
+      views: data.views,
+      category: data.category,
+      tags: data.tags,
+      featured: data.featured,
+      published: data.published,
+      slug: data.slug,
+      createdAt: data.created_at,
+      updatedAt: data.updated_at,
+      relatedPosts: data.related_posts,
+      metaDescription: data.meta_description,
+    };
+
+    res.json({ message: 'مقاله با موفقیت ایجاد شد', blog: camelCaseBlog });
   } catch (error) {
     console.error('Error creating blog post:', error);
     res.status(500).json({ message: 'خطا در ایجاد مقاله' });
@@ -1049,6 +1085,20 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
 
   try {
     const post = req.body;
+
+    // Auto-generate slug from title if it's not provided or empty
+    const generateSlug = (title) => {
+      const baseSlug = title
+        .toString()
+        .toLowerCase()
+        .replace(/\s+/g, '-') // Replace spaces with -
+        .replace(/[^\u0600-\u06FF\w\-]+/g, '') // Remove all non-word chars except Persian
+        .replace(/\-\-+/g, '-') // Replace multiple - with single -
+        .replace(/^-+/, '') // Trim - from start of text
+        .replace(/-+$/, ''); // Trim - from end of text
+      return `${baseSlug}-${nanoid(6)}`;
+    };
+    
     const updatedPost = {
       title: post.title,
       excerpt: post.excerpt,
@@ -1060,7 +1110,7 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
       tags: post.tags,
       featured: post.featured,
       published: post.published,
-      slug: post.slug,
+      slug: post.slug || generateSlug(post.title), // Regenerate slug if needed
       related_posts: post.relatedPosts,
       meta_description: post.metaDescription,
       updatedAt: new Date().toISOString(),

@@ -1,5 +1,297 @@
 [
   {
+    "id": "log_1760627476834_y27khlj8j",
+    "timestamp": "2025-10-16T15:11:16.834Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627437159_jk5j99aor",
+    "timestamp": "2025-10-16T15:10:37.159Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "3",
+      "newData": {
+        "title": "سلامن مقاله جدید ۲۳۴۰ خمبنت",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627343356_z5z6sv1wq",
+    "timestamp": "2025-10-16T15:09:03.356Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "3",
+      "newData": {
+        "title": "سلامن مقاله جدید ۲۳۴۰ خمبنت",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627326730_kiahctwvh",
+    "timestamp": "2025-10-16T15:08:46.730Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627326134_0rrgrrsq2",
+    "timestamp": "2025-10-16T15:08:46.134Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627296685_ggakig0tj",
+    "timestamp": "2025-10-16T15:08:16.685Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "2",
+      "oldData": {
+        "title": "jhgjhg",
+        "category": "قوانین"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627293249_ifvkjsjva",
+    "timestamp": "2025-10-16T15:08:13.249Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627292465_9p0g3p8iw",
+    "timestamp": "2025-10-16T15:08:12.465Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627290096_g1hs9czm8",
+    "timestamp": "2025-10-16T15:08:10.096Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "f4z980omov7iju6skvx7kc",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "f4z980omov7iju6skvx7kc"
+  },
+  {
+    "id": "log_1760627084905_2sdk06nb5",
+    "timestamp": "2025-10-16T15:04:44.905Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760627082644_w30qajy4j",
+    "timestamp": "2025-10-16T15:04:42.644Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626913923_me41mcyj1",
+    "timestamp": "2025-10-16T15:01:53.923Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626912595_oc7toqpji",
+    "timestamp": "2025-10-16T15:01:52.595Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626425138_pqa3ew0oc",
+    "timestamp": "2025-10-16T14:53:45.138Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "1",
+      "oldData": {
+        "title": "test سیس",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626419552_drbfg5oir",
+    "timestamp": "2025-10-16T14:53:39.552Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626418740_vkj17vc3v",
+    "timestamp": "2025-10-16T14:53:38.740Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626416614_n6a83dovx",
+    "timestamp": "2025-10-16T14:53:36.614Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "i306hl406wnue9yn9tb47d",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "i306hl406wnue9yn9tb47d"
+  },
+  {
+    "id": "log_1760626114019_iqww86jge",
+    "timestamp": "2025-10-16T14:48:34.019Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "1760015031854",
+      "newData": {
+        "title": "افزایش فروش سایت: راه‌های عملی و گام‌به‌گام برای رشد",
+        "category": "تحلیل"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626100701_joyz90v2m",
+    "timestamp": "2025-10-16T14:48:20.701Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626100208_el0i4m04u",
+    "timestamp": "2025-10-16T14:48:20.208Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760626097856_ackx4jf6z",
+    "timestamp": "2025-10-16T14:48:17.856Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "gnlm4ujxffoispuqgwfbf",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "gnlm4ujxffoispuqgwfbf"
+  },
+  {
     "id": "log_1760625791590_udwucdafi",
     "timestamp": "2025-10-16T14:43:11.590Z",
     "adminUser": "admin",

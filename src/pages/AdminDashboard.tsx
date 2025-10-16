@@ -210,8 +210,15 @@ const AdminDashboard: React.FC = () => {
       });
 
       if (response.ok) {
+        const { blog: newBlog } = await response.json();
         toast.success(editingBlog ? "مقاله ویرایش شد" : "مقاله جدید ایجاد شد");
-        loadBlogs();
+        
+        if (!editingBlog && newBlog?.slug) {
+          navigate(`/blog/${newBlog.slug}`);
+        } else {
+          loadBlogs();
+        }
+        
         resetBlogForm();
       } else {
         const error = await response.json();
