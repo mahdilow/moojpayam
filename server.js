@@ -124,6 +124,11 @@ const readJsonFile = async (filename) => {
     return JSON.parse(data);
   } catch (error) {
     console.error(`Error reading ${filename}:`, error);
+    // For pricing, it's better to return a default structure
+    if (filename === 'pricing.json') return [];
+    // For logs, returning empty is also safe
+    if (filename === 'admin-logs.json') return [];
+    // If another file type were added, it might need a different default
     return [];
   }
 };
@@ -641,56 +646,44 @@ function requireAdmin(req, res, next) {
 // Blog post view tracking endpoint
 app.post('/api/blogs/:id/view', viewTrackingLimiter, async (req, res) => {
   try {
-    const blogId = parseInt(req.params.id, 10);
-    const clientIp = req.ip; // Get client's IP address
+    const blogId = req.params.id;
 
-    if (isNaN(blogId)) {
+    if (!blogId) {
       return res.status(400).json({ message: 'شناسه مقاله نامعتبر است' });
     }
 
-    const blogs = await readJsonFile('blogs.json');
-    const blogIndex = blogs.findIndex(blog => blog.id === blogId);
+    // Fetch the current view count
+    const { data: blog, error: fetchError } = await supabase
+      .from('blogs')
+      .select('views')
+      .eq('id', blogId)
+      .single();
 
-    if (blogIndex === -1) {
-      return res.status(404).json({ message: 'مقاله یافت نشد' });
+    if (fetchError) {
+      if (fetchError.code === 'PGRST116') {
+        return res.status(404).json({ message: 'مقاله یافت نشد' });
+      }
+      throw fetchError;
     }
 
-    const blogViews = await readJsonFile('blog-views.json');
+    // Increment view count and update lastViewed timestamp
+    const newViews = (blog.views || 0) + 1;
+    const { data: updatedBlog, error: updateError } = await supabase
+      .from('blogs')
+      .update({ views: newViews, lastViewed: new Date().toISOString() })
+      .eq('id', blogId)
+      .select('views')
+      .single();
 
-    // Check if this IP has already viewed this post
-    if (blogViews[blogId] && blogViews[blogId].includes(clientIp)) {
-      return res.json({
-        message: 'بازدید شما قبلاً ثبت شده است',
-        views: blogs[blogIndex].views
-      });
+    if (updateError) {
+      throw updateError;
     }
 
-    // If not, add the IP and increment the view count
-    if (!blogViews[blogId]) {
-      blogViews[blogId] = [];
-    }
-    blogViews[blogId].push(clientIp);
+    res.json({
+      message: 'بازدید شما با موفقیت ثبت شد',
+      views: updatedBlog.views
+    });
 
-    // Increment view count
-    blogs[blogIndex].views = (blogs[blogIndex].views || 0) + 1;
-    blogs[blogIndex].lastViewed = new Date().toISOString();
-
-    // Write both files
-    const [viewsSuccess, blogsSuccess] = await Promise.all([
-      writeJsonFile('blog-views.json', blogViews),
-      writeJsonFile('blogs.json', blogs)
-    ]);
-
-    if (viewsSuccess && blogsSuccess) {
-      res.json({
-        message: 'بازدید شما با موفقیت ثبت شد',
-        views: blogs[blogIndex].views
-      });
-    } else {
-      // Log an error if the write fails but don't expose details
-      console.error('Failed to write view tracking or blogs file.');
-      res.status(500).json({ message: 'خطا در ثبت بازدید' });
-    }
   } catch (error) {
     console.error('View tracking error:', error);
     res.status(500).json({ message: 'خطا در ثبت بازدید' });
@@ -711,56 +704,77 @@ app.get('/api/content/blogs', async (req, res) => {
 });
 */
 
+// Helper function to get related posts
+const getRelatedPosts = async (blog) => {
+  let relatedPosts = [];
+  // First, try fetching explicitly related posts
+  if (blog.related_posts && blog.related_posts.length > 0) {
+    const { data: explicitRelated } = await supabase
+      .from('blogs')
+      .select('*')
+      .in('id', blog.related_posts)
+      .eq('published', true)
+      .neq('id', blog.id);
+    if (explicitRelated) relatedPosts = explicitRelated;
+  }
+
+  // If not enough related posts, fetch by category
+  if (relatedPosts.length < 2) {
+    const { data: categoryRelated } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('category', blog.category)
+      .eq('published', true)
+      .neq('id', blog.id)
+      .limit(2 - relatedPosts.length);
+    if (categoryRelated) {
+      const existingIds = new Set(relatedPosts.map(p => p.id));
+      relatedPosts.push(...categoryRelated.filter(p => !existingIds.has(p.id)));
+    }
+  }
+
+  // If still not enough, fetch any other posts
+  if (relatedPosts.length < 2) {
+    const { data: anyRelated } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('published', true)
+      .neq('id', blog.id)
+      .limit(2 - relatedPosts.length);
+    if (anyRelated) {
+      const existingIds = new Set(relatedPosts.map(p => p.id));
+      relatedPosts.push(...anyRelated.filter(p => !existingIds.has(p.id)));
+    }
+  }
+  return relatedPosts;
+}
+
 // Get single blog post with SEO data and related posts
 app.get('/api/content/blogs/:id', async (req, res) => {
   try {
-    const blogId = parseInt(req.params.id);
-    const blogs = await readJsonFile('blogs.json');
-    const blog = blogs.find(blog => blog.id === blogId && blog.published);
+    const blogId = req.params.id;
+    const { data: blog, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('id', blogId)
+      .eq('published', true)
+      .single();
 
-    if (!blog) {
+    if (error || !blog) {
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "No rows found"
+        throw error;
+      }
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
 
-    // Get related posts
-    let relatedPosts = [];
-    if (blog.relatedPosts && blog.relatedPosts.length > 0) {
-      relatedPosts = blogs.filter(b =>
-        blog.relatedPosts.includes(b.id) &&
-        b.published &&
-        b.id !== blog.id
-      );
-    }
-
-    // If no related posts specified or found, auto-select based on category
-    if (relatedPosts.length === 0) {
-      relatedPosts = blogs
-        .filter(b =>
-          b.published &&
-          b.id !== blog.id &&
-          b.category === blog.category
-        )
-        .slice(0, 2);
-
-      // If still not enough, get from all published posts
-      if (relatedPosts.length < 2) {
-        const additionalPosts = blogs
-          .filter(b =>
-            b.published &&
-            b.id !== blog.id &&
-            !relatedPosts.some(rp => rp.id === b.id)
-          )
-          .slice(0, 2 - relatedPosts.length);
-
-        relatedPosts = [...relatedPosts, ...additionalPosts];
-      }
-    }
+    const relatedPosts = await getRelatedPosts(blog);
 
     res.json({
       ...blog,
       relatedPosts
     });
   } catch (error) {
+    console.error('Error fetching blog by id:', error);
     res.status(500).json({ message: 'خطا در بارگذاری مقاله' });
   }
 });
@@ -769,52 +783,29 @@ app.get('/api/content/blogs/:id', async (req, res) => {
 app.get('/api/content/blogs/slug/:slug', async (req, res) => {
   try {
     const blogSlug = decodeURIComponent(req.params.slug);
-    const blogs = await readJsonFile('blogs.json');
-    const blog = blogs.find(blog => blog.slug === blogSlug && blog.published);
 
-    if (!blog) {
+    const { data: blog, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('slug', blogSlug)
+      .eq('published', true)
+      .single();
+
+    if (error || !blog) {
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "No rows found"
+        throw error;
+      }
       return res.status(404).json({ message: 'مقاله یافت نشد' });
     }
 
-    // Get related posts
-    let relatedPosts = [];
-    if (blog.relatedPosts && blog.relatedPosts.length > 0) {
-      relatedPosts = blogs.filter(b =>
-        blog.relatedPosts.includes(b.id) &&
-        b.published &&
-        b.id !== blog.id
-      );
-    }
-
-    // If no related posts specified or found, auto-select based on category
-    if (relatedPosts.length === 0) {
-      relatedPosts = blogs
-        .filter(b =>
-          b.published &&
-          b.id !== blog.id &&
-          b.category === blog.category
-        )
-        .slice(0, 2);
-
-      // If still not enough, get from all published posts
-      if (relatedPosts.length < 2) {
-        const additionalPosts = blogs
-          .filter(b =>
-            b.published &&
-            b.id !== blog.id &&
-            !relatedPosts.some(rp => rp.id === b.id)
-          )
-          .slice(0, 2 - relatedPosts.length);
-
-        relatedPosts = [...relatedPosts, ...additionalPosts];
-      }
-    }
+    const relatedPosts = await getRelatedPosts(blog);
 
     res.json({
       ...blog,
       relatedPosts
     });
   } catch (error) {
+    console.error('Error fetching blog by slug:', error);
     res.status(500).json({ message: 'خطا در بارگذاری مقاله' });
   }
 });
@@ -926,22 +917,32 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
 
   try {
-    const [blogs, pricing] = await Promise.all([
-      readJsonFile('blogs.json'),
-      readJsonFile('pricing.json')
-    ]);
+    // Pricing data is still from JSON
+    const pricing = await readJsonFile('pricing.json');
+
+    // Fetch blog stats from Supabase
+    const { data: blogs, error: blogsError } = await supabase
+      .from('blogs')
+      .select('views, published, lastViewed, id, title');
+
+    if (blogsError) throw blogsError;
+
+    // Most viewed post
+    const { data: mostViewedPostData, error: mostViewedError } = await supabase
+      .from('blogs')
+      .select('title, views')
+      .order('views', { ascending: false })
+      .limit(1)
+      .single();
+
+    if (mostViewedError && mostViewedError.code !== 'PGRST116') throw mostViewedError;
 
     const stats = {
       totalPosts: blogs.filter(blog => blog.published).length,
       totalViews: blogs.reduce((sum, blog) => sum + (blog.views || 0), 0),
       activePlans: pricing.filter(plan => plan.active).length,
-      // Additional stats
       draftPosts: blogs.filter(blog => !blog.published).length,
-      totalPosts: blogs.length,
-      mostViewedPost: blogs.reduce((max, blog) =>
-        (blog.views || 0) > (max.views || 0) ? blog : max,
-        { views: 0, title: 'هیچ مقاله‌ای' }
-      ),
+      mostViewedPost: mostViewedPostData || { views: 0, title: 'هیچ مقاله‌ای' },
       recentViews: blogs
         .filter(blog => blog.lastViewed)
         .sort((a, b) => new Date(b.lastViewed).getTime() - new Date(a.lastViewed).getTime())
@@ -958,6 +959,7 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
 
     res.json(stats);
   } catch (error) {
+    console.error('Error fetching admin stats:', error);
     await logAdminAction(createLogEntry(
       adminUser,
       'View dashboard stats failed',
@@ -971,174 +973,134 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
 
 // Blog management endpoints
 app.get('/api/admin/blogs', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const blogs = await readJsonFile('blogs.json');
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .order('createdAt', { ascending: false });
 
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View all blogs',
-      'content',
-      { blogCount: blogs.length, success: true },
-      'low'
-    ));
+    if (error) throw error;
 
-    res.json(blogs);
+    // Convert snake_case to camelCase for the frontend
+    const camelCaseBlogs = data.map(blog => ({
+      id: blog.id,
+      title: blog.title,
+      excerpt: blog.excerpt,
+      content: blog.content,
+      image: blog.image,
+      author: blog.author,
+      date: blog.date,
+      readTime: blog.read_time,
+      views: blog.views,
+      category: blog.category,
+      tags: blog.tags,
+      featured: blog.featured,
+      published: blog.published,
+      slug: blog.slug,
+      createdAt: blog.created_at,
+      updatedAt: blog.updated_at,
+      relatedPosts: blog.related_posts,
+      metaDescription: blog.meta_description,
+    }));
+
+    res.json(camelCaseBlogs);
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'View all blogs failed',
-      'content',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
+    console.error('Error fetching blogs:', error);
     res.status(500).json({ message: 'خطا در بارگذاری مقالات' });
   }
 });
 
 app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
-  const adminUser = getAdminUserFromSession(req);
-
   try {
-    const blogs = await readJsonFile('blogs.json');
-
-    // Auto-select related posts if none provided
-    let relatedPosts = req.body.relatedPosts || [];
-    if (relatedPosts.length === 0) {
-      const sameCategoryPosts = blogs
-        .filter(b => b.published && b.category === req.body.category)
-        .slice(0, 2);
-
-      if (sameCategoryPosts.length >= 2) {
-        relatedPosts = sameCategoryPosts.map(p => p.id);
-      } else {
-        relatedPosts = blogs
-          .filter(b => b.published)
-          .slice(0, 2)
-          .map(p => p.id);
-      }
-    }
-
-    const newBlog = {
-      ...req.body,
-      id: Date.now(),
-      views: 0,
+    const post = req.body;
+    const newPost = {
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content,
+      image: post.image,
+      author: post.author,
       date: new Date().toLocaleDateString('fa-IR'),
+      read_time: post.readTime,
+      views: 0,
+      category: post.category,
+      tags: post.tags,
+      featured: post.featured,
+      published: post.published,
+      slug: post.slug,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      relatedPosts,
-      // SEO fields
-      slug: req.body.title.trim(),
-      metaDescription: req.body.excerpt || req.body.title
+      related_posts: post.relatedPosts,
+      meta_description: post.metaDescription,
     };
 
-    blogs.push(newBlog);
-    const success = await writeJsonFile('blogs.json', blogs);
+    const { error } = await supabase.from('blogs').insert([newPost]);
+    if (error) throw error;
 
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Create blog post',
-        'content',
-        {
-          resourceType: 'blog',
-          resourceId: newBlog.id,
-          newData: { title: newBlog.title, category: newBlog.category },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'مقاله با موفقیت ایجاد شد', blog: newBlog });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره مقاله' });
-    }
+    res.json({ message: 'مقاله با موفقیت ایجاد شد', blog: post });
   } catch (error) {
-    await logAdminAction(createLogEntry(
-      adminUser,
-      'Create blog post failed',
-      'content',
-      { success: false, errorMessage: error.message },
-      'medium'
-    ));
+    console.error('Error creating blog post:', error);
     res.status(500).json({ message: 'خطا در ایجاد مقاله' });
   }
 });
 
 app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
+  const blogId = req.params.id;
 
   try {
-    const blogs = await readJsonFile('blogs.json');
-    const blogId = parseInt(req.params.id);
-    const blogIndex = blogs.findIndex(blog => blog.id === blogId);
-
-    if (blogIndex === -1) {
-      return res.status(404).json({ message: 'مقاله یافت نشد' });
-    }
-
-    const oldBlog = { ...blogs[blogIndex] };
-
-    // Auto-select related posts if none provided
-    let relatedPosts = req.body.relatedPosts || [];
-    if (relatedPosts.length === 0) {
-      const sameCategoryPosts = blogs
-        .filter(b => b.published && b.category === req.body.category && b.id !== blogId)
-        .slice(0, 2);
-
-      if (sameCategoryPosts.length >= 2) {
-        relatedPosts = sameCategoryPosts.map(p => p.id);
-      } else {
-        relatedPosts = blogs
-          .filter(b => b.published && b.id !== blogId)
-          .slice(0, 2)
-          .map(p => p.id);
-      }
-    }
-
-    // Preserve views and creation date
-    const updatedBlog = {
-      ...blogs[blogIndex],
-      ...req.body,
-      id: blogId,
-      views: blogs[blogIndex].views || 0,
-      createdAt: blogs[blogIndex].createdAt,
+    const post = req.body;
+    const updatedPost = {
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content,
+      image: post.image,
+      author: post.author,
+      read_time: post.readTime,
+      category: post.category,
+      tags: post.tags,
+      featured: post.featured,
+      published: post.published,
+      slug: post.slug,
+      related_posts: post.relatedPosts,
+      meta_description: post.metaDescription,
       updatedAt: new Date().toISOString(),
-      relatedPosts,
-      // Update SEO fields
-      slug: req.body.title ? req.body.title.trim() : blogs[blogIndex].slug,
-      metaDescription: req.body.excerpt || req.body.title || blogs[blogIndex].metaDescription
     };
 
-    blogs[blogIndex] = updatedBlog;
-    const success = await writeJsonFile('blogs.json', blogs);
+    const { data, error } = await supabase
+      .from('blogs')
+      .update(updatedPost)
+      .eq('id', blogId)
+      .select()
+      .single();
 
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Update blog post',
-        'content',
-        {
-          resourceType: 'blog',
-          resourceId: blogId,
-          oldData: { title: oldBlog.title, category: oldBlog.category },
-          newData: { title: updatedBlog.title, category: updatedBlog.category },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'مقاله با موفقیت ویرایش شد', blog: updatedBlog });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
+    if (error) {
+      if (error.code === 'PGRST116') { // No rows found
+        return res.status(404).json({ message: 'مقاله یافت نشد' });
+      }
+      throw error;
     }
+
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Update blog post',
+      'content',
+      {
+        resourceType: 'blog',
+        resourceId: blogId,
+        newData: { title: data.title, category: data.category },
+        success: true
+      },
+      'medium'
+    ));
+
+    res.json({ message: 'مقاله با موفقیت ویرایش شد', blog: data });
   } catch (error) {
+    console.error('Error updating blog post:', error);
     await logAdminAction(createLogEntry(
       adminUser,
       'Update blog post failed',
       'content',
-      { resourceType: 'blog', resourceId: req.params.id, success: false, errorMessage: error.message },
+      { resourceType: 'blog', resourceId: blogId, success: false, errorMessage: error.message },
       'medium'
     ));
     res.status(500).json({ message: 'خطا در ویرایش مقاله' });
@@ -1147,43 +1109,44 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
 
 app.delete('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
+  const blogId = req.params.id;
 
   try {
-    const blogs = await readJsonFile('blogs.json');
-    const blogId = parseInt(req.params.id);
-    const blogToDelete = blogs.find(blog => blog.id === blogId);
-    const filteredBlogs = blogs.filter(blog => blog.id !== blogId);
+    const { data, error } = await supabase
+      .from('blogs')
+      .delete()
+      .eq('id', blogId)
+      .select('title, category')
+      .single();
 
-    if (filteredBlogs.length === blogs.length) {
-      return res.status(404).json({ message: 'مقاله یافت نشد' });
+    if (error) {
+      if (error.code === 'PGRST116') { // No rows found
+        return res.status(404).json({ message: 'مقاله یافت نشد' });
+      }
+      throw error;
     }
 
-    const success = await writeJsonFile('blogs.json', filteredBlogs);
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Delete blog post',
+      'content',
+      {
+        resourceType: 'blog',
+        resourceId: blogId,
+        oldData: { title: data.title, category: data.category },
+        success: true
+      },
+      'high'
+    ));
 
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Delete blog post',
-        'content',
-        {
-          resourceType: 'blog',
-          resourceId: blogId,
-          oldData: { title: blogToDelete?.title, category: blogToDelete?.category },
-          success: true
-        },
-        'high'
-      ));
-
-      res.json({ message: 'مقاله با موفقیت حذف شد' });
-    } else {
-      res.status(500).json({ message: 'خطا در حذف مقاله' });
-    }
+    res.json({ message: 'مقاله با موفقیت حذف شد' });
   } catch (error) {
+    console.error('Error deleting blog post:', error);
     await logAdminAction(createLogEntry(
       adminUser,
       'Delete blog post failed',
       'content',
-      { resourceType: 'blog', resourceId: req.params.id, success: false, errorMessage: error.message },
+      { resourceType: 'blog', resourceId: blogId, success: false, errorMessage: error.message },
       'high'
     ));
     res.status(500).json({ message: 'خطا در حذف مقاله' });

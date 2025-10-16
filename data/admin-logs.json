@@ -1,5 +1,258 @@
 [
   {
+    "id": "log_1760625791590_udwucdafi",
+    "timestamp": "2025-10-16T14:43:11.590Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "1760015031854",
+      "newData": {
+        "title": "افزایش فروش سایت: راه‌های عملی و گام‌به‌گام برای رشد",
+        "category": "تحلیل"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760625776548_6nb3bhc2o",
+    "timestamp": "2025-10-16T14:42:56.548Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760625776043_9fhhfmf1o",
+    "timestamp": "2025-10-16T14:42:56.043Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760625773654_zxhfnzt50",
+    "timestamp": "2025-10-16T14:42:53.654Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "0xih66dw6yji95kimssrcrv",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "0xih66dw6yji95kimssrcrv"
+  },
+  {
+    "id": "log_1760516722106_z7ffryna2",
+    "timestamp": "2025-10-15T08:25:22.106Z",
+    "adminUser": "admin",
+    "action": "Update blog post failed",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "1760015031854",
+      "success": false,
+      "errorMessage": "Could not find the 'updated_at' column of 'blogs' in the schema cache"
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516694789_0gz7s70bi",
+    "timestamp": "2025-10-15T08:24:54.789Z",
+    "adminUser": "admin",
+    "action": "Update blog post failed",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "1760015031854",
+      "success": false,
+      "errorMessage": "Could not find the 'updated_at' column of 'blogs' in the schema cache"
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516619023_afq3n56g9",
+    "timestamp": "2025-10-15T08:23:39.023Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516618684_m4ycadtq1",
+    "timestamp": "2025-10-15T08:23:38.684Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516616497_zfd25fosu",
+    "timestamp": "2025-10-15T08:23:36.497Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "rb8367atf8do74sjwsb85",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "rb8367atf8do74sjwsb85"
+  },
+  {
+    "id": "log_1760516492886_2kmuz2oa4",
+    "timestamp": "2025-10-15T08:21:32.886Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516492336_0rj4e7i6x",
+    "timestamp": "2025-10-15T08:21:32.336Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516490087_rer746nhz",
+    "timestamp": "2025-10-15T08:21:30.087Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516484808_0s7t3qugg",
+    "timestamp": "2025-10-15T08:21:24.808Z",
+    "adminUser": "admin",
+    "action": "View pricing plans",
+    "category": "content",
+    "details": {
+      "planCount": 3,
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516480905_h7t6z1izd",
+    "timestamp": "2025-10-15T08:21:20.905Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516480071_7gaduwocv",
+    "timestamp": "2025-10-15T08:21:20.071Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760516477702_nzo5x1a5c",
+    "timestamp": "2025-10-15T08:21:17.702Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "29eaqzcd614wu450hxnd1e",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "29eaqzcd614wu450hxnd1e"
+  },
+  {
+    "id": "log_1760514901235_fp66plsc6",
+    "timestamp": "2025-10-15T07:55:01.235Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514900982_2pn4l9wh2",
+    "timestamp": "2025-10-15T07:55:00.982Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760514899123_l3ez2t6a9",
+    "timestamp": "2025-10-15T07:54:59.123Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "c4qtedcrepu8nopzzhdb",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "c4qtedcrepu8nopzzhdb"
+  },
+  {
     "id": "log_1760514477817_3zou31cpr",
     "timestamp": "2025-10-15T07:47:57.817Z",
     "adminUser": "admin",
