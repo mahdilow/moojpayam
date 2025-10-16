@@ -19,8 +19,6 @@ import { createClient } from '@supabase/supabase-js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SHORTLINKS_PATH = path.join(__dirname, 'data/shortlinks.json');
-
 // Load environment variables
 dotenv.config();
 
@@ -1014,8 +1012,8 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
   try {
     const post = req.body;
 
-    // Auto-generate slug from title
-    const generateSlug = (title) => {
+    // Auto-generate a unique slug from the title
+    const generateSlug = async (title) => {
       const baseSlug = title
         .toString()
         .toLowerCase()
@@ -1024,7 +1022,28 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
         .replace(/\-\-+/g, '-') // Replace multiple - with single -
         .replace(/^-+/, '') // Trim - from start of text
         .replace(/-+$/, ''); // Trim - from end of text
-      return `${baseSlug}-${nanoid(6)}`;
+
+      let slug = baseSlug;
+      let count = 2;
+      let slugExists = true;
+
+      while (slugExists) {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('slug')
+          .eq('slug', slug)
+          .single();
+
+        if (error && error.code !== 'PGRST116') throw error; // Ignore "No rows found"
+
+        if (!data) {
+          slugExists = false;
+        } else {
+          slug = `${baseSlug}-${count}`;
+          count++;
+        }
+      }
+      return slug;
     };
 
     const newPost = {
@@ -1040,7 +1059,7 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       tags: post.tags,
       featured: post.featured,
       published: post.published,
-      slug: generateSlug(post.title), // Generate the slug here
+      slug: await generateSlug(post.title), // Generate the slug here
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       related_posts: post.relatedPosts,
@@ -1086,8 +1105,8 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
   try {
     const post = req.body;
 
-    // Auto-generate slug from title if it's not provided or empty
-    const generateSlug = (title) => {
+    // Auto-generate a unique slug from the title
+    const generateSlug = async (title, currentId) => {
       const baseSlug = title
         .toString()
         .toLowerCase()
@@ -1096,7 +1115,29 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
         .replace(/\-\-+/g, '-') // Replace multiple - with single -
         .replace(/^-+/, '') // Trim - from start of text
         .replace(/-+$/, ''); // Trim - from end of text
-      return `${baseSlug}-${nanoid(6)}`;
+
+      let slug = baseSlug;
+      let count = 2;
+      let slugExists = true;
+
+      while (slugExists) {
+        const { data, error } = await supabase
+          .from('blogs')
+          .select('id')
+          .eq('slug', slug)
+          .neq('id', currentId) // Exclude the current post from the check
+          .single();
+
+        if (error && error.code !== 'PGRST116') throw error;
+
+        if (!data) {
+          slugExists = false;
+        } else {
+          slug = `${baseSlug}-${count}`;
+          count++;
+        }
+      }
+      return slug;
     };
     
     const updatedPost = {
@@ -1110,7 +1151,7 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
       tags: post.tags,
       featured: post.featured,
       published: post.published,
-      slug: post.slug || generateSlug(post.title), // Regenerate slug if needed
+      slug: await generateSlug(post.title, blogId), // Regenerate slug if needed
       related_posts: post.relatedPosts,
       meta_description: post.metaDescription,
       updatedAt: new Date().toISOString(),
@@ -1371,39 +1412,33 @@ app.post('/api/shorten', async (req, res) => {
     return res.status(400).json({ message: 'longUrl, slug, and category are required' });
   }
 
-  // 1. Clean the URL to ensure stability
   const cleanedUrl = longUrl.split('?')[0].split('#')[0];
 
   try {
-    const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
+    // Check if this exact URL has already been shortened
+    const { data: existing, error: existingError } = await supabase
+      .from('shortlinks')
+      .select('slug')
+      .eq('long_url', cleanedUrl)
+      .single();
 
-    // 2. Check if this exact URL has already been shortened
-    const existing = Object.entries(shortlinks).find(([, val]) => val === cleanedUrl);
+    if (existingError && existingError.code !== 'PGRST116') throw existingError;
+
     if (existing) {
-      return res.json({ shortUrl: `${FRONTEND_URL}/s/${existing[0]}` });
+      return res.json({ shortUrl: `${FRONTEND_URL}/s/${existing.slug}` });
     }
 
-    // 3. Create a new structured, short, and random code
-    // Sanitize category, providing a fallback
+    // Sanitize category
     const sanitizedCategory = (category || 'general').replace(/[^a-zA-Z0-9\u0600-\u06FF-]/g, '').toLowerCase();
+    const randomPart = nanoid(6);
+    const shortCode = `${sanitizedCategory}/${randomPart}`;
 
-    let shortCode;
-    let counter = 0;
+    // Insert new short link
+    const { error: insertError } = await supabase
+      .from('shortlinks')
+      .insert([{ long_url: cleanedUrl, slug: shortCode, category: sanitizedCategory }]);
 
-    // Handle potential collisions by generating a new random code until it's unique
-    do {
-      const randomPart = nanoid(6); // Generate a 6-character random string
-      shortCode = `${sanitizedCategory}/${randomPart}`;
-      counter++;
-      // Failsafe to prevent an extremely unlikely infinite loop
-      if (counter > 20) {
-        shortCode = nanoid(12); // Use a longer random string as a fallback
-      }
-    } while (shortlinks[shortCode]);
-
-    shortlinks[shortCode] = cleanedUrl;
-
-    await fs.writeFile(SHORTLINKS_PATH, JSON.stringify(shortlinks, null, 2));
+    if (insertError) throw insertError;
 
     const shortUrl = `${FRONTEND_URL}/s/${shortCode}`;
     res.json({ shortUrl });
@@ -1417,12 +1452,17 @@ app.post('/api/shorten', async (req, res) => {
 app.get('/s/:shortCode(*)', async (req, res) => {
   try {
     const { shortCode } = req.params;
-    const shortlinks = JSON.parse(await fs.readFile(SHORTLINKS_PATH, 'utf-8'));
+    
+    const { data: link, error } = await supabase
+      .from('shortlinks')
+      .select('long_url')
+      .eq('slug', shortCode)
+      .single();
 
-    const longUrl = shortlinks[shortCode];
+    if (error && error.code !== 'PGRST116') throw error;
 
-    if (longUrl) {
-      res.redirect(301, longUrl);
+    if (link) {
+      res.redirect(301, link.long_url);
     } else {
       res.status(404).send('URL not found');
     }
