@@ -1,5 +1,149 @@
 [
   {
+    "id": "log_1760701707452_jubwnnd84",
+    "timestamp": "2025-10-17T11:48:27.452Z",
+    "adminUser": "admin",
+    "action": "Delete blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "6",
+      "oldData": {
+        "title": "trdgdfd",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "high",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701672432_eh4ieut3j",
+    "timestamp": "2025-10-17T11:47:52.432Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "6",
+      "newData": {
+        "title": "trdgdfd",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701660498_kxjfzd2mu",
+    "timestamp": "2025-10-17T11:47:40.498Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701659969_nyn3sz4xw",
+    "timestamp": "2025-10-17T11:47:39.969Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701657538_os8unnbz3",
+    "timestamp": "2025-10-17T11:47:37.538Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "t5vdr2g61ebm7es88v9ow",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "t5vdr2g61ebm7es88v9ow"
+  },
+  {
+    "id": "log_1760701307581_7tpu1vz83",
+    "timestamp": "2025-10-17T11:41:47.581Z",
+    "adminUser": "admin",
+    "action": "Update blog post",
+    "category": "content",
+    "details": {
+      "resourceType": "blog",
+      "resourceId": "6",
+      "newData": {
+        "title": "trdgdfd",
+        "category": "آموزش"
+      },
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701167626_epsxs29lu",
+    "timestamp": "2025-10-17T11:39:27.626Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701098948_38bz6tm7h",
+    "timestamp": "2025-10-17T11:38:18.948Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701097535_qqh0qx50x",
+    "timestamp": "2025-10-17T11:38:17.535Z",
+    "adminUser": "admin",
+    "action": "View dashboard stats",
+    "category": "system",
+    "details": {
+      "success": true
+    },
+    "severity": "low",
+    "sessionId": null
+  },
+  {
+    "id": "log_1760701094775_496hsaoks",
+    "timestamp": "2025-10-17T11:38:14.775Z",
+    "adminUser": "mahdi",
+    "action": "Successful login",
+    "category": "auth",
+    "details": {
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "sessionId": "ifan0dqpdzzuol2xz19bk",
+      "success": true
+    },
+    "severity": "medium",
+    "sessionId": "ifan0dqpdzzuol2xz19bk"
+  },
+  {
     "id": "log_1760630248211_hnaw0wa3i",
     "timestamp": "2025-10-16T15:57:28.211Z",
     "adminUser": "admin",

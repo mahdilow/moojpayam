@@ -1071,6 +1071,22 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       return slug;
     };
 
+    // Automatically find related posts based on category
+    const { data: relatedPostsData } = await supabase
+      .from('blogs')
+      .select('id')
+      .eq('category', post.category)
+      .eq('published', true)
+      .order('views', { ascending: false })
+      .limit(2);
+
+    const relatedPostIds = relatedPostsData ? relatedPostsData.map(p => p.id) : [];
+
+    // Auto-generate meta description from excerpt
+    const metaDescription = post.excerpt 
+      ? post.excerpt.substring(0, 160) 
+      : '';
+
     const newPost = {
       title: post.title,
       excerpt: post.excerpt,
@@ -1087,8 +1103,8 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
       slug: await generateSlug(post.title), // Generate the slug here
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      related_posts: post.relatedPosts,
-      meta_description: post.metaDescription,
+      related_posts: relatedPostIds, // Use the auto-generated list
+      meta_description: metaDescription, // Use the auto-generated meta description
     };
 
     const { data, error } = await supabase.from('blogs').insert([newPost]).select().single();
