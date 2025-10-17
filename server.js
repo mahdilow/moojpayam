@@ -114,50 +114,42 @@ const viewTrackingLimiter = rateLimit({
 const activeSessions = new Set();
 const otpStore = new Map(); // In-memory OTP store
 
-// Helper functions for JSON file operations
-const readJsonFile = async (filename) => {
-  try {
-    const filePath = path.join(__dirname, 'data', filename);
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error(`Error reading ${filename}:`, error);
-    // For pricing, it's better to return a default structure
-    if (filename === 'pricing.json') return [];
-    // For logs, returning empty is also safe
-    if (filename === 'admin-logs.json') return [];
-    // If another file type were added, it might need a different default
-    return [];
-  }
-};
-
-const writeJsonFile = async (filename, data) => {
-  try {
-    const filePath = path.join(__dirname, 'data', filename);
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
-    return true;
-  } catch (error) {
-    console.error(`Error writing ${filename}:`, error);
-    return false;
-  }
-};
-
 // Admin logging functions
+
 const logAdminAction = async (logEntry) => {
+
   try {
-    const logs = await readJsonFile('admin-logs.json');
-    logs.unshift(logEntry); // Add to beginning
 
-    // Keep only last 10000 logs
-    if (logs.length > 10000) {
-      logs.splice(10000);
-    }
+    // The logEntry object is already in the correct format (camelCase)
 
-    await writeJsonFile('admin-logs.json', logs);
+    const { adminUser, sessionId, ...logData } = logEntry;
+
+    const dataToInsert = {
+
+      ...logData,
+
+      adminUser: adminUser,
+
+      sessionId: sessionId,
+
+    };
+
+
+
+    const { error } = await supabase.from('admin_logs').insert([dataToInsert]);
+
+    if (error) throw error;
+
+    
+
     console.log(`Admin action logged: ${logEntry.action} by ${logEntry.adminUser}`);
+
   } catch (error) {
+
     console.error('Error logging admin action:', error);
+
   }
+
 };
 
 const createLogEntry = (adminUser, action, category, details, severity = 'medium', sessionId = null) => {
@@ -208,36 +200,38 @@ app.post('/api/admin/logs', requireAdmin, async (req, res) => {
 app.get('/api/admin/logs', requireAdmin, async (req, res) => {
   try {
     const { category, severity, dateRange, search, limit = 100, offset = 0 } = req.query;
-    let logs = await readJsonFile('admin-logs.json');
+    
+    let query = supabase.from('admin_logs').select('*', { count: 'exact' });
 
     // Apply filters
     if (category && category !== 'all') {
-      logs = logs.filter(log => log.category === category);
+      query = query.eq('category', category);
     }
-
     if (severity && severity !== 'all') {
-      logs = logs.filter(log => log.severity === severity);
+      query = query.eq('severity', severity);
     }
-
     if (dateRange && dateRange !== 'all') {
       const now = new Date();
       const days = parseInt(dateRange.replace('d', ''));
       const cutoff = new Date(now.getTime() - (days * 24 * 60 * 60 * 1000));
-      logs = logs.filter(log => new Date(log.timestamp) >= cutoff);
+      query = query.gte('timestamp', cutoff.toISOString());
     }
-
     if (search) {
       const searchLower = search.toLowerCase();
-      logs = logs.filter(log =>
-        log.action.toLowerCase().includes(searchLower) ||
-        log.adminUser.toLowerCase().includes(searchLower) ||
-        JSON.stringify(log.details).toLowerCase().includes(searchLower)
+      query = query.or(
+        `action.ilike.%${searchLower}%,` +
+        `admin_user.ilike.%${searchLower}%,` +
+        `details::text.ilike.%${searchLower}%`
       );
     }
 
-    // Apply pagination
-    const total = logs.length;
-    const paginatedLogs = logs.slice(parseInt(offset), parseInt(offset) + parseInt(limit));
+    // Apply ordering and pagination
+    query = query.order('timestamp', { ascending: false })
+                 .range(parseInt(offset), parseInt(offset) + parseInt(limit) - 1);
+
+    const { data: logs, error, count: total } = await query;
+
+    if (error) throw error;
 
     // Log the view action
     const adminUser = getAdminUserFromSession(req);
@@ -247,14 +241,21 @@ app.get('/api/admin/logs', requireAdmin, async (req, res) => {
       'system',
       {
         filters: { category, severity, dateRange, search },
-        resultCount: paginatedLogs.length,
+        resultCount: logs.length,
         success: true
       },
       'low'
     ));
 
+    // Convert snake_case from Supabase to camelCase for the frontend
+    const camelCaseLogs = logs.map(log => ({
+      ...log,
+      adminUser: log.admin_user,
+      sessionId: log.session_id,
+    }));
+
     res.json({
-      logs: paginatedLogs,
+      logs: camelCaseLogs,
       total,
       offset: parseInt(offset),
       limit: parseInt(limit)
@@ -267,7 +268,13 @@ app.get('/api/admin/logs', requireAdmin, async (req, res) => {
 
 app.get('/api/admin/logs/export', requireAdmin, async (req, res) => {
   try {
-    const logs = await readJsonFile('admin-logs.json');
+    const { data: logs, error } = await supabase
+      .from('admin_logs')
+      .select('*')
+      .order('timestamp', { ascending: false });
+
+    if (error) throw error;
+
     const adminUser = getAdminUserFromSession(req);
 
     // Log the export action
@@ -282,9 +289,16 @@ app.get('/api/admin/logs/export', requireAdmin, async (req, res) => {
       'medium'
     ));
 
+    // Convert to camelCase for consistency
+    const camelCaseLogs = logs.map(log => ({
+      ...log,
+      adminUser: log.admin_user,
+      sessionId: log.session_id,
+    }));
+
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Content-Disposition', `attachment; filename=admin-logs-${new Date().toISOString().split('T')[0]}.json`);
-    res.json(logs);
+    res.json(camelCaseLogs);
   } catch (error) {
     console.error('Error exporting logs:', error);
     res.status(500).json({ message: 'Error exporting logs' });
@@ -940,8 +954,13 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
 
   try {
-    // Pricing data is still from JSON
-    const pricing = await readJsonFile('pricing.json');
+    // Fetch active plans count from Supabase
+    const { count: activePlansCount, error: pricingError } = await supabase
+      .from('pricing')
+      .select('*', { count: 'exact', head: true })
+      .eq('active', true);
+
+    if (pricingError) throw pricingError;
 
     // Fetch blog stats from Supabase
     const { data: blogs, error: blogsError } = await supabase
@@ -963,7 +982,7 @@ app.get('/api/admin/stats', requireAdmin, async (req, res) => {
     const stats = {
       totalPosts: blogs.filter(blog => blog.published).length,
       totalViews: blogs.reduce((sum, blog) => sum + (blog.views || 0), 0),
-      activePlans: pricing.filter(plan => plan.active).length,
+      activePlans: activePlansCount || 0,
       draftPosts: blogs.filter(blog => !blog.published).length,
       mostViewedPost: mostViewedPostData || { views: 0, title: 'هیچ مقاله‌ای' },
       recentViews: blogs
