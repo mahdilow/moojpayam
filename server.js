@@ -645,27 +645,54 @@ function requireAdmin(req, res, next) {
 app.post('/api/blogs/:id/view', viewTrackingLimiter, async (req, res) => {
   try {
     const blogId = req.params.id;
+    const clientIp = req.ip; // Get client IP for logging
 
     if (!blogId) {
       return res.status(400).json({ message: 'شناسه مقاله نامعتبر است' });
     }
 
-    // Fetch the current view count
+    // 1. Attempt to insert a new view record.
+    const { error: insertError } = await supabase
+      .from('blog_views')
+      .insert({ blog_id: blogId, viewer_ip: clientIp });
+
+    if (insertError) {
+      // If it's a unique violation, the user has already viewed this post.
+      if (insertError.code === '23505') {
+        // Fetch the current view count and return it without incrementing.
+        const { data: currentBlog, error: fetchError } = await supabase
+          .from('blogs')
+          .select('views')
+          .eq('id', blogId)
+          .single();
+
+        if (fetchError) throw fetchError;
+
+        return res.json({
+          message: 'بازدید شما قبلا ثبت شده است',
+          views: currentBlog.views
+        });
+      }
+      // If it's a foreign key error, the blog doesn't exist.
+      if (insertError.code === '23503') {
+        return res.status(404).json({ message: 'مقاله یافت نشد' });
+      }
+      // For any other error, we throw it.
+      throw insertError;
+    }
+
+    // 2. If the insert was successful, it's a new unique view. Increment the count.
+    // Note: This is a non-atomic operation (read-then-write). For high-traffic sites, a database function (RPC) would be safer.
     const { data: blog, error: fetchError } = await supabase
       .from('blogs')
       .select('views')
       .eq('id', blogId)
       .single();
 
-    if (fetchError) {
-      if (fetchError.code === 'PGRST116') {
-        return res.status(404).json({ message: 'مقاله یافت نشد' });
-      }
-      throw fetchError;
-    }
+    if (fetchError) throw fetchError;
 
-    // Increment view count and update lastViewed timestamp
     const newViews = (blog.views || 0) + 1;
+
     const { data: updatedBlog, error: updateError } = await supabase
       .from('blogs')
       .update({ views: newViews, lastViewed: new Date().toISOString() })
@@ -673,9 +700,7 @@ app.post('/api/blogs/:id/view', viewTrackingLimiter, async (req, res) => {
       .select('views')
       .single();
 
-    if (updateError) {
-      throw updateError;
-    }
+    if (updateError) throw updateError;
 
     res.json({
       message: 'بازدید شما با موفقیت ثبت شد',
@@ -1139,7 +1164,7 @@ app.put('/api/admin/blogs/:id', requireAdmin, async (req, res) => {
       }
       return slug;
     };
-    
+
     const updatedPost = {
       title: post.title,
       excerpt: post.excerpt,
@@ -1452,7 +1477,7 @@ app.post('/api/shorten', async (req, res) => {
 app.get('/s/:shortCode(*)', async (req, res) => {
   try {
     const { shortCode } = req.params;
-    
+
     const { data: link, error } = await supabase
       .from('shortlinks')
       .select('long_url')
