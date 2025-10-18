@@ -97,7 +97,10 @@ const PricingSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
+          {plans
+            .filter(p => p.id <= 3)
+            .sort((a, b) => a.id - b.id)
+            .map((plan, index) => (
             <motion.div
               key={plan.id}
               initial={{ opacity: 0, y: 20 }}

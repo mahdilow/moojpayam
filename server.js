@@ -846,16 +846,22 @@ app.get('/api/content/blogs/slug/:slug', async (req, res) => {
     res.status(500).json({ message: 'خطا در بارگذاری مقاله' });
   }
 });
-/*
 app.get('/api/content/pricing', async (req, res) => {
   try {
-    const pricing = await readJsonFile('pricing.json');
-    res.json(pricing);
+    const { data, error } = await supabase
+      .from('pricing')
+      .select('*')
+      .eq('active', true)
+      .order('id', { ascending: true });
+
+    if (error) throw error;
+
+    res.json(data);
   } catch (error) {
+    console.error('Error fetching public pricing:', error);
     res.status(500).json({ message: 'خطا در بارگذاری تعرفه‌ها' });
   }
 });
-*/
 
 // Announcement endpoints
 app.get('/api/content/announcement', async (req, res) => {
@@ -1309,7 +1315,12 @@ app.get('/api/admin/pricing', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
 
   try {
-    const pricing = await readJsonFile('pricing.json');
+    const { data: pricing, error } = await supabase
+      .from('pricing')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) throw error;
 
     await logAdminAction(createLogEntry(
       adminUser,
@@ -1336,30 +1347,22 @@ app.post('/api/admin/pricing', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
 
   try {
-    const pricing = await readJsonFile('pricing.json');
-    const newPlan = { ...req.body, id: Date.now() };
+    const { error } = await supabase.from('pricing').insert([req.body]);
+    if (error) throw error;
 
-    pricing.push(newPlan);
-    const success = await writeJsonFile('pricing.json', pricing);
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Create pricing plan',
+      'content',
+      {
+        resourceType: 'pricing',
+        newData: { name: req.body.name, price: req.body.price },
+        success: true
+      },
+      'medium'
+    ));
 
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Create pricing plan',
-        'content',
-        {
-          resourceType: 'pricing',
-          resourceId: newPlan.id,
-          newData: { name: newPlan.name, price: newPlan.price },
-          success: true
-        },
-        'medium'
-      ));
-
-      res.json({ message: 'پلن با موفقیت ایجاد شد', plan: newPlan });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره پلن' });
-    }
+    res.json({ message: 'پلن با موفقیت ایجاد شد' });
   } catch (error) {
     await logAdminAction(createLogEntry(
       adminUser,
@@ -1374,39 +1377,44 @@ app.post('/api/admin/pricing', requireAdmin, async (req, res) => {
 
 app.put('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
+  const planId = parseInt(req.params.id);
 
   try {
-    const pricing = await readJsonFile('pricing.json');
-    const planId = parseInt(req.params.id);
-    const planIndex = pricing.findIndex(plan => plan.id === planId);
+    const { data: oldPlan, error: fetchError } = await supabase
+      .from('pricing')
+      .select('name, price')
+      .eq('id', planId)
+      .single();
 
-    if (planIndex === -1) {
-      return res.status(404).json({ message: 'پلن یافت نشد' });
+    if (fetchError) {
+      if (fetchError.code === 'PGRST116') {
+        return res.status(404).json({ message: 'پلن یافت نشد' });
+      }
+      throw fetchError;
     }
 
-    const oldPlan = { ...pricing[planIndex] };
-    pricing[planIndex] = { ...pricing[planIndex], ...req.body, id: planId };
-    const success = await writeJsonFile('pricing.json', pricing);
+    const { error: updateError } = await supabase
+      .from('pricing')
+      .update(req.body)
+      .eq('id', planId);
 
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Update pricing plan',
-        'content',
-        {
-          resourceType: 'pricing',
-          resourceId: planId,
-          oldData: { name: oldPlan.name, price: oldPlan.price },
-          newData: { name: pricing[planIndex].name, price: pricing[planIndex].price },
-          success: true
-        },
-        'medium'
-      ));
+    if (updateError) throw updateError;
 
-      res.json({ message: 'پلن با موفقیت ویرایش شد', plan: pricing[planIndex] });
-    } else {
-      res.status(500).json({ message: 'خطا در ذخیره تغییرات' });
-    }
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Update pricing plan',
+      'content',
+      {
+        resourceType: 'pricing',
+        resourceId: planId,
+        oldData: { name: oldPlan.name, price: oldPlan.price },
+        newData: { name: req.body.name, price: req.body.price },
+        success: true
+      },
+      'medium'
+    ));
+
+    res.json({ message: 'پلن با موفقیت ویرایش شد' });
   } catch (error) {
     await logAdminAction(createLogEntry(
       adminUser,
@@ -1421,37 +1429,37 @@ app.put('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
 
 app.delete('/api/admin/pricing/:id', requireAdmin, async (req, res) => {
   const adminUser = getAdminUserFromSession(req);
+  const planId = parseInt(req.params.id);
 
   try {
-    const pricing = await readJsonFile('pricing.json');
-    const planId = parseInt(req.params.id);
-    const planToDelete = pricing.find(plan => plan.id === planId);
-    const filteredPricing = pricing.filter(plan => plan.id !== planId);
+    const { data: planToDelete, error } = await supabase
+      .from('pricing')
+      .delete()
+      .eq('id', planId)
+      .select('name, price')
+      .single();
 
-    if (filteredPricing.length === pricing.length) {
-      return res.status(404).json({ message: 'پلن یافت نشد' });
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return res.status(404).json({ message: 'پلن یافت نشد' });
+      }
+      throw error;
     }
 
-    const success = await writeJsonFile('pricing.json', filteredPricing);
+    await logAdminAction(createLogEntry(
+      adminUser,
+      'Delete pricing plan',
+      'content',
+      {
+        resourceType: 'pricing',
+        resourceId: planId,
+        oldData: { name: planToDelete?.name, price: planToDelete?.price },
+        success: true
+      },
+      'high'
+    ));
 
-    if (success) {
-      await logAdminAction(createLogEntry(
-        adminUser,
-        'Delete pricing plan',
-        'content',
-        {
-          resourceType: 'pricing',
-          resourceId: planId,
-          oldData: { name: planToDelete?.name, price: planToDelete?.price },
-          success: true
-        },
-        'high'
-      ));
-
-      res.json({ message: 'پلن با موفقیت حذف شد' });
-    } else {
-      res.status(500).json({ message: 'خطا در حذف پلن' });
-    }
+    res.json({ message: 'پلن با موفقیت حذف شد' });
   } catch (error) {
     await logAdminAction(createLogEntry(
       adminUser,
