@@ -10,7 +10,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node server.js"
+    "start": "node server.js",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.75.0",

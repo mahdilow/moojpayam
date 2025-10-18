@@ -34,7 +34,8 @@ interface BlogPost {
 }
 
 const BlogPostPage: React.FC = () => {
-  const { slug } = useParams();
+  const { slug: encodedSlug } = useParams<{ slug: string }>();
+  const slug = encodedSlug ? decodeURIComponent(encodedSlug) : undefined;
   const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

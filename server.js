@@ -1063,28 +1063,34 @@ app.post('/api/admin/blogs', requireAdmin, async (req, res) => {
     const post = req.body;
 
     // Auto-generate a unique slug from the title
-    const generateSlug = async (title) => {
+    const generateSlug = async (title, currentId = null) => {
+      if (!title) return nanoid(6);
+
       const baseSlug = title
         .toString()
         .toLowerCase()
-        .replace(/\s+/g, '-') // Replace spaces with -
-        .replace(/[^\u0600-\u06FF\w\-]+/g, '') // Remove all non-word chars except Persian
-        .replace(/\-\-+/g, '-') // Replace multiple - with single -
-        .replace(/^-+/, '') // Trim - from start of text
-        .replace(/-+$/, ''); // Trim - from end of text
+        .trim()
+        .replace(/[:"?'|]/g, '') // Remove problematic characters
+        .replace(/[^\u0600-\u06FF\w\d]+/g, '-') // Replace non-persian/word/digit chars with hyphen
+        .replace(/-+/g, '-') // Collapse multiple hyphens
+        .replace(/^-+|-+$/g, ''); // Trim leading/trailing hyphens
+
+      // If the slug is empty after cleaning, generate a random one as a fallback
+      if (!baseSlug) return nanoid(6);
 
       let slug = baseSlug;
       let count = 2;
       let slugExists = true;
 
       while (slugExists) {
-        const { data, error } = await supabase
-          .from('blogs')
-          .select('slug')
-          .eq('slug', slug)
-          .single();
+        let query = supabase.from('blogs').select('id').eq('slug', slug);
+        if (currentId) {
+          query = query.neq('id', currentId);
+        }
+        
+        const { data, error } = await query.single();
 
-        if (error && error.code !== 'PGRST116') throw error; // Ignore "No rows found"
+        if (error && error.code !== 'PGRST116') throw error;
 
         if (!data) {
           slugExists = false;

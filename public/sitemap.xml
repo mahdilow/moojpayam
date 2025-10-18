@@ -1,48 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <url>
     <loc>https://moojpayam.ir/</loc>
+    
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  
   <url>
     <loc>https://moojpayam.ir/about-us</loc>
+    
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://moojpayam.ir/features</loc>
+    
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://moojpayam.ir/faq</loc>
+    
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://moojpayam.ir/blog</loc>
+    
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  
   <url>
-    <loc>https://moojpayam.ir/blog/چرا بازاریابی پیامکی منطقه‌ای با نقشه بهترین انتخاب برای کسب‌وکار شماست؟</loc>
+    <loc>https://moojpayam.ir/contact-us</loc>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://moojpayam.ir/blog/افزایش-فروش-با-تبلیغات-پیامکی-و-روش-های-مختلف-آن</loc>
+    <lastmod>2025-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
   <url>
-    <loc>https://moojpayam.ir/blog/آموزش کامل اتصال پنل پیامکی به سایت | افزایش امنیت و فروش</loc>
+    <loc>https://moojpayam.ir/blog/چرا-بازاریابی-پیامکی-منطقه-ای-با-نقشه-بهترین-انتخاب-برای-کسب-وکار-شماست؟</loc>
+    <lastmod>2025-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
   <url>
-    <loc>https://moojpayam.ir/blog/افزایش فروش با تبلیغات پیامکی و روش های مختلف آن</loc>
+    <loc>https://moojpayam.ir/blog/آموزش-کامل-اتصال-پنل-پیامکی-به-سایت-افزایش-امنیت-و-فروش</loc>
+    <lastmod>2025-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
   <url>
-    <loc>https://moojpayam.ir/blog/بهترین پنل پیامکی ایران ۱۴۰۴: راهنمای جامع خرید پنل SMS انبوه، قیمت‌ها و مزایای تبلیغاتی برای کسب‌وکارهای محلی</loc>
+    <loc>https://moojpayam.ir/blog/افزایش-فروش-سایت-راه-های-عملی-و-گام-به-گام-برای-رشد</loc>
+    <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <url>
+    <loc>https://moojpayam.ir/blog/بهترین-پنل-پیامکی-ایران-۱۴۰۴-راهنمای-جامع-خرید-پنل-sms-انبوه،-قیمت-ها-و-مزایای-تبلیغاتی-برای-کسب-وکارهای-محلی</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://moojpayam.ir/blog/سلام-چطوری-خوبی-۲۳۳۴-یک-دوسه</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
 </urlset>

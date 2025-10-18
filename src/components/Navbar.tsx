@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
               بلاگ
             </NavLink>
             <NavLink to="/faq" className={linkClass} closeMenu={closeMenu}>
-              راهنمای کامل
+              سوالات متداول
             </NavLink>
             <NavLink
               to="/contact-us"
@@ -183,7 +183,7 @@ const Navbar: React.FC = () => {
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
-                    راهنمای کامل
+                    سوالات متداول
                   </NavLink>
                   <NavLink
                     to="/contact-us"

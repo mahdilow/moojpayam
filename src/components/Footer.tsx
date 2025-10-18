@@ -1,7 +1,7 @@
 import React from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { FaInstagram, FaTelegramPlane } from "react-icons/fa";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavLinkProps {
   to: string;
@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <NavLink to="/faq" className={linkClass}>
-                  راهنمای کامل
+                  سوالات متداول
                 </NavLink>
               </li>
               <li>
