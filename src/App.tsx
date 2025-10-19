@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { HelmetProvider } from "react-helmet-async";
 import MainLayout from "./layouts/MainLayout";
 import { lazy, Suspense, useState, useEffect } from "react";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 
 // Lazy-loaded page components
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -132,6 +133,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <AnalyticsTracker />
         <AppContent />
       </Router>
     </HelmetProvider>

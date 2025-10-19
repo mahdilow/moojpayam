@@ -1,7 +1,5 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "files": [    "src/gtag.d.ts"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

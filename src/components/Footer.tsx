@@ -168,35 +168,53 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="text-base sm:text-lg font-bold mb-4 text-white">
-              اطلاعات تماس
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <Mail
-                  size={16}
-                  className="ml-2 mt-1 text-blue-400 flex-shrink-0"
-                />
-                <a
-                  href="mailto:contact@moojpayam.ir"
-                  className="text-sm sm:text-base"
-                >
-                  <span className="text-gray-400 hover:text-blue-400 transition-colors">
-                    contact@moojpayam.ir
+          <div className="flex flex-col">
+            <div>
+              <h3 className="text-base sm:text-lg font-bold mb-4 text-white">
+                اطلاعات تماس
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <Mail
+                    size={16}
+                    className="ml-2 mt-1 text-blue-400 flex-shrink-0"
+                  />
+                  <a
+                    href="mailto:contact@moojpayam.ir"
+                    className="text-sm sm:text-base"
+                  >
+                    <span className="text-gray-400 hover:text-blue-400 transition-colors">
+                      contact@moojpayam.ir
+                    </span>
+                  </a>
+                </li>
+                <li className="flex items-start">
+                  <MapPin
+                    size={16}
+                    className="ml-2 mt-1 text-blue-400 flex-shrink-0"
+                  />
+                  <span className="text-gray-400 text-sm sm:text-base">
+                    کرج طالقانی جنوبی
                   </span>
-                </a>
-              </li>
-              <li className="flex items-start">
-                <MapPin
-                  size={16}
-                  className="ml-2 mt-1 text-blue-400 flex-shrink-0"
+                </li>
+              </ul>
+            </div>
+            {/* enamad badge */}
+            <div className="mt-auto bg-gray-800 p-2 rounded-lg inline-block self-start">
+              <a
+                referrerPolicy="origin"
+                target="_blank"
+                href="https://trustseal.enamad.ir/?id=659683&Code=xd5KnVVBv4zwJ9thb0q5RPZqsGE7H3zr"
+              >
+                <img
+                  referrerPolicy="origin"
+                  src="https://trustseal.enamad.ir/logo.aspx?id=659683&Code=xd5KnVVBv4zwJ9thb0q5RPZqsGE7H3zr"
+                  alt="enamad trust badge"
+                  style={{ cursor: "pointer" }}
+                  id="xd5KnVVBv4zwJ9thb0q5RPZqsGE7H3zr"
                 />
-                <span className="text-gray-400 text-sm sm:text-base">
-                  کرج طالقانی جنوبی
-                </span>
-              </li>
-            </ul>
+              </a>
+            </div>
           </div>
         </div>
 
