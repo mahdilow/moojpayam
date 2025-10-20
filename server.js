@@ -66,9 +66,9 @@ const upload = multer({
 app.set('trust proxy', 1); // Trust the first proxy
 // Rate limiters
 const contactFormLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
+  windowMs: 24 * 60 * 60 * 1000, // 24 hours
   max: 2,
-  message: { message: 'شما بیش از حد مجاز در ساعت پیام ارسال کرده‌اید. لطفاً بعداً دوباره تلاش کنید.' },
+  message: { message: 'شما بیش از حد مجاز در روز پیام ارسال کرده‌اید. لطفاً فردا دوباره تلاش کنید.' },
   standardHeaders: true,
   legacyHeaders: false,
 });
@@ -385,7 +385,7 @@ app.get('/api/admin/images', requireAdmin, async (req, res) => {
 
 
 // OTP endpoint
-app.post('/api/send-otp', otpLimiter, async (req, res) => {
+app.post('/api/send-otp', contactFormLimiter, async (req, res) => {
   const { phone } = req.body;
 
   if (!phone || !/^(\+98|0)?9\d{9}$/.test(phone)) {
@@ -471,7 +471,7 @@ app.post('/api/verify-otp', otpLimiter, async (req, res) => {
 
 
 // Email endpoint
-app.post('/api/send-email', contactFormLimiter, async (req, res) => {
+app.post('/api/send-email', async (req, res) => {
   const { name, phone, email, subject, message, otpVerified } = req.body;
 
   // Validate required fields
