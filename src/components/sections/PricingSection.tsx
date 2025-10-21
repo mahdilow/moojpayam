@@ -104,158 +104,153 @@ const PricingSection: React.FC = () => {
               return a.id - b.id;
             })
             .map((plan, index) => (
-            <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{
-                y: -10,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              }}
-              transition={{
-                duration: 0.3,
-                delay: index * 0.1,
-                type: "spring",
-                stiffness: 300,
-              }}
-              viewport={{ once: true }}
-              className={`bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col ${
-                plan.popular ? "border-t transform lg:-translate-y-4" : ""
-              }`}
-            >
-              {plan.popular && (
-                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-6 rounded-t-xl text-sm sm:text-base font-extrabold tracking-wide shadow-md">
-                  محبوب‌ترین
-                </div>
-              )}
-
-              <div
-                className={`p-4 sm:p-6 lg:p-8 flex flex-col flex-grow backdrop-blur-md shadow-inner border border-white/20 ${
-                  plan.id === 2
-                    ? "rounded-b-2xl rounded-t-none bg-gradient-to-b from-blue-100/40 to-purple-700/20"
-                    : plan.id === 1
-                    ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-blue-600/20"
-                    : plan.id === 3
-                    ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-emerald-600/20"
-                    : plan.id === 4
-                    ? "rounded-2xl bg-gradient-to-b from-yellow-100/40 to-orange-500/20"
-                    : "rounded-2xl bg-white/20"
-                }`}
+              <motion.div
+                key={plan.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{
+                  y: -10,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                }}
+                transition={{
+                  duration: 0.3,
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 300,
+                }}
+                viewport={{ once: true }}
+                className="relative bg-white rounded-2xl shadow-lg flex flex-col mt-8"
               >
-                <div className="text-center mb-6 sm:mb-8">
-                  <h3
-                    className={`text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 ${
-                      plan.id === 2
-                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text"
-                        : plan.id === 1
-                        ? "bg-gradient-to-r from-blue-400 to-blue-900 text-transparent bg-clip-text"
-                        : plan.id === 3
-                        ? "bg-gradient-to-r from-green-600 to-teal-400 text-transparent bg-clip-text"
-                        : plan.id === 4
-                        ? "bg-gradient-to-r from-orange-500 to-yellow-400 text-transparent bg-clip-text"
-                        : "text-gray-800"
-                    }`}
-                  >
-                    {plan.name}
-                  </h3>
-
-                  <p className="text-gray-600 mb-4 sm:mb-6 min-h-[48px] text-sm sm:text-base px-2 sm:px-0">
-                    {plan.description}
-                  </p>
-
-                  <div className="flex items-center justify-center mb-4 sm:mb-6">
-                    {plan.discount && plan.discount > 0 ? (
-                      <div className="text-center">
-                        {/* Discount Badge */}
-                        <div className="bg-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold mb-2 inline-block">
-                          {plan.discount}% تخفیف
-                        </div>
-
-                        {/* Original Price (crossed out) */}
-                        <div className="text-sm sm:text-lg text-gray-400 line-through mb-1">
-                          {plan.price} هزار تومان
-                        </div>
-
-                        {/* Discounted Price */}
-                        <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">
-                          {getDiscountedPrice(plan.price, plan.discount)}
-                        </div>
-                        {plan.id !== 4 && (
-                        <span className="text-gray-600 text-xs sm:text-sm">
-                          هزار تومان / سالانه
-                        </span>
-                        )}
-                      </div>
-                    ) : (
-                      <>
-                        <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
-                          {plan.price}
-                        </span>
-                        {plan.id !== 4 && (
-                          <span className="text-gray-600 mr-2 text-xs sm:text-sm">
-                            هزار تومان / سالانه
-                          </span>
-                        )}
-                      </>
-                    )}
+                {plan.popular && (
+                  <div className="absolute bottom-full left-0 right-0 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-center py-2 px-6 rounded-t-2xl text-sm sm:text-base font-extrabold tracking-wide shadow-md">
+                    پرفروش ترین
                   </div>
-                </div>
-                <hr className="border-t-2 border-primary-100 opacity-40 my-4 sm:my-6" />
+                )}
 
-                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-grow">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      {feature.included ? (
-                        <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
-                          <Check
-                            size={12}
-                            className="sm:w-4 sm:h-4 text-green-500"
-                          />
+                <div
+                  className={`p-4 sm:p-6 lg:p-8 flex flex-col flex-grow backdrop-blur-md shadow-inner border border-white/20 ${
+                    plan.id === 2
+                      ? "rounded-b-2xl bg-gradient-to-b from-blue-100/40 to-purple-700/20"
+                      : plan.id === 1
+                      ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-blue-600/20"
+                      : plan.id === 3
+                      ? "rounded-2xl bg-gradient-to-b from-yellow-300/50 to-orange-400/40"
+                      : plan.id === 4
+                      ? "rounded-2xl bg-gradient-to-b  from-blue-100/40 to-emerald-600/20"
+                      : "rounded-2xl bg-white/20"
+                  }`}
+                >
+                  <div className="text-center mb-6 sm:mb-8">
+                    <h3
+                      className={`text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 ${
+                        plan.id === 2
+                          ? "bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text"
+                          : plan.id === 1
+                          ? "bg-gradient-to-r  from-blue-400 to-blue-900 text-transparent bg-clip-text"
+                          : plan.id === 3
+                          ? "bg-gradient-to-r from-orange-400 to-yellow-600 text-transparent bg-clip-text"
+                          : plan.id === 4
+                          ? "bg-gradient-to-r from-green-600 to-teal-400 text-transparent bg-clip-text"
+                          : "text-gray-800"
+                      }`}
+                    >
+                      {plan.name}
+                    </h3>
+
+                    <p className="text-gray-600 mb-4 sm:mb-6 min-h-[48px] text-sm sm:text-base px-2 sm:px-0 font-semibold">
+                      {plan.description}
+                    </p>
+
+                    <div className="flex items-center justify-center mb-4 sm:mb-6">
+                      {plan.discount && plan.discount > 0 ? (
+                        <div className="text-center">
+                          {/* Discount Badge */}
+                          <div className="bg-red-500 text-white px-1 sm:px-1.5 py-[1px] rounded-full text-[10px] sm:text-[11px] font-medium leading-none mb-1 inline-block">
+                            {plan.discount}% تخفیف
+                          </div>
+
+                          {/* Original Price (crossed out) */}
+                          <div className="text-sm sm:text-lg text-gray-400 line-through mb-1">
+                            {plan.price} هزار تومان
+                          </div>
+
+                          {/* Discounted Price */}
+                          <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">
+                            {getDiscountedPrice(plan.price, plan.discount)}
+                          </div>
+
+                          {plan.id !== 4 && (
+                            <span className="text-gray-600 text-xs sm:text-sm">
+                              هزار تومان / سالانه
+                            </span>
+                          )}
                         </div>
                       ) : (
-                        <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
-                          <X
-                            size={12}
-                            className="sm:w-4 sm:h-4 text-gray-400"
-                          />
-                        </div>
+                        <>
+                          <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
+                            {plan.price}
+                          </span>
+                          {plan.id !== 4 && (
+                            <span className="text-gray-600 mr-2 text-xs sm:text-sm">
+                              هزار تومان / سالانه
+                            </span>
+                          )}
+                        </>
                       )}
-                      <span
-                        className={`text-sm sm:text-base leading-relaxed ${
-                          feature.included ? "text-gray-800" : "text-gray-400"
-                        }`}
-                      >
-                        {feature.title}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                    </div>
+                  </div>
+                  <hr className="border-t-2 border-primary-100 opacity-40 my-4 sm:my-6" />
 
-                <div className="mt-auto">
-                  <a
-                    href={
-                      plan.id === 3
-                        ? "/contact-us"
-                        : "http://dash.moojpayam.ir/userregister.aspx"
-                    }
-                    {...(plan.id !== 3 && {
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                    })}
-                    className={`block w-full py-3 sm:py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] text-sm sm:text-base ${
-                      plan.popular
-                        ? "bg-blue-700 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl"
-                        : plan.id === 4
-                        ? "bg-orange-400 hover:bg-orange-500 text-white"
-                        : "bg-gray-100 hover:bg-gray-200 text-gray-800"
-                    }`}
-                  >
-                    {plan.cta}
-                  </a>
+                  <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-grow">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        {feature.included ? (
+                          <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
+                            <Check
+                              size={12}
+                              className="sm:w-4 sm:h-4 text-green-500"
+                            />
+                          </div>
+                        ) : (
+                          <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 flex items-center justify-center ml-2 sm:ml-3 mt-0.5">
+                            <X
+                              size={12}
+                              className="sm:w-4 sm:h-4 text-gray-400"
+                            />
+                          </div>
+                        )}
+                        <span
+                          className={`text-sm sm:text-base leading-relaxed ${
+                            feature.included ? "text-gray-800" : "text-gray-400"
+                          }`}
+                        >
+                          {feature.title}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto">
+                    <a
+                      href="http://dash.moojpayam.ir/userregister.aspx"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`block w-full py-3 sm:py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] text-sm sm:text-base ${
+                        plan.popular
+                          ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl"
+                          : plan.id === 3
+                          ? "bg-orange-400 hover:bg-orange-500 text-white"
+                          : plan.id === 4
+                          ? "bg-green-400 hover:bg-green-500 text-white"
+                          : "bg-blue-400 hover:bg-blue-500 text-white"
+                      }`}
+                    >
+                      {plan.cta}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
         </div>
 
         <motion.div
