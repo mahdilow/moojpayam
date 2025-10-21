@@ -138,7 +138,7 @@ const PricingSection: React.FC = () => {
                     : plan.id === 3
                     ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-emerald-600/20"
                     : plan.id === 4
-                    ? "rounded-2xl bg-gradient-to-b from-gray-100/40 to-gray-500/20"
+                    ? "rounded-2xl bg-gradient-to-b from-yellow-100/40 to-orange-500/20"
                     : "rounded-2xl bg-white/20"
                 }`}
               >
@@ -152,7 +152,7 @@ const PricingSection: React.FC = () => {
                         : plan.id === 3
                         ? "bg-gradient-to-r from-green-600 to-teal-400 text-transparent bg-clip-text"
                         : plan.id === 4
-                        ? "bg-gradient-to-r from-gray-600 to-gray-800 text-transparent bg-clip-text"
+                        ? "bg-gradient-to-r from-orange-500 to-yellow-400 text-transparent bg-clip-text"
                         : "text-gray-800"
                     }`}
                   >
@@ -180,16 +180,18 @@ const PricingSection: React.FC = () => {
                         <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">
                           {getDiscountedPrice(plan.price, plan.discount)}
                         </div>
+                        {plan.id !== 4 && (
                         <span className="text-gray-600 text-xs sm:text-sm">
                           هزار تومان / سالانه
                         </span>
+                        )}
                       </div>
                     ) : (
                       <>
                         <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
                           {plan.price}
                         </span>
-                        {plan.id !== 3 && (
+                        {plan.id !== 4 && (
                           <span className="text-gray-600 mr-2 text-xs sm:text-sm">
                             هزار تومان / سالانه
                           </span>
@@ -243,6 +245,8 @@ const PricingSection: React.FC = () => {
                     className={`block w-full py-3 sm:py-4 rounded-xl font-bold text-center transition-all duration-300 transform hover:scale-[1.02] text-sm sm:text-base ${
                       plan.popular
                         ? "bg-blue-700 hover:bg-blue-800 text-white shadow-lg hover:shadow-xl"
+                        : plan.id === 4
+                        ? "bg-orange-400 hover:bg-orange-500 text-white"
                         : "bg-gray-100 hover:bg-gray-200 text-gray-800"
                     }`}
                   >
