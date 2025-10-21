@@ -1,7 +1,2 @@
 User-agent: *
-Allow: /
-
-Sitemap: https://moojpayam.ir/sitemap.xml
-
-Disallow: /mooj-admin
-Disallow: /admin/dashboard
+Disallow: /

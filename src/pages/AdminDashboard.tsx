@@ -293,11 +293,18 @@ const AdminDashboard: React.FC = () => {
         : "/api/admin/pricing";
       const method = editingPricing ? "PUT" : "POST";
 
+      // Exclude ID when creating a new plan to allow the database to auto-generate it
+      let dataToSend: Omit<PricingPlan, 'id'> | PricingPlan = pricingForm;
+      if (!editingPricing) {
+        const { id, ...rest } = pricingForm;
+        dataToSend = rest;
+      }
+
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify(pricingForm),
+        body: JSON.stringify(dataToSend),
       });
 
       if (response.ok) {
