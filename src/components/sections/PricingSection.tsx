@@ -96,10 +96,13 @@ const PricingSection: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {plans
-            .filter(p => p.id <= 3)
-            .sort((a, b) => a.id - b.id)
+            .sort((a, b) => {
+              if (a.id === 4) return -1;
+              if (b.id === 4) return 1;
+              return a.id - b.id;
+            })
             .map((plan, index) => (
             <motion.div
               key={plan.id}
@@ -134,6 +137,8 @@ const PricingSection: React.FC = () => {
                     ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-blue-600/20"
                     : plan.id === 3
                     ? "rounded-2xl bg-gradient-to-b from-blue-100/40 to-emerald-600/20"
+                    : plan.id === 4
+                    ? "rounded-2xl bg-gradient-to-b from-gray-100/40 to-gray-500/20"
                     : "rounded-2xl bg-white/20"
                 }`}
               >
@@ -146,6 +151,8 @@ const PricingSection: React.FC = () => {
                         ? "bg-gradient-to-r from-blue-400 to-blue-900 text-transparent bg-clip-text"
                         : plan.id === 3
                         ? "bg-gradient-to-r from-green-600 to-teal-400 text-transparent bg-clip-text"
+                        : plan.id === 4
+                        ? "bg-gradient-to-r from-gray-600 to-gray-800 text-transparent bg-clip-text"
                         : "text-gray-800"
                     }`}
                   >
