@@ -10,11 +10,7 @@
     # Copy backend & built frontend
     COPY server.js ./
     COPY dist ./dist
-    
-    # Copy runtime folders
-    COPY uploads ./uploads
-    COPY data ./data
-    
+     
     EXPOSE 80
     
     CMD ["node", "server.js"]

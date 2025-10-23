@@ -36,7 +36,7 @@ interface BlogPost {
 }
 
 interface PricingPlan {
-  id: number;
+  id?: number;
   name: string;
   price: string;
   description: string;
@@ -212,13 +212,13 @@ const AdminDashboard: React.FC = () => {
       if (response.ok) {
         const { blog: newBlog } = await response.json();
         toast.success(editingBlog ? "مقاله ویرایش شد" : "مقاله جدید ایجاد شد");
-        
+
         if (!editingBlog && newBlog?.slug) {
           navigate(`/blog/${newBlog.slug}`);
         } else {
           loadBlogs();
         }
-        
+
         resetBlogForm();
       } else {
         const error = await response.json();
@@ -288,23 +288,17 @@ const AdminDashboard: React.FC = () => {
   // Pricing management functions
   const handleSavePricing = async () => {
     try {
-      const url = editingPricing
+      const isEditing = editingPricing && editingPricing.id !== undefined;
+      const url = isEditing
         ? `/api/admin/pricing/${editingPricing.id}`
         : "/api/admin/pricing";
-      const method = editingPricing ? "PUT" : "POST";
-
-      // Exclude ID when creating a new plan to allow the database to auto-generate it
-      let dataToSend: Omit<PricingPlan, 'id'> | PricingPlan = pricingForm;
-      if (!editingPricing) {
-        const { id, ...rest } = pricingForm;
-        dataToSend = rest;
-      }
+      const method = isEditing ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify(dataToSend),
+        body: JSON.stringify(pricingForm),
       });
 
       if (response.ok) {
@@ -922,9 +916,9 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pricing.map((plan) => (
+              {pricing.map((plan, index) => (
                 <div
-                  key={plan.id}
+                  key={plan.id ?? index}
                   className="bg-white rounded-lg shadow-lg overflow-hidden"
                 >
                   <div className="p-6">
@@ -942,12 +936,14 @@ const AdminDashboard: React.FC = () => {
                         >
                           <Edit size={16} />
                         </button>
-                        <button
-                          onClick={() => handleDeletePricing(plan.id)}
-                          className="text-red-600 hover:text-red-900"
-                        >
-                          <Trash2 size={16} />
-                        </button>
+                        {plan.id !== undefined && (
+                          <button
+                            onClick={() => handleDeletePricing(plan.id!)}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        )}
                       </div>
                     </div>
 
