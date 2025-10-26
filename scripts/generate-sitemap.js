@@ -22,6 +22,7 @@ const STATIC_PAGES = [
   { url: '/', changefreq: 'daily', priority: '1.0' },
   { url: '/about-us', changefreq: 'monthly', priority: '0.8' },
   { url: '/features', changefreq: 'monthly', priority: '0.8' },
+  { url: '/web-services', changefreq: 'monthly', priority: '0.8' },
   { url: '/faq', changefreq: 'monthly', priority: '0.8' },
   { url: '/blog', changefreq: 'weekly', priority: '0.9' },
   { url: '/contact-us', changefreq: 'monthly', priority: '0.7' },

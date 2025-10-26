@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/features" className={linkClass}>
+                <NavLink to="/web-services" className={linkClass}>
                   وب سرویس پیامک
                 </NavLink>
               </li>
