@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
           <div className="w-full lg:w-6/12 mb-8 lg:mb-0 order-1 lg:order-2">
             <div className="relative flex items-start justify-center">
               <motion.img
-                src="/assets/mooj_payam_wave_hero.webp"
+                src="/assets/moojpayam_hero.webp"
                 alt="موج پیام | ارسال پیامک سریع و ارزان"
                 className="w-full max-w-sm sm:max-w-md lg:max-w-none h-auto drop-shadow-2xl"
                 fetchPriority="high"
@@ -94,7 +94,7 @@ const HeroSection: React.FC = () => {
                   className="btn btn-primary text-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
                 >
                   <Zap className="ml-2" size={18} />
-                  شروع ماجراجویی
+                  ثبت نام رایگان
                 </a>
                 <a
                   href="#features"
