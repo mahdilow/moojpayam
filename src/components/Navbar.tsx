@@ -103,6 +103,13 @@ const Navbar: React.FC = () => {
               سوالات متداول
             </NavLink>
             <NavLink
+              to="/web-services"
+              className={linkClass}
+              closeMenu={closeMenu}
+            >
+              وب سرویس
+            </NavLink>
+            <NavLink
               to="/contact-us"
               className={linkClass}
               closeMenu={closeMenu}
@@ -184,6 +191,13 @@ const Navbar: React.FC = () => {
                     closeMenu={closeMenu}
                   >
                     سوالات متداول
+                  </NavLink>
+                  <NavLink
+                    to="/web-services"
+                    className={linkClass}
+                    closeMenu={closeMenu}
+                  >
+                    وب سرویس
                   </NavLink>
                   <NavLink
                     to="/contact-us"
