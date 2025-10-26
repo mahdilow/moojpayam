@@ -17,6 +17,7 @@ const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const AboutUsPage = lazy(() => import("./pages/AboutUsPage"));
 const FeaturesPage = lazy(() => import("./pages/FeaturesPage"));
 const FaqPage = lazy(() => import("./pages/FaqPage"));
+const WebServicesPage = lazy(() => import("./pages/WebServicesPage"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const ContactUsPage = lazy(() => import("./pages/ContactUsPage"));
@@ -117,6 +118,14 @@ function AppContent() {
             element={
               <MainLayout>
                 <ContactUsPage />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/web-services"
+            element={
+              <MainLayout>
+                <WebServicesPage />
               </MainLayout>
             }
           />
