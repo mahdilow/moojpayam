@@ -211,3 +211,4 @@ body {
     @apply card hover:shadow-xl border-t-4;
   }
 }
+.glassy-dropdown { backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); } 

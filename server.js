@@ -152,40 +152,6 @@ const logAdminAction = async (logEntry) => {
 
 };
 
-const createLogEntry = (adminUser, action, category, details, severity = 'medium', sessionId = null) => {
-  return {
-    id: `log_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-    timestamp: new Date().toISOString(),
-    adminUser,
-    action,
-    category,
-    details,
-    severity,
-    sessionId
-  };
-};
-
-// Get admin user from session
-const getAdminUserFromSession = (req) => {
-  const sessionToken = req.cookies.admin_session;
-  return sessionToken && activeSessions.has(sessionToken) ? 'admin' : 'unknown';
-};
-
-// Ensure data and uploads directories exist
-const ensureDirectories = async () => {
-  try {
-    const dataDir = path.join(__dirname, 'data');
-    const uploadsDir = path.join(__dirname, 'uploads');
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.mkdir(uploadsDir, { recursive: true });
-  } catch (error) {
-    console.error('Error creating directories:', error);
-  }
-};
-
-// Initialize directories
-ensureDirectories();
-
 // Admin logging endpoints
 app.post('/api/admin/logs', requireAdmin, async (req, res) => {
   try {

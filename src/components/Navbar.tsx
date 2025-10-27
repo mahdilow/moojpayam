@@ -51,6 +51,7 @@ const NavLink: React.FC<NavLinkProps> = ({
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -99,9 +100,6 @@ const Navbar: React.FC = () => {
             <NavLink to="/blog" className={linkClass} closeMenu={closeMenu}>
               بلاگ
             </NavLink>
-            <NavLink to="/faq" className={linkClass} closeMenu={closeMenu}>
-              سوالات متداول
-            </NavLink>
             <NavLink
               to="/web-services"
               className={linkClass}
@@ -109,16 +107,41 @@ const Navbar: React.FC = () => {
             >
               برنامه نویسان
             </NavLink>
-            <NavLink
-              to="/contact-us"
-              className={linkClass}
-              closeMenu={closeMenu}
+            <NavLink to="/faq" className={linkClass} closeMenu={closeMenu}>
+              سوالات متداول
+            </NavLink>
+            <div
+              className="relative group"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
             >
-              تماس با ما
-            </NavLink>
-            <NavLink to="/about-us" className={linkClass} closeMenu={closeMenu}>
-              درباره ما
-            </NavLink>
+              <button className={linkClass}>ارتباط با ما</button>
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute right-0 mt-2 w-48 glassy-dropdown p-2"
+                  >
+                    <NavLink
+                      to="/contact-us"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      closeMenu={closeMenu}
+                    >
+                      تماس با ما
+                    </NavLink>
+                    <NavLink
+                      to="/about-us"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+                      closeMenu={closeMenu}
+                    >
+                      درباره ما
+                    </NavLink>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <a
               target="_blank"
               href="http://dash.moojpayam.ir/"
@@ -186,13 +209,6 @@ const Navbar: React.FC = () => {
                     بلاگ
                   </NavLink>
                   <NavLink
-                    to="/faq"
-                    className={linkClass}
-                    closeMenu={closeMenu}
-                  >
-                    سوالات متداول
-                  </NavLink>
-                  <NavLink
                     to="/web-services"
                     className={linkClass}
                     closeMenu={closeMenu}
@@ -200,19 +216,63 @@ const Navbar: React.FC = () => {
                     برنامه نویسان
                   </NavLink>
                   <NavLink
-                    to="/contact-us"
+                    to="/faq"
                     className={linkClass}
                     closeMenu={closeMenu}
                   >
-                    تماس با ما
+                    سوالات متداول
                   </NavLink>
-                  <NavLink
-                    to="/about-us"
-                    className={linkClass}
-                    closeMenu={closeMenu}
-                  >
-                    درباره ما
-                  </NavLink>
+                  <div className="relative">
+                    <button
+                      onClick={() => setDropdownOpen(!isDropdownOpen)}
+                      className={`${linkClass} w-full text-right flex justify-between items-center`}
+                    >
+                      <span>ارتباط با ما</span>
+                      <svg
+                        className={`w-4 h-4 transition-transform ${
+                          isDropdownOpen ? "transform rotate-180" : ""
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </button>
+                    <AnimatePresence>
+                      {isDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-4">
+                            <NavLink
+                              to="/contact-us"
+                              className={linkClass}
+                              closeMenu={closeMenu}
+                            >
+                              تماس با ما
+                            </NavLink>
+                            <NavLink
+                              to="/about-us"
+                              className={linkClass}
+                              closeMenu={closeMenu}
+                            >
+                              درباره ما
+                            </NavLink>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
 
                   {/* Mobile Action Buttons */}
                   <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200 mt-3">
