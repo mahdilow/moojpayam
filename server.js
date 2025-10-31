@@ -115,6 +115,23 @@ const activeSessions = new Set();
 const otpStore = new Map(); // In-memory OTP store
 
 // Admin logging functions
+// Helper function to create a log entry object
+const createLogEntry = (adminUser, action, category, details, severity, sessionId = null) => {
+  const logEntry = {
+    adminUser,
+    action,
+    category,
+    details,
+    severity,
+    timestamp: new Date().toISOString(),
+  };
+
+  if (sessionId) {
+    logEntry.sessionId = sessionId;
+  }
+
+  return logEntry;
+};
 
 const logAdminAction = async (logEntry) => {
 
@@ -125,6 +142,8 @@ const logAdminAction = async (logEntry) => {
     const { adminUser, sessionId, ...logData } = logEntry;
 
     const dataToInsert = {
+
+      id: nanoid(), // Generate a unique ID for the log entry
 
       ...logData,
 
@@ -147,6 +166,82 @@ const logAdminAction = async (logEntry) => {
   } catch (error) {
 
     console.error('Error logging admin action:', error);
+
+  }
+
+};
+
+
+
+const cleanupOldLogs = async () => {
+
+  console.log('Running scheduled job: Cleaning up old admin logs...');
+
+  try {
+
+    const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
+
+    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+
+
+
+    // Delete non-critical logs older than 3 days
+
+    const { data: deletedNonCritical, error: nonCriticalError } = await supabase
+
+      .from('admin_logs')
+
+      .delete()
+
+      .neq('severity', 'critical')
+
+      .lt('timestamp', threeDaysAgo)
+
+      .select();
+
+
+
+    if (nonCriticalError) {
+
+      console.error('Error deleting non-critical logs:', nonCriticalError.message);
+
+    } else if (deletedNonCritical && deletedNonCritical.length > 0) {
+
+      console.log(`Successfully deleted ${deletedNonCritical.length} old non-critical logs.`);
+
+    }
+
+
+
+    // Delete critical logs older than 30 days
+
+    const { data: deletedCritical, error: criticalError } = await supabase
+
+      .from('admin_logs')
+
+      .delete()
+
+      .eq('severity', 'critical')
+
+      .lt('timestamp', thirtyDaysAgo)
+
+      .select();
+
+
+
+    if (criticalError) {
+
+      console.error('Error deleting critical logs:', criticalError.message);
+
+    } else if (deletedCritical && deletedCritical.length > 0) {
+
+      console.log(`Successfully deleted ${deletedCritical.length} old critical logs.`);
+
+    }
+
+  } catch (error) {
+
+    console.error('An unexpected error occurred during log cleanup:', error.message);
 
   }
 
@@ -611,6 +706,16 @@ app.post('/api/admin/logout', async (req, res) => {
 });
 
 // Admin middleware
+const getAdminUserFromSession = (req) => {
+  // In this simple setup, we know the admin user is the one from the .env file.
+  // A more complex system would decode a JWT or look up a session.
+  const sessionToken = req.cookies.admin_session;
+  if (sessionToken && activeSessions.has(sessionToken)) {
+    return process.env.ADMIN_USER || 'admin';
+  }
+  return 'unknown';
+};
+
 function requireAdmin(req, res, next) {
   const sessionToken = req.cookies.admin_session;
 
@@ -1559,6 +1664,14 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/*', (req, res) => {
   res.status(404).json({ message: 'API endpoint not found' });
 });
+
+// Schedule the cleanup job to run once a day
+const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+setInterval(cleanupOldLogs, oneDayInMilliseconds);
+
+// Run the cleanup once on server startup
+console.log('Performing initial admin log cleanup on startup...');
+cleanupOldLogs();
 
 // Start server
 const PORT = process.env.PORT || 80;
