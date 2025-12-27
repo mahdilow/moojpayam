@@ -64,7 +64,7 @@ const FaqSection: React.FC = () => {
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInVew={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
@@ -121,23 +121,6 @@ const FaqSection: React.FC = () => {
           </a>
         </div>
       </div>
-    <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqItems.map((item) => ({
-              "@type": "Question",
-              name: item.question,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: item.answer,
-              },
-            })),
-          }),
-        }}
-      />
     </section>
   );
 };

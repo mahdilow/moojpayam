@@ -382,7 +382,7 @@ const AnnouncementManager: React.FC<AnnouncementManagerProps> = ({ isOpen, onClo
                         </label>
                         <select
                           value={formData.type}
-                          onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
+                          onChange={(e) => setFormData({ ...formData, type: e.target.value as AnnouncementData['type'] })}
                           className="w-full border border-gray-300 rounded-lg p-2"
                         >
                           <option value="info">اطلاعات</option>

@@ -11,7 +11,7 @@
     COPY server.js ./
     COPY dist ./dist
      
-    EXPOSE 80
+    EXPOSE 3000
     
     CMD ["node", "server.js"]
     

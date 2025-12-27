@@ -9,13 +9,13 @@ export interface AdminLogEntry {
     endpoint?: string;
     resourceType?: string;
     resourceId?: string | number;
-    oldData?: any;
-    newData?: any;
+    oldData?: Record<string, unknown>;
+    newData?: Record<string, unknown>;
     ipAddress?: string;
     userAgent?: string;
     success: boolean;
     errorMessage?: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
   sessionId?: string;
@@ -80,23 +80,23 @@ export class AdminLogger {
   }
   
   // Helper methods for common log types
-  logAuth(action: string, success: boolean, details: any = {}) {
+  logAuth(action: string, success: boolean, details: Record<string, unknown> = {}) {
     return this.log({
-      adminUser: details.username || 'unknown',
+      adminUser: (details.username as string) || 'unknown',
       action,
       category: 'auth',
       details: {
         ...details,
         success,
-        ipAddress: details.ipAddress,
-        userAgent: details.userAgent
+        ipAddress: details.ipAddress as string,
+        userAgent: details.userAgent as string
       },
       severity: success ? 'low' : 'high',
-      sessionId: details.sessionId
+      sessionId: details.sessionId as string
     });
   }
   
-  logContentAction(action: string, resourceType: string, resourceId: string | number, oldData: any, newData: any, adminUser: string, success: boolean = true) {
+  logContentAction(action: string, resourceType: string, resourceId: string | number, oldData: Record<string, unknown>, newData: Record<string, unknown>, adminUser: string, success: boolean = true) {
     return this.log({
       adminUser,
       action,
@@ -127,7 +127,7 @@ export class AdminLogger {
     });
   }
   
-  logSecurity(action: string, adminUser: string, details: any = {}) {
+  logSecurity(action: string, adminUser: string, details: Record<string, unknown> = {}) {
     return this.log({
       adminUser,
       action,
@@ -140,7 +140,7 @@ export class AdminLogger {
     });
   }
   
-  logSystem(action: string, adminUser: string, details: any = {}) {
+  logSystem(action: string, adminUser: string, details: Record<string, unknown> = {}) {
     return this.log({
       adminUser,
       action,

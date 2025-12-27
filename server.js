@@ -14,6 +14,7 @@ import soap from 'soap'; // if using ESM
 import sharp from 'sharp';
 import { nanoid } from 'nanoid';
 import { createClient } from '@supabase/supabase-js';
+import fetch from 'node-fetch';
 
 // ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -113,6 +114,28 @@ const viewTrackingLimiter = rateLimit({
 // Simple session store
 const activeSessions = new Set();
 const otpStore = new Map(); // In-memory OTP store
+
+// In-memory cache
+const cache = new Map();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+const cacheMiddleware = (req, res, next) => {
+  const key = req.originalUrl;
+  const cached = cache.get(key);
+
+  if (cached && cached.timestamp + CACHE_TTL > Date.now()) {
+    console.log(`[CACHE] HIT for ${key}`);
+    return res.json(cached.data);
+  }
+
+  console.log(`[CACHE] MISS for ${key}`);
+  res.sendResponse = res.json;
+  res.json = (data) => {
+    cache.set(key, { data, timestamp: Date.now() });
+    res.sendResponse(data);
+  };
+  next();
+};
 
 // Admin logging functions
 // Helper function to create a log entry object
@@ -888,7 +911,7 @@ app.get('/api/content/blogs/:id', async (req, res) => {
 });
 
 // Get single blog post with SEO data and related posts by slug
-app.get('/api/content/blogs/slug/:slug', async (req, res) => {
+app.get('/api/content/blogs/slug/:slug', cacheMiddleware, async (req, res) => {
   try {
     const blogSlug = decodeURIComponent(req.params.slug);
 
@@ -917,7 +940,7 @@ app.get('/api/content/blogs/slug/:slug', async (req, res) => {
     res.status(500).json({ message: 'خطا در بارگذاری مقاله' });
   }
 });
-app.get('/api/content/pricing', async (req, res) => {
+app.get('/api/content/pricing', cacheMiddleware, async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('pricing')
@@ -935,19 +958,18 @@ app.get('/api/content/pricing', async (req, res) => {
 });
 
 // Announcement endpoints
-app.get('/api/content/announcement', async (req, res) => {
+app.get('/api/content/announcement', cacheMiddleware, async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('announcements')
       .select('*')
       .eq('isActive', true)
       .or(`expiresAt.is.null,expiresAt.gt.${new Date().toISOString()}`)
-      .limit(1)
-      .single();
+      .limit(1);
 
-    if (error && error.code !== 'PGRST116') throw error; // Ignore no rows found
+    if (error) throw error;
 
-    res.json(data);
+    res.json(data && data.length > 0 ? data[0] : null);
   } catch (error) {
     console.error('Error fetching announcement:', error);
     res.status(500).json({ message: 'خطا در بارگذاری اعلان' });
@@ -1646,14 +1668,97 @@ app.use((error, req, res, next) => {
   res.status(500).json({ message: 'خطای سرور' });
 });
 
-// Proxy to Vite dev server in development
-if (process.env.NODE_ENV === 'development') {
-  // Only in dev: proxy to Vite dev server for non-API routes
-  app.use('/', (req, res) => {
-    res.redirect(new URL(req.url, 'http://localhost:5173').href);
-  });
-} else {
-  // Serve frontend (production)
+const PORT = process.env.PORT || 3000;
+
+const crawlerUserAgents = [
+  'Googlebot',
+  'Bingbot',
+  'Slurp',
+  'DuckDuckBot',
+  'Baiduspider',
+  'YandexBot',
+  'Sogou',
+  'Exabot',
+  'facebot',
+  'facebookexternalhit',
+];
+
+const renderForCrawler = async (slug) => {
+  try {
+    const apiBaseUrl = `http://localhost:${PORT}`;
+    const response = await fetch(`${apiBaseUrl}/api/content/blogs/slug/${slug}`);
+    
+    if (!response.ok) {
+      return `
+        <!DOCTYPE html>
+        <html lang="fa" dir="rtl">
+          <head>
+            <meta charset="UTF-8">
+            <title>مقاله یافت نشد</title>
+          </head>
+          <body>
+            <h1>404 - مقاله یافت نشد</h1>
+          </body>
+        </html>
+      `;
+    }
+
+    const post = await response.json();
+
+    return `
+      <!DOCTYPE html>
+      <html lang="fa" dir="rtl">
+        <head>
+          <meta charset="UTF-8">
+          <title>${post.title}</title>
+          <meta name="description" content="${post.metaDescription || post.excerpt}">
+          <meta property="og:title" content="${post.title}" />
+          <meta property="og:description" content="${post.metaDescription || post.excerpt}" />
+          <meta property="og:image" content="${post.image}" />
+          <meta property="og:type" content="article" />
+        </head>
+        <body>
+          <h1>${post.title}</h1>
+          <div>${post.content}</div>
+        </body>
+      </html>
+    `;
+  } catch (error) {
+    console.error('Crawler rendering error:', error);
+    return `
+      <!DOCTYPE html>
+      <html lang="fa" dir="rtl">
+        <head>
+          <meta charset="UTF-8">
+          <title>خطای سرور</title>
+        </head>
+        <body>
+          <h1>500 - خطای داخلی سرور</h1>
+        </body>
+      </html>
+    `;
+  }
+};
+
+app.use(async (req, res, next) => {
+  const userAgent = req.headers['user-agent'];
+  const isCrawler = crawlerUserAgents.some(crawler => userAgent && userAgent.includes(crawler));
+
+  if (isCrawler) {
+    const blogMatch = req.url.match(/^\/blog\/(.+)/);
+    if (blogMatch) {
+      const slug = blogMatch[1];
+      console.log(`[CRAWLER] Detected crawler for blog post: ${slug}`);
+      const html = await renderForCrawler(slug);
+      return res.send(html);
+    }
+  }
+
+  next();
+});
+
+// Serve frontend (production)
+if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, 'dist')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -1674,7 +1779,6 @@ console.log('Performing initial admin log cleanup on startup...');
 cleanupOldLogs();
 
 // Start server
-const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
   console.log(`📧 Email API: http://localhost:${PORT}/api/send-email`);

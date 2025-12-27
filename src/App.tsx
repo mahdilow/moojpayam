@@ -43,7 +43,7 @@ function AppContent() {
     setIsLoading(true);
     const timeout = setTimeout(() => setIsLoading(false), 900);
     return () => clearTimeout(timeout);
-  }, [pathname]);
+  }, [pathname, isHomePage]);
 
   return (
     <div dir="rtl" className="font-vazir overflow-x-hidden max-w-screen">

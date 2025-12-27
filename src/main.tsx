@@ -1,11 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { onCLS, onFID, onFCP, onLCP, onTTFB } from 'web-vitals';
+import { onCLS, onFID, onFCP, onLCP, onTTFB, Metric } from 'web-vitals';
 import App from './App.tsx';
 import './index.css';
 
 // Performance monitoring function
-function sendToAnalytics(metric: any) {
+function sendToAnalytics(metric: Metric) {
   // Send to your analytics service
   console.log(metric);
 }

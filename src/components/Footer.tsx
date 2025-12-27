@@ -204,6 +204,7 @@ const Footer: React.FC = () => {
               <a
                 referrerPolicy="origin"
                 target="_blank"
+                rel="noreferrer"
                 href="https://trustseal.enamad.ir/?id=659683&Code=xd5KnVVBv4zwJ9thb0q5RPZqsGE7H3zr"
               >
                 <img

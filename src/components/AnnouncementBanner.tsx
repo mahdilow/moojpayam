@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Info, AlertTriangle, CheckCircle2, Gift } from "lucide-react";
 
@@ -21,11 +21,12 @@ const AnnouncementBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
-  useEffect(() => {
-    loadAnnouncement();
-  }, []);
+  const isExpired = (announcement: AnnouncementData): boolean => {
+    if (!announcement.expiresAt) return false;
+    return new Date() > new Date(announcement.expiresAt);
+  };
 
-  const loadAnnouncement = async () => {
+  const loadAnnouncement = useCallback(async () => {
     try {
       const response = await fetch("/api/content/announcement");
       if (response.ok) {
@@ -44,12 +45,11 @@ const AnnouncementBanner: React.FC = () => {
     } catch (error) {
       console.error("Error loading announcement:", error);
     }
-  };
+  }, []);
 
-  const isExpired = (announcement: AnnouncementData): boolean => {
-    if (!announcement.expiresAt) return false;
-    return new Date() > new Date(announcement.expiresAt);
-  };
+  useEffect(() => {
+    loadAnnouncement();
+  }, [loadAnnouncement]);
 
   const handleDismiss = () => {
     if (announcement && announcement.dismissible) {

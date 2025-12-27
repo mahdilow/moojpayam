@@ -326,7 +326,7 @@ const HowItWorksSection: React.FC = () => {
         <div className="mt-20 relative rounded-3xl overflow-hidden">
           <img
             src="/assets/birds-carrying-letters-over-sea.webp"
-            alt="نقشه شهری"
+            alt="ارسال پیامک انبوه تبلیغاتی و خدماتی بر اساس نقشه شهری"
             className="w-full h-[500px] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary-500/90 to-transparent flex items-center">

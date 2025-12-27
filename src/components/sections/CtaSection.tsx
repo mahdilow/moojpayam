@@ -51,6 +51,7 @@ const CtaSection: React.FC = () => {
           >
             <a
               target="_blank"
+              rel="noreferrer"
               href="http://dash.moojpayam.ir/userregister.aspx"
               className="btn bg-white text-primary-600 hover:bg-gray-100 transition-colors text-lg px-8 py-3"
             >

@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
                 src="/assets/moojpayam_hero.webp"
                 alt="موج پیام | ارسال پیامک سریع و ارزان"
                 className="w-full max-w-sm sm:max-w-md lg:max-w-none h-auto drop-shadow-2xl"
-                fetchPriority="high"
+                fetchpriority="high"
                 animate={{ y: [0, -8, 0] }}
                 transition={{
                   delay: 1, // delays animation to let image paint first
@@ -90,6 +90,7 @@ const HeroSection: React.FC = () => {
               >
                 <a
                   target="_blank"
+                  rel="noreferrer"
                   href="http://dash.moojpayam.ir/userregister.aspx"
                   className="btn btn-primary text-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
                 >

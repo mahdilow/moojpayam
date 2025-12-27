@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -111,21 +111,7 @@ const AdminDashboard: React.FC = () => {
     discount: 0,
   });
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  useEffect(() => {
-    if (activeTab === "dashboard") {
-      loadStats();
-    } else if (activeTab === "blogs") {
-      loadBlogs();
-    } else if (activeTab === "pricing") {
-      loadPricing();
-    }
-  }, [activeTab]);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const response = await fetch("/api/admin/verify", {
         credentials: "include",
@@ -136,9 +122,24 @@ const AdminDashboard: React.FC = () => {
       }
       setLoading(false);
     } catch (error) {
+      console.error("Auth check failed:", error);
       navigate("/mooj-admin");
     }
-  };
+  }, [navigate]);
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  useEffect(() => {
+    if (activeTab === "dashboard") {
+      loadStats();
+    } else if (activeTab === "blogs") {
+      loadBlogs();
+    } else if (activeTab === "pricing") {
+      loadPricing();
+    }
+  }, [activeTab]);
 
   const loadStats = async () => {
     try {
@@ -221,11 +222,11 @@ const AdminDashboard: React.FC = () => {
 
         resetBlogForm();
       } else {
-        const error = await response.json();
-        toast.error(error.message || "خطا در ذخیره مقاله");
+        const errorData = await response.json();
+        toast.error(errorData.message || "خطا در ذخیره مقاله");
       }
-    } catch (error) {
-      console.error("Error saving blog:", error);
+    } catch (e) {
+      console.error("Error saving blog:", e);
       toast.error("خطا در ذخیره مقاله");
     }
   };
@@ -306,11 +307,11 @@ const AdminDashboard: React.FC = () => {
         loadPricing();
         resetPricingForm();
       } else {
-        const error = await response.json();
-        toast.error(error.message || "خطا در ذخیره پلن");
+        const errorData = await response.json();
+        toast.error(errorData.message || "خطا در ذخیره پلن");
       }
-    } catch (error) {
-      console.error("Error saving pricing:", error);
+    } catch (e) {
+      console.error("Error saving pricing:", e);
       toast.error("خطا در ذخیره پلن");
     }
   };
@@ -375,7 +376,7 @@ const AdminDashboard: React.FC = () => {
     });
   };
 
-  const updateFeature = (index: number, field: string, value: any) => {
+  const updateFeature = (index: number, field: string, value: string | boolean) => {
     const newFeatures = [...pricingForm.features];
     newFeatures[index] = { ...newFeatures[index], [field]: value };
     setPricingForm({ ...pricingForm, features: newFeatures });

@@ -93,10 +93,9 @@ const FeaturesSection: React.FC = () => {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {features.map((feature, index) => (
-            <Link to="/features">
+          {features.map((feature) => (
+            <Link to="/features" key={feature.title}>
               <motion.div
-                key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -8 }}

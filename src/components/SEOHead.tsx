@@ -15,6 +15,7 @@ interface SEOHeadProps {
   tags?: string[];
   noindex?: boolean;
   canonical?: string;
+  children?: React.ReactNode;
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
@@ -31,6 +32,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   tags = [],
   noindex = false,
   canonical,
+  children,
 }) => {
   const fullTitle = title.includes("موج پیام") ? title : `${title} | موج پیام`;
   const currentUrl = canonical || url;
@@ -103,6 +105,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       {/* DNS prefetch for external resources */}
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />
       <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+      {children}
     </Helmet>
   );
 };
